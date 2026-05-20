@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #F6EFE6;
+  --cream-soft: #FBF6EF;
+  --espresso: #3A2A20;
+  --peach: #FBE2D2;
+  --softpink: #FCEAE4;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--cream);
+  color: var(--espresso);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tracking-vision {
+  letter-spacing: 0.35em;
+}
+
+.tracking-vision-tight {
+  letter-spacing: 0.18em;
+}
+
+/* Subtle gradient mockup tiles (replace external images) */
+.tile-1 { background: linear-gradient(135deg, #E6D7C0 0%, #C9B49A 100%); }
+.tile-2 { background: linear-gradient(135deg, #FBE2D2 0%, #E8B89A 100%); }
+.tile-3 { background: linear-gradient(135deg, #EFE5D6 0%, #B89F84 100%); }
+.tile-4 { background: linear-gradient(135deg, #FCEAE4 0%, #D9A892 100%); }
+.tile-5 { background: linear-gradient(135deg, #E6D7C0 0%, #8B7259 100%); }
+.tile-6 { background: linear-gradient(135deg, #F8D6CC 0%, #C28B72 100%); }
+
+/* Hide scrollbar in mockup */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
