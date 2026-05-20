@@ -2,43 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --cream: #F6EFE6;
-  --cream-soft: #FBF6EF;
-  --espresso: #3A2A20;
-  --peach: #FBE2D2;
-  --softpink: #FCEAE4;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: var(--cream);
-  color: var(--espresso);
+  font-family: "DM Sans", system-ui, sans-serif;
+  background-color: #F8F2E8;
+  color: #2C1A0E;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-.tracking-vision {
-  letter-spacing: 0.35em;
+/* Portrait photo tiles — warm editorial gradient fills */
+.tile-blush  { background: linear-gradient(160deg, #F2C4C4 0%, #D48080 100%); }
+.tile-sage   { background: linear-gradient(160deg, #B8D4B8 0%, #6A9A6A 100%); }
+.tile-sky    { background: linear-gradient(160deg, #B8D4E8 0%, #5A8AB0 100%); }
+.tile-butter { background: linear-gradient(160deg, #F0DFA0 0%, #C0A040 100%); }
+.tile-lilac  { background: linear-gradient(160deg, #C8B8E0 0%, #8060B0 100%); }
+.tile-peach  { background: linear-gradient(160deg, #F2C4A0 0%, #C07040 100%); }
+.tile-mint   { background: linear-gradient(160deg, #A8D8C8 0%, #3A9070 100%); }
+.tile-warm   { background: linear-gradient(160deg, #E8D0B0 0%, #9A7040 100%); }
+
+/* Portrait tiles with a faint person silhouette suggestion */
+.tile-portrait {
+  position: relative;
+  overflow: hidden;
+}
+.tile-portrait::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 55%; height: 80%;
+  background: rgba(0,0,0,0.12);
+  border-radius: 50% 50% 0 0;
 }
 
-.tracking-vision-tight {
-  letter-spacing: 0.18em;
-}
-
-/* Subtle gradient mockup tiles (replace external images) */
-.tile-1 { background: linear-gradient(135deg, #E6D7C0 0%, #C9B49A 100%); }
-.tile-2 { background: linear-gradient(135deg, #FBE2D2 0%, #E8B89A 100%); }
-.tile-3 { background: linear-gradient(135deg, #EFE5D6 0%, #B89F84 100%); }
-.tile-4 { background: linear-gradient(135deg, #FCEAE4 0%, #D9A892 100%); }
-.tile-5 { background: linear-gradient(135deg, #E6D7C0 0%, #8B7259 100%); }
-.tile-6 { background: linear-gradient(135deg, #F8D6CC 0%, #C28B72 100%); }
-
-/* Hide scrollbar in mockup */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

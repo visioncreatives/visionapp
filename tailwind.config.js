@@ -8,37 +8,40 @@ export default {
     extend: {
       colors: {
         cream: {
-          50: "#FBF6EF",
-          100: "#F6EFE6",
-          200: "#EFE5D6",
-          300: "#E6D7C0",
+          50: "#FDFAF5",
+          100: "#F8F2E8",
+          200: "#EFE5D4",
+          300: "#E2D0B8",
         },
         espresso: {
-          DEFAULT: "#3A2A20",
-          light: "#5C443A",
-          dark: "#2A1D15",
+          DEFAULT: "#2C1A0E",
+          light: "#4A2E1A",
+          dark: "#1A0D06",
         },
-        peach: {
-          50: "#FDEFE7",
-          100: "#FBE2D2",
-          200: "#F7C9AE",
-        },
-        softpink: {
-          50: "#FCEAE4",
-          100: "#F8D6CC",
-        },
+        // Pastel palette
+        blush:   { DEFAULT: "#F2C4C4", light: "#FBE9E9", dark: "#C47A7A" },
+        sage:    { DEFAULT: "#B8D4B8", light: "#E6F0E6", dark: "#5A8A5A" },
+        sky:     { DEFAULT: "#B8D4E8", light: "#E2EEF6", dark: "#4A7A9B" },
+        butter:  { DEFAULT: "#F0DFA0", light: "#FAF4D6", dark: "#8A7030" },
+        lilac:   { DEFAULT: "#C8B8E0", light: "#EDE6F5", dark: "#6A4A9B" },
+        peach:   { DEFAULT: "#F2C4A0", light: "#FBE9D6", dark: "#9B5A30" },
+        mint:    { DEFAULT: "#A8D8C8", light: "#D6EEE8", dark: "#2A7A62" },
       },
       fontFamily: {
-        display: ['Fraunces', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: "0 8px 30px -10px rgba(58, 42, 32, 0.15)",
-        card: "0 4px 20px -6px rgba(58, 42, 32, 0.08)",
-        phone: "0 30px 60px -20px rgba(58, 42, 32, 0.35)",
+        soft:  "0 8px 30px -10px rgba(44,26,14,0.12)",
+        card:  "0 2px 16px -4px rgba(44,26,14,0.08)",
+        phone: "0 30px 60px -15px rgba(44,26,14,0.40)",
       },
       borderRadius: {
         '4xl': '2rem',
+        '5xl': '2.5rem',
+      },
+      letterSpacing: {
+        vision: '0.32em',
+        'vision-sm': '0.15em',
       },
     },
   },
