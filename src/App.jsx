@@ -936,14 +936,13 @@ function SharedVision() {
     { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
     { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
   ]
-  // Right column: project cards with themed Pixar-style scene illustrations
+  // Right column: project cards with themed Pixar-style images
   const cards = [
-    { Scene: SceneContentShoot, title: "Content Shoot",    tag: "Photography", tagBg: "#FAF4D6", tagC: "#6A5010" },
-    { Scene: SceneBrandFilm,    title: "Brand Film",       tag: "Video",       tagBg: "#E2EEF6", tagC: "#1A4A6A" },
-    { Scene: SceneIdentity,     title: "Identity Refresh", tag: "Branding",    tagBg: "#EDE6F5", tagC: "#4A2A7A" },
-    { Scene: SceneBridal,       title: "Bridal Beauty",    tag: "Makeup",      tagBg: "#FBE9E9", tagC: "#7A2A2A" },
-    { Scene: SceneEvent,        title: "Launch Event",     tag: "Events",      tagBg: "#FBE9D6", tagC: "#7A3A10" },
-    { Scene: SceneEditorial,    title: "Editorial Style",  tag: "Styling",     tagBg: "#E6F0E6", tagC: "#2A5A2A" },
+    { src: "/projects/content-creators.png",  title: "Content Creators", tag: "Content",   tagBg: "#D6EEE8", tagC: "#1A5A48" },
+    { src: "/projects/photoshoots.png",       title: "Photoshoots",      tag: "Photography",tagBg: "#FAF4D6", tagC: "#6A5010" },
+    { src: "/projects/branding.png",          title: "Branding",         tag: "Branding",  tagBg: "#EDE6F5", tagC: "#4A2A7A" },
+    { src: "/projects/makeup-artists.png",    title: "Makeup Artists",   tag: "Makeup",    tagBg: "#FBE9E9", tagC: "#7A2A2A" },
+    { src: "/projects/graphic-designers.png", title: "Graphic Designers",tag: "Design",    tagBg: "#E2EEF6", tagC: "#1A4A6A" },
   ]
   return (
     <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
@@ -963,22 +962,19 @@ function SharedVision() {
               Find a Creative <Ico.Arrow className="w-4 h-4" />
             </a>
           </div>
-          {/* Right: project-card mosaic */}
+          {/* Right: project-card mosaic with Pixar-style images */}
           <div className="grid grid-cols-2 gap-4">
-            {cards.map((card, i) => {
-              const Scene = card.Scene
-              return (
-                <div key={i} className={`bg-white rounded-3xl overflow-hidden shadow-card border border-cream-200/40 ${i === 0 || i === 5 ? "mt-0" : i === 1 || i === 4 ? "mt-6" : "mt-0"}`}>
-                  <div style={{ height: 110, overflow: "hidden" }}>
-                    <Scene />
-                  </div>
-                  <div className="px-4 py-3">
-                    <div className="text-xs font-bold text-espresso">{card.title}</div>
-                    <span style={{ background: card.tagBg, color: card.tagC, fontSize: 10, padding: "2px 8px", borderRadius: 999, fontWeight: 600, display: "inline-block", marginTop: 4 }}>{card.tag}</span>
-                  </div>
+            {cards.map((card, i) => (
+              <div key={i} className={`bg-white rounded-3xl overflow-hidden shadow-card border border-cream-200/40 ${i === 1 || i === 3 ? "mt-6" : ""}`}>
+                <div style={{ aspectRatio: "4/3", overflow: "hidden", background: "#EFE5D4" }}>
+                  <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 </div>
-              )
-            })}
+                <div className="px-4 py-3">
+                  <div className="text-xs font-bold text-espresso">{card.title}</div>
+                  <span style={{ background: card.tagBg, color: card.tagC, fontSize: 10, padding: "2px 8px", borderRadius: 999, fontWeight: 600, display: "inline-block", marginTop: 4 }}>{card.tag}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
