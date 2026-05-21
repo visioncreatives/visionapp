@@ -443,7 +443,7 @@ function ScenePayment() {
 // kai.png    → graphic designer (tablet drawing)
 // lena.png   → makeup artist (doing makeup)
 const CREATORS = [
-  { name: "Zoe Chen",     Av: Avatar.Zoe,    handle: "@zoechen",    role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48", img: "zoe" },
+  { name: "Zoe Creative", Av: Avatar.Zoe,    handle: "@zoecreative", role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48", img: "zoe" },
   { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "PHOTOGRAPHER",     location: "New York",      price: "$200", rating: "5.0", works: 21, bookings: 52,  tagBg: "#FAF4D6", tagC: "#6A5010", img: "marcus" },
   { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A", img: "sofia" },
   // Ava uses kai.png (drawing tablet) → graphic designer
@@ -623,49 +623,77 @@ function DiscoverPhone() {
 }
 
 function ProfilePhone() {
-  const c = CREATORS[0]
-  const Av = c.Av
+  const c = CREATORS[0] // Zoe Creative
+  // Fill the portfolio with Pixar-themed images from the projects folder + other creator illustrations
+  const portfolioImgs = [
+    "/projects/content-creators.png",
+    "/projects/photoshoots.png",
+    "/projects/branding.png",
+    "/projects/makeup-artists.png",
+    "/projects/graphic-designers.png",
+    "/creators/sofia.png",
+  ]
   return (
     <PhoneShell>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 14px 6px", flexShrink: 0 }}>
-        <span style={{ fontSize: 8, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</span>
-        <span style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>{c.handle}</span>
+      {/* Top bar: VISION label + handle */}
+      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
       </div>
-      <div style={{ flex: 1, overflowY: "hidden", padding: "0 12px", display: "flex", flexDirection: "column", gap: 8 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><Av size={46} /></div>
-          <div style={{ flex: 1 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
-              <span style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E" }}>{c.name}</span>
-              <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 8, padding: "2px 7px", borderRadius: 999, fontWeight: 600 }}>CREATIVE</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 2 }}>
-              <Ico.Map style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
-              <span style={{ fontSize: 9, color: "rgba(44,26,14,0.5)" }}>{c.location}</span>
-            </div>
+
+      {/* Profile pic + 3 stat cards row */}
+      <div style={{ padding: "0 12px 8px", display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+        <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 44, height: 44 }}>
+          <c.Av size={44} />
+        </div>
+        {[[c.works, "POSTS"], ["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
+          <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "5px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
+            <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
           </div>
-          <button style={{ background: "#2C1A0E", color: "#F8F2E8", border: "none", borderRadius: 18, padding: "5px 11px", fontSize: 9, fontWeight: 700, cursor: "pointer", flexShrink: 0 }}>Hire</button>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 5 }}>
-          {[[c.works, "WORKS"], ["4.9 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
-            <div key={l} style={{ background: "white", borderRadius: 10, padding: "6px 4px", textAlign: "center" }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
-              <div style={{ fontSize: 7, letterSpacing: "0.06em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{ display: "flex", gap: 5 }}>
-          {["Portfolio", "Packages", "Reviews"].map((t, i) => (
-            <span key={t} style={{ fontSize: 9, padding: "4px 10px", borderRadius: 18, fontWeight: 600, background: i === 0 ? "#2C1A0E" : "white", color: i === 0 ? "#F8F2E8" : "rgba(44,26,14,0.5)", border: i === 0 ? "none" : "1px solid rgba(44,26,14,0.1)" }}>{t}</span>
-          ))}
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 5, flex: 1 }}>
-          <ArtTile bg="#E8B8A8" price="$120" variant={0} style={{ aspectRatio: "3/4" }} />
-          <ArtTile bg="#C8D4A0" price="$200" variant={1} style={{ aspectRatio: "3/4" }} />
-          <ArtTile bg="#A8C8D0" price="$95"  variant={2} style={{ aspectRatio: "3/4" }} />
-          <ArtTile bg="#D4B8E0" price="$180" variant={3} style={{ aspectRatio: "3/4" }} />
+        ))}
+      </div>
+
+      {/* Name + CREATIVE pill */}
+      <div style={{ padding: "0 12px 2px", display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
+        <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name}</span>
+        <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
+      </div>
+
+      {/* Location */}
+      <div style={{ padding: "0 12px 4px", display: "flex", alignItems: "center", gap: 3, flexShrink: 0 }}>
+        <Ico.Map style={{ width: 8, height: 8, color: "rgba(44,26,14,0.5)" }} />
+        <span style={{ fontSize: 9, color: "rgba(44,26,14,0.55)" }}>{c.location}</span>
+      </div>
+
+      {/* Bio */}
+      <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
+        <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.35, margin: 0 }}>Lifestyle &amp; brand content creator. Available for collabs.</p>
+      </div>
+
+      {/* Message button */}
+      <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
+        <div style={{ background: "rgba(44,26,14,0.08)", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
+          <Ico.Chat style={{ width: 10, height: 10 }} /> Message Zoe
         </div>
       </div>
+
+      {/* Tabs */}
+      <div style={{ padding: "0 12px 6px", display: "flex", gap: 4, flexShrink: 0 }}>
+        {["Work", "Services", "Bookings", "Reviews"].map((t, i) => (
+          <span key={t} style={{ fontSize: 8, padding: "4px 8px", borderRadius: 18, fontWeight: 600, whiteSpace: "nowrap", background: i === 0 ? "#2C1A0E" : "transparent", color: i === 0 ? "#F8F2E8" : "rgba(44,26,14,0.5)" }}>{t}</span>
+        ))}
+      </div>
+
+      {/* Portfolio grid: 2 columns of Pixar-themed images */}
+      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content", overflowY: "hidden" }}>
+        {portfolioImgs.map((src, i) => (
+          <div key={i} style={{ aspectRatio: "1/1", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
+            <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          </div>
+        ))}
+      </div>
+
       <BottomNav active="profile" />
     </PhoneShell>
   )
@@ -806,29 +834,29 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right side — phone preview of the actual app on desktop, also visible on tablet */}
+        {/* Right side — phone preview showing a creative's profile */}
         <div className="hidden md:flex justify-center lg:justify-end relative">
           {/* Soft glow behind the phone */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
           </div>
           <div className="relative">
-            <DiscoverPhone />
+            <ProfilePhone />
             {/* Floating cue card next to phone */}
             <div className="absolute -left-8 top-20 hidden lg:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60" style={{ whiteSpace: "nowrap" }}>
               <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
-              <span className="text-xs font-semibold text-espresso">6 creatives near you</span>
+              <span className="text-xs font-semibold text-espresso">Available this week</span>
             </div>
             <div className="absolute -right-6 bottom-36 hidden lg:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60">
               <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
-              <div className="text-sm font-bold text-espresso">$95 / project</div>
+              <div className="text-sm font-bold text-espresso">$110 / session</div>
             </div>
           </div>
         </div>
 
         {/* Mobile: still show phone, simpler layout */}
         <div className="flex md:hidden justify-center">
-          <DiscoverPhone />
+          <ProfilePhone />
         </div>
       </div>
     </section>
@@ -934,14 +962,14 @@ function SharedVision() {
     { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
     { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
   ]
-  // Asymmetric collage layout: 5 image cards positioned absolutely
-  // Sizes and offsets are tuned for a layered, editorial feel
+  // Compact 2-column, 3-row staggered collage that aligns with text height on the left
+  // Slight rotations + small overlaps give an editorial feel without making things big
   const cards = [
-    { src: "/projects/content-creators.png",  title: "Content Creators",  pos: { top: "0%",  left: "2%",   width: "50%", rotate: "-2deg" }, z: 3 },
-    { src: "/projects/photoshoots.png",       title: "Photoshoots",       pos: { top: "8%",  left: "48%",  width: "48%", rotate: "2deg"  }, z: 2 },
-    { src: "/projects/branding.png",          title: "Branding",          pos: { top: "38%", left: "0%",   width: "55%", rotate: "1.5deg"}, z: 4 },
-    { src: "/projects/makeup-artists.png",    title: "Makeup Artists",    pos: { top: "44%", left: "52%",  width: "46%", rotate: "-2deg" }, z: 3 },
-    { src: "/projects/graphic-designers.png", title: "Graphic Designers", pos: { top: "78%", left: "20%",  width: "60%", rotate: "-1deg" }, z: 5 },
+    { src: "/projects/content-creators.png",  title: "Content Creators",  pos: { top: "0%",   left: "10%",  width: "40%", rotate: "-2deg" }, z: 3 },
+    { src: "/projects/photoshoots.png",       title: "Photoshoots",       pos: { top: "4%",   left: "55%",  width: "38%", rotate: "2deg"  }, z: 2 },
+    { src: "/projects/branding.png",          title: "Branding",          pos: { top: "33%",  left: "0%",   width: "42%", rotate: "1.5deg"}, z: 4 },
+    { src: "/projects/makeup-artists.png",    title: "Makeup Artists",    pos: { top: "37%",  left: "48%",  width: "40%", rotate: "-1.5deg" }, z: 3 },
+    { src: "/projects/graphic-designers.png", title: "Graphic Designers", pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg" }, z: 5 },
   ]
   return (
     <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
@@ -961,8 +989,8 @@ function SharedVision() {
               Find a Creative <Ico.Arrow className="w-4 h-4" />
             </a>
           </div>
-          {/* Right: editorial collage with overlapping, slightly rotated cards */}
-          <div className="relative w-full" style={{ paddingBottom: "115%" }}>
+          {/* Right: compact staggered collage, sized to align with text height */}
+          <div className="relative w-full" style={{ paddingBottom: "100%" }}>
             {cards.map((card, i) => (
               <div
                 key={i}
