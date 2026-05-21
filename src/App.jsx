@@ -443,12 +443,14 @@ function ScenePayment() {
 // kai.png    → graphic designer (tablet drawing)
 // lena.png   → makeup artist (doing makeup)
 const CREATORS = [
-  { name: "Zoe Chen",     Av: Avatar.Zoe,    handle: "@zoechen",    role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48" },
-  { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "PHOTOGRAPHER",     location: "New York",      price: "$200", rating: "5.0", works: 21, bookings: 52,  tagBg: "#FAF4D6", tagC: "#6A5010" },
-  { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A" },
-  { name: "Ava Nakamura", Av: Avatar.Ava,    handle: "@avanaka",    role: "VIDEOGRAPHER",     location: "San Francisco", price: "$175", rating: "5.0", works: 18, bookings: 44,  tagBg: "#E2EEF6", tagC: "#1A4A6A" },
-  { name: "Kai Williams", Av: Avatar.Kai,    handle: "@kaiwill",    role: "GRAPHIC DESIGNER", location: "Portland",      price: "$140", rating: "4.9", works: 29, bookings: 71,  tagBg: "#EDE6F5", tagC: "#4A2A7A" },
-  { name: "Lena Park",    Av: Avatar.Lena,   handle: "@lenapark",   role: "MAKEUP ARTIST",    location: "Chicago",       price: "$120", rating: "4.8", works: 38, bookings: 60,  tagBg: "#FBE9E9", tagC: "#7A2A2A" },
+  { name: "Zoe Chen",     Av: Avatar.Zoe,    handle: "@zoechen",    role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48", img: "zoe" },
+  { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "PHOTOGRAPHER",     location: "New York",      price: "$200", rating: "5.0", works: 21, bookings: 52,  tagBg: "#FAF4D6", tagC: "#6A5010", img: "marcus" },
+  { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A", img: "sofia" },
+  // Ava uses kai.png (drawing tablet) → graphic designer
+  { name: "Ava Nakamura", Av: Avatar.Kai,    handle: "@avanaka",    role: "GRAPHIC DESIGNER", location: "San Francisco", price: "$140", rating: "5.0", works: 18, bookings: 44,  tagBg: "#EDE6F5", tagC: "#4A2A7A", img: "kai" },
+  // Kai uses ava.png (gimbal camera) → videographer
+  { name: "Kai Williams", Av: Avatar.Ava,    handle: "@kaiwill",    role: "VIDEOGRAPHER",     location: "Portland",      price: "$175", rating: "4.9", works: 29, bookings: 71,  tagBg: "#E2EEF6", tagC: "#1A4A6A", img: "ava" },
+  { name: "Lena Park",    Av: Avatar.Lena,   handle: "@lenapark",   role: "MAKEUP ARTIST",    location: "Chicago",       price: "$120", rating: "4.8", works: 38, bookings: 60,  tagBg: "#FBE9E9", tagC: "#7A2A2A", img: "lena" },
 ]
 
 // ─── ArtTile — abstract decorative tile, no human figure ──────
@@ -558,16 +560,12 @@ function BottomNav({ active = "home" }) {
 
 // ─── Phone mockups ────────────────────────────────────────────
 function DiscoverPhone() {
-  // Real-app inspired: small Instagram-style 3-column tiles, vertical aspect
-  // Photo URLs reference the same illustrations used for avatars + abstract tiles
-  const grid = [
-    { src: "/creators/zoe.png",    name: "Zoe",    loc: "Los Angeles" },
-    { src: "/creators/marcus.png", name: "Marcus", loc: "New York" },
-    { src: "/creators/sofia.png",  name: "Sofia",  loc: "Miami" },
-    { src: "/creators/ava.png",    name: "Ava",    loc: "San Francisco" },
-    { src: "/creators/kai.png",    name: "Kai",    loc: "Portland" },
-    { src: "/creators/lena.png",   name: "Lena",   loc: "Chicago" },
-  ]
+  // Pull from CREATORS so names/images/locations stay in sync everywhere
+  const grid = CREATORS.map(c => ({
+    src:  `/creators/${c.img}.png`,
+    name: c.name.split(" ")[0],
+    loc:  c.location,
+  }))
   return (
     <PhoneShell>
       {/* Header */}
@@ -892,7 +890,7 @@ function DiscoverSection() {
             <a key={i} href={APP_URL} className="block group">
               <div className="relative overflow-hidden rounded-2xl bg-cream-200" style={{ aspectRatio: "3/4" }}>
                 <img
-                  src={`/creators/${c.name.split(" ")[0].toLowerCase()}.png`}
+                  src={`/creators/${c.img}.png`}
                   alt=""
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -936,13 +934,14 @@ function SharedVision() {
     { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
     { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
   ]
-  // Right column: project cards with themed Pixar-style images
+  // Asymmetric collage layout: 5 image cards positioned absolutely
+  // Sizes and offsets are tuned for a layered, editorial feel
   const cards = [
-    { src: "/projects/content-creators.png",  title: "Content Creators", tag: "Content",   tagBg: "#D6EEE8", tagC: "#1A5A48" },
-    { src: "/projects/photoshoots.png",       title: "Photoshoots",      tag: "Photography",tagBg: "#FAF4D6", tagC: "#6A5010" },
-    { src: "/projects/branding.png",          title: "Branding",         tag: "Branding",  tagBg: "#EDE6F5", tagC: "#4A2A7A" },
-    { src: "/projects/makeup-artists.png",    title: "Makeup Artists",   tag: "Makeup",    tagBg: "#FBE9E9", tagC: "#7A2A2A" },
-    { src: "/projects/graphic-designers.png", title: "Graphic Designers",tag: "Design",    tagBg: "#E2EEF6", tagC: "#1A4A6A" },
+    { src: "/projects/content-creators.png",  title: "Content Creators",  pos: { top: "0%",  left: "2%",   width: "50%", rotate: "-2deg" }, z: 3 },
+    { src: "/projects/photoshoots.png",       title: "Photoshoots",       pos: { top: "8%",  left: "48%",  width: "48%", rotate: "2deg"  }, z: 2 },
+    { src: "/projects/branding.png",          title: "Branding",          pos: { top: "38%", left: "0%",   width: "55%", rotate: "1.5deg"}, z: 4 },
+    { src: "/projects/makeup-artists.png",    title: "Makeup Artists",    pos: { top: "44%", left: "52%",  width: "46%", rotate: "-2deg" }, z: 3 },
+    { src: "/projects/graphic-designers.png", title: "Graphic Designers", pos: { top: "78%", left: "20%",  width: "60%", rotate: "-1deg" }, z: 5 },
   ]
   return (
     <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
@@ -962,16 +961,28 @@ function SharedVision() {
               Find a Creative <Ico.Arrow className="w-4 h-4" />
             </a>
           </div>
-          {/* Right: project-card mosaic with Pixar-style images */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Right: editorial collage with overlapping, slightly rotated cards */}
+          <div className="relative w-full" style={{ paddingBottom: "115%" }}>
             {cards.map((card, i) => (
-              <div key={i} className={`bg-white rounded-3xl overflow-hidden shadow-card border border-cream-200/40 ${i === 1 || i === 3 ? "mt-6" : ""}`}>
-                <div style={{ aspectRatio: "4/3", overflow: "hidden", background: "#EFE5D4" }}>
-                  <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-                <div className="px-4 py-3">
-                  <div className="text-xs font-bold text-espresso">{card.title}</div>
-                  <span style={{ background: card.tagBg, color: card.tagC, fontSize: 10, padding: "2px 8px", borderRadius: 999, fontWeight: 600, display: "inline-block", marginTop: 4 }}>{card.tag}</span>
+              <div
+                key={i}
+                className="absolute group transition-transform duration-300 hover:scale-105 hover:z-50"
+                style={{
+                  top: card.pos.top,
+                  left: card.pos.left,
+                  width: card.pos.width,
+                  zIndex: card.z,
+                  transform: `rotate(${card.pos.rotate})`,
+                }}
+              >
+                <div className="relative bg-white rounded-2xl overflow-hidden shadow-soft border border-cream-200/40">
+                  <div style={{ aspectRatio: "4/3", overflow: "hidden", background: "#EFE5D4" }}>
+                    <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </div>
+                  {/* Bottom gradient + title overlay on the image */}
+                  <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent 75%)" }}>
+                    <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
+                  </div>
                 </div>
               </div>
             ))}
