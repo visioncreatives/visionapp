@@ -30,187 +30,36 @@ const Ico = {
 }
 
 // ─── Pixar-style cartoon avatars ──────────────────────────────
+const AVATAR_SRCS = {
+  Zoe:    "/creators/zoe.png",
+  Marcus: "/creators/marcus.png",
+  Sofia:  "/creators/sofia.png",
+  Ava:    "/creators/ava.png",
+  Kai:    "/creators/kai.png",
+  Lena:   "/creators/lena.png",
+}
+
+function makeAvatar(key) {
+  return function Avatar({ size = 40 }) {
+    return (
+      <img
+        src={AVATAR_SRCS[key]}
+        alt=""
+        width={size}
+        height={size}
+        style={{ width: size, height: size, borderRadius: "50%", objectFit: "cover", display: "block" }}
+      />
+    )
+  }
+}
+
 const Avatar = {
-  Zoe: ({ size = 40 }) => (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#FADADC"/>
-      <ellipse cx="50" cy="96" rx="28" ry="14" fill="#F4A261"/>
-      <rect x="28" y="82" width="44" height="20" rx="8" fill="#F4A261"/>
-      <rect x="40" y="68" width="20" height="16" rx="6" fill="#F7C59F"/>
-      <ellipse cx="50" cy="52" rx="28" ry="30" fill="#F7C59F"/>
-      <ellipse cx="22" cy="53" rx="5" ry="7" fill="#F0B88A"/>
-      <ellipse cx="78" cy="53" rx="5" ry="7" fill="#F0B88A"/>
-      <ellipse cx="50" cy="34" rx="29" ry="22" fill="#2D1B0E"/>
-      <ellipse cx="21" cy="52" rx="7" ry="14" fill="#2D1B0E"/>
-      <ellipse cx="79" cy="52" rx="7" ry="14" fill="#2D1B0E"/>
-      <ellipse cx="50" cy="26" rx="28" ry="16" fill="#3D2512"/>
-      <path d="M22 38 Q36 48 50 40 Q64 48 78 38 Q72 24 50 22 Q28 24 22 38Z" fill="#2D1B0E"/>
-      <ellipse cx="38" cy="53" rx="8" ry="9" fill="white"/>
-      <ellipse cx="62" cy="53" rx="8" ry="9" fill="white"/>
-      <circle cx="38" cy="54" r="5.5" fill="#6B3A2A"/>
-      <circle cx="62" cy="54" r="5.5" fill="#6B3A2A"/>
-      <circle cx="38" cy="54" r="3" fill="#1A0D06"/>
-      <circle cx="62" cy="54" r="3" fill="#1A0D06"/>
-      <circle cx="40" cy="52" r="1.6" fill="white"/>
-      <circle cx="64" cy="52" r="1.6" fill="white"/>
-      <circle cx="36.5" cy="55.5" r="0.8" fill="white"/>
-      <circle cx="60.5" cy="55.5" r="0.8" fill="white"/>
-      <path d="M30 43 Q38 39 46 43" stroke="#2D1B0E" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      <path d="M54 43 Q62 39 70 43" stroke="#2D1B0E" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      <ellipse cx="50" cy="63" rx="3" ry="2" fill="#E8A882" opacity="0.8"/>
-      <path d="M36 70 Q50 78 64 70" fill="#C0392B" stroke="none"/>
-      <path d="M36 70 Q50 72 64 70" fill="white" stroke="none"/>
-      <ellipse cx="26" cy="62" rx="7" ry="4" fill="#F4908A" opacity="0.35"/>
-      <ellipse cx="74" cy="62" rx="7" ry="4" fill="#F4908A" opacity="0.35"/>
-    </svg>
-  ),
-  Marcus: ({ size = 40 }) => (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#B8D4E8"/>
-      <ellipse cx="50" cy="96" rx="28" ry="14" fill="#3A7BD5"/>
-      <rect x="28" y="82" width="44" height="20" rx="8" fill="#3A7BD5"/>
-      <rect x="40" y="68" width="20" height="16" rx="6" fill="#7A4A28"/>
-      <ellipse cx="50" cy="52" rx="28" ry="30" fill="#8B5030"/>
-      <ellipse cx="22" cy="53" rx="5" ry="7" fill="#7A4020"/>
-      <ellipse cx="78" cy="53" rx="5" ry="7" fill="#7A4020"/>
-      <ellipse cx="50" cy="28" rx="27" ry="18" fill="#1A0D06"/>
-      <circle cx="33" cy="27" r="8" fill="#1A0D06"/>
-      <circle cx="40" cy="22" r="9" fill="#1A0D06"/>
-      <circle cx="50" cy="20" r="10" fill="#1A0D06"/>
-      <circle cx="60" cy="22" r="9" fill="#1A0D06"/>
-      <circle cx="67" cy="27" r="8" fill="#1A0D06"/>
-      <ellipse cx="38" cy="53" rx="8" ry="9" fill="white"/>
-      <ellipse cx="62" cy="53" rx="8" ry="9" fill="white"/>
-      <circle cx="38" cy="54" r="5.5" fill="#3D2010"/>
-      <circle cx="62" cy="54" r="5.5" fill="#3D2010"/>
-      <circle cx="38" cy="54" r="3" fill="#0D0806"/>
-      <circle cx="62" cy="54" r="3" fill="#0D0806"/>
-      <circle cx="40" cy="52" r="1.6" fill="white"/>
-      <circle cx="64" cy="52" r="1.6" fill="white"/>
-      <path d="M29 43 Q38 38 46 42" stroke="#0D0806" strokeWidth="3" fill="none" strokeLinecap="round"/>
-      <path d="M54 42 Q62 38 71 43" stroke="#0D0806" strokeWidth="3" fill="none" strokeLinecap="round"/>
-      <path d="M44 63 Q47 68 50 67 Q53 68 56 63" fill="none" stroke="#5A2A10" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M35 71 Q50 81 65 71" fill="#8B1A10" stroke="none"/>
-      <path d="M35 71 Q50 74 65 71" fill="white" stroke="none"/>
-    </svg>
-  ),
-  Sofia: ({ size = 40 }) => (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#D4EDE4"/>
-      <ellipse cx="50" cy="96" rx="28" ry="14" fill="#E8608A"/>
-      <rect x="28" y="82" width="44" height="20" rx="8" fill="#E8608A"/>
-      <rect x="40" y="68" width="20" height="16" rx="6" fill="#D4916A"/>
-      <ellipse cx="50" cy="44" rx="33" ry="32" fill="#7B3F1A"/>
-      <path d="M18 50 Q10 65 16 82" stroke="#7B3F1A" strokeWidth="14" fill="none" strokeLinecap="round"/>
-      <path d="M82 50 Q90 65 84 82" stroke="#7B3F1A" strokeWidth="14" fill="none" strokeLinecap="round"/>
-      <ellipse cx="50" cy="53" rx="27" ry="29" fill="#DDA07A"/>
-      <ellipse cx="23" cy="53" rx="5" ry="7" fill="#CD9068"/>
-      <ellipse cx="77" cy="53" rx="5" ry="7" fill="#CD9068"/>
-      <ellipse cx="50" cy="29" rx="29" ry="18" fill="#8B4820"/>
-      <path d="M21 40 Q30 52 42 44 Q50 40 58 44 Q70 52 79 40 Q70 20 50 18 Q30 20 21 40Z" fill="#7B3F1A"/>
-      <ellipse cx="38" cy="53" rx="8" ry="9" fill="white"/>
-      <ellipse cx="62" cy="53" rx="8" ry="9" fill="white"/>
-      <circle cx="38" cy="54" r="5.5" fill="#5C3010"/>
-      <circle cx="62" cy="54" r="5.5" fill="#5C3010"/>
-      <circle cx="38" cy="54" r="3" fill="#1A0806"/>
-      <circle cx="62" cy="54" r="3" fill="#1A0806"/>
-      <circle cx="40" cy="52" r="1.6" fill="white"/>
-      <circle cx="64" cy="52" r="1.6" fill="white"/>
-      <path d="M29 43 Q38 38 46 42" stroke="#5C2A08" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-      <path d="M54 42 Q62 38 71 43" stroke="#5C2A08" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-      <ellipse cx="50" cy="64" rx="3" ry="2" fill="#C07850" opacity="0.7"/>
-      <path d="M35 71 Q50 80 65 71" fill="#B03060" stroke="none"/>
-      <path d="M35 71 Q50 74 65 71" fill="white" stroke="none"/>
-    </svg>
-  ),
-  Ava: ({ size = 40 }) => (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#DDD0F0"/>
-      <ellipse cx="50" cy="96" rx="28" ry="14" fill="#9B59B6"/>
-      <rect x="28" y="82" width="44" height="20" rx="8" fill="#9B59B6"/>
-      <rect x="40" y="68" width="20" height="16" rx="6" fill="#F0D0B0"/>
-      <rect x="17" y="28" width="66" height="60" rx="10" fill="#1A0D06"/>
-      <ellipse cx="50" cy="51" rx="27" ry="29" fill="#F2D8B8"/>
-      <ellipse cx="23" cy="51" rx="5" ry="7" fill="#E8C8A0"/>
-      <ellipse cx="77" cy="51" rx="5" ry="7" fill="#E8C8A0"/>
-      <path d="M18 38 Q50 18 82 38 Q80 22 50 18 Q20 22 18 38Z" fill="#1A0D06"/>
-      <ellipse cx="50" cy="26" rx="28" ry="12" fill="#1A0D06"/>
-      <path d="M22 38 Q36 46 50 40 Q64 46 78 38 Q72 26 50 24 Q28 26 22 38Z" fill="#1A0D06"/>
-      <ellipse cx="37" cy="52" rx="9" ry="10" fill="white"/>
-      <ellipse cx="63" cy="52" rx="9" ry="10" fill="white"/>
-      <circle cx="37" cy="53" r="6.5" fill="#4A2810"/>
-      <circle cx="63" cy="53" r="6.5" fill="#4A2810"/>
-      <circle cx="37" cy="53" r="3.5" fill="#0D0806"/>
-      <circle cx="63" cy="53" r="3.5" fill="#0D0806"/>
-      <circle cx="39.5" cy="51" r="2" fill="white"/>
-      <circle cx="65.5" cy="51" r="2" fill="white"/>
-      <path d="M28 41 Q37 37 46 41" stroke="#1A0D06" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
-      <path d="M54 41 Q63 37 72 41" stroke="#1A0D06" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
-      <path d="M48 63 Q50 66 52 63" stroke="#D0A880" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-      <path d="M37 70 Q50 79 63 70" fill="#C0506A" stroke="none"/>
-      <path d="M37 70 Q50 73 63 70" fill="white" stroke="none"/>
-    </svg>
-  ),
-  Kai: ({ size = 40 }) => (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#A8D8C8"/>
-      <ellipse cx="50" cy="96" rx="28" ry="14" fill="#2ECC71"/>
-      <rect x="28" y="82" width="44" height="20" rx="8" fill="#2ECC71"/>
-      <rect x="40" y="68" width="20" height="16" rx="6" fill="#C8985A"/>
-      <circle cx="50" cy="24" r="26" fill="#2A1408"/>
-      <circle cx="30" cy="30" r="16" fill="#2A1408"/>
-      <circle cx="70" cy="30" r="16" fill="#2A1408"/>
-      <circle cx="20" cy="44" r="13" fill="#2A1408"/>
-      <circle cx="80" cy="44" r="13" fill="#2A1408"/>
-      <ellipse cx="50" cy="53" rx="27" ry="28" fill="#CFA070"/>
-      <ellipse cx="23" cy="53" rx="5" ry="7" fill="#BF9060"/>
-      <ellipse cx="77" cy="53" rx="5" ry="7" fill="#BF9060"/>
-      <circle cx="22" cy="42" r="10" fill="#2A1408"/>
-      <circle cx="78" cy="42" r="10" fill="#2A1408"/>
-      <ellipse cx="50" cy="28" rx="24" ry="14" fill="#2A1408"/>
-      <ellipse cx="38" cy="53" rx="9" ry="10" fill="white"/>
-      <ellipse cx="62" cy="53" rx="9" ry="10" fill="white"/>
-      <circle cx="38" cy="54" r="6" fill="#5A7A30"/>
-      <circle cx="62" cy="54" r="6" fill="#5A7A30"/>
-      <circle cx="38" cy="54" r="3.2" fill="#1A0D06"/>
-      <circle cx="62" cy="54" r="3.2" fill="#1A0D06"/>
-      <circle cx="40.5" cy="52" r="1.8" fill="white"/>
-      <circle cx="64.5" cy="52" r="1.8" fill="white"/>
-      <path d="M28 43 Q38 38 47 42" stroke="#1A0D06" strokeWidth="2.8" fill="none" strokeLinecap="round"/>
-      <path d="M53 42 Q62 38 72 43" stroke="#1A0D06" strokeWidth="2.8" fill="none" strokeLinecap="round"/>
-      <ellipse cx="50" cy="64" rx="3.5" ry="2.5" fill="#A07040" opacity="0.6"/>
-      <path d="M34 72 Q50 83 66 72" fill="#8B3A1A" stroke="none"/>
-      <path d="M34 72 Q50 75 66 72" fill="white" stroke="none"/>
-    </svg>
-  ),
-  Lena: ({ size = 40 }) => (
-    <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#FDE8D0"/>
-      <ellipse cx="50" cy="96" rx="28" ry="14" fill="#E8A87C"/>
-      <rect x="28" y="82" width="44" height="20" rx="8" fill="#E8A87C"/>
-      <rect x="40" y="68" width="20" height="16" rx="6" fill="#F5CFA8"/>
-      <ellipse cx="50" cy="52" rx="28" ry="30" fill="#F5CFA8"/>
-      <ellipse cx="22" cy="53" rx="5" ry="7" fill="#EBBF96"/>
-      <ellipse cx="78" cy="53" rx="5" ry="7" fill="#EBBF96"/>
-      <ellipse cx="50" cy="30" rx="30" ry="24" fill="#8B2500"/>
-      <path d="M20 42 Q12 55 18 72" stroke="#8B2500" strokeWidth="12" fill="none" strokeLinecap="round"/>
-      <path d="M80 42 Q88 55 82 72" stroke="#8B2500" strokeWidth="12" fill="none" strokeLinecap="round"/>
-      <ellipse cx="50" cy="24" rx="29" ry="16" fill="#A02E00"/>
-      <path d="M20 36 Q34 50 50 42 Q66 50 80 36 Q72 20 50 18 Q28 20 20 36Z" fill="#8B2500"/>
-      <ellipse cx="38" cy="53" rx="8" ry="9" fill="white"/>
-      <ellipse cx="62" cy="53" rx="8" ry="9" fill="white"/>
-      <circle cx="38" cy="54" r="5.5" fill="#2E6FA8"/>
-      <circle cx="62" cy="54" r="5.5" fill="#2E6FA8"/>
-      <circle cx="38" cy="54" r="3" fill="#0D1A2A"/>
-      <circle cx="62" cy="54" r="3" fill="#0D1A2A"/>
-      <circle cx="40" cy="52" r="1.6" fill="white"/>
-      <circle cx="64" cy="52" r="1.6" fill="white"/>
-      <path d="M30 42 Q38 38 46 42" stroke="#6B3A00" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      <path d="M54 42 Q62 38 70 42" stroke="#6B3A00" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      <path d="M36 70 Q50 79 64 70" fill="#C0392B" stroke="none"/>
-      <path d="M36 70 Q50 72.5 64 70" fill="white" stroke="none"/>
-    </svg>
-  ),
+  Zoe:    makeAvatar("Zoe"),
+  Marcus: makeAvatar("Marcus"),
+  Sofia:  makeAvatar("Sofia"),
+  Ava:    makeAvatar("Ava"),
+  Kai:    makeAvatar("Kai"),
+  Lena:   makeAvatar("Lena"),
 }
 
 // ─── Creators dataset ─────────────────────────────────────────
@@ -330,51 +179,68 @@ function BottomNav({ active = "home" }) {
 
 // ─── Phone mockups ────────────────────────────────────────────
 function DiscoverPhone() {
-  const tiles = [
-    { bg: "#E8C4B8", v: 0, label: "Photography" },
-    { bg: "#B8D4C0", v: 1, label: "Styling" },
-    { bg: "#C4C8E8", v: 2, label: "Branding" },
-    { bg: "#E8D8B8", v: 3, label: "Content" },
-    { bg: "#D8C4E8", v: 4, label: "Direction" },
-    { bg: "#B8DDE8", v: 5, label: "Video" },
+  // Real-app inspired: small Instagram-style 3-column tiles, vertical aspect
+  // Photo URLs reference the same illustrations used for avatars + abstract tiles
+  const grid = [
+    { src: "/creators/zoe.png",    name: "Zoe",    loc: "Los Angeles" },
+    { src: "/creators/marcus.png", name: "Marcus", loc: "New York" },
+    { src: "/creators/sofia.png",  name: "Sofia",  loc: "Miami" },
+    { src: "/creators/ava.png",    name: "Ava",    loc: "San Francisco" },
+    { src: "/creators/kai.png",    name: "Kai",    loc: "Portland" },
+    { src: "/creators/lena.png",   name: "Lena",   loc: "Chicago" },
   ]
   return (
     <PhoneShell>
+      {/* Header */}
       <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontSize: 8, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</span>
-          <div style={{ background: "white", borderRadius: 12, padding: "4px 8px", display: "flex", alignItems: "center", gap: 4, border: "1px solid rgba(44,26,14,0.08)" }}>
-            <Ico.Search style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
-            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>Find creatives</span>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <div>
+            <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#2C1A0E", marginTop: 2, lineHeight: 1.2 }}>find creatives that<br/>match your vision</div>
+          </div>
+          <div style={{ width: 22, height: 22, borderRadius: "50%", background: "white", border: "1px solid rgba(44,26,14,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Ico.Search style={{ width: 10, height: 10, color: "#2C1A0E" }} />
           </div>
         </div>
       </div>
-      <div style={{ padding: "0 12px 8px", display: "flex", gap: 5, overflowX: "auto", flexShrink: 0 }} className="no-scrollbar">
+
+      {/* Category pills */}
+      <div style={{ padding: "8px 12px 8px", display: "flex", gap: 5, overflowX: "auto", flexShrink: 0 }} className="no-scrollbar">
         {[
-          { l: "All", a: true },
-          { l: "Photo", a: false },
-          { l: "Video", a: false },
-          { l: "Style", a: false },
-          { l: "Brand", a: false },
-          { l: "Design", a: false },
+          { l: "For you", a: true },
+          { l: "Photography", a: false },
+          { l: "Videography", a: false },
+          { l: "Content", a: false },
         ].map(({ l, a }) => (
-          <span key={l} style={{ fontSize: 8, padding: "3px 10px", borderRadius: 18, fontWeight: 600, whiteSpace: "nowrap", background: a ? "#2C1A0E" : "white", color: a ? "#F8F2E8" : "rgba(44,26,14,0.55)", border: a ? "none" : "1px solid rgba(44,26,14,0.1)" }}>{l}</span>
+          <span key={l} style={{ fontSize: 8, padding: "4px 10px", borderRadius: 18, fontWeight: 600, whiteSpace: "nowrap", background: a ? "#2C1A0E" : "white", color: a ? "#F8F2E8" : "rgba(44,26,14,0.6)", border: a ? "none" : "1px solid rgba(44,26,14,0.1)" }}>{l}</span>
         ))}
       </div>
-      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, overflowY: "hidden" }}>
-        {tiles.map((t, i) => (
-          <div key={i} style={{ position: "relative" }}>
-            <ArtTile bg={t.bg} variant={t.v} label={t.label} style={{ height: "100%", minHeight: i === 0 || i === 3 ? 95 : 75 }} />
-            {i === 0 && (
-              <div style={{ position: "absolute", bottom: 6, right: 6, background: "rgba(255,255,255,0.9)", borderRadius: 8, padding: "3px 6px", display: "flex", alignItems: "center", gap: 4 }}>
-                <div style={{ borderRadius: "50%", overflow: "hidden" }}><Avatar.Zoe size={14} /></div>
-                <span style={{ fontSize: 7, fontWeight: 700, color: "#2C1A0E" }}>Zoe</span>
+
+      {/* "Discover creatives / See all" row */}
+      <div style={{ padding: "4px 12px 6px", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>Discover creatives</span>
+        <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)", display: "flex", alignItems: "center", gap: 2 }}>
+          See all <Ico.Arrow style={{ width: 7, height: 7 }} />
+        </span>
+      </div>
+
+      {/* Instagram-style 3-column grid, small tiles */}
+      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content", overflowY: "hidden" }}>
+        {grid.map((g, i) => (
+          <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
+            <img src={g.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            {/* Subtle bottom gradient + name */}
+            <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "8px 5px 4px", background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent)", color: "white" }}>
+              <div style={{ fontSize: 7, fontWeight: 700, lineHeight: 1.1 }}>{g.name}</div>
+              <div style={{ fontSize: 6, opacity: 0.85, display: "flex", alignItems: "center", gap: 1.5, marginTop: 1 }}>
+                <Ico.Map style={{ width: 5, height: 5 }} /> {g.loc}
               </div>
-            )}
+            </div>
           </div>
         ))}
       </div>
-      <BottomNav active="search" />
+
+      <BottomNav active="home" />
     </PhoneShell>
   )
 }
@@ -630,47 +496,43 @@ function Categories() {
 
 // ─── Discover Creatives ───────────────────────────────────────
 function DiscoverSection() {
-  const previewBgs = ["#E8C4B8", "#C4C8E8", "#C4D4C0", "#E8D8B8", "#D4C0E8", "#B8DDE0"]
   return (
     <section id="discover" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl mb-12">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Discover</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">browse creatives who get your aesthetic.</h2>
-          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Filter by style, location, category, and price. Every profile shows real work, honest pricing, and open availability.</p>
+          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">browse creatives across every discipline.</h2>
+          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Filter by category, location, and price. Every profile shows real work, honest pricing, and open availability.</p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {CREATORS.map((c, i) => {
-            const Av = c.Av
-            return (
-              <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-card border border-cream-200/40 hover:-translate-y-1 transition-transform">
-                <div className="grid grid-cols-3 h-28">
-                  {[0, 1, 2].map((j) => (
-                    <ArtTile key={j} bg={previewBgs[(i * 2 + j) % previewBgs.length]} variant={(i + j) % 6} style={{ borderRadius: 0, height: "100%" }} />
-                  ))}
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-3">
-                    <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><Av size={38} /></div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-bold text-sm text-espresso">{c.name}</div>
-                      <div className="text-xs text-espresso/50 truncate">{c.role} · {c.location}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold text-sm text-espresso">{c.price}</div>
-                      <div className="text-xs text-espresso/50">/ session</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between mt-3">
-                    <span style={{ background: c.tagBg, color: c.tagC, fontSize: 10, padding: "3px 9px", borderRadius: 999, fontWeight: 600 }}>{c.tag}</span>
-                    <div className="flex items-center gap-1 text-xs text-espresso/60">
-                      <Ico.Star style={{ width: 10, height: 10, color: "#C8A040" }} />{c.rating}
-                    </div>
+        {/* Instagram-style 3-col grid of small vertical creator tiles */}
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+          {CREATORS.map((c, i) => (
+            <a key={i} href={APP_URL} className="block group">
+              <div className="relative overflow-hidden rounded-2xl bg-cream-200" style={{ aspectRatio: "3/4" }}>
+                <img
+                  src={`/creators/${c.name.split(" ")[0].toLowerCase()}.png`}
+                  alt=""
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
+                {/* Tag */}
+                <span className="absolute top-2 left-2" style={{ background: c.tagBg, color: c.tagC, fontSize: 9, padding: "2px 7px", borderRadius: 999, fontWeight: 700 }}>{c.tag}</span>
+                {/* Name + location */}
+                <div className="absolute inset-x-0 bottom-0 p-2.5 text-white">
+                  <div className="font-bold text-xs leading-tight">{c.name.split(" ")[0]}</div>
+                  <div className="flex items-center gap-1 text-[10px] opacity-90 mt-0.5">
+                    <Ico.Map style={{ width: 8, height: 8 }} /> {c.location}
                   </div>
                 </div>
               </div>
-            )
-          })}
+              {/* Below the image, a small role + price line */}
+              <div className="mt-2 px-1 flex items-center justify-between">
+                <span className="text-[10px] text-espresso/55 font-medium truncate">{c.role}</span>
+                <span className="text-[11px] font-bold text-espresso">{c.price}</span>
+              </div>
+            </a>
+          ))}
         </div>
         <div className="mt-10 text-center">
           <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3.5 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
@@ -682,43 +544,67 @@ function DiscoverSection() {
   )
 }
 
-// ─── Shared Vision ────────────────────────────────────────────
+// ─── For Any Project ──────────────────────────────────────────
 function SharedVision() {
-  const aesthetics = [
-    { label: "Golden Hour",     bg: "#F5E6C0", c: "#6A4A10", tiles: ["#E8C090", "#D4A870", "#F0D4A0"] },
-    { label: "Editorial",       bg: "#C8D4E8", c: "#1A3A6A", tiles: ["#A0B4D0", "#8898B8", "#B8C8E0"] },
-    { label: "Soft & Dreamy",   bg: "#EDD8E8", c: "#5A2A6A", tiles: ["#D8B8D8", "#C4A0C4", "#E8CCE8"] },
-    { label: "Clean & Minimal", bg: "#D8E8D8", c: "#1A5A2A", tiles: ["#B8D0B8", "#A0C0A0", "#C8DCC8"] },
-    { label: "Luxury",          bg: "#D8D4C0", c: "#4A3A10", tiles: ["#C0B898", "#A89870", "#D4C4A8"] },
-    { label: "Bold & Vivid",    bg: "#E8C8B8", c: "#6A2A10", tiles: ["#D0A090", "#B88070", "#E4B8A8"] },
+  const projects = [
+    { label: "A content shoot",     bg: "#F5E6C0", c: "#6A4A10" },
+    { label: "A brand launch",      bg: "#C8D4E8", c: "#1A3A6A" },
+    { label: "A wedding",           bg: "#EDD8E8", c: "#5A2A6A" },
+    { label: "A product campaign",  bg: "#D8E8D8", c: "#1A5A2A" },
+    { label: "A music video",       bg: "#D8D4C0", c: "#4A3A10" },
+    { label: "An event",            bg: "#E8C8B8", c: "#6A2A10" },
+    { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
+    { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
+  ]
+  // Right column: a varied project-card mosaic representing different kinds of work
+  const cards = [
+    { Icon: Ico.Eye,      title: "Content Shoot",   tag: "Photography",  bg: "#F0D8B8", tagBg: "#FAF4D6", tagC: "#6A5010" },
+    { Icon: Ico.Film,     title: "Brand Film",      tag: "Video",        bg: "#C8D4E8", tagBg: "#E2EEF6", tagC: "#1A4A6A" },
+    { Icon: Ico.Layers,   title: "Identity Refresh",tag: "Branding",     bg: "#D8C4E8", tagBg: "#EDE6F5", tagC: "#4A2A7A" },
+    { Icon: Ico.Sparkle,  title: "Bridal Beauty",   tag: "Makeup",       bg: "#F4D0D8", tagBg: "#FBE9E9", tagC: "#7A2A2A" },
+    { Icon: Ico.Calendar, title: "Launch Event",    tag: "Events",       bg: "#E8D0B8", tagBg: "#FBE9D6", tagC: "#7A3A10" },
+    { Icon: Ico.Palette,  title: "Editorial Style", tag: "Styling",      bg: "#C8DCC0", tagBg: "#E6F0E6", tagC: "#2A5A2A" },
   ]
   return (
     <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Shared Vision</span>
-            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">find someone who sees what you see.</h2>
-            <p className="mt-5 text-espresso/60 text-base leading-relaxed max-w-lg">Every creative on Vision is tagged by aesthetic — so you can search by vibe, not just job title. Find a Golden Hour photographer, a minimalist brand designer, or a bold editorial stylist.</p>
-            <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-lg">Your creative vision deserves someone who already gets it.</p>
+            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
+            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">find the right creative for your next project, shoot, or idea.</h2>
+            <p className="mt-5 text-espresso/60 text-base leading-relaxed max-w-lg">Whatever you are building — a brand, an event, a campaign, a personal moment — there is a creative on Vision who can bring it to life.</p>
+            <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-lg">Search by category, location, budget, or the kind of work you need. Real portfolios, real availability, no guesswork.</p>
             <div className="mt-8 flex flex-wrap gap-2">
-              {aesthetics.map(({ label, bg, c }) => (
+              {projects.map(({ label, bg, c }) => (
                 <span key={label} style={{ background: bg, color: c, fontSize: 12, padding: "6px 14px", borderRadius: 999, fontWeight: 600 }}>{label}</span>
               ))}
             </div>
             <a href={APP_URL} className="mt-8 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3.5 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
-              Find Your Aesthetic <Ico.Arrow className="w-4 h-4" />
+              Find a Creative <Ico.Arrow className="w-4 h-4" />
             </a>
           </div>
-          <div className="grid grid-cols-3 gap-3">
-            {aesthetics.map(({ label, tiles, bg, c }, i) => (
-              <div key={i} className="flex flex-col gap-2">
-                {tiles.map((t, j) => (
-                  <ArtTile key={j} bg={t} variant={(i + j) % 6} style={{ aspectRatio: j === 1 ? "1/1.2" : "1/1", borderRadius: 14 }} />
-                ))}
-                <span style={{ background: bg, color: c, fontSize: 9, padding: "3px 8px", borderRadius: 999, fontWeight: 600, textAlign: "center" }}>{label}</span>
-              </div>
-            ))}
+          {/* Right: project-card mosaic */}
+          <div className="grid grid-cols-2 gap-4">
+            {cards.map((card, i) => {
+              const IconC = card.Icon
+              return (
+                <div key={i} className={`bg-white rounded-3xl overflow-hidden shadow-card border border-cream-200/40 ${i === 0 || i === 5 ? "mt-0" : i === 1 || i === 4 ? "mt-6" : "mt-0"}`}>
+                  <div style={{ background: card.bg, height: 100, position: "relative", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", top: "-20%", right: "-15%", width: "60%", paddingBottom: "60%", borderRadius: "50%", background: "rgba(255,255,255,0.18)" }} />
+                    <div style={{ position: "absolute", bottom: "-25%", left: "10%", width: "45%", paddingBottom: "45%", borderRadius: "50%", background: "rgba(0,0,0,0.06)" }} />
+                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <div style={{ background: "rgba(255,255,255,0.85)", width: 36, height: 36, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <IconC style={{ width: 17, height: 17, color: "#2C1A0E" }} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-4 py-3">
+                    <div className="text-xs font-bold text-espresso">{card.title}</div>
+                    <span style={{ background: card.tagBg, color: card.tagC, fontSize: 10, padding: "2px 8px", borderRadius: 999, fontWeight: 600, display: "inline-block", marginTop: 4 }}>{card.tag}</span>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
