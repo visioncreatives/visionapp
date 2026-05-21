@@ -1,71 +1,46 @@
 # Vision — Landing Page
 
-The public marketing landing page for **Vision**, a creator booking marketplace.
+The public marketing landing page for **Vision**, a modern creative marketplace where people can find creatives that match their vision — for content, branding, events, styling, photography, design, and more.
 
-Built with Vite + React + Tailwind CSS. No backend, no database, no auth — just a clean, mobile-first landing page ready to deploy on Vercel.
-
----
-
-## 🛠 Tech Stack
-
-- **Vite** (React, JavaScript — no TypeScript)
-- **Tailwind CSS**
-- **No backend, no database, no external APIs**
-- Mobile-first responsive design
-- Vercel-ready file structure
+Built with **Vite + React + Tailwind CSS** (JavaScript, no TypeScript). No backend, no database, no auth — just a clean, mobile-first landing page ready for Vercel.
 
 ---
 
 ## 🚀 Run Locally
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Start the dev server
 npm run dev
+```
 
-# 3. Build for production (optional)
+Dev server opens at **http://localhost:5173**.
+
+To verify the production build:
+```bash
 npm run build
-
-# 4. Preview the production build (optional)
 npm run preview
 ```
 
-The dev server will be available at **http://localhost:5173**.
-
 ---
 
-## 🔗 Replace Your Lovable / PWA App URL
+## 🔗 Replace the App URL
 
-All "Get Vision", "Join as a Creative", and "Open Vision App" buttons share a single constant.
-
-Open **`src/App.jsx`** and update this line near the top:
+Open **`src/App.jsx`** and change line 7:
 
 ```js
 const APP_URL = "https://app.joinvision.app"
 ```
 
-Replace it with your Lovable app or PWA URL, for example:
-
-```js
-const APP_URL = "https://your-app-name.lovable.app"
-```
-
-That's the only place you need to change — every CTA button on the page uses this constant.
+Replace with your Lovable / PWA URL, e.g. `https://your-app.lovable.app`. Every "Explore Creatives", "Become a Creative", and "Open Vision App" CTA uses this constant.
 
 ---
 
 ## 📦 Push to GitHub
 
 ```bash
-# Inside the project folder
 git init
 git add .
 git commit -m "Initial commit: Vision landing page"
-
-# Create a new empty repo on GitHub (no README, no .gitignore — keep it empty)
-# Then connect and push:
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/vision-landing.git
 git push -u origin main
@@ -75,30 +50,15 @@ git push -u origin main
 
 ## ☁️ Deploy to Vercel
 
-### Option A — Vercel Dashboard (recommended)
-
 1. Go to **https://vercel.com/new**
-2. Click **Import** next to your `vision-landing` GitHub repo
-3. Vercel auto-detects **Vite** — leave all defaults as-is:
-   - **Framework Preset:** Vite
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `dist`
-   - **Install Command:** `npm install`
+2. Import your `vision-landing` GitHub repo
+3. Vercel auto-detects Vite — accept defaults:
+   - Framework: Vite
+   - Build: `npm run build`
+   - Output: `dist`
 4. Click **Deploy**
 
-That's it. Vercel will build and give you a live URL.
-
-### Option B — Vercel CLI
-
-```bash
-npm i -g vercel
-vercel
-# Follow the prompts
-```
-
-### Connect your custom domain
-
-In Vercel → your project → **Settings → Domains** → add `joinvision.app` and follow the DNS instructions.
+In Settings → Domains, add `joinvision.app` and follow the DNS prompts.
 
 ---
 
@@ -115,30 +75,26 @@ vision-landing/
 ├── .gitignore
 ├── README.md
 └── src/
-    ├── App.jsx        ← all sections live here (Header, Hero, Problem, How, Features, PWA, CTA, Footer)
+    ├── App.jsx        ← all sections live here
     ├── main.jsx
     └── index.css
 ```
 
 ---
 
-## 🎨 Design Notes
+## 🎨 What's Included
 
-- Cream/beige backgrounds (`#F6EFE6`, `#FBF6EF`)
-- Dark espresso primary buttons (`#3A2A20`)
-- Soft peach + pink accents
-- `Fraunces` display font + `Inter` body font
-- All "images" are gradient mockup tiles — no broken image links, no external assets
-- Sections: Header → Hero with phone mockup → Problem → How it Works (tabbed) → Features → PWA → Final CTA → Footer
+10 sections, all in one App.jsx:
 
----
+1. **Header** — sticky nav with Explore Creatives CTA
+2. **Hero** — "find creatives that match your vision" with desktop aesthetic mosaic / mobile phone preview
+3. **Creative Categories** — 8 disciplines (photo, video, styling, direction, makeup, branding, events, content)
+4. **Discover Creatives** — 6 sample creator cards with portfolio previews
+5. **Shared Vision** — aesthetic-based discovery with 6 mood columns
+6. **How it Works** — tabbed (Hiring / Creating)
+7. **App Showcase** — 3 phone mockups (Discover, Profile, Chat)
+8. **For Creatives** — benefit list with portfolio mosaic
+9. **Trust & Platform** — 8 platform feature cards
+10. **PWA Install + Final CTA + Footer**
 
-## ✅ Production Checklist
-
-- [x] No broken image links — all visuals are CSS gradients / SVG
-- [x] No external APIs or backend calls
-- [x] No reviews/testimonials section
-- [x] Mobile-first responsive
-- [x] All CTAs point to `APP_URL` constant
-- [x] Builds cleanly with `npm run build`
-- [x] Vercel-ready out of the box
+All images are CSS gradients with abstract SVG patterns — no external image dependencies, no broken links.

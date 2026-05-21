@@ -12,35 +12,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Portrait photo tiles — warm editorial gradient fills */
-.tile-blush  { background: linear-gradient(160deg, #F2C4C4 0%, #D48080 100%); }
-.tile-sage   { background: linear-gradient(160deg, #B8D4B8 0%, #6A9A6A 100%); }
-.tile-sky    { background: linear-gradient(160deg, #B8D4E8 0%, #5A8AB0 100%); }
-.tile-butter { background: linear-gradient(160deg, #F0DFA0 0%, #C0A040 100%); }
-.tile-lilac  { background: linear-gradient(160deg, #C8B8E0 0%, #8060B0 100%); }
-.tile-peach  { background: linear-gradient(160deg, #F2C4A0 0%, #C07040 100%); }
-.tile-mint   { background: linear-gradient(160deg, #A8D8C8 0%, #3A9070 100%); }
-.tile-warm   { background: linear-gradient(160deg, #E8D0B0 0%, #9A7040 100%); }
-
-/* Portrait tiles with a faint person silhouette suggestion */
-.tile-portrait {
-  position: relative;
-  overflow: hidden;
-}
-.tile-portrait::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 55%; height: 80%;
-  background: rgba(0,0,0,0.12);
-  border-radius: 50% 50% 0 0;
-}
-
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Mosaic hero grid helpers */
+/* Hero mosaic grid for the aesthetic collage */
 .mosaic-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -49,5 +24,3 @@ body {
   height: 480px;
 }
 .mosaic-tall { grid-row: span 2; }
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
