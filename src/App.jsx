@@ -62,14 +62,393 @@ const Avatar = {
   Lena:   makeAvatar("Lena"),
 }
 
+// ─── Pixar-style scene illustrations (inline SVG) ─────────────
+// Detailed cartoon scenes in muted brand palette for project + creative cards
+const SkinTones = ["#F2C9A0", "#D9A07A", "#B07B57", "#8B5536"]
+
+// Reusable simple cartoon person (mini, for backgrounds of scenes)
+function MiniPerson({ x, y, scale = 1, skin = "#F2C9A0", hair = "#3D2512", shirt = "#C8B8A0" }) {
+  return (
+    <g transform={`translate(${x},${y}) scale(${scale})`}>
+      {/* Body */}
+      <ellipse cx="0" cy="35" rx="18" ry="14" fill={shirt} />
+      <rect x="-15" y="22" width="30" height="20" rx="6" fill={shirt} />
+      {/* Neck */}
+      <rect x="-5" y="10" width="10" height="8" rx="3" fill={skin} />
+      {/* Head */}
+      <ellipse cx="0" cy="0" rx="14" ry="15" fill={skin} />
+      {/* Hair */}
+      <ellipse cx="0" cy="-8" rx="15" ry="10" fill={hair} />
+      <path d={`M-14 -2 Q -10 8 -14 14 Z`} fill={hair} />
+      <path d={`M14 -2 Q 10 8 14 14 Z`} fill={hair} />
+      {/* Eyes */}
+      <circle cx="-5" cy="2" r="2" fill="white"/>
+      <circle cx="5" cy="2" r="2" fill="white"/>
+      <circle cx="-5" cy="2" r="1.2" fill="#1A0D06"/>
+      <circle cx="5" cy="2" r="1.2" fill="#1A0D06"/>
+      {/* Smile */}
+      <path d="M-4 7 Q 0 10 4 7" stroke="#7A3A1A" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+      {/* Blush */}
+      <circle cx="-8" cy="5" r="2" fill="#E89080" opacity="0.4"/>
+      <circle cx="8" cy="5" r="2" fill="#E89080" opacity="0.4"/>
+    </g>
+  )
+}
+
+// CONTENT SHOOT — photographer + subject in soft daylight
+function SceneContentShoot() {
+  return (
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      {/* Sky background */}
+      <rect width="200" height="130" fill="#F4E4D0"/>
+      {/* Soft sun */}
+      <circle cx="160" cy="35" r="22" fill="#F0D8A8" opacity="0.7"/>
+      <circle cx="160" cy="35" r="14" fill="#F8E4BC" opacity="0.7"/>
+      {/* Distant landscape */}
+      <ellipse cx="30" cy="115" rx="60" ry="20" fill="#C8A878" opacity="0.5"/>
+      <ellipse cx="170" cy="118" rx="55" ry="18" fill="#B08858" opacity="0.4"/>
+      {/* Subject (model) */}
+      <MiniPerson x={130} y={70} scale={1.2} skin="#D9A07A" hair="#3D2512" shirt="#E8C8B8"/>
+      {/* Photographer */}
+      <MiniPerson x={60} y={75} scale={1.1} skin="#E8B89A" hair="#4A2A10" shirt="#A89070"/>
+      {/* Camera on photographer */}
+      <g transform="translate(75,78)">
+        <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#2C1A0E"/>
+        <circle cx="0" cy="0" r="4" fill="#1A0D06"/>
+        <circle cx="0" cy="0" r="2.5" fill="#4A3A28"/>
+      </g>
+      {/* Tripod hint */}
+      <line x1="68" y1="98" x2="64" y2="118" stroke="#3A2A20" strokeWidth="1.5"/>
+      <line x1="68" y1="98" x2="72" y2="118" stroke="#3A2A20" strokeWidth="1.5"/>
+    </svg>
+  )
+}
+
+// BRAND FILM — videographer with stabilizer + monitor
+function SceneBrandFilm() {
+  return (
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="130" fill="#D4DDE8"/>
+      {/* Window */}
+      <rect x="120" y="10" width="70" height="60" rx="4" fill="#E8EEF4" opacity="0.7"/>
+      <line x1="155" y1="10" x2="155" y2="70" stroke="#B8C4D0" strokeWidth="1.5"/>
+      <line x1="120" y1="40" x2="190" y2="40" stroke="#B8C4D0" strokeWidth="1.5"/>
+      {/* Monitor on desk */}
+      <rect x="10" y="55" width="50" height="32" rx="3" fill="#2C1A0E"/>
+      <rect x="13" y="58" width="44" height="26" rx="1" fill="#5A6878"/>
+      {/* Timeline bars */}
+      <rect x="16" y="76" width="38" height="2" fill="#B8C4D0"/>
+      <rect x="16" y="71" width="20" height="3" fill="#E8A878"/>
+      <rect x="38" y="71" width="14" height="3" fill="#8B7AA8"/>
+      <line x1="35" y1="87" x2="35" y2="105" stroke="#2C1A0E" strokeWidth="2"/>
+      <ellipse cx="35" cy="106" rx="14" ry="3" fill="#2C1A0E"/>
+      {/* Videographer */}
+      <MiniPerson x={115} y={80} scale={1.2} skin="#E8B89A" hair="#3A2410" shirt="#9AB0A0"/>
+      {/* Gimbal/camera */}
+      <g transform="translate(140,78)">
+        <rect x="-3" y="-12" width="6" height="14" rx="1" fill="#2C1A0E"/>
+        <rect x="-9" y="-20" width="18" height="11" rx="2" fill="#2C1A0E"/>
+        <circle cx="0" cy="-14" r="3.5" fill="#4A3A28"/>
+      </g>
+    </svg>
+  )
+}
+
+// IDENTITY REFRESH — designer at desk with brand swatches
+function SceneIdentity() {
+  return (
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="130" fill="#DDD0E8"/>
+      {/* Wall shelf */}
+      <rect x="10" y="20" width="80" height="3" fill="#A89878" opacity="0.5"/>
+      {/* Plants */}
+      <ellipse cx="25" cy="15" rx="6" ry="8" fill="#9AB0A0"/>
+      <ellipse cx="60" cy="13" rx="7" ry="9" fill="#A8C0A8"/>
+      <rect x="20" y="20" width="10" height="6" fill="#A89878"/>
+      <rect x="55" y="22" width="10" height="4" fill="#A89878"/>
+      {/* Desk */}
+      <rect x="0" y="95" width="200" height="35" fill="#C4A888"/>
+      <rect x="0" y="95" width="200" height="3" fill="#A88858"/>
+      {/* Designer */}
+      <MiniPerson x={100} y={65} scale={1.3} skin="#F2C9A0" hair="#5A3A20" shirt="#9A9AB8"/>
+      {/* Color swatches sheet */}
+      <rect x="35" y="100" width="55" height="22" rx="2" fill="white" stroke="#B0A088" strokeWidth="0.5"/>
+      <rect x="40" y="103" width="9" height="8" rx="1" fill="#D8A878"/>
+      <rect x="51" y="103" width="9" height="8" rx="1" fill="#9AB0A0"/>
+      <rect x="62" y="103" width="9" height="8" rx="1" fill="#C8B0D8"/>
+      <rect x="73" y="103" width="9" height="8" rx="1" fill="#E8C8B8"/>
+      <rect x="40" y="113" width="42" height="2" fill="#D0C0B0"/>
+      <rect x="40" y="116" width="32" height="2" fill="#D0C0B0"/>
+      {/* Laptop */}
+      <rect x="120" y="100" width="45" height="22" rx="2" fill="#2C1A0E"/>
+      <rect x="123" y="103" width="39" height="16" rx="1" fill="#E8E0D4"/>
+      {/* Logo on laptop screen */}
+      <circle cx="142" cy="111" r="4" fill="#8B6AA8"/>
+    </svg>
+  )
+}
+
+// BRIDAL BEAUTY — makeup artist applying makeup
+function SceneBridal() {
+  return (
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="130" fill="#F4DCE0"/>
+      {/* Vanity mirror */}
+      <rect x="125" y="10" width="60" height="50" rx="6" fill="#E8C4CC"/>
+      <rect x="130" y="15" width="50" height="40" rx="3" fill="#F8E4E8"/>
+      {/* Mirror lights */}
+      {[0,1,2,3].map(i=>(
+        <circle key={i} cx={132 + i*16} cy={9} r="2.5" fill="#FAEFCF"/>
+      ))}
+      {/* Makeup artist (standing left, focused) */}
+      <MiniPerson x={50} y={70} scale={1.3} skin="#F4D0B8" hair="#E8C898" shirt="#FFFFFF"/>
+      {/* Brush */}
+      <g transform="translate(70,75) rotate(35)">
+        <rect x="0" y="-1" width="14" height="2" rx="1" fill="#A88858"/>
+        <ellipse cx="15" cy="0" rx="3" ry="1.5" fill="#E8C8B8"/>
+      </g>
+      {/* Client (sitting right) */}
+      <MiniPerson x={120} y={78} scale={1.4} skin="#C8956A" hair="#3A2410" shirt="#D8B8A8"/>
+      {/* Eyes closed indicator on client */}
+      <line x1="115" y1="79" x2="119" y2="79" stroke="#1A0D06" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="121" y1="79" x2="125" y2="79" stroke="#1A0D06" strokeWidth="1.2" strokeLinecap="round"/>
+      {/* Makeup table */}
+      <rect x="0" y="115" width="200" height="15" fill="#C4A888"/>
+      <rect x="15" y="108" width="14" height="9" rx="1" fill="#D8A088"/>
+      <rect x="32" y="106" width="6" height="11" rx="1" fill="#E8C09A"/>
+      <rect x="42" y="108" width="10" height="9" rx="1" fill="#C8889A"/>
+    </svg>
+  )
+}
+
+// LAUNCH EVENT — confetti, balloons, stage
+function SceneEvent() {
+  return (
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="130" fill="#F0DDC0"/>
+      {/* String lights */}
+      <path d="M 10 20 Q 100 45 190 20" fill="none" stroke="#A89878" strokeWidth="1"/>
+      {[20,40,60,80,100,120,140,160,180].map((x,i)=>{
+        // bulb positions follow the curve approximately
+        const y = 20 + Math.sin((x-10)/180 * Math.PI) * 25
+        return <circle key={i} cx={x} cy={y} r="2.5" fill="#F8E4A8"/>
+      })}
+      {/* Balloons */}
+      <g>
+        <ellipse cx="30" cy="55" rx="8" ry="10" fill="#E8A8A8"/>
+        <line x1="30" y1="65" x2="32" y2="85" stroke="#A89878" strokeWidth="0.6"/>
+        <ellipse cx="48" cy="48" rx="8" ry="10" fill="#C8B0D8"/>
+        <line x1="48" y1="58" x2="46" y2="82" stroke="#A89878" strokeWidth="0.6"/>
+        <ellipse cx="170" cy="50" rx="8" ry="10" fill="#A8C0D8"/>
+        <line x1="170" y1="60" x2="172" y2="84" stroke="#A89878" strokeWidth="0.6"/>
+      </g>
+      {/* People crowd */}
+      <MiniPerson x={75} y={82} scale={0.85} skin="#E8B89A" hair="#3D2512" shirt="#9AB0A0"/>
+      <MiniPerson x={100} y={80} scale={0.9} skin="#C8956A" hair="#1A0D06" shirt="#D8A8B0"/>
+      <MiniPerson x={125} y={82} scale={0.85} skin="#F2C9A0" hair="#5A3A20" shirt="#A89A78"/>
+      {/* Stage / podium */}
+      <rect x="60" y="105" width="80" height="20" rx="3" fill="#8B6A48"/>
+      <rect x="60" y="105" width="80" height="3" fill="#6A4A28"/>
+      {/* Floor */}
+      <rect x="0" y="120" width="200" height="10" fill="#A88858"/>
+      {/* Confetti */}
+      {[{x:80,y:30,c:"#E89080"},{x:110,y:35,c:"#8BB098"},{x:140,y:28,c:"#C8B0D8"},{x:65,y:40,c:"#F8D898"},{x:155,y:42,c:"#E8A8A8"}].map((c,i)=>(
+        <rect key={i} x={c.x} y={c.y} width="3" height="3" fill={c.c} transform={`rotate(${i*30} ${c.x+1.5} ${c.y+1.5})`}/>
+      ))}
+    </svg>
+  )
+}
+
+// EDITORIAL STYLE — stylist arranging clothing rack
+function SceneEditorial() {
+  return (
+    <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="130" fill="#C8DCC0"/>
+      {/* Window light streaks */}
+      <rect x="10" y="0" width="40" height="130" fill="#E0EDD8" opacity="0.5"/>
+      {/* Clothing rack */}
+      <line x1="70" y1="35" x2="180" y2="35" stroke="#3A2A20" strokeWidth="2"/>
+      <line x1="75" y1="35" x2="75" y2="115" stroke="#3A2A20" strokeWidth="1.5"/>
+      <line x1="175" y1="35" x2="175" y2="115" stroke="#3A2A20" strokeWidth="1.5"/>
+      {/* Hangers + clothes */}
+      {[{x:85,c:"#D8A8B8",h:"#A89878"},{x:105,c:"#C8B098",h:"#A89878"},{x:125,c:"#A8B0D0",h:"#A89878"},{x:145,c:"#E8C8A8",h:"#A89878"},{x:165,c:"#B0C8B0",h:"#A89878"}].map((c,i)=>(
+        <g key={i}>
+          {/* hanger */}
+          <path d={`M ${c.x-7} 38 L ${c.x} 33 L ${c.x+7} 38`} stroke={c.h} strokeWidth="1" fill="none"/>
+          {/* clothes */}
+          <path d={`M ${c.x-10} 40 L ${c.x-12} 90 L ${c.x+12} 90 L ${c.x+10} 40 Z`} fill={c.c}/>
+        </g>
+      ))}
+      {/* Stylist */}
+      <MiniPerson x={35} y={75} scale={1.2} skin="#D9A07A" hair="#2D1B0E" shirt="#E8C0A8"/>
+      {/* Floor */}
+      <rect x="0" y="115" width="200" height="15" fill="#B89878"/>
+    </svg>
+  )
+}
+
+// CREATIVE SCENES — for "For Creatives" section
+// SHOWCASE AESTHETIC — gallery wall / portfolio grid
+function SceneShowcase() {
+  return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="200" fill="#F4E4D0"/>
+      {/* Gallery wall frames */}
+      <g>
+        <rect x="20" y="30" width="55" height="70" rx="2" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="25" y="35" width="45" height="55" fill="#E8C4B8"/>
+        <circle cx="47" cy="55" r="10" fill="#D8A088" opacity="0.7"/>
+        <ellipse cx="47" cy="80" rx="18" ry="5" fill="#C88068" opacity="0.5"/>
+
+        <rect x="85" y="20" width="50" height="50" rx="2" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="90" y="25" width="40" height="40" fill="#C8D4E8"/>
+        <rect x="95" y="30" width="30" height="3" fill="#A8B8D0"/>
+        <rect x="95" y="36" width="20" height="3" fill="#A8B8D0"/>
+        <rect x="95" y="42" width="25" height="3" fill="#A8B8D0"/>
+
+        <rect x="145" y="35" width="40" height="65" rx="2" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="150" y="40" width="30" height="50" fill="#D8C4E8"/>
+        <ellipse cx="165" cy="65" rx="10" ry="14" fill="#B89AC8" opacity="0.6"/>
+
+        <rect x="30" y="115" width="60" height="50" rx="2" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="35" y="120" width="50" height="40" fill="#C8DCC0"/>
+        <path d="M40 145 Q 50 130 60 145 Q 70 135 80 145 L 80 155 L 40 155 Z" fill="#A8C098"/>
+
+        <rect x="100" y="100" width="80" height="60" rx="2" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="105" y="105" width="70" height="50" fill="#E8D0B8"/>
+        <circle cx="140" cy="125" r="12" fill="#D8B098"/>
+        <rect x="115" y="142" width="50" height="3" fill="#C8A878"/>
+      </g>
+      {/* Floor */}
+      <rect x="0" y="170" width="200" height="30" fill="#D4C4A8"/>
+      <rect x="0" y="170" width="200" height="3" fill="#B8A488"/>
+    </svg>
+  )
+}
+
+// LIST PACKAGES — pricing/menu card
+function ScenePackages() {
+  return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="200" fill="#D8E0D0"/>
+      {/* Three package cards stacked */}
+      <g>
+        {/* Card 1 */}
+        <rect x="20" y="25" width="160" height="48" rx="10" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="30" y="35" width="50" height="6" rx="2" fill="#5A4A38"/>
+        <rect x="30" y="46" width="80" height="4" rx="1" fill="#B8A088"/>
+        <rect x="30" y="55" width="70" height="4" rx="1" fill="#B8A088"/>
+        <rect x="140" y="40" width="30" height="18" rx="9" fill="#2C1A0E"/>
+        <text x="155" y="52" fontSize="9" fontWeight="700" fill="#F8F2E8" textAnchor="middle">$120</text>
+
+        {/* Card 2 */}
+        <rect x="20" y="80" width="160" height="48" rx="10" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="30" y="90" width="60" height="6" rx="2" fill="#5A4A38"/>
+        <rect x="30" y="101" width="90" height="4" rx="1" fill="#B8A088"/>
+        <rect x="30" y="110" width="60" height="4" rx="1" fill="#B8A088"/>
+        <rect x="140" y="95" width="30" height="18" rx="9" fill="#2C1A0E"/>
+        <text x="155" y="107" fontSize="9" fontWeight="700" fill="#F8F2E8" textAnchor="middle">$220</text>
+
+        {/* Card 3 */}
+        <rect x="20" y="135" width="160" height="48" rx="10" fill="white" stroke="#C8B098" strokeWidth="1"/>
+        <rect x="30" y="145" width="55" height="6" rx="2" fill="#5A4A38"/>
+        <rect x="30" y="156" width="75" height="4" rx="1" fill="#B8A088"/>
+        <rect x="30" y="165" width="65" height="4" rx="1" fill="#B8A088"/>
+        <rect x="140" y="150" width="30" height="18" rx="9" fill="#2C1A0E"/>
+        <text x="155" y="162" fontSize="9" fontWeight="700" fill="#F8F2E8" textAnchor="middle">$350</text>
+      </g>
+    </svg>
+  )
+}
+
+// CONTROL AVAILABILITY — calendar with selected dates
+function SceneCalendar() {
+  return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="200" fill="#E0D4F0"/>
+      {/* Calendar */}
+      <rect x="25" y="25" width="150" height="150" rx="12" fill="white" stroke="#B8A4D0" strokeWidth="1"/>
+      {/* Header */}
+      <rect x="25" y="25" width="150" height="32" rx="12" fill="#2C1A0E"/>
+      <rect x="25" y="45" width="150" height="12" fill="#2C1A0E"/>
+      <text x="100" y="46" fontSize="11" fontWeight="700" fill="#F8F2E8" textAnchor="middle">June 2026</text>
+      {/* Day labels */}
+      {["S","M","T","W","T","F","S"].map((d,i)=>(
+        <text key={i} x={37 + i*21} y={70} fontSize="7" fontWeight="600" fill="#8B7A6A" textAnchor="middle">{d}</text>
+      ))}
+      {/* Calendar grid — 5 weeks */}
+      {Array.from({length: 35}, (_, i) => {
+        const row = Math.floor(i/7)
+        const col = i % 7
+        const cx = 37 + col*21
+        const cy = 84 + row*18
+        const day = i - 2 // start Mon
+        const valid = day > 0 && day <= 30
+        const selected = [8, 14, 21, 28].includes(day)
+        const today = day === 17
+        return (
+          <g key={i}>
+            {selected && <circle cx={cx} cy={cy} r="8" fill="#B89AC8"/>}
+            {today && <circle cx={cx} cy={cy} r="8" fill="#2C1A0E"/>}
+            {valid && <text x={cx} y={cy+3} fontSize="8" fontWeight={selected || today ? "700" : "500"} fill={selected || today ? "white" : "#5A4A38"} textAnchor="middle">{day}</text>}
+          </g>
+        )
+      })}
+    </svg>
+  )
+}
+
+// GET PAID DIRECTLY — payment / earnings dashboard
+function ScenePayment() {
+  return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+      <rect width="200" height="200" fill="#D4E0EC"/>
+      {/* Dashboard card */}
+      <rect x="20" y="25" width="160" height="150" rx="14" fill="white" stroke="#A8B8C8" strokeWidth="1"/>
+      {/* Heading */}
+      <rect x="30" y="35" width="55" height="4" rx="1" fill="#8B98A8"/>
+      <text x="30" y="60" fontSize="22" fontWeight="800" fill="#2C1A0E">$4,820</text>
+      <rect x="30" y="68" width="35" height="3" rx="1" fill="#A8B8C8"/>
+      {/* Chart bars */}
+      <g>
+        {[
+          {h:18,c:"#B8C4D0"},
+          {h:24,c:"#B8C4D0"},
+          {h:32,c:"#B8C4D0"},
+          {h:22,c:"#B8C4D0"},
+          {h:38,c:"#2C1A0E"},
+          {h:30,c:"#B8C4D0"},
+          {h:42,c:"#B8C4D0"},
+        ].map((b,i)=>(
+          <rect key={i} x={32 + i*20} y={155 - b.h} width="14" height={b.h} rx="3" fill={b.c}/>
+        ))}
+      </g>
+      {/* Transaction row */}
+      <rect x="20" y="180" width="160" height="14" rx="3" fill="#E8D4B8"/>
+      <circle cx="30" cy="187" r="4" fill="#2C8C5A"/>
+      <text x="30" y="189" fontSize="6" fontWeight="700" fill="white" textAnchor="middle">✓</text>
+      <rect x="40" y="184" width="50" height="3" fill="#5A4A38"/>
+      <rect x="40" y="189" width="35" height="2" fill="#A89878"/>
+      <text x="172" y="190" fontSize="8" fontWeight="700" fill="#2C8C5A" textAnchor="end">+$320</text>
+    </svg>
+  )
+}
+
 // ─── Creators dataset ─────────────────────────────────────────
+// Images mapped to actual professions shown:
+// zoe.png   → content creator (podcast/mic)
+// marcus.png → photographer (with camera)
+// sofia.png  → stylist (palette + laptop)
+// ava.png    → videographer (gimbal camera)
+// kai.png    → graphic designer (tablet drawing)
+// lena.png   → makeup artist (doing makeup)
 const CREATORS = [
-  { name: "Zoe Chen",     Av: Avatar.Zoe,    handle: "@zoechen",    role: "PHOTOGRAPHER",     location: "Los Angeles",   price: "$120", tag: "Golden Hour", rating: "4.9", works: 34, bookings: 89,  tagBg: "#FAF4D6", tagC: "#6A5010" },
-  { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "VIDEOGRAPHER",     location: "New York",      price: "$200", tag: "Editorial",   rating: "5.0", works: 21, bookings: 52,  tagBg: "#E2EEF6", tagC: "#1A4A6A" },
-  { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  tag: "Lifestyle",   rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A" },
-  { name: "Ava Nakamura", Av: Avatar.Ava,    handle: "@avanaka",    role: "CREATIVE DIR.",    location: "San Francisco", price: "$175", tag: "Luxury",      rating: "5.0", works: 18, bookings: 44,  tagBg: "#EDE6F5", tagC: "#4A2A7A" },
-  { name: "Kai Williams", Av: Avatar.Kai,    handle: "@kaiwill",    role: "CONTENT CREATOR",  location: "Portland",      price: "$110", tag: "Candid",      rating: "4.9", works: 29, bookings: 71,  tagBg: "#D6EEE8", tagC: "#1A5A48" },
-  { name: "Lena Park",    Av: Avatar.Lena,   handle: "@lenapark",   role: "GRAPHIC DESIGNER", location: "Chicago",       price: "$140", tag: "Branding",    rating: "4.8", works: 38, bookings: 60,  tagBg: "#FBE9E9", tagC: "#7A2A2A" },
+  { name: "Zoe Chen",     Av: Avatar.Zoe,    handle: "@zoechen",    role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48" },
+  { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "PHOTOGRAPHER",     location: "New York",      price: "$200", rating: "5.0", works: 21, bookings: 52,  tagBg: "#FAF4D6", tagC: "#6A5010" },
+  { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A" },
+  { name: "Ava Nakamura", Av: Avatar.Ava,    handle: "@avanaka",    role: "VIDEOGRAPHER",     location: "San Francisco", price: "$175", rating: "5.0", works: 18, bookings: 44,  tagBg: "#E2EEF6", tagC: "#1A4A6A" },
+  { name: "Kai Williams", Av: Avatar.Kai,    handle: "@kaiwill",    role: "GRAPHIC DESIGNER", location: "Portland",      price: "$140", rating: "4.9", works: 29, bookings: 71,  tagBg: "#EDE6F5", tagC: "#4A2A7A" },
+  { name: "Lena Park",    Av: Avatar.Lena,   handle: "@lenapark",   role: "MAKEUP ARTIST",    location: "Chicago",       price: "$120", rating: "4.8", works: 38, bookings: 60,  tagBg: "#FBE9E9", tagC: "#7A2A2A" },
 ]
 
 // ─── ArtTile — abstract decorative tile, no human figure ──────
@@ -369,16 +748,6 @@ function Header() {
 
 // ─── Hero ─────────────────────────────────────────────────────
 function Hero() {
-  const mosaic = [
-    { bg: "#E8C4B8", v: 0, label: "Photography" },
-    { bg: "#C4D4C0", v: 1, label: "Styling" },
-    { bg: "#C4C8E8", v: 2, label: "Branding" },
-    { bg: "#E8D8B8", v: 3, label: "Creative Dir." },
-    { bg: "#D4C0E8", v: 4, label: "Content" },
-    { bg: "#B8DDE0", v: 5, label: "Makeup" },
-    { bg: "#E0C8B8", v: 0, label: "Events" },
-    { bg: "#C8D8B0", v: 1, label: "Design" },
-  ]
   const heroPills = [
     { l: "Photography", bg: "#FAF4D6", c: "#6A5010" },
     { l: "Styling",     bg: "#E6F0E6", c: "#2A5A2A" },
@@ -439,16 +808,29 @@ function Hero() {
           </div>
         </div>
 
-        <div className="hidden lg:block mosaic-grid">
-          {mosaic.map((t, i) => (
-            <div key={i} className={i === 0 || i === 3 ? "mosaic-tall" : ""}>
-              <ArtTile bg={t.bg} variant={t.v} label={t.label} style={{ borderRadius: 20, height: "100%" }} />
+        {/* Right side — phone preview of the actual app on desktop, also visible on tablet */}
+        <div className="hidden md:flex justify-center lg:justify-end relative">
+          {/* Soft glow behind the phone */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
+          </div>
+          <div className="relative">
+            <DiscoverPhone />
+            {/* Floating cue card next to phone */}
+            <div className="absolute -left-8 top-20 hidden lg:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60" style={{ whiteSpace: "nowrap" }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
+              <span className="text-xs font-semibold text-espresso">6 creatives near you</span>
             </div>
-          ))}
+            <div className="absolute -right-6 bottom-36 hidden lg:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60">
+              <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
+              <div className="text-sm font-bold text-espresso">$95 / project</div>
+            </div>
+          </div>
         </div>
 
-        <div className="flex lg:hidden justify-center">
-          <ProfilePhone />
+        {/* Mobile: still show phone, simpler layout */}
+        <div className="flex md:hidden justify-center">
+          <DiscoverPhone />
         </div>
       </div>
     </section>
@@ -516,8 +898,6 @@ function DiscoverSection() {
                 />
                 {/* Gradient overlay */}
                 <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
-                {/* Tag */}
-                <span className="absolute top-2 left-2" style={{ background: c.tagBg, color: c.tagC, fontSize: 9, padding: "2px 7px", borderRadius: 999, fontWeight: 700 }}>{c.tag}</span>
                 {/* Name + location */}
                 <div className="absolute inset-x-0 bottom-0 p-2.5 text-white">
                   <div className="font-bold text-xs leading-tight">{c.name.split(" ")[0]}</div>
@@ -526,7 +906,7 @@ function DiscoverSection() {
                   </div>
                 </div>
               </div>
-              {/* Below the image, a small role + price line */}
+              {/* Below the image, role + price line */}
               <div className="mt-2 px-1 flex items-center justify-between">
                 <span className="text-[10px] text-espresso/55 font-medium truncate">{c.role}</span>
                 <span className="text-[11px] font-bold text-espresso">{c.price}</span>
@@ -556,14 +936,14 @@ function SharedVision() {
     { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
     { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
   ]
-  // Right column: a varied project-card mosaic representing different kinds of work
+  // Right column: project cards with themed Pixar-style scene illustrations
   const cards = [
-    { Icon: Ico.Eye,      title: "Content Shoot",   tag: "Photography",  bg: "#F0D8B8", tagBg: "#FAF4D6", tagC: "#6A5010" },
-    { Icon: Ico.Film,     title: "Brand Film",      tag: "Video",        bg: "#C8D4E8", tagBg: "#E2EEF6", tagC: "#1A4A6A" },
-    { Icon: Ico.Layers,   title: "Identity Refresh",tag: "Branding",     bg: "#D8C4E8", tagBg: "#EDE6F5", tagC: "#4A2A7A" },
-    { Icon: Ico.Sparkle,  title: "Bridal Beauty",   tag: "Makeup",       bg: "#F4D0D8", tagBg: "#FBE9E9", tagC: "#7A2A2A" },
-    { Icon: Ico.Calendar, title: "Launch Event",    tag: "Events",       bg: "#E8D0B8", tagBg: "#FBE9D6", tagC: "#7A3A10" },
-    { Icon: Ico.Palette,  title: "Editorial Style", tag: "Styling",      bg: "#C8DCC0", tagBg: "#E6F0E6", tagC: "#2A5A2A" },
+    { Scene: SceneContentShoot, title: "Content Shoot",    tag: "Photography", tagBg: "#FAF4D6", tagC: "#6A5010" },
+    { Scene: SceneBrandFilm,    title: "Brand Film",       tag: "Video",       tagBg: "#E2EEF6", tagC: "#1A4A6A" },
+    { Scene: SceneIdentity,     title: "Identity Refresh", tag: "Branding",    tagBg: "#EDE6F5", tagC: "#4A2A7A" },
+    { Scene: SceneBridal,       title: "Bridal Beauty",    tag: "Makeup",      tagBg: "#FBE9E9", tagC: "#7A2A2A" },
+    { Scene: SceneEvent,        title: "Launch Event",     tag: "Events",      tagBg: "#FBE9D6", tagC: "#7A3A10" },
+    { Scene: SceneEditorial,    title: "Editorial Style",  tag: "Styling",     tagBg: "#E6F0E6", tagC: "#2A5A2A" },
   ]
   return (
     <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
@@ -586,17 +966,11 @@ function SharedVision() {
           {/* Right: project-card mosaic */}
           <div className="grid grid-cols-2 gap-4">
             {cards.map((card, i) => {
-              const IconC = card.Icon
+              const Scene = card.Scene
               return (
                 <div key={i} className={`bg-white rounded-3xl overflow-hidden shadow-card border border-cream-200/40 ${i === 0 || i === 5 ? "mt-0" : i === 1 || i === 4 ? "mt-6" : "mt-0"}`}>
-                  <div style={{ background: card.bg, height: 100, position: "relative", overflow: "hidden" }}>
-                    <div style={{ position: "absolute", top: "-20%", right: "-15%", width: "60%", paddingBottom: "60%", borderRadius: "50%", background: "rgba(255,255,255,0.18)" }} />
-                    <div style={{ position: "absolute", bottom: "-25%", left: "10%", width: "45%", paddingBottom: "45%", borderRadius: "50%", background: "rgba(0,0,0,0.06)" }} />
-                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <div style={{ background: "rgba(255,255,255,0.85)", width: 36, height: 36, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <IconC style={{ width: 17, height: 17, color: "#2C1A0E" }} />
-                      </div>
-                    </div>
+                  <div style={{ height: 110, overflow: "hidden" }}>
+                    <Scene />
                   </div>
                   <div className="px-4 py-3">
                     <div className="text-xs font-bold text-espresso">{card.title}</div>
@@ -689,23 +1063,32 @@ function AppShowcase() {
 // ─── For Creatives ────────────────────────────────────────────
 function ForCreatives() {
   const benefits = [
-    { Icon: Ico.Palette,  t: "Showcase your aesthetic",       d: "Upload portfolio work with style tags. Your visual identity is your pitch.",                bg: "#FBE9D6", ic: "#7A3A10" },
-    { Icon: Ico.Layers,   t: "List packages & set your price", d: "Create clear, bookable packages so clients know exactly what they are getting.",          bg: "#E6F0E6", ic: "#2A5A2A" },
-    { Icon: Ico.Calendar, t: "Control your availability",      d: "Set weekly slots and toggle instant booking. You decide when and how you work.",          bg: "#EDE6F5", ic: "#4A2A7A" },
-    { Icon: Ico.Sparkle,  t: "Get paid directly",              d: "Stripe Connect deposits straight to your bank. Track earnings in one dashboard.",         bg: "#E2EEF6", ic: "#1A4A6A" },
+    { Scene: SceneShowcase, t: "Showcase your aesthetic",       d: "Upload portfolio work with style tags. Your visual identity is your pitch.",                bg: "#FBE9D6", ic: "#7A3A10", Icon: Ico.Palette },
+    { Scene: ScenePackages, t: "List packages & set your price", d: "Create clear, bookable packages so clients know exactly what they are getting.",          bg: "#E6F0E6", ic: "#2A5A2A", Icon: Ico.Layers },
+    { Scene: SceneCalendar, t: "Control your availability",      d: "Set weekly slots and toggle instant booking. You decide when and how you work.",          bg: "#EDE6F5", ic: "#4A2A7A", Icon: Ico.Calendar },
+    { Scene: ScenePayment,  t: "Get paid directly",              d: "Stripe Connect deposits straight to your bank. Track earnings in one dashboard.",         bg: "#E2EEF6", ic: "#1A4A6A", Icon: Ico.Sparkle },
   ]
   return (
     <section id="creatives" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
+          {/* Left: 2x2 themed Pixar scene mosaic, matching the 4 benefits */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-4">
-              <ArtTile bg="#E8C4B8" variant={0} style={{ aspectRatio: "3/4", borderRadius: 20 }} />
-              <ArtTile bg="#C4D4C0" variant={1} style={{ aspectRatio: "4/3", borderRadius: 20 }} />
+              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "3/4" }}>
+                <SceneShowcase />
+              </div>
+              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "4/3" }}>
+                <ScenePackages />
+              </div>
             </div>
             <div className="flex flex-col gap-4 mt-8">
-              <ArtTile bg="#C4C8E8" variant={2} style={{ aspectRatio: "4/3", borderRadius: 20 }} />
-              <ArtTile bg="#E8D8B8" variant={3} style={{ aspectRatio: "3/4", borderRadius: 20 }} />
+              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "4/3" }}>
+                <SceneCalendar />
+              </div>
+              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "3/4" }}>
+                <ScenePayment />
+              </div>
             </div>
           </div>
           <div>
