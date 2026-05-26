@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import PrivacyPolicy from './PrivacyPolicy.jsx'
+import TermsOfService from './TermsOfService.jsx'
+import Contact from './Contact.jsx'
 
 // ============================================================
 // REPLACE THIS WITH YOUR LOVABLE / PWA URL
@@ -1323,9 +1326,9 @@ function Footer() {
         </div>
         <div className="flex flex-col gap-2 text-sm text-espresso/60">
           <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Company</p>
-          <a href="#" className="hover:text-espresso transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-espresso transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-espresso transition-colors">Contact</a>
+          <a href="#/privacy" className="hover:text-espresso transition-colors">Privacy Policy</a>
+          <a href="#/terms" className="hover:text-espresso transition-colors">Terms of Service</a>
+          <a href="#/contact" className="hover:text-espresso transition-colors">Contact</a>
         </div>
         <div className="flex flex-col gap-2 text-sm text-espresso/60">
           <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Platform</p>
@@ -1344,7 +1347,22 @@ function Footer() {
 }
 
 // ─── App ──────────────────────────────────────────────────────
-export default function App() {
+// ─── Hash router ──────────────────────────────────────────────
+function useHashRoute() {
+  const [route, setRoute] = useState(() => window.location.hash.replace(/^#\/?/, '') || '')
+  useEffect(() => {
+    function onHashChange() {
+      setRoute(window.location.hash.replace(/^#\/?/, '') || '')
+      // Scroll to top on route change so the new page starts at the top
+      window.scrollTo(0, 0)
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+  return route
+}
+
+function LandingPage() {
   return (
     <div className="bg-cream-100 min-h-screen font-sans">
       <Header />
@@ -1363,4 +1381,12 @@ export default function App() {
       <Footer />
     </div>
   )
+}
+
+export default function App() {
+  const route = useHashRoute()
+  if (route === 'privacy') return <PrivacyPolicy />
+  if (route === 'terms')   return <TermsOfService />
+  if (route === 'contact') return <Contact />
+  return <LandingPage />
 }
