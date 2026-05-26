@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import PrivacyPolicy from './PrivacyPolicy.jsx'
-import TermsOfService from './TermsOfService.jsx'
-import Contact from './Contact.jsx'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 // ============================================================
 // REPLACE THIS WITH YOUR LOVABLE / PWA URL
@@ -294,7 +292,7 @@ function SceneEditorial() {
 // SHOWCASE AESTHETIC — gallery wall / portfolio grid
 function SceneShowcase() {
   return (
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%", display: "block" }}>
       <rect width="200" height="200" fill="#F4E4D0"/>
       {/* Gallery wall frames */}
       <g>
@@ -332,7 +330,7 @@ function SceneShowcase() {
 // LIST PACKAGES — pricing/menu card
 function ScenePackages() {
   return (
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%", display: "block" }}>
       <rect width="200" height="200" fill="#D8E0D0"/>
       {/* Three package cards stacked */}
       <g>
@@ -367,7 +365,7 @@ function ScenePackages() {
 // CONTROL AVAILABILITY — calendar with selected dates
 function SceneCalendar() {
   return (
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%", display: "block" }}>
       <rect width="200" height="200" fill="#E0D4F0"/>
       {/* Calendar */}
       <rect x="25" y="25" width="150" height="150" rx="12" fill="white" stroke="#B8A4D0" strokeWidth="1"/>
@@ -404,7 +402,7 @@ function SceneCalendar() {
 // GET PAID DIRECTLY — payment / earnings dashboard
 function ScenePayment() {
   return (
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%", display: "block" }}>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%", display: "block" }}>
       <rect width="200" height="200" fill="#D4E0EC"/>
       {/* Dashboard card */}
       <rect x="20" y="25" width="160" height="150" rx="14" fill="white" stroke="#A8B8C8" strokeWidth="1"/>
@@ -446,7 +444,7 @@ function ScenePayment() {
 // kai.png    → graphic designer (tablet drawing)
 // lena.png   → makeup artist (doing makeup)
 const CREATORS = [
-  { name: "Zoe Creative", Av: Avatar.Zoe,    handle: "@zoecreative", role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48", img: "zoe" },
+  { name: "Zoe Kingsley", Av: Avatar.Zoe,    handle: "@zoekingsley", role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48", img: "zoe" },
   { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "PHOTOGRAPHER",     location: "New York",      price: "$200", rating: "5.0", works: 21, bookings: 52,  tagBg: "#FAF4D6", tagC: "#6A5010", img: "marcus" },
   { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A", img: "sofia" },
   // Ava uses kai.png (drawing tablet) → graphic designer
@@ -627,14 +625,17 @@ function DiscoverPhone() {
 
 function ProfilePhone() {
   const c = CREATORS[0] // Zoe Creative
-  // Fill the portfolio with Pixar-themed images from the projects folder + other creator illustrations
+  // Zoe's portfolio: 9 portrait (3:4) images. First 6 show fully; last 3 show only the top.
   const portfolioImgs = [
-    "/projects/content-creators.png",
-    "/projects/photoshoots.png",
-    "/projects/branding.png",
-    "/projects/makeup-artists.png",
-    "/projects/graphic-designers.png",
-    "/creators/sofia.png",
+    "/zoe-portfolio/zoe-1.png",
+    "/zoe-portfolio/zoe-2.png",
+    "/zoe-portfolio/zoe-3.png",
+    "/zoe-portfolio/zoe-4.png",
+    "/zoe-portfolio/zoe-5.png",
+    "/zoe-portfolio/zoe-6.png",
+    "/zoe-portfolio/zoe-7.png",
+    "/zoe-portfolio/zoe-8.png",
+    "/zoe-portfolio/zoe-9.png",
   ]
   return (
     <PhoneShell>
@@ -677,7 +678,7 @@ function ProfilePhone() {
       {/* Message button */}
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
         <div style={{ background: "rgba(44,26,14,0.08)", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
-          <Ico.Chat style={{ width: 10, height: 10 }} /> Message Zoe
+          <Ico.Chat style={{ width: 10, height: 10 }} /> Message Zoe Kingsley
         </div>
       </div>
 
@@ -688,13 +689,34 @@ function ProfilePhone() {
         ))}
       </div>
 
-      {/* Portfolio grid: 2 columns of Pixar-themed images */}
+      {/* Portfolio grid: 3×3 of 3:4 portraits. Rows 1–2 show fully; row 3 shows only the top of the photo. */}
       <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content", overflowY: "hidden" }}>
-        {portfolioImgs.map((src, i) => (
-          <div key={i} style={{ aspectRatio: "1/1", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
-            <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-          </div>
-        ))}
+        {portfolioImgs.map((src, i) => {
+          const isPeekRow = i >= 6 // last 3 images: show only top portion
+          return (
+            <div
+              key={i}
+              style={{
+                aspectRatio: isPeekRow ? "3/1" : "3/4",
+                borderRadius: 6,
+                overflow: "hidden",
+                background: "#EFE5D4",
+              }}
+            >
+              <img
+                src={src}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "top",
+                  display: "block",
+                }}
+              />
+            </div>
+          )
+        })}
       </div>
 
       <BottomNav active="profile" />
@@ -1113,18 +1135,18 @@ function ForCreatives() {
           {/* Left: 2x2 themed Pixar scene mosaic, matching the 4 benefits */}
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-4">
-              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "3/4" }}>
+              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "3/4", background: "#F4E4D0", padding: "12px" }}>
                 <SceneShowcase />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "4/3" }}>
+              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "4/3", background: "#D8E0D0", padding: "12px" }}>
                 <ScenePackages />
               </div>
             </div>
             <div className="flex flex-col gap-4 mt-8">
-              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "4/3" }}>
+              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "4/3", background: "#E0D4F0", padding: "12px" }}>
                 <SceneCalendar />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-card border border-cream-200/40" style={{ aspectRatio: "3/4" }}>
+              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "3/4", background: "#D4E0EC", padding: "12px" }}>
                 <ScenePayment />
               </div>
             </div>
@@ -1326,9 +1348,10 @@ function Footer() {
         </div>
         <div className="flex flex-col gap-2 text-sm text-espresso/60">
           <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Company</p>
-          <a href="#/privacy" className="hover:text-espresso transition-colors">Privacy Policy</a>
-          <a href="#/terms" className="hover:text-espresso transition-colors">Terms of Service</a>
-          <a href="#/contact" className="hover:text-espresso transition-colors">Contact</a>
+          <Link to="/privacy" className="hover:text-espresso transition-colors">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-espresso transition-colors">Terms of Service</Link>
+          <Link to="/faq" className="hover:text-espresso transition-colors">FAQ</Link>
+          <Link to="/contact" className="hover:text-espresso transition-colors">Contact</Link>
         </div>
         <div className="flex flex-col gap-2 text-sm text-espresso/60">
           <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Platform</p>
@@ -1347,22 +1370,7 @@ function Footer() {
 }
 
 // ─── App ──────────────────────────────────────────────────────
-// ─── Hash router ──────────────────────────────────────────────
-function useHashRoute() {
-  const [route, setRoute] = useState(() => window.location.hash.replace(/^#\/?/, '') || '')
-  useEffect(() => {
-    function onHashChange() {
-      setRoute(window.location.hash.replace(/^#\/?/, '') || '')
-      // Scroll to top on route change so the new page starts at the top
-      window.scrollTo(0, 0)
-    }
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
-  }, [])
-  return route
-}
-
-function LandingPage() {
+export default function App() {
   return (
     <div className="bg-cream-100 min-h-screen font-sans">
       <Header />
@@ -1381,12 +1389,4 @@ function LandingPage() {
       <Footer />
     </div>
   )
-}
-
-export default function App() {
-  const route = useHashRoute()
-  if (route === 'privacy') return <PrivacyPolicy />
-  if (route === 'terms')   return <TermsOfService />
-  if (route === 'contact') return <Contact />
-  return <LandingPage />
 }
