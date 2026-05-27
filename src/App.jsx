@@ -683,7 +683,7 @@ function ProfilePhone() {
         <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 44, height: 44 }}>
           <c.Av size={44} />
         </div>
-        {[[c.works, "POSTS"], ["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
+        {[["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
           <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "5px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
             <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
@@ -715,31 +715,38 @@ function ProfilePhone() {
         </div>
       </div>
 
-      {/* Tabs — clickable */}
-      <div style={{ padding: "0 12px 6px", display: "flex", gap: 4, flexShrink: 0 }}>
-        {["Work", "Services", "Reviews"].map((t) => (
-          <span
-            key={t}
-            onClick={() => setActiveTab(t)}
-            style={{
-              fontSize: 8, padding: "4px 10px", borderRadius: 18, fontWeight: 600,
-              whiteSpace: "nowrap", cursor: "pointer",
-              background: activeTab === t ? "#2C1A0E" : "transparent",
-              color: activeTab === t ? "#F8F2E8" : "rgba(44,26,14,0.5)",
-              transition: "all 0.15s",
-            }}
-          >{t}</span>
-        ))}
+      {/* Tabs — clickable, inside white pill container */}
+      <div style={{ padding: "0 12px 8px", flexShrink: 0 }}>
+        <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
+          {[
+            { label: "Work",     icon: <Ico.Eye     style={{ width: 7, height: 7 }} /> },
+            { label: "Services", icon: <Ico.Layers  style={{ width: 7, height: 7 }} /> },
+            { label: "Reviews",  icon: <Ico.Star    style={{ width: 7, height: 7 }} /> },
+          ].map(({ label, icon }) => (
+            <span
+              key={label}
+              onClick={() => setActiveTab(label)}
+              style={{
+                flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600,
+                whiteSpace: "nowrap", cursor: "pointer", textAlign: "center",
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 3,
+                background: activeTab === label ? "#2C1A0E" : "transparent",
+                color: activeTab === label ? "#F8F2E8" : "rgba(44,26,14,0.45)",
+                transition: "all 0.15s",
+              }}
+            >{icon}{label}</span>
+          ))}
+        </div>
       </div>
 
       {/* Tab content */}
       <div style={{ flex: 1, overflowY: "hidden" }}>
 
-        {/* WORK — portfolio grid */}
+        {/* WORK — 2-column portfolio grid */}
         {activeTab === "Work" && (
-          <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content" }}>
-            {portfolioImgs.map((src, i) => (
-              <div key={i} style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
+          <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+            {portfolioImgs.slice(0, 6).map((src, i) => (
+              <div key={i} style={{ aspectRatio: "4/5", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
                 <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
               </div>
             ))}
@@ -1010,8 +1017,8 @@ function DiscoverSection() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl mb-12">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Discover</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">browse creatives across every discipline.</h2>
-          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Filter by category, location, and price. Every profile shows real work, honest pricing, and open availability.</p>
+          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">Find creatives for every kind of project.</h2>
+          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Browse by category, location, budget, and availability — with real portfolios and transparent pricing.</p>
         </div>
         {/* Creator tiles — not clickable */}
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -1122,43 +1129,367 @@ function SharedVision() {
   )
 }
 
+// ─── Booking Phone ────────────────────────────────────────────
+function BookingPhone() {
+  const [instant, setInstant] = useState(true)
+  return (
+    <PhoneShell>
+      {/* Top bar */}
+      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>Book a Creative</div>
+      </div>
+
+      {/* Order summary card */}
+      <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+        <div style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 5 }}>ORDER SUMMARY</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 3 }}>
+          <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Golden Hour Shoot</span>
+          <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>$180<span style={{ fontSize: 8, fontWeight: 500, color: "rgba(44,26,14,0.45)" }}>/session</span></span>
+        </div>
+        <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)", lineHeight: 1.4, marginBottom: 6 }}>Outdoor lifestyle shoot · 3 hours. Includes 100+ edited photos delivered within 5 days.</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+          <div style={{ width: 18, height: 18, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><Avatar.Emi size={18} /></div>
+          <span style={{ fontSize: 8, color: "rgba(44,26,14,0.6)" }}>You're booking with <strong style={{ color: "#2C1A0E" }}>Emi Chen</strong></span>
+        </div>
+      </div>
+
+      {/* Instant Book toggle */}
+      <div style={{ margin: "0 10px 8px", background: instant ? "#2C1A0E" : "white", borderRadius: 12, padding: "9px 12px", border: "1px solid rgba(44,26,14,0.12)", flexShrink: 0, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between" }}
+           onClick={() => setInstant(v => !v)}>
+        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+          <span style={{ fontSize: 11 }}>⚡</span>
+          <div>
+            <div style={{ fontSize: 9, fontWeight: 700, color: instant ? "#F8F2E8" : "#2C1A0E" }}>Instant Book</div>
+            <div style={{ fontSize: 7.5, color: instant ? "rgba(248,242,232,0.6)" : "rgba(44,26,14,0.45)" }}>Confirmed automatically</div>
+          </div>
+        </div>
+        <div style={{ width: 26, height: 14, borderRadius: 99, background: instant ? "#F8F2E8" : "rgba(44,26,14,0.15)", position: "relative", transition: "all 0.2s" }}>
+          <div style={{ position: "absolute", top: 2, left: instant ? 14 : 2, width: 10, height: 10, borderRadius: "50%", background: instant ? "#2C1A0E" : "#F8F2E8", transition: "left 0.2s" }} />
+        </div>
+      </div>
+
+      {/* Booking details */}
+      <div style={{ margin: "0 10px 6px", background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+        <div style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 7 }}>BOOKING DETAILS</div>
+
+        <div style={{ fontSize: 7.5, fontWeight: 600, color: "#2C1A0E", marginBottom: 3 }}>Preferred date</div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#FAF8F4", borderRadius: 8, padding: "6px 9px", marginBottom: 7, border: "1px solid rgba(44,26,14,0.08)" }}>
+          <span style={{ fontSize: 9, color: "#2C1A0E" }}>Sat, Jun 14, 2026</span>
+          <Ico.Calendar style={{ width: 9, height: 9, color: "rgba(44,26,14,0.4)" }} />
+        </div>
+
+        <div style={{ display: "flex", gap: 6, marginBottom: 7 }}>
+          {[["From", "5:00 PM"], ["To", "8:00 PM"]].map(([l, v]) => (
+            <div key={l} style={{ flex: 1 }}>
+              <div style={{ fontSize: 7.5, fontWeight: 600, color: "#2C1A0E", marginBottom: 3 }}>{l}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 4, background: "#FAF8F4", borderRadius: 8, padding: "5px 8px", border: "1px solid rgba(44,26,14,0.08)" }}>
+                <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.35)" }} />
+                <span style={{ fontSize: 8.5, color: "#2C1A0E", flex: 1 }}>{v}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ fontSize: 7.5, fontWeight: 600, color: "#2C1A0E", marginBottom: 3 }}>Location</div>
+        <div style={{ background: "#FAF8F4", borderRadius: 8, padding: "6px 9px", marginBottom: 0, border: "1px solid rgba(44,26,14,0.08)" }}>
+          <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.35)" }}>Where should the project happen?</span>
+        </div>
+      </div>
+
+      {/* Price breakdown */}
+      <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "9px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+        {[["Subtotal (3 hr × $60/hr)", "$180.00"], ["Processing Fee (5%)", "+$9.00"]].map(([l, v]) => (
+          <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>{l}</span>
+            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>{v}</span>
+          </div>
+        ))}
+        <div style={{ borderTop: "1px solid rgba(44,26,14,0.07)", paddingTop: 5, display: "flex", justifyContent: "space-between" }}>
+          <span style={{ fontSize: 9, fontWeight: 700, color: "#2C1A0E" }}>Estimated total</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E" }}>$189.00</span>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div style={{ margin: "0 10px", flexShrink: 0 }}>
+        <div style={{ background: "#2C1A0E", borderRadius: 18, padding: "8px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#F8F2E8", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+          {instant ? "⚡" : <Ico.Check style={{ width: 10, height: 10 }} />}
+          {instant ? "Instant Book · $189 est." : "Request to Book · $189 est."}
+        </div>
+        <div style={{ textAlign: "center", fontSize: 7, color: "rgba(44,26,14,0.35)", marginTop: 4 }}>No payment is taken until confirmed.</div>
+      </div>
+
+      <BottomNav active="home" />
+    </PhoneShell>
+  )
+}
+
+// ─── Listing Phone ─────────────────────────────────────────────
+function ListingPhone() {
+  const [showModal, setShowModal] = useState(true)
+  return (
+    <PhoneShell>
+      {/* Top bar */}
+      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>Project Listing</div>
+      </div>
+
+      {/* Hero image placeholder */}
+      <div style={{ margin: "0 10px 8px", height: 80, borderRadius: 10, overflow: "hidden", flexShrink: 0, background: "#D6E4D8", position: "relative" }}>
+        <img src="/projects/content-shoot.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(44,26,14,0.45) 0%, transparent 60%)" }} />
+      </div>
+
+      {/* Title + tags */}
+      <div style={{ padding: "0 12px 5px", flexShrink: 0 }}>
+        <div style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E", marginBottom: 5 }}>Summer Campaign Shoot</div>
+        <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 5 }}>
+          {[["Active","#D6EEE8","#1A5A48"], ["$200 budget","#FBE9D6","#7A3A10"], ["✦ Editorial","#EDE6F5","#4A2A7A"]].map(([l,bg,c]) => (
+            <span key={l} style={{ fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 600, background: bg, color: c }}>{l}</span>
+          ))}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 7.5, color: "rgba(44,26,14,0.5)" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 2 }}><Ico.Map style={{ width: 7, height: 7 }} /> Brooklyn, NY</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 2 }}><Ico.Calendar style={{ width: 7, height: 7 }} /> Jun 20 · 10AM–1PM</span>
+        </div>
+      </div>
+
+      {/* About + Notes */}
+      <div style={{ padding: "0 10px", display: "flex", flexDirection: "column", gap: 5, flexShrink: 0 }}>
+        {[["ABOUT", "Looking for a photographer for a summer clothing campaign. Clean, bright, editorial feel."], ["NOTES", "3–4 looks. Bring your own equipment. Final selects due within 1 week."]].map(([h, t]) => (
+          <div key={h} style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.06)" }}>
+            <div style={{ fontSize: 6, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.35)", marginBottom: 3 }}>{h}</div>
+            <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.7)", lineHeight: 1.35 }}>{t}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Apply button */}
+      <div style={{ padding: "8px 10px 4px", flexShrink: 0 }}>
+        <div onClick={() => setShowModal(true)} style={{ background: "#2C1A0E", borderRadius: 16, padding: "7px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#F8F2E8", cursor: "pointer" }}>Apply</div>
+      </div>
+
+      {/* Apply modal overlay */}
+      {showModal && (
+        <div style={{ position: "absolute", inset: 0, background: "rgba(44,26,14,0.45)", borderRadius: "inherit", display: "flex", alignItems: "flex-end", zIndex: 10 }}>
+          <div style={{ width: "100%", background: "#FAF8F4", borderRadius: "16px 16px 0 0", padding: "14px 14px 16px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+              <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Apply to listing</span>
+              <span onClick={() => setShowModal(false)} style={{ cursor: "pointer", fontSize: 14, color: "rgba(44,26,14,0.4)", lineHeight: 1 }}>×</span>
+            </div>
+            <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", marginBottom: 7, border: "1px solid rgba(44,26,14,0.08)" }}>
+              <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.35)", lineHeight: 1.4 }}>Introduce yourself and your approach...</div>
+            </div>
+            <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", marginBottom: 10, border: "1px solid rgba(44,26,14,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.35)" }}>Proposed price ($)</span>
+              <Ico.Arrow style={{ width: 9, height: 9, color: "rgba(44,26,14,0.3)", transform: "rotate(90deg)" }} />
+            </div>
+            <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "7px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#F8F2E8" }}>Send application</div>
+          </div>
+        </div>
+      )}
+
+      <BottomNav active="home" />
+    </PhoneShell>
+  )
+}
+
+// ─── Payouts Phone ─────────────────────────────────────────────
+function PayoutsPhone() {
+  return (
+    <PhoneShell>
+      {/* Top bar */}
+      <div style={{ padding: "4px 12px 8px", flexShrink: 0 }}>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+        <div style={{ fontSize: 13, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>Payouts</div>
+        <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.45)", marginTop: 1 }}>Track your earnings and withdraw to your bank.</div>
+      </div>
+
+      {/* Balance card */}
+      <div style={{ margin: "0 10px 8px", background: "#2C1A0E", borderRadius: 14, padding: "12px 14px", flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4 }}>
+          <Ico.Download style={{ width: 9, height: 9, color: "rgba(248,242,232,0.6)" }} />
+          <span style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(248,242,232,0.6)" }}>AVAILABLE BALANCE</span>
+        </div>
+        <div style={{ fontSize: 26, fontWeight: 800, color: "#F8F2E8", letterSpacing: "-0.02em", marginBottom: 4 }}>$840.00</div>
+        <div style={{ fontSize: 7.5, color: "rgba(248,242,232,0.5)", lineHeight: 1.4 }}>Funds paid out automatically ~2 days after each booking.</div>
+      </div>
+
+      {/* Pending / Lifetime */}
+      <div style={{ margin: "0 10px 8px", display: "flex", gap: 6, flexShrink: 0 }}>
+        {[["PENDING", "$0.00"], ["LIFETIME", "$1,140.00"]].map(([l, v]) => (
+          <div key={l} style={{ flex: 1, background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.06)" }}>
+            <div style={{ fontSize: 6, letterSpacing: "0.1em", fontWeight: 700, color: "rgba(44,26,14,0.35)", marginBottom: 3 }}>{l}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Payout method */}
+      <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.06)", flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#F0EBE0", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Ico.Download style={{ width: 10, height: 10, color: "#2C1A0E" }} />
+            </div>
+            <div>
+              <div style={{ fontSize: 9, fontWeight: 700, color: "#2C1A0E" }}>Payout method</div>
+              <div style={{ fontSize: 7.5, color: "rgba(44,26,14,0.45)" }}>Stripe Bank ····4891</div>
+            </div>
+          </div>
+          <span style={{ fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, background: "#D6EEE8", color: "#1A5A48" }}>✓ Ready</span>
+        </div>
+      </div>
+
+      {/* Activity */}
+      <div style={{ margin: "0 10px", flexShrink: 0 }}>
+        <div style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 6 }}>ACTIVITY</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          {[
+            { name: "Sofia R.", date: "6/8/2026",  amt: "+$420.00" },
+            { name: "Alex M.",  date: "6/2/2026",  amt: "+$220.00" },
+            { name: "Jordan T.",date: "5/28/2026", amt: "+$200.00" },
+          ].map((r) => (
+            <div key={r.name} style={{ background: "white", borderRadius: 10, padding: "7px 10px", border: "1px solid rgba(44,26,14,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EFE5D4", flexShrink: 0 }} />
+                <div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: "#2C1A0E" }}>{r.name}</div>
+                  <div style={{ fontSize: 7, color: "rgba(44,26,14,0.4)" }}>Paid out · {r.date}</div>
+                </div>
+              </div>
+              <span style={{ fontSize: 10, fontWeight: 700, color: "#1A5A48" }}>{r.amt}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <BottomNav active="profile" />
+    </PhoneShell>
+  )
+}
+
 // ─── How It Works ─────────────────────────────────────────────
 function HowItWorks() {
-  const [tab, setTab] = useState("hire")
+  const [tab, setTab]           = useState("hire")
+  const [activeStep, setActiveStep] = useState(0)
+
   const steps = {
     hire: [
-      { n: "01", t: "Browse & discover",        d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.", bg: "#FAF4D6", tc: "#6A5010" },
-      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                    bg: "#E2EEF6", tc: "#1A4A6A" },
-      { n: "03", t: "Book, collaborate & pay",  d: "Send a request, chat in-app, confirm the details. Pay securely through Stripe. Done in minutes.",            bg: "#E6F0E6", tc: "#2A5A2A" },
+      { n: "01", t: "Browse & discover",          d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.", bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
+        floaters: [
+          { text: "Filter by vibe & location", pos: { left: "-30%", top: "20%" } },
+          { text: "Real portfolios, upfront pricing", pos: { right: "-28%", bottom: "30%" } },
+        ]},
+      { n: "02", t: "View portfolios & packages",  d: "See real work, transparent pricing, and open availability — all in one clean profile.",                     bg: "#E2EEF6", tc: "#1A4A6A", Phone: ProfilePhone,
+        floaters: [
+          { text: "Available this week", pos: { left: "-30%", top: "22%" } },
+          { text: "Starting from $180 / session", pos: { right: "-28%", bottom: "28%" } },
+        ]},
+      { n: "03", t: "Instant Book or Request",     d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.", bg: "#E6F0E6", tc: "#2A5A2A", Phone: BookingPhone,
+        floaters: [
+          { text: "⚡ Confirmed instantly", pos: { left: "-28%", top: "30%" } },
+          { text: "No charge until confirmed", pos: { right: "-28%", bottom: "26%" } },
+        ]},
     ],
     create: [
-      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.", bg: "#FBE9D6", tc: "#7A3A10" },
-      { n: "02", t: "Get discovered & hired",      d: "Clients search by vibe. Your aesthetic tags and portfolio do the selling — no cold pitching.",            bg: "#EDE6F5", tc: "#4A2A7A" },
-      { n: "03", t: "Collaborate & get paid",      d: "Accept bookings, message clients in-app, and receive direct deposits via Stripe Connect.",                 bg: "#D6EEE8", tc: "#1A5A48" },
+      { n: "01", t: "Build your creative profile",  d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.", bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
+        floaters: [
+          { text: "89 bookings completed", pos: { left: "-28%", top: "22%" } },
+          { text: "5.0 ★ rating", pos: { right: "-24%", bottom: "32%" } },
+        ]},
+      { n: "02", t: "Apply to project listings",    d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",     bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
+        floaters: [
+          { text: "$200 budget available", pos: { left: "-28%", top: "25%" } },
+          { text: "Pitch your price & approach", pos: { right: "-28%", bottom: "28%" } },
+        ]},
+      { n: "03", t: "Collaborate & get paid",        d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",    bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
+        floaters: [
+          { text: "Auto payout in ~2 days", pos: { left: "-28%", top: "28%" } },
+          { text: "$840 available balance", pos: { right: "-24%", bottom: "26%" } },
+        ]},
     ],
   }
+
+  const currentSteps = steps[tab]
+  const activeData   = currentSteps[activeStep]
+  const ActivePhone  = activeData.Phone
+
+  // Floating chip component
+  const Chip = ({ text, pos }) => (
+    <div style={{
+      position: "absolute", ...pos,
+      background: "white", borderRadius: 20,
+      padding: "8px 14px",
+      boxShadow: "0 4px 24px rgba(44,26,14,0.12)",
+      fontSize: 12, fontWeight: 600, color: "#2C1A0E",
+      whiteSpace: "nowrap", pointerEvents: "none",
+    }}>{text}</div>
+  )
+
   return (
     <section id="how" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+
+        {/* Header row */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
           <div className="max-w-xl">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
             <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">simple for both sides of a creative collaboration.</h2>
           </div>
           <div className="inline-flex bg-cream-200/80 p-1 rounded-full self-start">
             {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
-              <button key={k} onClick={() => setTab(k)} className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}>{l}</button>
+              <button
+                key={k}
+                onClick={() => { setTab(k); setActiveStep(0) }}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
+              >{l}</button>
             ))}
           </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {steps[tab].map((s, i) => (
-            <div key={i} className="bg-white rounded-3xl p-7 shadow-card border border-cream-200/50">
-              <span className="inline-block font-bold text-xl px-3 py-1.5 rounded-xl" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
-              <h3 className="mt-5 font-bold text-lg text-espresso">{s.t}</h3>
-              <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
+
+        {/* Two-col: phone + floaters left, steps right */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
+          {/* Phone with floating chips */}
+          <div className="hidden lg:flex justify-center">
+            <div style={{ position: "relative" }}>
+              <ActivePhone />
+              {activeData.floaters.map((f, i) => <Chip key={i} text={f.text} pos={f.pos} />)}
             </div>
-          ))}
+          </div>
+          {/* Mobile: phone without floaters (no space for them) */}
+          <div className="flex lg:hidden justify-center">
+            <ActivePhone />
+          </div>
+
+          {/* Clickable steps */}
+          <div className="flex flex-col gap-3">
+            {currentSteps.map((s, i) => (
+              <div
+                key={i}
+                onClick={() => setActiveStep(i)}
+                className={`rounded-2xl px-6 py-5 cursor-pointer transition-all border ${
+                  activeStep === i
+                    ? "bg-white shadow-card border-cream-200/50"
+                    : "border-transparent hover:bg-white/50"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <span className="inline-block font-bold text-base px-3 py-1.5 rounded-xl flex-shrink-0 mt-0.5" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
+                  <div>
+                    <h3 className="font-bold text-lg text-espresso">{s.t}</h3>
+                    {activeStep === i && (
+                      <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
