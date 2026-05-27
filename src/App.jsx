@@ -443,7 +443,7 @@ const CREATORS = [
   { name: "Emi Chen",  Av: Avatar.Emi,  handle: "@snapsbyemi", role: "WEDDING PHOTOGRAPHER", location: "Los Angeles", price: "$250", rating: "5.0", works: 34, bookings: 89, tagBg: "#D6EEE8", tagC: "#1A5A48", img: "emi" },
 ]
 
-// ─── Discover grid profiles (all 12 fake profiles) ────────────
+// ─── Browse Creatives section (landing page, 6 cards) ─────────
 const DISCOVER_PROFILES = [
   { name: "Mia Torres",   img: "mia",   loc: "Los Angeles", role: "UGC CREATOR",    price: "$95"  },
   { name: "Diego Reyes",  img: "diego", loc: "Chicago",     role: "PHOTOGRAPHER",   price: "$185" },
@@ -451,6 +451,22 @@ const DISCOVER_PROFILES = [
   { name: "Ellie Ross",   img: "ellie", loc: "Los Angeles", role: "MODEL",          price: "$145" },
   { name: "Luca Finn",    img: "luca",  loc: "Portland",    role: "PHOTOGRAPHER",   price: "$160" },
   { name: "Dre Williams", img: "dre",   loc: "Atlanta",     role: "VIDEOGRAPHER",   price: "$220" },
+]
+
+// ─── DiscoverPhone grid (12 profiles: 9 full + 3 peek) ─────────
+const DISCOVER_PHONE_GRID = [
+  { name: "Mia",   img: "mia",   loc: "Los Angeles" },
+  { name: "Diego", img: "diego", loc: "Chicago"     },
+  { name: "Yumi",  img: "yumi",  loc: "Seoul"       },
+  { name: "Ellie", img: "ellie", loc: "Los Angeles" },
+  { name: "Luca",  img: "luca",  loc: "Portland"    },
+  { name: "Dre",   img: "dre",   loc: "Atlanta"     },
+  { name: "Leila", img: "leila", loc: "Miami"       },
+  { name: "Nova",  img: "nova",  loc: "New York"    },
+  { name: "Sage",  img: "sage",  loc: "Austin"      },
+  { name: "Nia",   img: "nia",   loc: "Atlanta"     },
+  { name: "Chloe", img: "chloe", loc: "Seattle"     },
+  { name: "Zara",  img: "zara",  loc: "London"      },
 ]
 
 // ─── ArtTile — abstract decorative tile, no human figure ──────
@@ -560,10 +576,10 @@ function BottomNav({ active = "home" }) {
 
 // ─── Phone mockups ────────────────────────────────────────────
 function DiscoverPhone() {
-  // All 12 fake profiles: 9 shown fully (3×3 grid), 3 peeking at the bottom
-  const grid = DISCOVER_PROFILES.map(p => ({
+  // 12 profiles: 9 fully visible (3×3 grid) + 3 peeking from the 4th row
+  const grid = DISCOVER_PHONE_GRID.map(p => ({
     src:  `/creators/${p.img}.jpg`,
-    name: p.name.split(" ")[0],
+    name: p.name,
     loc:  p.loc,
   }))
   return (
@@ -601,10 +617,10 @@ function DiscoverPhone() {
         </span>
       </div>
 
-      {/* Instagram-style 3-column grid, small tiles */}
-      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content", overflowY: "hidden" }}>
+      {/* 3-col grid — 9 full tiles + 3 peeking (4th row clips naturally) */}
+      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start", overflowY: "hidden" }}>
         {grid.map((g, i) => (
-          <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
+          <div key={i} style={{ position: "relative", aspectRatio: "1/1", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
             <img src={g.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             {/* Subtle bottom gradient + name */}
             <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "8px 5px 4px", background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent)", color: "white" }}>
@@ -693,7 +709,7 @@ function ProfilePhone() {
 
       {/* Name + pill */}
       <div style={{ padding: "0 12px 2px", display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
-        <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name}</span>
+        <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name.split(" ")[0]}</span>
         <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
       </div>
 
@@ -742,11 +758,11 @@ function ProfilePhone() {
       {/* Tab content */}
       <div style={{ flex: 1, overflowY: "hidden" }}>
 
-        {/* WORK — 2-column portfolio grid */}
+        {/* WORK — 3-column portfolio grid */}
         {activeTab === "Work" && (
-          <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
-            {portfolioImgs.slice(0, 6).map((src, i) => (
-              <div key={i} style={{ aspectRatio: "4/5", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
+          <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
+            {portfolioImgs.map((src, i) => (
+              <div key={i} style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
                 <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
               </div>
             ))}
@@ -1378,56 +1394,25 @@ function HowItWorks() {
 
   const steps = {
     hire: [
-      { n: "01", t: "Browse & discover",          d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.", bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
-        floaters: [
-          { text: "Filter by vibe & location", pos: { left: "-30%", top: "20%" } },
-          { text: "Real portfolios, upfront pricing", pos: { right: "-28%", bottom: "30%" } },
-        ]},
-      { n: "02", t: "View portfolios & packages",  d: "See real work, transparent pricing, and open availability — all in one clean profile.",                     bg: "#E2EEF6", tc: "#1A4A6A", Phone: ProfilePhone,
-        floaters: [
-          { text: "Available this week", pos: { left: "-30%", top: "22%" } },
-          { text: "Starting from $180 / session", pos: { right: "-28%", bottom: "28%" } },
-        ]},
-      { n: "03", t: "Instant Book or Request",     d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.", bg: "#E6F0E6", tc: "#2A5A2A", Phone: BookingPhone,
-        floaters: [
-          { text: "⚡ Confirmed instantly", pos: { left: "-28%", top: "30%" } },
-          { text: "No charge until confirmed", pos: { right: "-28%", bottom: "26%" } },
-        ]},
+      { n: "01", t: "Browse & discover",         d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.",         bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
+        tags: ["Filter by vibe", "Search by location", "Real portfolios"] },
+      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                             bg: "#E2EEF6", tc: "#1A4A6A", Phone: ProfilePhone,
+        tags: ["Portfolio gallery", "Honest pricing", "Check availability"] },
+      { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",     bg: "#E6F0E6", tc: "#2A5A2A", Phone: BookingPhone,
+        tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
     ],
     create: [
-      { n: "01", t: "Build your creative profile",  d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.", bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
-        floaters: [
-          { text: "89 bookings completed", pos: { left: "-28%", top: "22%" } },
-          { text: "5.0 ★ rating", pos: { right: "-24%", bottom: "32%" } },
-        ]},
-      { n: "02", t: "Apply to project listings",    d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",     bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
-        floaters: [
-          { text: "$200 budget available", pos: { left: "-28%", top: "25%" } },
-          { text: "Pitch your price & approach", pos: { right: "-28%", bottom: "28%" } },
-        ]},
-      { n: "03", t: "Collaborate & get paid",        d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",    bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
-        floaters: [
-          { text: "Auto payout in ~2 days", pos: { left: "-28%", top: "28%" } },
-          { text: "$840 available balance", pos: { right: "-24%", bottom: "26%" } },
-        ]},
+      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.",         bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
+        tags: ["Upload your portfolio", "Set your packages", "Show your aesthetic"] },
+      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",            bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
+        tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
+      { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",           bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
+        tags: ["Auto payout ~2 days", "Track earnings", "Stripe Connect"] },
     ],
   }
 
   const currentSteps = steps[tab]
-  const activeData   = currentSteps[activeStep]
-  const ActivePhone  = activeData.Phone
-
-  // Floating chip component
-  const Chip = ({ text, pos }) => (
-    <div style={{
-      position: "absolute", ...pos,
-      background: "white", borderRadius: 20,
-      padding: "8px 14px",
-      boxShadow: "0 4px 24px rgba(44,26,14,0.12)",
-      fontSize: 12, fontWeight: 600, color: "#2C1A0E",
-      whiteSpace: "nowrap", pointerEvents: "none",
-    }}>{text}</div>
-  )
+  const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
     <section id="how" className="py-16 sm:py-24 bg-cream-100">
@@ -1450,22 +1435,15 @@ function HowItWorks() {
           </div>
         </div>
 
-        {/* Two-col: phone + floaters left, steps right */}
+        {/* Two-col: phone left, steps right */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
-          {/* Phone with floating chips */}
-          <div className="hidden lg:flex justify-center">
-            <div style={{ position: "relative" }}>
-              <ActivePhone />
-              {activeData.floaters.map((f, i) => <Chip key={i} text={f.text} pos={f.pos} />)}
-            </div>
-          </div>
-          {/* Mobile: phone without floaters (no space for them) */}
-          <div className="flex lg:hidden justify-center">
+          {/* Phone mockup — clean, no overlays */}
+          <div className="flex justify-center">
             <ActivePhone />
           </div>
 
-          {/* Clickable steps */}
+          {/* Clickable steps with feature tags */}
           <div className="flex flex-col gap-3">
             {currentSteps.map((s, i) => (
               <div
@@ -1479,10 +1457,17 @@ function HowItWorks() {
               >
                 <div className="flex items-start gap-4">
                   <span className="inline-block font-bold text-base px-3 py-1.5 rounded-xl flex-shrink-0 mt-0.5" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
-                  <div>
+                  <div className="flex-1">
                     <h3 className="font-bold text-lg text-espresso">{s.t}</h3>
                     {activeStep === i && (
-                      <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
+                      <>
+                        <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          {s.tags.map(tag => (
+                            <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                          ))}
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
