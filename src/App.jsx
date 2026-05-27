@@ -445,18 +445,12 @@ const CREATORS = [
 
 // ─── Discover grid profiles (all 12 fake profiles) ────────────
 const DISCOVER_PROFILES = [
-  { name: "Mia Torres",   img: "mia",   loc: "Los Angeles",  role: "UGC CREATOR",          price: "$95"  },
-  { name: "Nia James",    img: "nia",   loc: "Houston",      role: "INFLUENCER",            price: "$120" },
-  { name: "Diego Reyes",  img: "diego", loc: "Chicago",      role: "PHOTOGRAPHER",          price: "$185" },
-  { name: "Nova Cruz",    img: "nova",  loc: "Miami",        role: "INFLUENCER",            price: "$150" },
-  { name: "Leila Voss",   img: "leila", loc: "New York",     role: "MODEL",                 price: "$200" },
-  { name: "Chloe Finn",   img: "chloe", loc: "Copenhagen",   role: "MODEL",                 price: "$175" },
-  { name: "Zara Monroe",  img: "zara",  loc: "London",       role: "MAKEUP ARTIST",         price: "$130" },
-  { name: "Yumi Park",    img: "yumi",  loc: "Seoul",        role: "CONTENT CREATOR",       price: "$110" },
-  { name: "Dre Williams", img: "dre",   loc: "Atlanta",      role: "VIDEOGRAPHER",          price: "$220" },
-  { name: "Luca Finn",    img: "luca",  loc: "Portland",     role: "PHOTOGRAPHER",          price: "$160" },
-  { name: "Ellie Ross",   img: "ellie", loc: "Los Angeles",  role: "MODEL",                 price: "$145" },
-  { name: "Sage Turner",  img: "sage",  loc: "Austin",       role: "BRANDING SPECIALIST",   price: "$140" },
+  { name: "Mia Torres",   img: "mia",   loc: "Los Angeles", role: "UGC CREATOR",    price: "$95"  },
+  { name: "Diego Reyes",  img: "diego", loc: "Chicago",     role: "PHOTOGRAPHER",   price: "$185" },
+  { name: "Yumi Park",    img: "yumi",  loc: "Seoul",       role: "CONTENT CREATOR",price: "$110" },
+  { name: "Ellie Ross",   img: "ellie", loc: "Los Angeles", role: "MODEL",          price: "$145" },
+  { name: "Luca Finn",    img: "luca",  loc: "Portland",    role: "PHOTOGRAPHER",   price: "$160" },
+  { name: "Dre Williams", img: "dre",   loc: "Atlanta",     role: "VIDEOGRAPHER",   price: "$220" },
 ]
 
 // ─── ArtTile — abstract decorative tile, no human figure ──────
@@ -629,8 +623,9 @@ function DiscoverPhone() {
 }
 
 function ProfilePhone() {
-  const c = CREATORS[0] // Zoe Creative
-  // Zoe's portfolio: 9 portrait (3:4) images. First 6 show fully; last 3 show only the top.
+  const c = CREATORS[0]
+  const [activeTab, setActiveTab] = useState("Work")
+
   const portfolioImgs = [
     "/zoe-portfolio/emi-1.jpg",
     "/zoe-portfolio/emi-2.jpg",
@@ -642,15 +637,48 @@ function ProfilePhone() {
     "/zoe-portfolio/emi-3.jpg",
     "/zoe-portfolio/emi-4.jpg",
   ]
+
+  const services = [
+    {
+      title: "Half Day Coverage",
+      price: "$250",
+      unit: "/session",
+      duration: "4 hours",
+      desc: "Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.",
+    },
+    {
+      title: "Full Day Coverage",
+      price: "$450",
+      unit: "/session",
+      duration: "8 hours",
+      desc: "Full day from getting ready to reception. 300+ edited photos + online gallery & print release.",
+    },
+  ]
+
+  const reviews = [
+    {
+      name: "Sofia R.",
+      handle: "@sofiareyes",
+      stars: 5,
+      text: "Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!",
+    },
+    {
+      name: "Marcus A.",
+      handle: "@marcusali",
+      stars: 5,
+      text: "Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10.",
+    },
+  ]
+
   return (
     <PhoneShell>
-      {/* Top bar: VISION label + handle */}
+      {/* Top bar */}
       <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
         <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
         <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
       </div>
 
-      {/* Profile pic + 3 stat cards row */}
+      {/* Stats row */}
       <div style={{ padding: "0 12px 8px", display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
         <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 44, height: 44 }}>
           <c.Av size={44} />
@@ -663,7 +691,7 @@ function ProfilePhone() {
         ))}
       </div>
 
-      {/* Name + CREATIVE pill */}
+      {/* Name + pill */}
       <div style={{ padding: "0 12px 2px", display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
         <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name}</span>
         <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
@@ -687,41 +715,84 @@ function ProfilePhone() {
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Tabs — clickable */}
       <div style={{ padding: "0 12px 6px", display: "flex", gap: 4, flexShrink: 0 }}>
-        {["Work", "Services", "Bookings", "Reviews"].map((t, i) => (
-          <span key={t} style={{ fontSize: 8, padding: "4px 8px", borderRadius: 18, fontWeight: 600, whiteSpace: "nowrap", background: i === 0 ? "#2C1A0E" : "transparent", color: i === 0 ? "#F8F2E8" : "rgba(44,26,14,0.5)" }}>{t}</span>
+        {["Work", "Services", "Reviews"].map((t) => (
+          <span
+            key={t}
+            onClick={() => setActiveTab(t)}
+            style={{
+              fontSize: 8, padding: "4px 10px", borderRadius: 18, fontWeight: 600,
+              whiteSpace: "nowrap", cursor: "pointer",
+              background: activeTab === t ? "#2C1A0E" : "transparent",
+              color: activeTab === t ? "#F8F2E8" : "rgba(44,26,14,0.5)",
+              transition: "all 0.15s",
+            }}
+          >{t}</span>
         ))}
       </div>
 
-      {/* Portfolio grid: 3×3 of 3:4 portraits. Rows 1–2 show fully; row 3 shows only the top of the photo. */}
-      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content", overflowY: "hidden" }}>
-        {portfolioImgs.map((src, i) => {
-          const isPeekRow = i >= 6 // last 3 images: show only top portion
-          return (
-            <div
-              key={i}
-              style={{
-                aspectRatio: isPeekRow ? "3/1" : "3/4",
-                borderRadius: 6,
-                overflow: "hidden",
-                background: "#EFE5D4",
-              }}
-            >
-              <img
-                src={src}
-                alt=""
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  display: "block",
-                }}
-              />
-            </div>
-          )
-        })}
+      {/* Tab content */}
+      <div style={{ flex: 1, overflowY: "hidden" }}>
+
+        {/* WORK — portfolio grid */}
+        {activeTab === "Work" && (
+          <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, gridAutoRows: "min-content" }}>
+            {portfolioImgs.map((src, i) => (
+              <div key={i} style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
+                <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* SERVICES — package cards */}
+        {activeTab === "Services" && (
+          <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 8 }}>
+            {services.map((s) => (
+              <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 3 }}>
+                  <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{s.title}</span>
+                  <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>{s.price}<span style={{ fontSize: 9, fontWeight: 500, color: "rgba(44,26,14,0.5)" }}>{s.unit}</span></span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 5 }}>
+                  <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
+                  <span style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{s.duration}</span>
+                </div>
+                <p style={{ fontSize: 8.5, color: "rgba(44,26,14,0.65)", lineHeight: 1.4, margin: "0 0 8px" }}>{s.desc}</p>
+                <div style={{ background: "#2C1A0E", borderRadius: 12, padding: "5px 0", textAlign: "center", fontSize: 8.5, fontWeight: 700, color: "#F8F2E8" }}>
+                  Book This Package
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* REVIEWS — review cards */}
+        {activeTab === "Reviews" && (
+          <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 8 }}>
+            {reviews.map((r) => (
+              <div key={r.handle} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EFE5D4", flexShrink: 0 }} />
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{r.name}</div>
+                      <div style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>{r.handle}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: 1 }}>
+                    {[...Array(r.stars)].map((_, i) => (
+                      <Ico.Star key={i} style={{ width: 8, height: 8, color: "#C8A040" }} />
+                    ))}
+                  </div>
+                </div>
+                <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.4, margin: 0 }}>{r.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
       </div>
 
       <BottomNav active="profile" />
@@ -818,7 +889,7 @@ function Hero() {
       <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
       <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20 pb-12 sm:pb-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20 pb-12 sm:pb-24 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#EDE6F5", color: "#4A2A7A" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
@@ -864,78 +935,29 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right side — creator photo mosaic */}
-        <div className="hidden lg:flex gap-3 items-start justify-end relative">
-          {/* Glow */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute rounded-full opacity-30" style={{ width: 360, height: 360, background: "#F2C4A0", filter: "blur(80px)", top: "10%", right: "5%" }} />
-            <div className="absolute rounded-full opacity-20" style={{ width: 220, height: 220, background: "#C8B8E0", filter: "blur(60px)", bottom: "10%", left: "10%" }} />
+        {/* Right side — Emi Chen profile preview */}
+        <div className="hidden md:flex justify-center lg:justify-end relative">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
           </div>
-
-          {/* Column A — starts 48px lower for offset */}
-          <div className="flex flex-col gap-3 relative z-10" style={{ marginTop: 48 }}>
-            {[
-              { img: "mia",   name: "Mia",   role: "UGC Creator"  },
-              { img: "leila", name: "Leila", role: "Model"        },
-              { img: "sage",  name: "Sage",  role: "Branding"     },
-            ].map((c) => (
-              <div key={c.img} className="relative overflow-hidden rounded-2xl shadow-soft" style={{ width: 180, height: 220 }}>
-                <img src={`/creators/${c.img}.jpg`} alt="" className="w-full h-full object-cover" />
-                <div className="absolute inset-x-0 bottom-0 h-2/5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58), transparent)" }} />
-                <div className="absolute bottom-0 left-0 p-3 text-white">
-                  <div className="font-bold text-sm leading-tight">{c.name}</div>
-                  <div className="text-[11px] opacity-80 mt-0.5">{c.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Column B — flush with top */}
-          <div className="flex flex-col gap-3 relative z-10">
-            {[
-              { img: "dre",   name: "Dre",   role: "Videographer" },
-              { img: "nova",  name: "Nova",  role: "Influencer"   },
-              { img: "diego", name: "Diego", role: "Photographer" },
-            ].map((c) => (
-              <div key={c.img} className="relative overflow-hidden rounded-2xl shadow-soft" style={{ width: 180, height: 220 }}>
-                <img src={`/creators/${c.img}.jpg`} alt="" className="w-full h-full object-cover" />
-                <div className="absolute inset-x-0 bottom-0 h-2/5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58), transparent)" }} />
-                <div className="absolute bottom-0 left-0 p-3 text-white">
-                  <div className="font-bold text-sm leading-tight">{c.name}</div>
-                  <div className="text-[11px] opacity-80 mt-0.5">{c.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Floating chip: availability */}
-          <div className="absolute hidden xl:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60 z-20" style={{ left: -16, top: "30%", whiteSpace: "nowrap" }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
-            <span className="text-xs font-semibold text-espresso">Creatives near you</span>
-          </div>
-
-          {/* Floating chip: pricing */}
-          <div className="absolute hidden xl:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60 z-20" style={{ right: -16, bottom: "12%" }}>
-            <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
-            <div className="text-sm font-bold text-espresso">$95 / session</div>
+          <div className="relative">
+            <ProfilePhone />
+            {/* Floating chip: availability */}
+            <div className="absolute -left-8 top-20 hidden lg:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60" style={{ whiteSpace: "nowrap" }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
+              <span className="text-xs font-semibold text-espresso">Available this week</span>
+            </div>
+            {/* Floating chip: pricing */}
+            <div className="absolute -right-6 bottom-36 hidden lg:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60">
+              <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
+              <div className="text-sm font-bold text-espresso">$250 / session</div>
+            </div>
           </div>
         </div>
 
-        {/* Mobile / tablet: single column of 2 photos */}
-        <div className="flex lg:hidden gap-3 justify-center">
-          {[
-            { img: "mia",  name: "Mia",  role: "UGC Creator"  },
-            { img: "dre",  name: "Dre",  role: "Videographer" },
-          ].map((c) => (
-            <div key={c.img} className="relative overflow-hidden rounded-2xl shadow-soft" style={{ width: 150, height: 190 }}>
-              <img src={`/creators/${c.img}.jpg`} alt="" className="w-full h-full object-cover" />
-              <div className="absolute inset-x-0 bottom-0 h-2/5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58), transparent)" }} />
-              <div className="absolute bottom-0 left-0 p-3 text-white">
-                <div className="font-bold text-sm">{c.name}</div>
-                <div className="text-[11px] opacity-80">{c.role}</div>
-              </div>
-            </div>
-          ))}
+        {/* Mobile */}
+        <div className="flex md:hidden justify-center">
+          <ProfilePhone />
         </div>
       </div>
     </section>
