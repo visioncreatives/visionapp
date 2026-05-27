@@ -30,14 +30,15 @@ const Ico = {
   Layers:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="m12 2 10 6.5-10 6.5L2 8.5 12 2Z"/><path d="m20 13 2 1.5-10 6.5L2 14.5l2-1.5"/></svg>,
 }
 
-// ─── Pixar-style cartoon avatars ──────────────────────────────
+// ─── Realistic creator avatars ────────────────────────────────
 const AVATAR_SRCS = {
-  Zoe:    "/creators/zoe.png",
-  Marcus: "/creators/marcus.png",
-  Sofia:  "/creators/sofia.png",
-  Ava:    "/creators/ava.png",
-  Kai:    "/creators/kai.png",
-  Lena:   "/creators/lena.png",
+  Emi:   "/creators/emi.jpg",
+  Mia:   "/creators/mia.jpg",
+  Dre:   "/creators/dre.jpg",
+  Leila: "/creators/leila.jpg",
+  Nova:  "/creators/nova.jpg",
+  Sage:  "/creators/sage.jpg",
+  Luca:  "/creators/luca.jpg",
 }
 
 function makeAvatar(key) {
@@ -55,12 +56,13 @@ function makeAvatar(key) {
 }
 
 const Avatar = {
-  Zoe:    makeAvatar("Zoe"),
-  Marcus: makeAvatar("Marcus"),
-  Sofia:  makeAvatar("Sofia"),
-  Ava:    makeAvatar("Ava"),
-  Kai:    makeAvatar("Kai"),
-  Lena:   makeAvatar("Lena"),
+  Emi:   makeAvatar("Emi"),
+  Mia:   makeAvatar("Mia"),
+  Dre:   makeAvatar("Dre"),
+  Leila: makeAvatar("Leila"),
+  Nova:  makeAvatar("Nova"),
+  Sage:  makeAvatar("Sage"),
+  Luca:  makeAvatar("Luca"),
 }
 
 // ─── Pixar-style scene illustrations (inline SVG) ─────────────
@@ -436,22 +438,25 @@ function ScenePayment() {
 }
 
 // ─── Creators dataset ─────────────────────────────────────────
-// Images mapped to actual professions shown:
-// zoe.png   → content creator (podcast/mic)
-// marcus.png → photographer (with camera)
-// sofia.png  → stylist (palette + laptop)
-// ava.png    → videographer (gimbal camera)
-// kai.png    → graphic designer (tablet drawing)
-// lena.png   → makeup artist (doing makeup)
+// CREATORS[0] is used for the profile phone mockup (snapsbyemi)
 const CREATORS = [
-  { name: "Zoe Kingsley", Av: Avatar.Zoe,    handle: "@zoekingsley", role: "CONTENT CREATOR",  location: "Los Angeles",   price: "$110", rating: "4.9", works: 34, bookings: 89,  tagBg: "#D6EEE8", tagC: "#1A5A48", img: "zoe" },
-  { name: "Marcus Ali",   Av: Avatar.Marcus, handle: "@marcusali",  role: "PHOTOGRAPHER",     location: "New York",      price: "$200", rating: "5.0", works: 21, bookings: 52,  tagBg: "#FAF4D6", tagC: "#6A5010", img: "marcus" },
-  { name: "Sofia Reyes",  Av: Avatar.Sofia,  handle: "@sofiareyes", role: "STYLIST",          location: "Miami",         price: "$95",  rating: "4.8", works: 47, bookings: 130, tagBg: "#E6F0E6", tagC: "#2A5A2A", img: "sofia" },
-  // Ava uses kai.png (drawing tablet) → graphic designer
-  { name: "Ava Nakamura", Av: Avatar.Kai,    handle: "@avanaka",    role: "GRAPHIC DESIGNER", location: "San Francisco", price: "$140", rating: "5.0", works: 18, bookings: 44,  tagBg: "#EDE6F5", tagC: "#4A2A7A", img: "kai" },
-  // Kai uses ava.png (gimbal camera) → videographer
-  { name: "Kai Williams", Av: Avatar.Ava,    handle: "@kaiwill",    role: "VIDEOGRAPHER",     location: "Portland",      price: "$175", rating: "4.9", works: 29, bookings: 71,  tagBg: "#E2EEF6", tagC: "#1A4A6A", img: "ava" },
-  { name: "Lena Park",    Av: Avatar.Lena,   handle: "@lenapark",   role: "MAKEUP ARTIST",    location: "Chicago",       price: "$120", rating: "4.8", works: 38, bookings: 60,  tagBg: "#FBE9E9", tagC: "#7A2A2A", img: "lena" },
+  { name: "Emi Chen",  Av: Avatar.Emi,  handle: "@snapsbyemi", role: "WEDDING PHOTOGRAPHER", location: "Los Angeles", price: "$250", rating: "5.0", works: 34, bookings: 89, tagBg: "#D6EEE8", tagC: "#1A5A48", img: "emi" },
+]
+
+// ─── Discover grid profiles (all 12 fake profiles) ────────────
+const DISCOVER_PROFILES = [
+  { name: "Mia Torres",   img: "mia",   loc: "Los Angeles",  role: "UGC CREATOR",          price: "$95"  },
+  { name: "Nia James",    img: "nia",   loc: "Houston",      role: "INFLUENCER",            price: "$120" },
+  { name: "Diego Reyes",  img: "diego", loc: "Chicago",      role: "PHOTOGRAPHER",          price: "$185" },
+  { name: "Nova Cruz",    img: "nova",  loc: "Miami",        role: "INFLUENCER",            price: "$150" },
+  { name: "Leila Voss",   img: "leila", loc: "New York",     role: "MODEL",                 price: "$200" },
+  { name: "Chloe Finn",   img: "chloe", loc: "Copenhagen",   role: "MODEL",                 price: "$175" },
+  { name: "Zara Monroe",  img: "zara",  loc: "London",       role: "MAKEUP ARTIST",         price: "$130" },
+  { name: "Yumi Park",    img: "yumi",  loc: "Seoul",        role: "CONTENT CREATOR",       price: "$110" },
+  { name: "Dre Williams", img: "dre",   loc: "Atlanta",      role: "VIDEOGRAPHER",          price: "$220" },
+  { name: "Luca Finn",    img: "luca",  loc: "Portland",     role: "PHOTOGRAPHER",          price: "$160" },
+  { name: "Ellie Ross",   img: "ellie", loc: "Los Angeles",  role: "MODEL",                 price: "$145" },
+  { name: "Sage Turner",  img: "sage",  loc: "Austin",       role: "BRANDING SPECIALIST",   price: "$140" },
 ]
 
 // ─── ArtTile — abstract decorative tile, no human figure ──────
@@ -561,11 +566,11 @@ function BottomNav({ active = "home" }) {
 
 // ─── Phone mockups ────────────────────────────────────────────
 function DiscoverPhone() {
-  // Pull from CREATORS so names/images/locations stay in sync everywhere
-  const grid = CREATORS.map(c => ({
-    src:  `/creators/${c.img}.png`,
-    name: c.name.split(" ")[0],
-    loc:  c.location,
+  // All 12 fake profiles: 9 shown fully (3×3 grid), 3 peeking at the bottom
+  const grid = DISCOVER_PROFILES.map(p => ({
+    src:  `/creators/${p.img}.jpg`,
+    name: p.name.split(" ")[0],
+    loc:  p.loc,
   }))
   return (
     <PhoneShell>
@@ -627,15 +632,15 @@ function ProfilePhone() {
   const c = CREATORS[0] // Zoe Creative
   // Zoe's portfolio: 9 portrait (3:4) images. First 6 show fully; last 3 show only the top.
   const portfolioImgs = [
-    "/zoe-portfolio/zoe-1.png",
-    "/zoe-portfolio/zoe-2.png",
-    "/zoe-portfolio/zoe-3.png",
-    "/zoe-portfolio/zoe-4.png",
-    "/zoe-portfolio/zoe-5.png",
-    "/zoe-portfolio/zoe-6.png",
-    "/zoe-portfolio/zoe-7.png",
-    "/zoe-portfolio/zoe-8.png",
-    "/zoe-portfolio/zoe-9.png",
+    "/zoe-portfolio/emi-1.jpg",
+    "/zoe-portfolio/emi-2.jpg",
+    "/zoe-portfolio/emi-3.jpg",
+    "/zoe-portfolio/emi-4.jpg",
+    "/zoe-portfolio/emi-5.jpg",
+    "/zoe-portfolio/emi-1.jpg",
+    "/zoe-portfolio/emi-2.jpg",
+    "/zoe-portfolio/emi-3.jpg",
+    "/zoe-portfolio/emi-4.jpg",
   ]
   return (
     <PhoneShell>
@@ -672,13 +677,13 @@ function ProfilePhone() {
 
       {/* Bio */}
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
-        <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.35, margin: 0 }}>Lifestyle &amp; brand content creator. Available for collabs.</p>
+        <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.35, margin: 0 }}>Wedding photographer capturing timeless moments. Available for bookings.</p>
       </div>
 
       {/* Message button */}
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
         <div style={{ background: "rgba(44,26,14,0.08)", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
-          <Ico.Chat style={{ width: 10, height: 10 }} /> Message Zoe Kingsley
+          <Ico.Chat style={{ width: 10, height: 10 }} /> Message Emi Chen
         </div>
       </div>
 
@@ -735,10 +740,10 @@ function ChatPhone() {
   return (
     <PhoneShell>
       <div style={{ padding: "4px 12px 8px", borderBottom: "1px solid rgba(44,26,14,0.06)", display: "flex", alignItems: "center", gap: 7, flexShrink: 0 }}>
-        <div style={{ borderRadius: "50%", overflow: "hidden" }}><Avatar.Marcus size={28} /></div>
+        <div style={{ borderRadius: "50%", overflow: "hidden" }}><Avatar.Dre size={28} /></div>
         <div>
-          <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Marcus Ali</div>
-          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>Videographer · New York</div>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Dre Williams</div>
+          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>Videographer · Atlanta</div>
         </div>
       </div>
       <div style={{ flex: 1, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 6, overflowY: "hidden" }}>
@@ -813,7 +818,7 @@ function Hero() {
       <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
       <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20 pb-12 sm:pb-24 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20 pb-12 sm:pb-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#EDE6F5", color: "#4A2A7A" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
@@ -846,7 +851,7 @@ function Hero() {
 
           <div className="mt-9 flex items-center gap-3">
             <div className="flex -space-x-2">
-              {[Avatar.Zoe, Avatar.Marcus, Avatar.Sofia, Avatar.Ava, Avatar.Kai].map((Av, i) => (
+              {[Avatar.Emi, Avatar.Mia, Avatar.Dre, Avatar.Leila, Avatar.Nova].map((Av, i) => (
                 <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #F8F2E8" }}><Av size={30} /></div>
               ))}
             </div>
@@ -859,29 +864,78 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right side — phone preview showing a creative's profile */}
-        <div className="hidden md:flex justify-center lg:justify-end relative">
-          {/* Soft glow behind the phone */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
+        {/* Right side — creator photo mosaic */}
+        <div className="hidden lg:flex gap-3 items-start justify-end relative">
+          {/* Glow */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute rounded-full opacity-30" style={{ width: 360, height: 360, background: "#F2C4A0", filter: "blur(80px)", top: "10%", right: "5%" }} />
+            <div className="absolute rounded-full opacity-20" style={{ width: 220, height: 220, background: "#C8B8E0", filter: "blur(60px)", bottom: "10%", left: "10%" }} />
           </div>
-          <div className="relative">
-            <ProfilePhone />
-            {/* Floating cue card next to phone */}
-            <div className="absolute -left-8 top-20 hidden lg:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60" style={{ whiteSpace: "nowrap" }}>
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
-              <span className="text-xs font-semibold text-espresso">Available this week</span>
-            </div>
-            <div className="absolute -right-6 bottom-36 hidden lg:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60">
-              <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
-              <div className="text-sm font-bold text-espresso">$110 / session</div>
-            </div>
+
+          {/* Column A — starts 48px lower for offset */}
+          <div className="flex flex-col gap-3 relative z-10" style={{ marginTop: 48 }}>
+            {[
+              { img: "mia",   name: "Mia",   role: "UGC Creator"  },
+              { img: "leila", name: "Leila", role: "Model"        },
+              { img: "sage",  name: "Sage",  role: "Branding"     },
+            ].map((c) => (
+              <div key={c.img} className="relative overflow-hidden rounded-2xl shadow-soft" style={{ width: 180, height: 220 }}>
+                <img src={`/creators/${c.img}.jpg`} alt="" className="w-full h-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 h-2/5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58), transparent)" }} />
+                <div className="absolute bottom-0 left-0 p-3 text-white">
+                  <div className="font-bold text-sm leading-tight">{c.name}</div>
+                  <div className="text-[11px] opacity-80 mt-0.5">{c.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Column B — flush with top */}
+          <div className="flex flex-col gap-3 relative z-10">
+            {[
+              { img: "dre",   name: "Dre",   role: "Videographer" },
+              { img: "nova",  name: "Nova",  role: "Influencer"   },
+              { img: "diego", name: "Diego", role: "Photographer" },
+            ].map((c) => (
+              <div key={c.img} className="relative overflow-hidden rounded-2xl shadow-soft" style={{ width: 180, height: 220 }}>
+                <img src={`/creators/${c.img}.jpg`} alt="" className="w-full h-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 h-2/5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58), transparent)" }} />
+                <div className="absolute bottom-0 left-0 p-3 text-white">
+                  <div className="font-bold text-sm leading-tight">{c.name}</div>
+                  <div className="text-[11px] opacity-80 mt-0.5">{c.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Floating chip: availability */}
+          <div className="absolute hidden xl:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60 z-20" style={{ left: -16, top: "30%", whiteSpace: "nowrap" }}>
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
+            <span className="text-xs font-semibold text-espresso">Creatives near you</span>
+          </div>
+
+          {/* Floating chip: pricing */}
+          <div className="absolute hidden xl:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60 z-20" style={{ right: -16, bottom: "12%" }}>
+            <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
+            <div className="text-sm font-bold text-espresso">$95 / session</div>
           </div>
         </div>
 
-        {/* Mobile: still show phone, simpler layout */}
-        <div className="flex md:hidden justify-center">
-          <ProfilePhone />
+        {/* Mobile / tablet: single column of 2 photos */}
+        <div className="flex lg:hidden gap-3 justify-center">
+          {[
+            { img: "mia",  name: "Mia",  role: "UGC Creator"  },
+            { img: "dre",  name: "Dre",  role: "Videographer" },
+          ].map((c) => (
+            <div key={c.img} className="relative overflow-hidden rounded-2xl shadow-soft" style={{ width: 150, height: 190 }}>
+              <img src={`/creators/${c.img}.jpg`} alt="" className="w-full h-full object-cover" />
+              <div className="absolute inset-x-0 bottom-0 h-2/5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58), transparent)" }} />
+              <div className="absolute bottom-0 left-0 p-3 text-white">
+                <div className="font-bold text-sm">{c.name}</div>
+                <div className="text-[11px] opacity-80">{c.role}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -937,15 +991,15 @@ function DiscoverSection() {
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">browse creatives across every discipline.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed">Filter by category, location, and price. Every profile shows real work, honest pricing, and open availability.</p>
         </div>
-        {/* Instagram-style 3-col grid of small vertical creator tiles */}
+        {/* Creator tiles — not clickable */}
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-          {CREATORS.map((c, i) => (
-            <a key={i} href={APP_URL} className="block group">
+          {DISCOVER_PROFILES.map((c, i) => (
+            <div key={i}>
               <div className="relative overflow-hidden rounded-2xl bg-cream-200" style={{ aspectRatio: "3/4" }}>
                 <img
-                  src={`/creators/${c.img}.png`}
+                  src={`/creators/${c.img}.jpg`}
                   alt=""
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover"
                 />
                 {/* Gradient overlay */}
                 <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
@@ -953,7 +1007,7 @@ function DiscoverSection() {
                 <div className="absolute inset-x-0 bottom-0 p-2.5 text-white">
                   <div className="font-bold text-xs leading-tight">{c.name.split(" ")[0]}</div>
                   <div className="flex items-center gap-1 text-[10px] opacity-90 mt-0.5">
-                    <Ico.Map style={{ width: 8, height: 8 }} /> {c.location}
+                    <Ico.Map style={{ width: 8, height: 8 }} /> {c.loc}
                   </div>
                 </div>
               </div>
@@ -962,7 +1016,7 @@ function DiscoverSection() {
                 <span className="text-[10px] text-espresso/55 font-medium truncate">{c.role}</span>
                 <span className="text-[11px] font-bold text-espresso">{c.price}</span>
               </div>
-            </a>
+            </div>
           ))}
         </div>
         <div className="mt-10 text-center">
@@ -990,11 +1044,11 @@ function SharedVision() {
   // Compact 2-column, 3-row staggered collage that aligns with text height on the left
   // Slight rotations + small overlaps give an editorial feel without making things big
   const cards = [
-    { src: "/projects/content-creators.png",  title: "Content Creators",  pos: { top: "0%",   left: "10%",  width: "40%", rotate: "-2deg" }, z: 3 },
-    { src: "/projects/photoshoots.png",       title: "Photoshoots",       pos: { top: "4%",   left: "55%",  width: "38%", rotate: "2deg"  }, z: 2 },
-    { src: "/projects/branding.png",          title: "Branding",          pos: { top: "33%",  left: "0%",   width: "42%", rotate: "1.5deg"}, z: 4 },
-    { src: "/projects/makeup-artists.png",    title: "Makeup Artists",    pos: { top: "37%",  left: "48%",  width: "40%", rotate: "-1.5deg" }, z: 3 },
-    { src: "/projects/graphic-designers.png", title: "Graphic Designers", pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg" }, z: 5 },
+    { src: "/projects/content-shoot.jpg",  title: "Content Shoot",   pos: { top: "0%",   left: "10%",  width: "40%", rotate: "-2deg"   }, z: 3 },
+    { src: "/projects/brand-campaign.jpg", title: "Brand Campaign",  pos: { top: "4%",   left: "55%",  width: "38%", rotate: "2deg"    }, z: 2 },
+    { src: "/projects/editorial.jpg",      title: "Editorial",       pos: { top: "33%",  left: "0%",   width: "42%", rotate: "1.5deg"  }, z: 4 },
+    { src: "/projects/music-video.jpg",    title: "Music Video",     pos: { top: "37%",  left: "48%",  width: "40%", rotate: "-1.5deg" }, z: 3 },
+    { src: "/projects/photoshoot.jpg",     title: "Photoshoot",      pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg"   }, z: 5 },
   ]
   return (
     <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
@@ -1263,7 +1317,7 @@ function PWA() {
                     {[100, 80, 60].map((w, i) => <div key={i} style={{ height: 6, background: "#EFE5D4", borderRadius: 8, width: `${w}%` }} />)}
                   </div>
                   <div style={{ marginTop: 16, display: "flex", gap: 8, width: "100%", justifyContent: "center" }}>
-                    {[Avatar.Zoe, Avatar.Marcus, Avatar.Sofia].map((Av, i) => (
+                    {[Avatar.Emi, Avatar.Mia, Avatar.Dre].map((Av, i) => (
                       <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #F8F2E8" }}><Av size={28} /></div>
                     ))}
                   </div>
