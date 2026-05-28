@@ -650,9 +650,9 @@ function ProfilePhone() {
     "/zoe-portfolio/emi-3.jpg",
     "/zoe-portfolio/emi-4.jpg",
     "/zoe-portfolio/emi-5.jpg",
-    "/zoe-portfolio/emi-1.jpg",
-    "/zoe-portfolio/emi-2.jpg",
-    "/zoe-portfolio/emi-3.jpg",
+    "/zoe-portfolio/emi-6.jpg",
+    "/zoe-portfolio/emi-7.jpg",
+    "/zoe-portfolio/emi-8.jpg",
     "/zoe-portfolio/emi-4.jpg",
   ]
 
@@ -912,9 +912,9 @@ function HeroProfilePhone() {
     "/zoe-portfolio/emi-3.jpg",
     "/zoe-portfolio/emi-4.jpg",
     "/zoe-portfolio/emi-5.jpg",
-    "/zoe-portfolio/emi-1.jpg",
-    "/zoe-portfolio/emi-2.jpg",
-    "/zoe-portfolio/emi-3.jpg",
+    "/zoe-portfolio/emi-6.jpg",
+    "/zoe-portfolio/emi-7.jpg",
+    "/zoe-portfolio/emi-8.jpg",
     "/zoe-portfolio/emi-4.jpg",
   ]
 
@@ -1400,8 +1400,7 @@ function Hero() {
             <HeroProfilePhone />
             {/* Solid arrow: scroll hint — left of phone */}
             <div className="hidden xl:flex absolute flex-col items-end gap-2" style={{ right: "calc(100% + 16px)", top: "36%" }}>
-              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5 }}>
-                <svg viewBox="0 0 12 16" width="8" height="10" fill="none"><path d="M6 1v14M3 11l3 3 3-3" stroke="#2C1A0E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>
                 scroll to explore
               </div>
               <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", alignSelf: "flex-end" }}>
@@ -1415,12 +1414,9 @@ function Hero() {
                 <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 16, padding: "7px 12px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 1 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>
-                  <Ico.Sparkle style={{ width: 9, height: 9 }} />
-                  interactive preview
-                </div>
-                <div style={{ fontSize: 10, fontWeight: 500, color: "rgba(44,26,14,0.55)" }}>tap &amp; scroll</div>
+              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 16, padding: "8px 14px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", lineHeight: 1.2 }}>interactive preview</div>
+                <div style={{ fontSize: 11, fontWeight: 500, color: "rgba(44,26,14,0.5)", lineHeight: 1.2 }}>tap &amp; scroll</div>
               </div>
             </div>
           </div>
