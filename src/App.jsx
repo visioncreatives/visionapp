@@ -642,7 +642,7 @@ function DiscoverPhone() {
 
 function ProfilePhone() {
   const c = CREATORS[0]
-  const [activeTab, setActiveTab] = useState("Work")
+  const [activeTab, setActiveTab] = useState("Portfolio")
 
   const portfolioImgs = [
     "/zoe-portfolio/emi-1.jpg",
@@ -737,7 +737,7 @@ function ProfilePhone() {
       <div style={{ padding: "0 12px 8px", flexShrink: 0 }}>
         <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
           {[
-            { label: "Work",     icon: <Ico.Eye     style={{ width: 7, height: 7 }} /> },
+            { label: "Portfolio",     icon: <Ico.Eye     style={{ width: 7, height: 7 }} /> },
             { label: "Services", icon: <Ico.Layers  style={{ width: 7, height: 7 }} /> },
             { label: "Reviews",  icon: <Ico.Star    style={{ width: 7, height: 7 }} /> },
           ].map(({ label, icon }) => (
@@ -761,7 +761,7 @@ function ProfilePhone() {
       <div style={{ flex: 1, overflowY: "hidden" }}>
 
         {/* WORK — 3-column portfolio grid */}
-        {activeTab === "Work" && (
+        {activeTab === "Portfolio" && (
           <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
             {portfolioImgs.map((src, i) => (
               <div key={i} style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
@@ -964,7 +964,7 @@ function FeedScroll({ startIndex, posts, imgs, c }) {
 function HeroProfilePhone() {
   const c = CREATORS[0]
   const [screen, setScreen] = useState("profile") // "profile" | "booking" | "chat" | "image"
-  const [activeTab, setActiveTab] = useState("Work")
+  const [activeTab, setActiveTab] = useState("Portfolio")
   const [selectedImg, setSelectedImg] = useState(null)
   const [instantBook, setInstantBook] = useState(true)
 
@@ -1029,15 +1029,11 @@ function HeroProfilePhone() {
     return (
       <PhoneShell>
         {/* Sticky header */}
-        <div style={{ padding: "6px 10px", display: "flex", alignItems: "center", gap: 7, flexShrink: 0, borderBottom: "1px solid rgba(44,26,14,0.07)", background: "white", zIndex: 2 }}>
-          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", flexShrink: 0 }}>
+        <div style={{ padding: "6px 10px", display: "flex", alignItems: "center", flexShrink: 0, borderBottom: "1px solid rgba(44,26,14,0.07)", background: "white", zIndex: 2, position: "relative" }}>
+          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", position: "absolute", left: 10 }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           </button>
-          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={24} /></div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", lineHeight: 1.2 }}>{c.name}</div>
-            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{portfolioImgs.length} posts</div>
-          </div>
+          <div style={{ flex: 1, textAlign: "center", fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Portfolio</div>
         </div>
 
         {/* Scrollable feed */}
@@ -1219,7 +1215,7 @@ function HeroProfilePhone() {
         <div style={{ padding: "0 12px 8px", position: "sticky", top: 0, background: "#F8F2E8", zIndex: 2 }}>
           <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
             {[
-              { label: "Work",     icon: <Ico.Eye    style={{ width: 7, height: 7 }} /> },
+              { label: "Portfolio",     icon: <Ico.Eye    style={{ width: 7, height: 7 }} /> },
               { label: "Services", icon: <Ico.Layers style={{ width: 7, height: 7 }} /> },
               { label: "Reviews",  icon: <Ico.Star   style={{ width: 7, height: 7 }} /> },
             ].map(({ label, icon }) => (
@@ -1240,7 +1236,7 @@ function HeroProfilePhone() {
         </div>
 
         {/* WORK — 3-col portrait grid, tappable */}
-        {activeTab === "Work" && (
+        {activeTab === "Portfolio" && (
           <div style={{ padding: "0 12px 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
             {portfolioImgs.map((src, i) => (
               <div
