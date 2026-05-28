@@ -617,8 +617,8 @@ function DiscoverPhone() {
         </span>
       </div>
 
-      {/* 3-col grid — 9 full tiles + 3 peeking, clipped cleanly at ~30% of 4th row */}
-      <div style={{ height: 348, flexShrink: 0, overflowY: "hidden" }}>
+      {/* 3-col grid — 9 full tiles + 3 peeking, flex:1 fills remaining height so BottomNav always sits flush at the bottom */}
+      <div style={{ flex: 1, overflowY: "hidden" }}>
         <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start" }}>
         {grid.map((g, i) => (
           <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
@@ -953,31 +953,117 @@ function HeroProfilePhone() {
 
   // ── IMAGE PREVIEW SCREEN ──
   if (screen === "image" && selectedImg !== null) {
+    const total = portfolioImgs.length
+    const prev = () => setSelectedImg((selectedImg - 1 + total) % total)
+    const next = () => setSelectedImg((selectedImg + 1) % total)
+    const postCaptions = [
+      { tag: "Wedding", caption: "Golden Hour Ceremony" },
+      { tag: "Portrait", caption: "Natural Light Series" },
+      { tag: "Editorial", caption: "Summer Lookbook" },
+      { tag: "Wedding", caption: "Reception Details" },
+      { tag: "Candid", caption: "Behind the Scenes" },
+      { tag: "Portrait", caption: "Bridal Portraits" },
+      { tag: "Wedding", caption: "Ceremony Moments" },
+      { tag: "Editorial", caption: "Studio Session" },
+      { tag: "Candid", caption: "Getting Ready" },
+    ]
+    const post = postCaptions[selectedImg % postCaptions.length]
     return (
       <PhoneShell>
-        <div style={{ flex: 1, background: "#1A0D06", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden" }}>
-          {/* Close button */}
-          <button onClick={goBack} style={{ position: "absolute", top: 10, right: 12, zIndex: 10, background: "rgba(0,0,0,0.45)", border: "none", borderRadius: "50%", width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
-            <Ico.Close style={{ width: 12, height: 12, color: "white" }} />
+        {/* Header: back + avatar + name/loc + counter */}
+        <div style={{ padding: "6px 10px 6px", display: "flex", alignItems: "center", gap: 7, flexShrink: 0, borderBottom: "1px solid rgba(44,26,14,0.07)", background: "white" }}>
+          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", flexShrink: 0 }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           </button>
-          {/* Avatar + name row */}
-          <div style={{ position: "absolute", top: 10, left: 12, zIndex: 10, display: "flex", alignItems: "center", gap: 6 }}>
-            <div style={{ borderRadius: "50%", overflow: "hidden", border: "1.5px solid rgba(255,255,255,0.5)" }}><c.Av size={22} /></div>
-            <span style={{ color: "white", fontSize: 10, fontWeight: 700 }}>{c.name.split(" ")[0]}</span>
+          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={26} /></div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", lineHeight: 1.2 }}>{c.name}</div>
+            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)", display: "flex", alignItems: "center", gap: 2 }}>
+              <Ico.Map style={{ width: 7, height: 7 }} />{c.location}
+            </div>
           </div>
-          {/* Full image */}
-          <img
-            src={portfolioImgs[selectedImg]}
-            alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }}
-          />
+          <span style={{ fontSize: 9, fontWeight: 600, color: "rgba(44,26,14,0.4)", flexShrink: 0 }}>{selectedImg + 1} / {total}</span>
+        </div>
+
+        {/* Image with left/right nav and counter badge */}
+        <div style={{ position: "relative", width: "100%", aspectRatio: "1/1", flexShrink: 0, background: "#EFE5D4", overflow: "hidden" }}>
+          <img src={portfolioImgs[selectedImg]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+          {/* Counter badge */}
+          <div style={{ position: "absolute", top: 8, right: 8, background: "rgba(0,0,0,0.45)", color: "white", fontSize: 8, fontWeight: 600, padding: "2px 7px", borderRadius: 12, backdropFilter: "blur(4px)" }}>
+            {selectedImg + 1} / {total}
+          </div>
+          {/* Left arrow */}
+          {selectedImg > 0 && (
+            <button onClick={prev} style={{ position: "absolute", left: 6, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 11, height: 11 }}><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+          )}
+          {/* Right arrow */}
+          {selectedImg < total - 1 && (
+            <button onClick={next} style={{ position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 11, height: 11 }}><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          )}
           {/* Dot indicators */}
-          <div style={{ position: "absolute", bottom: 14, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 4 }}>
-            {portfolioImgs.slice(0, 6).map((_, i) => (
-              <div key={i} onClick={() => setSelectedImg(i)} style={{ width: i === selectedImg ? 14 : 5, height: 5, borderRadius: 999, background: i === selectedImg ? "white" : "rgba(255,255,255,0.4)", cursor: "pointer", transition: "all 0.2s" }} />
+          <div style={{ position: "absolute", bottom: 8, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 3 }}>
+            {[0,1,2].map(i => (
+              <div key={i} style={{ width: i === selectedImg % 3 ? 12 : 4, height: 4, borderRadius: 999, background: i === selectedImg % 3 ? "white" : "rgba(255,255,255,0.45)", transition: "all 0.2s" }} />
             ))}
           </div>
         </div>
+
+        {/* Below-image content */}
+        <div style={{ flex: 1, overflowY: "auto", background: "white" }}>
+          {/* Actions row */}
+          <div style={{ padding: "8px 12px 6px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              {/* Heart */}
+              <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 16, height: 16 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span style={{ fontSize: 9, color: "rgba(44,26,14,0.5)" }}>0</span>
+              </div>
+              {/* Comment */}
+              <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 15, height: 15 }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span style={{ fontSize: 9, color: "rgba(44,26,14,0.5)" }}>0</span>
+              </div>
+              {/* Bookmark */}
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            {/* Edit + Delete */}
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 3, color: "rgba(44,26,14,0.55)" }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" style={{ width: 13, height: 13 }}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <span style={{ fontSize: 9, fontWeight: 600 }}>Edit</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 3, color: "#C0392B", background: "#FEE8E6", borderRadius: 8, padding: "2px 6px" }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" style={{ width: 11, height: 11 }}><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                <span style={{ fontSize: 9, fontWeight: 600 }}>Delete</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Tag + caption */}
+          <div style={{ padding: "0 12px 6px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 4, background: "#FBE9D6", color: "#7A3A10", fontSize: 8, fontWeight: 700, padding: "2px 8px", borderRadius: 999, marginBottom: 5 }}>
+              <Ico.Sparkle style={{ width: 7, height: 7 }} /> {post.tag}
+            </div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{post.caption}</div>
+          </div>
+
+          {/* Comments */}
+          <div style={{ padding: "0 12px 8px" }}>
+            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "rgba(44,26,14,0.4)", marginBottom: 6 }}>COMMENTS</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#F8F2E8", borderRadius: 20, padding: "6px 10px" }}>
+              <span style={{ flex: 1, fontSize: 9, color: "rgba(44,26,14,0.35)" }}>Add a comment...</span>
+              <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Ico.Arrow style={{ width: 9, height: 9, color: "#F8F2E8" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <BottomNav active="profile" />
       </PhoneShell>
     )
   }
@@ -1306,27 +1392,38 @@ function Hero() {
         </div>
 
         {/* Right side — Emi Chen profile preview */}
-        <div className="hidden md:flex justify-center lg:justify-end relative overflow-visible">
+        <div className="hidden md:flex justify-center relative overflow-visible">
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
           </div>
           <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
+            {/* Interactive badge above phone */}
+            <div className="hidden xl:flex absolute items-center gap-1.5" style={{ bottom: "calc(100% + 10px)", left: "50%", transform: "translateX(-50%)", background: "#2C1A0E", color: "#F8F2E8", fontSize: 10, fontWeight: 700, padding: "5px 12px", borderRadius: 999, whiteSpace: "nowrap", letterSpacing: "0.01em", boxShadow: "0 4px 12px rgba(44,26,14,0.25)" }}>
+              <Ico.Sparkle style={{ width: 10, height: 10 }} />
+              interactive preview — tap &amp; scroll
+            </div>
             <HeroProfilePhone />
-            {/* Sketch arrow: scroll hint — left of phone */}
-            <div className="hidden xl:flex absolute flex-col items-end gap-1.5" style={{ right: "calc(100% + 12px)", top: "38%" }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>scroll to explore</span>
-              <svg width="52" height="22" viewBox="0 0 52 22" fill="none" style={{ display: "block" }}>
-                <path d="M2 6 Q 14 2 32 10 Q 42 15 50 14" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" fill="none" strokeDasharray="4 2.5"/>
-                <path d="M45 10 L51 15 L43 17" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            {/* Solid arrow: scroll hint — left of phone */}
+            <div className="hidden xl:flex absolute flex-col items-end gap-2" style={{ right: "calc(100% + 16px)", top: "36%" }}>
+              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5 }}>
+                <svg viewBox="0 0 12 16" width="8" height="10" fill="none"><path d="M6 1v14M3 11l3 3 3-3" stroke="#2C1A0E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                scroll to explore
+              </div>
+              <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", alignSelf: "flex-end" }}>
+                <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
             </div>
-            {/* Sketch arrow: tap to book — right of phone */}
-            <div className="hidden xl:flex absolute flex-col items-start gap-1.5" style={{ left: "calc(100% + 12px)", bottom: "28%" }}>
-              <svg width="52" height="22" viewBox="0 0 52 22" fill="none" style={{ display: "block", transform: "scaleX(-1)" }}>
-                <path d="M2 6 Q 14 2 32 10 Q 42 15 50 14" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" fill="none" strokeDasharray="4 2.5"/>
-                <path d="M45 10 L51 15 L43 17" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            {/* Solid arrow: tap to book — right of phone */}
+            <div className="hidden xl:flex absolute flex-col items-start gap-2" style={{ left: "calc(100% + 16px)", bottom: "26%" }}>
+              <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", transform: "scaleX(-1)" }}>
+                <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>tap to book</span>
+              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5 }}>
+                tap to book
+                <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
             </div>
           </div>
         </div>
