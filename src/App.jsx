@@ -898,6 +898,68 @@ function Header() {
   )
 }
 
+// ─── FeedScroll — Instagram-style post feed ────────────────────
+function FeedScroll({ startIndex, posts, imgs, c }) {
+  const postRefs = React.useRef([])
+  React.useEffect(() => {
+    const el = postRefs.current[startIndex]
+    if (el) el.scrollIntoView({ block: "start", behavior: "instant" })
+  }, [startIndex])
+
+  return (
+    <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", background: "#F8F2E8" }}>
+      {posts.map((post, i) => (
+        <div key={i} ref={el => postRefs.current[i] = el} style={{ background: "white", marginBottom: 6 }}>
+          {/* Per-post mini header */}
+          <div style={{ padding: "7px 10px", display: "flex", alignItems: "center", gap: 7 }}>
+            <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={22} /></div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{c.name}</div>
+              <div style={{ fontSize: 7.5, color: "rgba(44,26,14,0.4)" }}>{c.location}</div>
+            </div>
+            <svg viewBox="0 0 24 24" fill="#2C1A0E" style={{ width: 14, height: 14, opacity: 0.3 }}><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+          </div>
+          {/* Photo */}
+          <div style={{ width: "100%", aspectRatio: "1/1", background: "#EFE5D4", overflow: "hidden" }}>
+            <img src={imgs[i]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+          </div>
+          {/* Actions */}
+          <div style={{ padding: "7px 10px 4px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 15, height: 15 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.5)" }}>{post.likes}</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.5)" }}>{post.comments}</span>
+              </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          {/* Tag + caption */}
+          <div style={{ padding: "0 10px 6px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 3, background: "#FBE9D6", color: "#7A3A10", fontSize: 7.5, fontWeight: 700, padding: "2px 7px", borderRadius: 999, marginBottom: 4 }}>
+              <Ico.Sparkle style={{ width: 6, height: 6 }} /> {post.tag}
+            </div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>{post.caption}</div>
+          </div>
+          {/* Comment input */}
+          <div style={{ padding: "0 10px 8px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, background: "#F8F2E8", borderRadius: 20, padding: "5px 9px" }}>
+              <span style={{ flex: 1, fontSize: 8.5, color: "rgba(44,26,14,0.35)" }}>Add a comment...</span>
+              <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Ico.Arrow style={{ width: 8, height: 8, color: "#F8F2E8" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 // ─── HeroProfilePhone (fully interactive hero phone) ──────────
 function HeroProfilePhone() {
   const c = CREATORS[0]
@@ -951,117 +1013,35 @@ function HeroProfilePhone() {
 
   const goBack = () => { setScreen("profile"); setSelectedImg(null) }
 
-  // ── IMAGE PREVIEW SCREEN ──
+  // ── IMAGE FEED SCREEN (Instagram-style continuous scroll) ──
   if (screen === "image" && selectedImg !== null) {
-    const total = portfolioImgs.length
-    const prev = () => setSelectedImg((selectedImg - 1 + total) % total)
-    const next = () => setSelectedImg((selectedImg + 1) % total)
-    const postCaptions = [
-      { tag: "Wedding", caption: "Golden Hour Ceremony" },
-      { tag: "Portrait", caption: "Natural Light Series" },
-      { tag: "Editorial", caption: "Summer Lookbook" },
-      { tag: "Wedding", caption: "Reception Details" },
-      { tag: "Candid", caption: "Behind the Scenes" },
-      { tag: "Portrait", caption: "Bridal Portraits" },
-      { tag: "Wedding", caption: "Ceremony Moments" },
-      { tag: "Editorial", caption: "Studio Session" },
-      { tag: "Candid", caption: "Getting Ready" },
+    const postMeta = [
+      { tag: "Wedding",   caption: "Reception Evening",   likes: 47,  comments: 12 },
+      { tag: "Candid",    caption: "Pure Joy",            likes: 83,  comments: 21 },
+      { tag: "Candid",    caption: "On the Run",          likes: 61,  comments: 8  },
+      { tag: "Wedding",   caption: "Champagne & Roses",   likes: 102, comments: 34 },
+      { tag: "Portrait",  caption: "Behind the Lens",     likes: 74,  comments: 19 },
+      { tag: "Romance",   caption: "Rain & Romance",      likes: 138, comments: 45 },
+      { tag: "Romance",   caption: "Kiss in the Rain",    likes: 95,  comments: 27 },
+      { tag: "Editorial", caption: "Sunset Drive",        likes: 88,  comments: 16 },
+      { tag: "Wedding",   caption: "Getting Ready",       likes: 113, comments: 38 },
     ]
-    const post = postCaptions[selectedImg % postCaptions.length]
     return (
       <PhoneShell>
-        {/* Header: back + avatar + name/loc + counter */}
-        <div style={{ padding: "6px 10px 6px", display: "flex", alignItems: "center", gap: 7, flexShrink: 0, borderBottom: "1px solid rgba(44,26,14,0.07)", background: "white" }}>
+        {/* Sticky header */}
+        <div style={{ padding: "6px 10px", display: "flex", alignItems: "center", gap: 7, flexShrink: 0, borderBottom: "1px solid rgba(44,26,14,0.07)", background: "white", zIndex: 2 }}>
           <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", flexShrink: 0 }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           </button>
-          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={26} /></div>
+          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={24} /></div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", lineHeight: 1.2 }}>{c.name}</div>
-            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)", display: "flex", alignItems: "center", gap: 2 }}>
-              <Ico.Map style={{ width: 7, height: 7 }} />{c.location}
-            </div>
-          </div>
-          <span style={{ fontSize: 9, fontWeight: 600, color: "rgba(44,26,14,0.4)", flexShrink: 0 }}>{selectedImg + 1} / {total}</span>
-        </div>
-
-        {/* Image with left/right nav and counter badge */}
-        <div style={{ position: "relative", width: "100%", aspectRatio: "1/1", flexShrink: 0, background: "#EFE5D4", overflow: "hidden" }}>
-          <img src={portfolioImgs[selectedImg]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
-          {/* Counter badge */}
-          <div style={{ position: "absolute", top: 8, right: 8, background: "rgba(0,0,0,0.45)", color: "white", fontSize: 8, fontWeight: 600, padding: "2px 7px", borderRadius: 12, backdropFilter: "blur(4px)" }}>
-            {selectedImg + 1} / {total}
-          </div>
-          {/* Left arrow */}
-          {selectedImg > 0 && (
-            <button onClick={prev} style={{ position: "absolute", left: 6, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 11, height: 11 }}><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-          )}
-          {/* Right arrow */}
-          {selectedImg < total - 1 && (
-            <button onClick={next} style={{ position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,0.85)", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 11, height: 11 }}><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          )}
-          {/* Dot indicators */}
-          <div style={{ position: "absolute", bottom: 8, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 3 }}>
-            {[0,1,2].map(i => (
-              <div key={i} style={{ width: i === selectedImg % 3 ? 12 : 4, height: 4, borderRadius: 999, background: i === selectedImg % 3 ? "white" : "rgba(255,255,255,0.45)", transition: "all 0.2s" }} />
-            ))}
+            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{portfolioImgs.length} posts</div>
           </div>
         </div>
 
-        {/* Below-image content */}
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", background: "white" }}>
-          {/* Actions row */}
-          <div style={{ padding: "8px 12px 6px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              {/* Heart */}
-              <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 16, height: 16 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <span style={{ fontSize: 9, color: "rgba(44,26,14,0.5)" }}>0</span>
-              </div>
-              {/* Comment */}
-              <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 15, height: 15 }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                <span style={{ fontSize: 9, color: "rgba(44,26,14,0.5)" }}>0</span>
-              </div>
-              {/* Bookmark */}
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-            </div>
-            {/* Edit + Delete */}
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 3, color: "rgba(44,26,14,0.55)" }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" style={{ width: 13, height: 13 }}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                <span style={{ fontSize: 9, fontWeight: 600 }}>Edit</span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 3, color: "#C0392B", background: "#FEE8E6", borderRadius: 8, padding: "2px 6px" }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" style={{ width: 11, height: 11 }}><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                <span style={{ fontSize: 9, fontWeight: 600 }}>Delete</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Tag + caption */}
-          <div style={{ padding: "0 12px 6px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 4, background: "#FBE9D6", color: "#7A3A10", fontSize: 8, fontWeight: 700, padding: "2px 8px", borderRadius: 999, marginBottom: 5 }}>
-              <Ico.Sparkle style={{ width: 7, height: 7 }} /> {post.tag}
-            </div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{post.caption}</div>
-          </div>
-
-          {/* Comments */}
-          <div style={{ padding: "0 12px 8px" }}>
-            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "rgba(44,26,14,0.4)", marginBottom: 6 }}>COMMENTS</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#F8F2E8", borderRadius: 20, padding: "6px 10px" }}>
-              <span style={{ flex: 1, fontSize: 9, color: "rgba(44,26,14,0.35)" }}>Add a comment...</span>
-              <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <Ico.Arrow style={{ width: 9, height: 9, color: "#F8F2E8" }} />
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Scrollable feed */}
+        <FeedScroll startIndex={selectedImg} posts={postMeta} imgs={portfolioImgs} c={c} />
 
         <BottomNav active="profile" />
       </PhoneShell>
