@@ -617,8 +617,8 @@ function DiscoverPhone() {
         </span>
       </div>
 
-      {/* 3-col grid — 9 full tiles + 3 peeking with gradient fade */}
-      <div style={{ flex: 1, position: "relative", overflowY: "hidden" }}>
+      {/* 3-col grid — 9 full tiles + 3 peeking, clipped cleanly at ~30% of 4th row */}
+      <div style={{ height: 348, flexShrink: 0, overflowY: "hidden" }}>
         <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start" }}>
         {grid.map((g, i) => (
           <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
@@ -633,8 +633,6 @@ function DiscoverPhone() {
           </div>
         ))}
         </div>
-        {/* Gradient fade — 4th row peeks through softly */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 90, background: "linear-gradient(to top, #F8F2E8 10%, transparent 100%)", pointerEvents: "none" }} />
       </div>
 
       <BottomNav active="home" />
@@ -900,6 +898,351 @@ function Header() {
   )
 }
 
+// ─── HeroProfilePhone (fully interactive hero phone) ──────────
+function HeroProfilePhone() {
+  const c = CREATORS[0]
+  const [screen, setScreen] = useState("profile") // "profile" | "booking" | "chat" | "image"
+  const [activeTab, setActiveTab] = useState("Work")
+  const [selectedImg, setSelectedImg] = useState(null)
+  const [instantBook, setInstantBook] = useState(true)
+
+  const portfolioImgs = [
+    "/zoe-portfolio/emi-1.jpg",
+    "/zoe-portfolio/emi-2.jpg",
+    "/zoe-portfolio/emi-3.jpg",
+    "/zoe-portfolio/emi-4.jpg",
+    "/zoe-portfolio/emi-5.jpg",
+    "/zoe-portfolio/emi-1.jpg",
+    "/zoe-portfolio/emi-2.jpg",
+    "/zoe-portfolio/emi-3.jpg",
+    "/zoe-portfolio/emi-4.jpg",
+  ]
+
+  const services = [
+    {
+      title: "Half Day Coverage",
+      price: "$250",
+      unit: "/session",
+      duration: "4 hours",
+      desc: "Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.",
+    },
+    {
+      title: "Full Day Coverage",
+      price: "$450",
+      unit: "/session",
+      duration: "8 hours",
+      desc: "Full day from getting ready to reception. 300+ edited photos + online gallery & print release.",
+    },
+  ]
+
+  const reviews = [
+    { name: "Sofia R.", handle: "@sofiareyes", stars: 5, text: "Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!" },
+    { name: "Marcus A.", handle: "@marcusali", stars: 5, text: "Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10." },
+  ]
+
+  const chatMsgs = [
+    { f: "me",   t: "Hi Emi! I saw your portfolio and I love your style." },
+    { f: "them", t: "Thank you so much! What kind of shoot are you thinking?" },
+    { f: "me",   t: "Wedding — June 22nd in Malibu. Half day package." },
+    { f: "them", t: "That sounds beautiful! I'm available June 22. Want to book the Half Day package?" },
+    { f: "me",   t: "Yes! Let's do it." },
+    { f: "them", t: "Booking confirmed! Can't wait to capture your day ✨" },
+  ]
+
+  const goBack = () => { setScreen("profile"); setSelectedImg(null) }
+
+  // ── IMAGE PREVIEW SCREEN ──
+  if (screen === "image" && selectedImg !== null) {
+    return (
+      <PhoneShell>
+        <div style={{ flex: 1, background: "#1A0D06", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden" }}>
+          {/* Close button */}
+          <button onClick={goBack} style={{ position: "absolute", top: 10, right: 12, zIndex: 10, background: "rgba(0,0,0,0.45)", border: "none", borderRadius: "50%", width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+            <Ico.Close style={{ width: 12, height: 12, color: "white" }} />
+          </button>
+          {/* Avatar + name row */}
+          <div style={{ position: "absolute", top: 10, left: 12, zIndex: 10, display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ borderRadius: "50%", overflow: "hidden", border: "1.5px solid rgba(255,255,255,0.5)" }}><c.Av size={22} /></div>
+            <span style={{ color: "white", fontSize: 10, fontWeight: 700 }}>{c.name.split(" ")[0]}</span>
+          </div>
+          {/* Full image */}
+          <img
+            src={portfolioImgs[selectedImg]}
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }}
+          />
+          {/* Dot indicators */}
+          <div style={{ position: "absolute", bottom: 14, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 4 }}>
+            {portfolioImgs.slice(0, 6).map((_, i) => (
+              <div key={i} onClick={() => setSelectedImg(i)} style={{ width: i === selectedImg ? 14 : 5, height: 5, borderRadius: 999, background: i === selectedImg ? "white" : "rgba(255,255,255,0.4)", cursor: "pointer", transition: "all 0.2s" }} />
+            ))}
+          </div>
+        </div>
+      </PhoneShell>
+    )
+  }
+
+  // ── CHAT SCREEN ──
+  if (screen === "chat") {
+    return (
+      <PhoneShell>
+        {/* Header */}
+        <div style={{ padding: "6px 12px 8px", borderBottom: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </button>
+          <div style={{ borderRadius: "50%", overflow: "hidden" }}><c.Av size={26} /></div>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{c.name}</div>
+            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>Wedding Photographer · {c.location}</div>
+          </div>
+        </div>
+        {/* Messages */}
+        <div style={{ flex: 1, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 5, overflowY: "auto" }}>
+          {chatMsgs.map((m, i) => (
+            <div key={i} style={{ display: "flex", justifyContent: m.f === "me" ? "flex-end" : "flex-start" }}>
+              <div style={{ maxWidth: "80%", padding: "6px 9px", borderRadius: m.f === "me" ? "12px 12px 3px 12px" : "12px 12px 12px 3px", background: m.f === "me" ? "#2C1A0E" : "white", color: m.f === "me" ? "#F8F2E8" : "#2C1A0E", fontSize: 9, lineHeight: 1.4, border: m.f === "me" ? "none" : "1px solid rgba(44,26,14,0.07)" }}>{m.t}</div>
+            </div>
+          ))}
+          <div style={{ alignSelf: "center", background: "#E6F0E6", color: "#2A5A2A", fontSize: 8, fontWeight: 600, padding: "3px 10px", borderRadius: 18, display: "flex", alignItems: "center", gap: 3 }}>
+            <Ico.Check style={{ width: 8, height: 8 }} /> Booking confirmed · Jun 22, Malibu
+          </div>
+        </div>
+        {/* Input */}
+        <div style={{ padding: "6px 10px", borderTop: "1px solid rgba(44,26,14,0.07)", display: "flex", gap: 6, flexShrink: 0 }}>
+          <div style={{ flex: 1, background: "white", borderRadius: 18, padding: "5px 10px", fontSize: 9, color: "rgba(44,26,14,0.35)", border: "1px solid rgba(44,26,14,0.08)" }}>Message</div>
+          <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Ico.Arrow style={{ width: 11, height: 11, color: "#F8F2E8" }} />
+          </div>
+        </div>
+        <BottomNav active="chat" />
+      </PhoneShell>
+    )
+  }
+
+  // ── BOOKING SCREEN ──
+  if (screen === "booking") {
+    return (
+      <PhoneShell>
+        {/* Header */}
+        <div style={{ padding: "6px 12px 8px", borderBottom: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </button>
+          <span style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E" }}>Book Package</span>
+        </div>
+        <div style={{ flex: 1, overflowY: "auto", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
+          {/* Package summary */}
+          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Half Day Coverage</div>
+                <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)", marginTop: 2 }}>with {c.name}</div>
+              </div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>$250</div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 6 }}>
+              <div style={{ borderRadius: "50%", overflow: "hidden" }}><c.Av size={18} /></div>
+              <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>5.0 ★ · 4 hours · 150+ photos</span>
+            </div>
+          </div>
+          {/* Instant Book toggle */}
+          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", display: "flex", alignItems: "center", gap: 4 }}>
+                <span>⚡</span> Instant Book
+              </div>
+              <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)", marginTop: 2 }}>Confirmed automatically</div>
+            </div>
+            <div onClick={() => setInstantBook(!instantBook)} style={{ width: 34, height: 20, borderRadius: 999, background: instantBook ? "#2C1A0E" : "rgba(44,26,14,0.15)", cursor: "pointer", position: "relative", transition: "background 0.2s", flexShrink: 0 }}>
+              <div style={{ position: "absolute", top: 3, left: instantBook ? 17 : 3, width: 14, height: 14, borderRadius: "50%", background: "white", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.2)" }} />
+            </div>
+          </div>
+          {/* Date & Time */}
+          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", display: "flex", flexDirection: "column", gap: 8 }}>
+            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Date & Time</div>
+            <div style={{ display: "flex", gap: 6 }}>
+              <div style={{ flex: 1, border: "1px solid rgba(44,26,14,0.12)", borderRadius: 8, padding: "6px 8px" }}>
+                <div style={{ fontSize: 7, color: "rgba(44,26,14,0.4)", marginBottom: 2 }}>DATE</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#2C1A0E" }}>Jun 22, 2025</div>
+              </div>
+              <div style={{ flex: 1, border: "1px solid rgba(44,26,14,0.12)", borderRadius: 8, padding: "6px 8px" }}>
+                <div style={{ fontSize: 7, color: "rgba(44,26,14,0.4)", marginBottom: 2 }}>TIME</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#2C1A0E" }}>10:00 AM</div>
+              </div>
+            </div>
+          </div>
+          {/* Price summary */}
+          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", marginBottom: 8 }}>Price Summary</div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+              <span style={{ fontSize: 9, color: "rgba(44,26,14,0.6)" }}>Half Day Coverage</span>
+              <span style={{ fontSize: 9, color: "#2C1A0E", fontWeight: 600 }}>$250.00</span>
+            </div>
+            <div style={{ borderTop: "1px dashed rgba(44,26,14,0.1)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
+              <span style={{ fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>Total</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>$250.00</span>
+            </div>
+          </div>
+          {/* CTA */}
+          <div style={{ background: "#2C1A0E", borderRadius: 18, padding: "10px 0", textAlign: "center", fontSize: 10, fontWeight: 700, color: "#F8F2E8", cursor: "pointer" }}>
+            {instantBook ? "⚡ Confirm Instant Book" : "Send Booking Request"}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
+            <Ico.Check style={{ width: 8, height: 8, color: "#2A5A2A" }} />
+            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>Secured via Stripe · No charge until confirmed</span>
+          </div>
+        </div>
+      </PhoneShell>
+    )
+  }
+
+  // ── PROFILE SCREEN (default) ──
+  return (
+    <PhoneShell>
+      {/* Top bar */}
+      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
+      </div>
+
+      {/* Scrollable content area */}
+      <div style={{ flex: 1, overflowY: "auto" }}>
+
+        {/* Stats row */}
+        <div style={{ padding: "0 12px 8px", display: "flex", alignItems: "center", gap: 6 }}>
+          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 44, height: 44 }}>
+            <c.Av size={44} />
+          </div>
+          {[["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
+            <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "5px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
+              <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Name + pill */}
+        <div style={{ padding: "0 12px 2px", display: "flex", alignItems: "center", gap: 5 }}>
+          <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name.split(" ")[0]}</span>
+          <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
+        </div>
+
+        {/* Location */}
+        <div style={{ padding: "0 12px 4px", display: "flex", alignItems: "center", gap: 3 }}>
+          <Ico.Map style={{ width: 8, height: 8, color: "rgba(44,26,14,0.5)" }} />
+          <span style={{ fontSize: 9, color: "rgba(44,26,14,0.55)" }}>{c.location}</span>
+        </div>
+
+        {/* Bio */}
+        <div style={{ padding: "0 12px 6px" }}>
+          <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.35, margin: 0 }}>Wedding photographer capturing timeless moments. Available for bookings.</p>
+        </div>
+
+        {/* Message button */}
+        <div style={{ padding: "0 12px 6px" }}>
+          <div
+            onClick={() => setScreen("chat")}
+            style={{ background: "rgba(44,26,14,0.08)", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, cursor: "pointer" }}
+          >
+            <Ico.Chat style={{ width: 10, height: 10 }} /> Message Emi Chen
+          </div>
+        </div>
+
+        {/* Tabs — sticky inside scroll */}
+        <div style={{ padding: "0 12px 8px", position: "sticky", top: 0, background: "#F8F2E8", zIndex: 2 }}>
+          <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
+            {[
+              { label: "Work",     icon: <Ico.Eye    style={{ width: 7, height: 7 }} /> },
+              { label: "Services", icon: <Ico.Layers style={{ width: 7, height: 7 }} /> },
+              { label: "Reviews",  icon: <Ico.Star   style={{ width: 7, height: 7 }} /> },
+            ].map(({ label, icon }) => (
+              <span
+                key={label}
+                onClick={() => setActiveTab(label)}
+                style={{
+                  flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600,
+                  whiteSpace: "nowrap", cursor: "pointer", textAlign: "center",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 3,
+                  background: activeTab === label ? "#2C1A0E" : "transparent",
+                  color: activeTab === label ? "#F8F2E8" : "rgba(44,26,14,0.45)",
+                  transition: "all 0.15s",
+                }}
+              >{icon}{label}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* WORK — 3-col portrait grid, tappable */}
+        {activeTab === "Work" && (
+          <div style={{ padding: "0 12px 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
+            {portfolioImgs.map((src, i) => (
+              <div
+                key={i}
+                onClick={() => { setSelectedImg(i); setScreen("image") }}
+                style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4", cursor: "pointer" }}
+              >
+                <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* SERVICES — package cards with Book CTA */}
+        {activeTab === "Services" && (
+          <div style={{ padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 8 }}>
+            {services.map((s) => (
+              <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 3 }}>
+                  <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{s.title}</span>
+                  <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>{s.price}<span style={{ fontSize: 9, fontWeight: 500, color: "rgba(44,26,14,0.5)" }}>{s.unit}</span></span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 5 }}>
+                  <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
+                  <span style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{s.duration}</span>
+                </div>
+                <p style={{ fontSize: 8.5, color: "rgba(44,26,14,0.65)", lineHeight: 1.4, margin: "0 0 8px" }}>{s.desc}</p>
+                <div
+                  onClick={() => setScreen("booking")}
+                  style={{ background: "#2C1A0E", borderRadius: 12, padding: "5px 0", textAlign: "center", fontSize: 8.5, fontWeight: 700, color: "#F8F2E8", cursor: "pointer" }}
+                >
+                  Book This Package
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* REVIEWS */}
+        {activeTab === "Reviews" && (
+          <div style={{ padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 8 }}>
+            {reviews.map((r) => (
+              <div key={r.handle} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EFE5D4", flexShrink: 0 }} />
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{r.name}</div>
+                      <div style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>{r.handle}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: 1 }}>
+                    {[...Array(r.stars)].map((_, i) => <Ico.Star key={i} style={{ width: 8, height: 8, color: "#C8A040" }} />)}
+                  </div>
+                </div>
+                <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.4, margin: 0 }}>{r.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+      </div>
+
+      <BottomNav active="profile" />
+    </PhoneShell>
+  )
+}
+
 // ─── Hero ─────────────────────────────────────────────────────
 function Hero() {
   const heroPills = [
@@ -968,7 +1311,7 @@ function Hero() {
             <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
           </div>
           <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
-            <ProfilePhone />
+            <HeroProfilePhone />
             {/* Sketch arrow: scroll hint — left of phone */}
             <div className="hidden xl:flex absolute flex-col items-end gap-1.5" style={{ right: "calc(100% + 12px)", top: "38%" }}>
               <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>scroll to explore</span>
@@ -991,7 +1334,7 @@ function Hero() {
         {/* Mobile — scale phone to fit smaller screens */}
         <div className="flex md:hidden justify-center">
           <div className="scale-90 xs:scale-95 origin-top">
-            <ProfilePhone />
+            <HeroProfilePhone />
           </div>
         </div>
       </div>
