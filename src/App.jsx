@@ -653,7 +653,7 @@ function ProfilePhone() {
     "/zoe-portfolio/emi-6.jpg",
     "/zoe-portfolio/emi-7.jpg",
     "/zoe-portfolio/emi-8.jpg",
-    "/zoe-portfolio/emi-4.jpg",
+    "/zoe-portfolio/emi-9.jpg",
   ]
 
   const services = [
@@ -915,7 +915,7 @@ function HeroProfilePhone() {
     "/zoe-portfolio/emi-6.jpg",
     "/zoe-portfolio/emi-7.jpg",
     "/zoe-portfolio/emi-8.jpg",
-    "/zoe-portfolio/emi-4.jpg",
+    "/zoe-portfolio/emi-9.jpg",
   ]
 
   const services = [
@@ -1414,9 +1414,9 @@ function Hero() {
                 <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 16, padding: "8px 14px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", lineHeight: 1.2 }}>interactive preview</div>
-                <div style={{ fontSize: 11, fontWeight: 500, color: "rgba(44,26,14,0.5)", lineHeight: 1.2 }}>tap &amp; scroll</div>
+              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 16, padding: "9px 16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>interactive preview</div>
+                <div style={{ fontSize: 12, fontWeight: 400, color: "rgba(44,26,14,0.45)", whiteSpace: "nowrap" }}>tap &amp; scroll</div>
               </div>
             </div>
           </div>
