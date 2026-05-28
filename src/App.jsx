@@ -620,7 +620,7 @@ function DiscoverPhone() {
       {/* 3-col grid — 9 full tiles + 3 peeking (4th row clips naturally) */}
       <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start", overflowY: "hidden" }}>
         {grid.map((g, i) => (
-          <div key={i} style={{ position: "relative", aspectRatio: "1/1", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
+          <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
             <img src={g.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             {/* Subtle bottom gradient + name */}
             <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "8px 5px 4px", background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent)", color: "white" }}>
@@ -965,16 +965,6 @@ function Hero() {
           </div>
           <div className="relative">
             <ProfilePhone />
-            {/* Floating chip: availability */}
-            <div className="absolute -left-8 top-20 hidden lg:flex bg-white rounded-2xl shadow-soft px-3.5 py-2.5 items-center gap-2.5 border border-cream-200/60" style={{ whiteSpace: "nowrap" }}>
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#A8D8C8" }} />
-              <span className="text-xs font-semibold text-espresso">Available this week</span>
-            </div>
-            {/* Floating chip: pricing */}
-            <div className="absolute -right-6 bottom-36 hidden lg:block bg-white rounded-2xl shadow-soft px-3.5 py-2.5 border border-cream-200/60">
-              <div className="text-[10px] text-espresso/50 font-medium">Starting from</div>
-              <div className="text-sm font-bold text-espresso">$250 / session</div>
-            </div>
           </div>
         </div>
 
@@ -1215,7 +1205,7 @@ function BookingPhone() {
 
       {/* Price breakdown */}
       <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "9px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
-        {[["Subtotal (3 hr × $60/hr)", "$180.00"], ["Processing Fee (5%)", "+$9.00"]].map(([l, v]) => (
+        {[["Subtotal (3 hr × $60/hr)", "$180.00"]].map(([l, v]) => (
           <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
             <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>{l}</span>
             <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>{v}</span>
@@ -1773,7 +1763,6 @@ export default function App() {
         <SharedVision />
         <HowItWorks />
         <AppShowcase />
-        <ForCreatives />
         <TrustSection />
         <PWA />
         <FinalCTA />
