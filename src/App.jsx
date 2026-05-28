@@ -550,7 +550,7 @@ function BottomNav({ active = "home" }) {
     { k: "profile", I: Ico.User,   l: "PROFILE" },
   ]
   return (
-    <div style={{ borderTop: "1px solid rgba(44,26,14,0.08)", background: "white", padding: "6px 4px 8px", display: "flex", alignItems: "center", justifyContent: "space-around", flexShrink: 0 }}>
+    <div style={{ borderTop: "1px solid rgba(44,26,14,0.08)", background: "white", padding: "6px 4px 14px", display: "flex", alignItems: "center", justifyContent: "space-around", flexShrink: 0, position: "relative", zIndex: 10 }}>
       {items.map((it) => {
         if (it.k === "plus") {
           return (
