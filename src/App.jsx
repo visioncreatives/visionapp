@@ -1013,7 +1013,7 @@ function HeroProfilePhone() {
         </div>
 
         {/* Below-image content */}
-        <div style={{ flex: 1, overflowY: "auto", background: "white" }}>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", background: "white" }}>
           {/* Actions row */}
           <div style={{ padding: "8px 12px 6px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -1084,7 +1084,7 @@ function HeroProfilePhone() {
           </div>
         </div>
         {/* Messages */}
-        <div style={{ flex: 1, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 5, overflowY: "auto" }}>
+        <div className="no-scrollbar" style={{ flex: 1, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 5, overflowY: "auto" }}>
           {chatMsgs.map((m, i) => (
             <div key={i} style={{ display: "flex", justifyContent: m.f === "me" ? "flex-end" : "flex-start" }}>
               <div style={{ maxWidth: "80%", padding: "6px 9px", borderRadius: m.f === "me" ? "12px 12px 3px 12px" : "12px 12px 12px 3px", background: m.f === "me" ? "#2C1A0E" : "white", color: m.f === "me" ? "#F8F2E8" : "#2C1A0E", fontSize: 9, lineHeight: 1.4, border: m.f === "me" ? "none" : "1px solid rgba(44,26,14,0.07)" }}>{m.t}</div>
@@ -1117,7 +1117,7 @@ function HeroProfilePhone() {
           </button>
           <span style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E" }}>Book Package</span>
         </div>
-        <div style={{ flex: 1, overflowY: "auto", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
           {/* Package summary */}
           <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -1193,7 +1193,7 @@ function HeroProfilePhone() {
       </div>
 
       {/* Scrollable content area */}
-      <div style={{ flex: 1, overflowY: "auto" }}>
+      <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto" }}>
 
         {/* Stats row */}
         <div style={{ padding: "0 12px 8px", display: "flex", alignItems: "center", gap: 6 }}>
@@ -1397,11 +1397,6 @@ function Hero() {
             <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
           </div>
           <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
-            {/* Interactive badge above phone */}
-            <div className="hidden xl:flex absolute items-center gap-1.5" style={{ bottom: "calc(100% + 10px)", left: "50%", transform: "translateX(-50%)", background: "#2C1A0E", color: "#F8F2E8", fontSize: 10, fontWeight: 700, padding: "5px 12px", borderRadius: 999, whiteSpace: "nowrap", letterSpacing: "0.01em", boxShadow: "0 4px 12px rgba(44,26,14,0.25)" }}>
-              <Ico.Sparkle style={{ width: 10, height: 10 }} />
-              interactive preview — tap &amp; scroll
-            </div>
             <HeroProfilePhone />
             {/* Solid arrow: scroll hint — left of phone */}
             <div className="hidden xl:flex absolute flex-col items-end gap-2" style={{ right: "calc(100% + 16px)", top: "36%" }}>
@@ -1414,15 +1409,18 @@ function Hero() {
                 <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
             </div>
-            {/* Solid arrow: tap to book — right of phone */}
+            {/* Solid arrow + interactive label — right of phone */}
             <div className="hidden xl:flex absolute flex-col items-start gap-2" style={{ left: "calc(100% + 16px)", bottom: "26%" }}>
               <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", transform: "scaleX(-1)" }}>
                 <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "4px 10px", fontSize: 10, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5 }}>
-                tap to book
-                <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 16, padding: "7px 12px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>
+                  <Ico.Sparkle style={{ width: 9, height: 9 }} />
+                  interactive preview
+                </div>
+                <div style={{ fontSize: 10, fontWeight: 500, color: "rgba(44,26,14,0.55)" }}>tap &amp; scroll</div>
               </div>
             </div>
           </div>
