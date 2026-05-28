@@ -617,8 +617,9 @@ function DiscoverPhone() {
         </span>
       </div>
 
-      {/* 3-col grid — 9 full tiles + 3 peeking (4th row clips naturally) */}
-      <div style={{ flex: 1, padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start", overflowY: "hidden" }}>
+      {/* 3-col grid — 9 full tiles + 3 peeking with gradient fade */}
+      <div style={{ flex: 1, position: "relative", overflowY: "hidden" }}>
+        <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start" }}>
         {grid.map((g, i) => (
           <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
             <img src={g.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
@@ -631,6 +632,9 @@ function DiscoverPhone() {
             </div>
           </div>
         ))}
+        </div>
+        {/* Gradient fade — 4th row peeks through softly */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 90, background: "linear-gradient(to top, #F8F2E8 10%, transparent 100%)", pointerEvents: "none" }} />
       </div>
 
       <BottomNav active="home" />
@@ -912,7 +916,7 @@ function Hero() {
       <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
       <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20 pb-12 sm:pb-24 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-20 pb-8 sm:pb-24 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#EDE6F5", color: "#4A2A7A" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
@@ -959,18 +963,36 @@ function Hero() {
         </div>
 
         {/* Right side — Emi Chen profile preview */}
-        <div className="hidden md:flex justify-center lg:justify-end relative">
+        <div className="hidden md:flex justify-center lg:justify-end relative overflow-visible">
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
           </div>
-          <div className="relative">
+          <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
             <ProfilePhone />
+            {/* Sketch arrow: scroll hint — left of phone */}
+            <div className="hidden xl:flex absolute flex-col items-end gap-1.5" style={{ right: "calc(100% + 12px)", top: "38%" }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>scroll to explore</span>
+              <svg width="52" height="22" viewBox="0 0 52 22" fill="none" style={{ display: "block" }}>
+                <path d="M2 6 Q 14 2 32 10 Q 42 15 50 14" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" fill="none" strokeDasharray="4 2.5"/>
+                <path d="M45 10 L51 15 L43 17" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
+            </div>
+            {/* Sketch arrow: tap to book — right of phone */}
+            <div className="hidden xl:flex absolute flex-col items-start gap-1.5" style={{ left: "calc(100% + 12px)", bottom: "28%" }}>
+              <svg width="52" height="22" viewBox="0 0 52 22" fill="none" style={{ display: "block", transform: "scaleX(-1)" }}>
+                <path d="M2 6 Q 14 2 32 10 Q 42 15 50 14" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" fill="none" strokeDasharray="4 2.5"/>
+                <path d="M45 10 L51 15 L43 17" stroke="#2C1A0E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E", letterSpacing: "-0.01em", whiteSpace: "nowrap" }}>tap to book</span>
+            </div>
           </div>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile — scale phone to fit smaller screens */}
         <div className="flex md:hidden justify-center">
-          <ProfilePhone />
+          <div className="scale-90 xs:scale-95 origin-top">
+            <ProfilePhone />
+          </div>
         </div>
       </div>
     </section>
@@ -1027,7 +1049,7 @@ function DiscoverSection() {
           <p className="mt-4 text-espresso/60 text-base leading-relaxed">Browse by category, location, budget, and availability — with real portfolios and transparent pricing.</p>
         </div>
         {/* Creator tiles — not clickable */}
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {DISCOVER_PROFILES.map((c, i) => (
             <div key={i}>
               <div className="relative overflow-hidden rounded-2xl bg-cream-200" style={{ aspectRatio: "3/4" }}>
@@ -1428,9 +1450,11 @@ function HowItWorks() {
         {/* Two-col: phone left, steps right */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
-          {/* Phone mockup — clean, no overlays */}
-          <div className="flex justify-center">
-            <ActivePhone />
+          {/* Phone mockup — hidden on mobile (steps-only), scales on tablet */}
+          <div className="hidden sm:flex justify-center">
+            <div className="scale-90 md:scale-100 origin-top">
+              <ActivePhone />
+            </div>
           </div>
 
           {/* Clickable steps with feature tags */}
@@ -1486,12 +1510,15 @@ function AppShowcase() {
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">book & collaborate without the back-and-forth.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed">Browse portfolios, send project requests, message in-app, and pay — all in one clean flow.</p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-10 items-start justify-center">
+        {/* Horizontal scroll on mobile, row on sm+ */}
+        <div className="flex gap-8 overflow-x-auto pb-4 sm:pb-0 sm:justify-center -mx-5 px-5 sm:mx-0 sm:px-0 snap-x snap-mandatory sm:snap-none">
           {screens.map((s, i) => {
             const Phone = s.Phone
             return (
-              <div key={i} className="flex flex-col items-center gap-4 flex-1">
-                <Phone />
+              <div key={i} className="flex flex-col items-center gap-4 flex-shrink-0 snap-center sm:flex-1">
+                <div className="scale-90 sm:scale-100 origin-top">
+                  <Phone />
+                </div>
                 <span style={{ background: s.bg, color: s.tc, fontSize: 12, fontWeight: 700, padding: "5px 16px", borderRadius: 999 }}>{s.label}</span>
               </div>
             )
