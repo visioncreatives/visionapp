@@ -1,192 +1,499 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const APP_URL = 'https://photo-petal-palette.lovable.app'
 
-const DownloadIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
-    <path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
-  </svg>
-)
+// ── Shared style tokens ───────────────────────────────────────
+const E = '#2C1A0E'
+const C = '#F8F2E8'
 
-// ── Nav icons ─────────────────────────────────────────────────
-const HomeNav  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:15,height:15}}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-const SearchNav= () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:15,height:15}}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-const ChatNav  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:15,height:15}}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-const ProfileNav=()=> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:15,height:15}}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-const MapPin   = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:9,height:9}}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-const MsgIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:11,height:11}}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-const EyeIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:10,height:10}}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-const SpkIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:10,height:10}}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-const StarIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{width:10,height:10}}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+// ── Icons ─────────────────────────────────────────────────────
+const Ico = {
+  Back:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2.2" strokeLinecap="round" {...p}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>,
+  Home:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  Search:  (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+  Chat:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  Profile: (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  Map:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+  Msg:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  Eye:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>,
+  Bolt:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  Star:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+  Clock:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+  Check:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}><polyline points="20 6 9 17 4 12"/></svg>,
+  Arrow:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
+  Cal:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  Download:(p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>,
+}
 
-// ── Phone mockup ──────────────────────────────────────────────
-function PhoneMockup() {
-  const photos = [
-    '/zoe-portfolio/emi-1.jpg',
-    '/zoe-portfolio/emi-2.jpg',
-    '/zoe-portfolio/emi-5.jpg',
-    '/zoe-portfolio/emi-3.jpg',
-    '/zoe-portfolio/emi-4.jpg',
-    '/zoe-portfolio/emi-7.jpg',
-    '/zoe-portfolio/emi-8.jpg',
-    '/zoe-portfolio/emi-6.jpg',
-    '/zoe-portfolio/emi-9.jpg',
+// ── Phone shell — fixed iPhone proportions ────────────────────
+function PhoneShell({ children }) {
+  return (
+    <div style={{ background: '#1A0D06', borderRadius: 44, padding: 9, boxShadow: '0 32px 80px rgba(44,26,14,0.3), 0 0 0 1px rgba(255,255,255,0.06)', width: 260 }}>
+      <div style={{ background: C, borderRadius: 36, overflow: 'hidden', height: 520, display: 'flex', flexDirection: 'column' }}>
+        {/* Status bar */}
+        <div style={{ padding: '12px 16px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: C }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: E }}>9:41</span>
+          <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 1.5, alignItems: 'flex-end' }}>
+              {[4,6,8,10].map((h,i) => <div key={i} style={{ width: 2.5, height: h, background: `rgba(44,26,14,${i<3?0.5:0.2})`, borderRadius: 1 }}/>)}
+            </div>
+            <div style={{ width: 18, height: 8, border: '1.5px solid rgba(44,26,14,0.4)', borderRadius: 2.5, position: 'relative', padding: 1.5 }}>
+              <div style={{ background: E, borderRadius: 1, height: '100%', width: '75%' }}/>
+            </div>
+          </div>
+        </div>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+// ── Bottom nav ────────────────────────────────────────────────
+function BottomNav({ active }) {
+  const items = [
+    { key: 'home',    label: 'HOME',    Icon: Ico.Home    },
+    { key: 'search',  label: 'SEARCH',  Icon: Ico.Search  },
+    { key: 'plus',    label: '',        Icon: null        },
+    { key: 'chat',    label: 'CHAT',    Icon: Ico.Chat    },
+    { key: 'profile', label: 'PROFILE', Icon: Ico.Profile },
+  ]
+  return (
+    <div style={{ borderTop: '1px solid rgba(44,26,14,0.08)', background: 'white', padding: '6px 4px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-around', flexShrink: 0, position: 'relative', zIndex: 10 }}>
+      {items.map(({ key, label, Icon }) =>
+        key === 'plus' ? (
+          <div key="plus" style={{ width: 36, height: 36, borderRadius: '50%', background: E, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="2.5" strokeLinecap="round" style={{ width: 15, height: 15 }}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        ) : (
+          <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+            <Icon style={{ width: 14, height: 14, color: active === key ? E : 'rgba(44,26,14,0.3)' }} />
+            <span style={{ fontSize: 6.5, fontWeight: active === key ? 700 : 400, color: active === key ? E : 'rgba(44,26,14,0.35)', letterSpacing: '0.04em' }}>{label}</span>
+          </div>
+        )
+      )}
+    </div>
+  )
+}
+
+// ── Avatar placeholder ────────────────────────────────────────
+function Av({ size = 26 }) {
+  return (
+    <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D4C4A8', flexShrink: 0 }}>
+      <img src="/creators/emi-avatar.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
+    </div>
+  )
+}
+
+// ── Interactive phone ─────────────────────────────────────────
+function InteractivePhone() {
+  const [activeTab, setActiveTab]     = useState('Portfolio')
+  const [screen, setScreen]           = useState('profile') // profile | checkout | confirmation | review
+  const [selectedService, setService] = useState(null)
+  const [selectedReview, setReview]   = useState(null)
+  const [selectedImg, setSelectedImg] = useState(null)
+  const [bookDate, setBookDate]       = useState('Jun 22, 2026')
+  const feedRef = useRef(null)
+
+  const portfolioImgs = [
+    '/zoe-portfolio/emi-1.jpg', '/zoe-portfolio/emi-2.jpg', '/zoe-portfolio/emi-5.jpg',
+    '/zoe-portfolio/emi-3.jpg', '/zoe-portfolio/emi-4.jpg', '/zoe-portfolio/emi-7.jpg',
+    '/zoe-portfolio/emi-8.jpg', '/zoe-portfolio/emi-6.jpg', '/zoe-portfolio/emi-9.jpg',
   ]
 
-  return (
-    <div style={{ width: 270, flexShrink: 0 }}>
-      <div style={{
-        background: '#1A0D06',
-        borderRadius: 48,
-        padding: 9,
-        boxShadow: '0 40px 100px rgba(44,26,14,0.3), 0 0 0 1px rgba(255,255,255,0.06)',
-      }}>
-        <div style={{ background: '#F0E8DC', borderRadius: 40, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+  const postMeta = [
+    { tag: 'Wedding',   caption: 'Reception Evening',  likes: 47,  comments: 12 },
+    { tag: 'Candid',    caption: 'Pure Joy',           likes: 83,  comments: 21 },
+    { tag: 'Portrait',  caption: 'Behind the Lens',    likes: 74,  comments: 19 },
+    { tag: 'Candid',    caption: 'On the Run',         likes: 61,  comments: 8  },
+    { tag: 'Wedding',   caption: 'Champagne & Roses',  likes: 102, comments: 34 },
+    { tag: 'Romance',   caption: 'Kiss in the Rain',   likes: 95,  comments: 27 },
+    { tag: 'Editorial', caption: 'Sunset Drive',       likes: 88,  comments: 16 },
+    { tag: 'Romance',   caption: 'Rain & Romance',     likes: 138, comments: 45 },
+    { tag: 'Wedding',   caption: 'Getting Ready',      likes: 113, comments: 38 },
+  ]
 
-          {/* Status bar */}
-          <div style={{ padding: '13px 18px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#F0E8DC', flexShrink: 0 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#2C1A0E' }}>9:41</span>
-            <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
-              {/* signal bars */}
-              <div style={{ display: 'flex', gap: 1.5, alignItems: 'flex-end' }}>
-                {[4,6,8,10].map((h,i) => <div key={i} style={{ width: 3, height: h, background: i < 3 ? 'rgba(44,26,14,0.5)' : 'rgba(44,26,14,0.2)', borderRadius: 1 }}/>)}
-              </div>
-              {/* wifi */}
-              <div style={{ width: 13, height: 10, position: 'relative' }}>
-                <svg viewBox="0 0 24 16" fill="none" style={{ width: 13, height: 10 }}>
-                  <path d="M1 5C5.5 1 10.5 0 12 0s6.5 1 11 5" stroke="rgba(44,26,14,0.5)" strokeWidth="2.5" strokeLinecap="round"/>
-                  <path d="M4 9c2-2.5 5-4 8-4s6 1.5 8 4" stroke="rgba(44,26,14,0.5)" strokeWidth="2.5" strokeLinecap="round"/>
-                  <path d="M7.5 13c1.2-1.2 3-2 4.5-2s3.3.8 4.5 2" stroke="rgba(44,26,14,0.5)" strokeWidth="2.5" strokeLinecap="round"/>
-                  <circle cx="12" cy="16" r="1.5" fill="rgba(44,26,14,0.5)"/>
-                </svg>
-              </div>
-              {/* battery */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <div style={{ width: 20, height: 10, border: '1.5px solid rgba(44,26,14,0.4)', borderRadius: 3, position: 'relative', padding: 1.5 }}>
-                  <div style={{ background: 'rgba(44,26,14,0.7)', borderRadius: 1, height: '100%', width: '75%' }} />
+  const services = [
+    { title: 'Half Day Coverage', price: '$250', unit: '/session', duration: '4 hours', desc: 'Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.', photos: '150+', delivery: '2 weeks' },
+    { title: 'Full Day Coverage', price: '$450', unit: '/session', duration: '8 hours', desc: 'Full day from getting ready to reception. 300+ edited photos + online gallery & print release.', photos: '300+', delivery: '3 weeks' },
+  ]
+
+  const reviews = [
+    { name: 'Sofia R.',   handle: '@sofiareyes',  stars: 5, date: 'May 2026', text: 'Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!' },
+    { name: 'Marcus A.',  handle: '@marcusali',   stars: 5, date: 'Apr 2026', text: 'Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10.' },
+    { name: 'Priya K.',   handle: '@priyak',      stars: 5, date: 'Mar 2026', text: 'Every single photo is a work of art. She captured moments we didn\'t even notice were happening. Truly gifted.' },
+    { name: 'James L.',   handle: '@jamesl',      stars: 5, date: 'Feb 2026', text: 'Emi was calm, fun, and incredibly talented. Our whole wedding party loved her. The photos speak for themselves.' },
+  ]
+
+  const goBack = () => { setScreen('profile'); setService(null); setReview(null); setSelectedImg(null) }
+
+  // ── Image feed ────────────────────────────────────────────
+  if (screen === 'imagefeed') {
+    const postRefs = {}
+    return (
+      <PhoneShell>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
+          </button>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
+        </div>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
+          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }) } }}>
+          {postMeta.map((post, i) => (
+            <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
+              <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <Av size={22} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, fontSize: 10, color: E }}>Emi Chen</div>
+                  <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>Los Angeles</div>
                 </div>
-                <div style={{ width: 2, height: 5, background: 'rgba(44,26,14,0.35)', borderRadius: 1 }} />
+                <svg viewBox="0 0 24 24" fill={E} style={{ width: 13, height: 13, opacity: 0.25 }}><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
               </div>
-            </div>
-          </div>
-
-          {/* VISION + handle */}
-          <div style={{ padding: '6px 16px 8px', flexShrink: 0 }}>
-            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.24em', color: 'rgba(44,26,14,0.4)' }}>V I S I O N</div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: '#2C1A0E', marginTop: 2, lineHeight: 1 }}>@snapsbyemi</div>
-          </div>
-
-          {/* Avatar + stat cards */}
-          <div style={{ padding: '0 16px 10px', display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-            {/* Avatar */}
-            <div style={{ width: 54, height: 54, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(44,26,14,0.15)', background: '#D4C4A8' }}>
-              <img src="/creators/emi-avatar.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />
-            </div>
-            {/* Stat cards */}
-            <div style={{ display: 'flex', gap: 7, flex: 1 }}>
-              <div style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 0', textAlign: 'center', border: '1px solid rgba(44,26,14,0.07)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
-                  <span style={{ fontSize: 14, fontWeight: 800, color: '#2C1A0E' }}>5.0</span>
-                  <svg viewBox="0 0 24 24" fill="#2C1A0E" style={{ width: 10, height: 10 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D4C4A8' }}>
+                <img src={portfolioImgs[i]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+              </div>
+              <div style={{ padding: '7px 10px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                  <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="1.8" style={{ width: 13, height: 13 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.likes}</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                    <Ico.Chat style={{ width: 12, height: 12, color: 'rgba(44,26,14,0.5)' }} />
+                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.comments}</span>
+                  </div>
                 </div>
-                <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>RATING</div>
+                <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="1.8" style={{ width: 12, height: 12 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               </div>
-              <div style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 0', textAlign: 'center', border: '1px solid rgba(44,26,14,0.07)' }}>
-                <div style={{ fontSize: 14, fontWeight: 800, color: '#2C1A0E' }}>89</div>
-                <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>BOOKED</div>
+              <div style={{ padding: '0 10px 8px' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
+                  <Ico.Bolt style={{ width: 6, height: 6, color: '#7A3A10' }} /> {post.tag}
+                </div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{post.caption}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <BottomNav active="profile" />
+      </PhoneShell>
+    )
+  }
+
+  // ── Checkout screen ───────────────────────────────────────
+  if (screen === 'checkout' && selectedService) {
+    const s = selectedService
+    return (
+      <PhoneShell>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
+          </button>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Book Package</div>
+        </div>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: C, padding: '12px 12px' }}>
+          {/* Package summary card */}
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 10 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 800, color: E }}>{s.title}</div>
+                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 3, color: 'rgba(44,26,14,0.5)' }}>
+                  <Ico.Clock style={{ width: 9, height: 9 }} />
+                  <span style={{ fontSize: 9 }}>{s.duration}</span>
+                </div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <span style={{ fontSize: 16, fontWeight: 800, color: E }}>{s.price}</span>
+                <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)' }}>{s.unit}</span>
+              </div>
+            </div>
+            <div style={{ borderTop: '1px solid rgba(44,26,14,0.07)', marginTop: 10, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {[`${s.photos} edited photos`, `Delivery in ${s.delivery}`, 'Online gallery + print release', 'Secure payment via Stripe'].map(item => (
+                <div key={item} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                  <Ico.Check style={{ width: 10, height: 10, color: '#1A5A48', flexShrink: 0 }} />
+                  <span style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)' }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Creative */}
+          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 10, display: 'flex', gap: 10, alignItems: 'center' }}>
+            <Av size={32} />
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
+              <div style={{ display: 'flex', gap: 2, marginTop: 2 }}>
+                {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 8, height: 8 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+                <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)', marginLeft: 2 }}>5.0 · 89 bookings</span>
               </div>
             </div>
           </div>
 
-          {/* Name + tag + location + bio */}
-          <div style={{ padding: '0 16px 10px', flexShrink: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 5 }}>
-              <span style={{ fontSize: 15, fontWeight: 800, color: '#2C1A0E' }}>Emi</span>
-              <span style={{ background: '#FBE9D6', color: '#7A3A10', fontSize: 8, fontWeight: 700, padding: '2px 8px', borderRadius: 999 }}>CREATIVE</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(44,26,14,0.5)', marginBottom: 5 }}>
-              <MapPin />
-              <span style={{ fontSize: 10 }}>Los Angeles</span>
-            </div>
-            <div style={{ fontSize: 10, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
-          </div>
-
-          {/* Message button */}
-          <div style={{ padding: '0 16px 10px', flexShrink: 0 }}>
-            <div style={{ background: '#EFE5D8', borderRadius: 24, padding: '9px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)' }}>
-              <MsgIcon />
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#2C1A0E' }}>Message Emi Chen</span>
+          {/* Date */}
+          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 10 }}>
+            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 7 }}>SELECT DATE</div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {['Jun 22', 'Jun 28', 'Jul 5', 'Jul 12'].map(d => (
+                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(44,26,14,0.1)'}`, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(44,26,14,0.6)', fontSize: 9, fontWeight: 600, cursor: 'pointer' }}>{d}</button>
+              ))}
             </div>
           </div>
 
-          {/* Tab bar */}
-          <div style={{ padding: '0 16px 0', display: 'flex', gap: 6, flexShrink: 0 }}>
-            {[
-              { label: 'Portfolio', Icon: EyeIcon,  active: true  },
-              { label: 'Services',  Icon: SpkIcon,  active: false },
-              { label: 'Reviews',   Icon: StarIcon, active: false },
-            ].map(({ label, Icon, active }) => (
-              <div key={label} style={{
-                display: 'flex', alignItems: 'center', gap: 4,
-                padding: '7px 10px', borderRadius: 999,
-                background: active ? '#2C1A0E' : 'transparent',
-                color: active ? '#F8F2E8' : 'rgba(44,26,14,0.45)',
-                fontSize: 10, fontWeight: active ? 700 : 500,
-              }}>
-                <Icon /> {label}
+          {/* Location */}
+          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
+            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 5 }}>LOCATION</div>
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              <Ico.Map style={{ width: 11, height: 11, color: 'rgba(44,26,14,0.4)' }} />
+              <span style={{ fontSize: 10, color: E }}>Malibu, CA</span>
+            </div>
+          </div>
+
+          {/* Total + confirm */}
+          <div style={{ background: E, borderRadius: 14, padding: '12px 14px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+              <span style={{ fontSize: 10, color: 'rgba(248,242,232,0.6)' }}>Total due</span>
+              <span style={{ fontSize: 14, fontWeight: 800, color: C }}>{s.price}</span>
+            </div>
+            <button onClick={() => setScreen('confirmation')} style={{ width: '100%', background: C, color: E, border: 'none', borderRadius: 10, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+              Confirm & Pay
+            </button>
+          </div>
+        </div>
+        <BottomNav active="profile" />
+      </PhoneShell>
+    )
+  }
+
+  // ── Confirmation screen ───────────────────────────────────
+  if (screen === 'confirmation') {
+    return (
+      <PhoneShell>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px 18px', background: C }}>
+          <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#D6EEE8', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
+            <Ico.Check style={{ width: 24, height: 24, color: '#1A5A48' }} />
+          </div>
+          <div style={{ fontSize: 16, fontWeight: 800, color: E, textAlign: 'center', marginBottom: 6 }}>Booking Confirmed!</div>
+          <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
+            {selectedService?.title} with Emi Chen<br />
+            {bookDate} · Malibu, CA
+          </div>
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 16px', width: '100%', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
+            {[['Package', selectedService?.title], ['Date', bookDate], ['Amount', selectedService?.price], ['Status', 'Confirmed ✓']].map(([k, v]) => (
+              <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(44,26,14,0.05)' }}>
+                <span style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)' }}>{k}</span>
+                <span style={{ fontSize: 9, fontWeight: 700, color: k === 'Status' ? '#1A5A48' : E }}>{v}</span>
               </div>
             ))}
           </div>
+          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 28px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+            Back to Profile
+          </button>
+        </div>
+        <BottomNav active="profile" />
+      </PhoneShell>
+    )
+  }
 
-          {/* Portfolio grid — portrait ratio, 3 cols, 3 rows */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2, marginTop: 8, flexShrink: 0 }}>
-            {photos.map((src, i) => (
-              <div key={i} style={{ aspectRatio: '3/4', background: '#D4C4A8', overflow: 'hidden' }}>
+  // ── Review detail ─────────────────────────────────────────
+  if (screen === 'review' && selectedReview) {
+    const r = selectedReview
+    return (
+      <PhoneShell>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
+          </button>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Review</div>
+        </div>
+        <div style={{ flex: 1, padding: '20px 16px', background: C, display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {/* Reviewer */}
+          <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', border: '1px solid rgba(44,26,14,0.07)' }}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: 14, fontWeight: 700, color: E }}>{r.name[0]}</span>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: E }}>{r.name}</div>
+                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.4)' }}>{r.handle} · {r.date}</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 2, marginBottom: 10 }}>
+              {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 11, height: 11 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+            </div>
+            <div style={{ fontSize: 12, color: 'rgba(44,26,14,0.7)', lineHeight: 1.6 }}>"{r.text}"</div>
+          </div>
+          {/* About Emi */}
+          <div style={{ background: 'white', borderRadius: 16, padding: '12px 16px', border: '1px solid rgba(44,26,14,0.07)', display: 'flex', gap: 10, alignItems: 'center' }}>
+            <Av size={34} />
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
+              <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)', marginTop: 1 }}>5.0 ★ · 89 bookings · Los Angeles</div>
+            </div>
+          </div>
+          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer', width: '100%' }}>
+            Back to Profile
+          </button>
+        </div>
+        <BottomNav active="profile" />
+      </PhoneShell>
+    )
+  }
+
+  // ── Profile screen ────────────────────────────────────────
+  return (
+    <PhoneShell>
+      {/* Header */}
+      <div style={{ padding: '4px 14px 8px', flexShrink: 0 }}>
+        <div style={{ fontSize: 7.5, fontWeight: 700, letterSpacing: '0.24em', color: 'rgba(44,26,14,0.35)' }}>V I S I O N</div>
+        <div style={{ fontSize: 16, fontWeight: 800, color: E, lineHeight: 1.1 }}>@snapsbyemi</div>
+      </div>
+
+      {/* Scrollable profile content */}
+      <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
+
+        {/* Avatar + stat cards */}
+        <div style={{ padding: '0 14px 10px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 52, height: 52, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(44,26,14,0.12)', background: '#D4C4A8' }}>
+            <img src="/creators/emi-avatar.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
+          </div>
+          <div style={{ display: 'flex', gap: 6, flex: 1 }}>
+            {[['5.0 ★', 'RATING'], ['89', 'BOOKED']].map(([v, l]) => (
+              <div key={l} style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 4px', textAlign: 'center', border: '1px solid rgba(44,26,14,0.07)' }}>
+                <div style={{ fontSize: 13, fontWeight: 800, color: E }}>{v}</div>
+                <div style={{ fontSize: 7, color: 'rgba(44,26,14,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Name + tag + location + bio */}
+        <div style={{ padding: '0 14px 8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+            <span style={{ fontSize: 14, fontWeight: 800, color: E }}>Emi</span>
+            <span style={{ background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(44,26,14,0.45)', marginBottom: 4 }}>
+            <Ico.Map style={{ width: 9, height: 9 }} />
+            <span style={{ fontSize: 9.5 }}>Los Angeles</span>
+          </div>
+          <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
+        </div>
+
+        {/* Message button */}
+        <div style={{ padding: '0 14px 10px' }}>
+          <div style={{ background: '#EFE5D8', borderRadius: 22, padding: '8px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)' }}>
+            <Ico.Msg style={{ width: 10, height: 10, color: E }} />
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: E }}>Message Emi Chen</span>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div style={{ padding: '0 14px 0', display: 'flex', gap: 5 }}>
+          {[['Portfolio', Ico.Eye], ['Services', Ico.Bolt], ['Reviews', Ico.Star]].map(([label, Icon]) => (
+            <button key={label} onClick={() => setActiveTab(label)} style={{
+              display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 999, border: 'none', cursor: 'pointer',
+              background: activeTab === label ? E : 'transparent',
+              color: activeTab === label ? C : 'rgba(44,26,14,0.45)',
+              fontSize: 9.5, fontWeight: activeTab === label ? 700 : 500,
+            }}>
+              <Icon style={{ width: 9, height: 9 }} /> {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab content */}
+        {activeTab === 'Portfolio' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2, marginTop: 8 }}>
+            {portfolioImgs.map((src, i) => (
+              <div key={i} onClick={() => { setSelectedImg(i); setScreen('imagefeed') }} style={{ aspectRatio: '3/4', background: '#D4C4A8', overflow: 'hidden', cursor: 'pointer' }}>
                 <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
               </div>
             ))}
           </div>
+        )}
 
-          {/* Bottom nav */}
-          <div style={{
-            background: 'white',
-            borderTop: '1px solid rgba(44,26,14,0.07)',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-around',
-            padding: '8px 8px 14px', flexShrink: 0,
-          }}>
-            {[
-              { label: 'HOME',    Icon: HomeNav,   active: false },
-              { label: 'SEARCH',  Icon: SearchNav, active: false },
-              { label: '+',       Icon: null,      active: false, plus: true },
-              { label: 'CHAT',    Icon: ChatNav,   active: false },
-              { label: 'PROFILE', Icon: ProfileNav,active: true  },
-            ].map(({ label, Icon, active, plus }) => (
-              <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-                {plus ? (
-                  <div style={{ width: 34, height: 34, borderRadius: '50%', background: '#2C1A0E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#F8F2E8" strokeWidth="2.5" strokeLinecap="round" style={{ width: 16, height: 16 }}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        {activeTab === 'Services' && (
+          <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {services.map((s) => (
+              <div key={s.title} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                  <div>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: E }}>{s.title}</div>
+                    <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.45)' }}>
+                      <Ico.Clock style={{ width: 8, height: 8 }} />
+                      <span style={{ fontSize: 8.5 }}>{s.duration}</span>
+                    </div>
                   </div>
-                ) : (
-                  <>
-                    <div style={{ color: active ? '#2C1A0E' : 'rgba(44,26,14,0.3)' }}><Icon /></div>
-                    <span style={{ fontSize: 6.5, fontWeight: active ? 700 : 500, color: active ? '#2C1A0E' : 'rgba(44,26,14,0.35)', letterSpacing: '0.04em' }}>{label}</span>
-                  </>
-                )}
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{ fontSize: 15, fontWeight: 800, color: E }}>{s.price}</span>
+                    <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{s.unit}</div>
+                  </div>
+                </div>
+                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.55)', lineHeight: 1.5, marginBottom: 10 }}>{s.desc}</div>
+                <button onClick={() => { setService(s); setScreen('checkout') }} style={{ width: '100%', background: E, color: C, border: 'none', borderRadius: 20, padding: '8px 0', fontSize: 10, fontWeight: 700, cursor: 'pointer' }}>
+                  Book This Package
+                </button>
               </div>
             ))}
           </div>
+        )}
 
-        </div>
+        {activeTab === 'Reviews' && (
+          <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {/* Summary */}
+            <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', display: 'flex', gap: 14, alignItems: 'center' }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 24, fontWeight: 800, color: E }}>5.0</div>
+                <div style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
+                  {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 9, height: 9 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+                </div>
+                <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 2 }}>89 reviews</div>
+              </div>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {[5,4,3].map(n => (
+                  <div key={n} style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                    <span style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.45)', width: 6 }}>{n}</span>
+                    <div style={{ flex: 1, height: 4, background: '#EFE5D4', borderRadius: 999, overflow: 'hidden' }}>
+                      <div style={{ width: n === 5 ? '96%' : n === 4 ? '3%' : '1%', height: '100%', background: E, borderRadius: 999 }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Individual reviews */}
+            {reviews.map((r, i) => (
+              <div key={i} onClick={() => { setReview(r); setScreen('review') }} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', cursor: 'pointer' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                  <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
+                    <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name[0]}</span>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name}</div>
+                      <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{r.date}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 1 }}>
+                    {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 8, height: 8 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+                  </div>
+                </div>
+                <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
+                <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.35)', marginTop: 5, fontWeight: 600 }}>Tap to read full review →</div>
+              </div>
+            ))}
+          </div>
+        )}
+
       </div>
-    </div>
+      <BottomNav active="profile" />
+    </PhoneShell>
   )
 }
 
 // ── Main page ─────────────────────────────────────────────────
 export default function DownloadPage() {
   const [installPrompt, setInstallPrompt] = useState(null)
-  const [installed, setInstalled] = useState(false)
+  const [installed, setInstalled]         = useState(false)
 
   useEffect(() => {
     const handler = (e) => { e.preventDefault(); setInstallPrompt(e) }
@@ -212,7 +519,7 @@ export default function DownloadPage() {
       {/* Nav */}
       <header style={{ borderBottom: '1px solid rgba(44,26,14,0.08)', background: 'rgba(248,242,232,0.95)', backdropFilter: 'blur(8px)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: '#2C1A0E', textDecoration: 'none' }}>V I S I O N</Link>
+          <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
           <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(44,26,14,0.5)', textDecoration: 'none' }}>← Back</Link>
         </div>
       </header>
@@ -221,26 +528,50 @@ export default function DownloadPage() {
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '60px 24px' }}>
 
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(44,26,14,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
-        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#2C1A0E', textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 16 }}>
+        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 16 }}>
           Vision on your<br />home screen.
         </h1>
         <p style={{ fontSize: 15, color: 'rgba(44,26,14,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 48 }}>
           Available on iPhone and Android. No App Store needed — install directly from your browser.
         </p>
 
-        {/* Phone */}
-        <div style={{ marginBottom: 48 }}>
-          <PhoneMockup />
+        {/* Phone + floating labels */}
+        <div style={{ position: 'relative', marginBottom: 48 }}>
+
+          {/* Left label */}
+          <div style={{ position: 'absolute', left: -140, top: '38%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none' }}>
+            <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '6px 14px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 12px rgba(44,26,14,0.08)' }}>
+              scroll to explore
+            </div>
+            <svg width="48" height="20" viewBox="0 0 48 20" fill="none">
+              <path d="M2 14 Q 14 18 30 10 Q 38 6 46 7" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+              <path d="M41 3 L47 7 L40 10" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            </svg>
+          </div>
+
+          {/* Right label */}
+          <div style={{ position: 'absolute', right: -150, top: '55%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none' }}>
+            <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ transform: 'scaleX(-1)' }}>
+              <path d="M2 14 Q 14 18 30 10 Q 38 6 46 7" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+              <path d="M41 3 L47 7 L40 10" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            </svg>
+            <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 16, padding: '9px 16px', boxShadow: '0 2px 12px rgba(44,26,14,0.08)', display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: E, whiteSpace: 'nowrap' }}>interactive preview</div>
+              <div style={{ fontSize: 12, fontWeight: 400, color: 'rgba(44,26,14,0.45)', whiteSpace: 'nowrap' }}>tap &amp; scroll</div>
+            </div>
+          </div>
+
+          <InteractivePhone />
         </div>
 
         {/* Download button */}
         <button
           onClick={handleInstall}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: '#2C1A0E', color: '#F8F2E8', padding: '15px 32px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 16, fontWeight: 700, boxShadow: '0 8px 30px rgba(44,26,14,0.2)', transition: 'opacity 0.15s', marginBottom: 16 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: E, color: C, padding: '15px 32px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 16, fontWeight: 700, boxShadow: '0 8px 30px rgba(44,26,14,0.2)', transition: 'opacity 0.15s', marginBottom: 16 }}
           onMouseOver={e => e.currentTarget.style.opacity = '0.85'}
           onMouseOut={e => e.currentTarget.style.opacity = '1'}
         >
-          <DownloadIcon />
+          <Ico.Download style={{ width: 18, height: 18 }} />
           {installed ? 'Installed ✓' : 'Download Vision'}
         </button>
 
