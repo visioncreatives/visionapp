@@ -590,6 +590,12 @@ export default function DownloadPage() {
   }, [])
 
   const [platform, setPlatform] = useState('ios')
+  const [isMobile,  setIsMobile]  = useState(() => typeof window !== 'undefined' && window.innerWidth < 640)
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 640)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   const handleInstall = async () => {
     if (installPrompt) {
@@ -642,19 +648,26 @@ export default function DownloadPage() {
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 64, width: '100%', maxWidth: 900, flexWrap: 'wrap', justifyContent: 'center' }}>
 
           {/* Left: phone with single floating label */}
-          <div style={{ position: 'relative', flexShrink: 0 }}>
-            {/* Single label — left side, arrow in cream so it's visible against dark phone frame */}
-            <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
-              <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(44,26,14,0.1)' }}>
-                tap &amp; scroll to explore
+          {/* On mobile we scale the whole unit (phone + label) so the label stays on-screen */}
+          <div style={{ flexShrink: 0, height: isMobile ? Math.round(520 * 0.6) : 'auto', overflow: 'visible' }}>
+            <div style={{
+              position: 'relative',
+              transform: isMobile ? 'scale(0.6)' : 'none',
+              transformOrigin: 'top center',
+            }}>
+              {/* Single label — left side, arrow in cream so it's visible against dark phone frame */}
+              <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
+                <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(44,26,14,0.1)' }}>
+                  tap &amp; scroll to explore
+                </div>
+                {/* Cream arrow with dark shadow so it reads over the phone frame */}
+                <svg width="48" height="22" viewBox="0 0 52 22" fill="none" style={{ filter: 'drop-shadow(0 1px 2px rgba(44,26,14,0.18))' }}>
+                  <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={C} strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                  <path d="M44 4 L50 8 L43 11" stroke={C} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                </svg>
               </div>
-              {/* Cream arrow with dark shadow so it reads over the phone frame */}
-              <svg width="48" height="22" viewBox="0 0 52 22" fill="none" style={{ filter: 'drop-shadow(0 1px 2px rgba(44,26,14,0.18))' }}>
-                <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={C} strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                <path d="M44 4 L50 8 L43 11" stroke={C} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              </svg>
+              <InteractivePhone />
             </div>
-            <InteractivePhone />
           </div>
 
           {/* Right: tabbed install guide */}

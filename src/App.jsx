@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // ============================================================
-// REPLACE THIS WITH YOUR LOVABLE / PWA URL
-// Example: const APP_URL = "https://your-app.lovable.app"
+// Landing page CTAs → local download/install guide
 // ============================================================
 const APP_URL = "/download"
+const LOVABLE_URL = "https://downloadvision.lovable.app"
 
 // ─── Icons ────────────────────────────────────────────────────
 const Ico = {
@@ -922,7 +922,7 @@ function Header() {
           <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
           <a href="#creatives" className="hover:text-espresso transition-colors">For Creatives</a>
-          <a href="#download" className="hover:text-espresso transition-colors">Install App</a>
+          <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-espresso transition-colors">Install App</a>
         </nav>
         <div className="flex items-center gap-3">
           <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
@@ -937,7 +937,7 @@ function Header() {
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
             <a href="#creatives" onClick={() => setOpen(false)}>For Creatives</a>
-            <a href="#download" onClick={() => setOpen(false)}>Install App</a>
+            <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Install App</a>
             <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
           </div>
         </div>
@@ -1938,10 +1938,10 @@ function FinalCTA() {
           </a>
         </div>
         <div className="mt-4 flex justify-center">
-          <Link to="/download" className="inline-flex items-center justify-center gap-2 text-espresso/60 hover:text-espresso text-sm font-medium transition-colors group">
+          <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 text-espresso/60 hover:text-espresso text-sm font-medium transition-colors group">
             <Ico.Download className="w-4 h-4 group-hover:text-espresso transition-colors" />
             Install Vision App
-          </Link>
+          </a>
         </div>
         <div className="mt-10 flex justify-center items-center gap-3">
           <div className="flex -space-x-2">
