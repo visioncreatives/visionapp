@@ -1017,15 +1017,15 @@ function CheckoutPhone() {
         </div>
         {/* Price summary */}
         <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
-          {[["Package", "$450.00"], ["Platform fee", "$22.50"], ["Total", "$472.50"]].map(([l, v], i) => (
-            <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 2 ? 4 : 0, borderTop: i === 2 ? "1px solid rgba(44,26,14,0.08)" : "none", paddingTop: i === 2 ? 6 : 0 }}>
-              <span style={{ fontSize: i === 2 ? 10 : 8.5, fontWeight: i === 2 ? 700 : 500, color: i === 2 ? "#2C1A0E" : "rgba(44,26,14,0.55)" }}>{l}</span>
-              <span style={{ fontSize: i === 2 ? 10 : 8.5, fontWeight: i === 2 ? 700 : 500, color: "#2C1A0E" }}>{v}</span>
+          {[["Package", "$450.00"], ["Total", "$450.00"]].map(([l, v], i) => (
+            <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 1 ? 4 : 0, borderTop: i === 1 ? "1px solid rgba(44,26,14,0.08)" : "none", paddingTop: i === 1 ? 6 : 0 }}>
+              <span style={{ fontSize: i === 1 ? 10 : 8.5, fontWeight: i === 1 ? 700 : 500, color: i === 1 ? "#2C1A0E" : "rgba(44,26,14,0.55)" }}>{l}</span>
+              <span style={{ fontSize: i === 1 ? 10 : 8.5, fontWeight: i === 1 ? 700 : 500, color: "#2C1A0E" }}>{v}</span>
             </div>
           ))}
         </div>
         {/* CTA */}
-        <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "10px 0", textAlign: "center", fontSize: 11, fontWeight: 700, color: "#F8F2E8" }}>Book &amp; Pay $472.50</div>
+        <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "10px 0", textAlign: "center", fontSize: 11, fontWeight: 700, color: "#F8F2E8" }}>Book &amp; Pay $450.00</div>
         <div style={{ textAlign: "center", fontSize: 8, color: "rgba(44,26,14,0.4)" }}>Secured by Stripe · Cancel free before 48h</div>
       </div>
     </PhoneShell>
@@ -1872,15 +1872,14 @@ function HowItWorks() {
     <section id="how" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
-        {/* Header row — label + toggle on same line, heading below */}
+        {/* Header — label + heading left, toggle only shows on mobile here */}
         <div className="mb-8 sm:mb-14 max-w-xl">
           <div className="flex items-center justify-between gap-4 mb-2 sm:mb-3">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
-            <div className="inline-flex bg-cream-200/80 p-1 rounded-full">
+            {/* Mobile toggle — hidden on desktop (desktop toggle is above the phone) */}
+            <div className="lg:hidden inline-flex bg-cream-200/80 p-1 rounded-full">
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
-                <button
-                  key={k}
-                  onClick={() => { setTab(k); setActiveStep(0) }}
+                <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
                   className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
                 >{l}</button>
               ))}
@@ -1960,7 +1959,15 @@ function HowItWorks() {
               </div>
             ))}
           </div>
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center gap-5">
+            {/* Desktop toggle — sits above the phone */}
+            <div className="inline-flex bg-cream-200/80 p-1 rounded-full self-start">
+              {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
+                <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
+                >{l}</button>
+              ))}
+            </div>
             <ActivePhone />
           </div>
         </div>
