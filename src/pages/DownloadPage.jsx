@@ -84,6 +84,8 @@ function EmiAv({ size = 26 }) {
 }
 
 // ── Creator data for search page ──────────────────────────────
+// CONFIRMED CARTOONS — never use: kai, marcus, ava, sofia, zoe, lena
+// CONFIRMED REAL PHOTOS: mia, diego, yumi, ellie, luca, dre, leila, nova, sage, emi, nia, zara, chloe
 const CREATIVES = [
   { name: 'Mia',   location: 'Los Angeles', img: '/creators/mia.jpg'   },
   { name: 'Diego', location: 'Chicago',     img: '/creators/diego.jpg' },
@@ -94,9 +96,9 @@ const CREATIVES = [
   { name: 'Leila', location: 'Miami',       img: '/creators/leila.jpg' },
   { name: 'Nova',  location: 'New York',    img: '/creators/nova.jpg'  },
   { name: 'Sage',  location: 'Austin',      img: '/creators/sage.jpg'  },
-  { name: 'Emi',  location: 'Los Angeles', img: '/creators/emi.jpg'  },
-  { name: 'Lena', location: 'Houston',     img: '/creators/lena.jpg' },
-  { name: 'Zara', location: 'Nashville',   img: '/creators/zara.jpg' },
+  { name: 'Emi',   location: 'Los Angeles', img: '/creators/emi.jpg'   },
+  { name: 'Nia',   location: 'Houston',     img: '/creators/nia.jpg'   },
+  { name: 'Zara',  location: 'Nashville',   img: '/creators/zara.jpg'  },
 ]
 
 const CATEGORIES = ['For you', 'Photography', 'Videography', 'Content', 'Events', 'Styling']
