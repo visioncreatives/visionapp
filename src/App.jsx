@@ -922,7 +922,7 @@ function Header() {
           <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
           <a href="#creatives" className="hover:text-espresso transition-colors">For Creatives</a>
-          <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-espresso transition-colors">Install App</a>
+          <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </nav>
         <div className="flex items-center gap-3">
           <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
