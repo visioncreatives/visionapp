@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-const APP_URL = 'https://downloadvision.lovable.app'
+const APP_URL = 'https://live.joinvision.app'
 const E = '#2C1A0E'
 const C = '#F8F2E8'
 
@@ -720,7 +720,7 @@ export default function DownloadPage() {
                     <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#6E40C9,#B04FC9)', flexShrink: 0 }}/>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 10, fontWeight: 700, color: '#000' }}>Vision</div>
-                      <div style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)' }}>downloadvision.lovable.app</div>
+                      <div style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)' }}>live.joinvision.app</div>
                     </div>
                   </div>
                   <div style={{ background: 'white', padding: '9px 14px 8px' }}>
@@ -764,7 +764,7 @@ export default function DownloadPage() {
                 {/* Android hint */}
                 <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.1)', marginTop: 4 }}>
                   <div style={{ background: 'white', padding: '9px 14px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
-                    <div style={{ flex: 1, background: 'rgba(0,0,0,0.05)', borderRadius: 20, padding: '4px 11px', fontSize: 10, color: 'rgba(0,0,0,0.4)' }}>downloadvision.lovable.app</div>
+                    <div style={{ flex: 1, background: 'rgba(0,0,0,0.05)', borderRadius: 20, padding: '4px 11px', fontSize: 10, color: 'rgba(0,0,0,0.4)' }}>live.joinvision.app</div>
                     <svg viewBox="0 0 24 24" fill="rgba(0,0,0,0.4)" style={{ width: 16, height: 16, flexShrink: 0 }}><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
                   </div>
                   <div style={{ background: '#F8F9FA', padding: '6px 0' }}>

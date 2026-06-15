@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 // Landing page CTAs → local download/install guide
 // ============================================================
 const APP_URL = "/download"
-const LOVABLE_URL = "https://downloadvision.lovable.app"
+const LOVABLE_URL = "https://live.joinvision.app"
 
 // ─── Icons ────────────────────────────────────────────────────
 const Ico = {
@@ -1146,7 +1146,7 @@ function Header() {
         <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/65 font-medium">
           <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
-          <a href="#creatives" className="hover:text-espresso transition-colors">For Creatives</a>
+          <a href="#how" className="hover:text-espresso transition-colors">For Creatives</a>
           <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </nav>
         <div className="flex items-center gap-3">
@@ -1161,7 +1161,7 @@ function Header() {
           <div className="px-5 py-4 flex flex-col gap-4 text-espresso/80 font-medium">
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
-            <a href="#creatives" onClick={() => setOpen(false)}>For Creatives</a>
+            <a href="#how" onClick={() => setOpen(false)}>For Creatives</a>
             <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Install App</a>
             <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
           </div>
@@ -1388,6 +1388,7 @@ function HeroProfilePhone() {
               value={chatInput}
               onChange={e => setChatInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && sendChat()}
+              onFocus={e => e.target.focus({ preventScroll: true })}
               placeholder="Message Emi..."
               style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: 9.5, color: E, width: '100%', fontFamily: 'inherit' }}
             />
@@ -2133,7 +2134,7 @@ function Footer() {
           <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Platform</p>
           <a href="#discover" className="hover:text-espresso transition-colors">Discover Creatives</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
-          <a href="#creatives" className="hover:text-espresso transition-colors">For Creatives</a>
+          <a href="#how" className="hover:text-espresso transition-colors">For Creatives</a>
           <a href="#download" className="hover:text-espresso transition-colors">Install App</a>
         </div>
       </div>
