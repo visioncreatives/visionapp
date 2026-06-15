@@ -2,37 +2,35 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const APP_URL = 'https://photo-petal-palette.lovable.app'
-
-// ── Shared style tokens ───────────────────────────────────────
 const E = '#2C1A0E'
 const C = '#F8F2E8'
 
 // ── Icons ─────────────────────────────────────────────────────
 const Ico = {
-  Back:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2.2" strokeLinecap="round" {...p}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>,
-  Home:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
-  Search:  (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-  Chat:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-  Profile: (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
-  Map:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
-  Msg:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-  Eye:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>,
-  Bolt:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
-  Star:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
-  Clock:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-  Check:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}><polyline points="20 6 9 17 4 12"/></svg>,
-  Arrow:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
-  Cal:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
-  Download:(p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>,
+  Back:    p => <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2.2" strokeLinecap="round" {...p}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>,
+  Home:    p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  Search:  p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+  Chat:    p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  Profile: p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  Map:     p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+  Msg:     p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  Eye:     p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>,
+  Bolt:    p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  Star:    p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+  Clock:   p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+  Check:   p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}><polyline points="20 6 9 17 4 12"/></svg>,
+  Send:    p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>,
+  Download:p => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>,
 }
 
-// ── Phone shell — fixed iPhone proportions ────────────────────
+const StarFilled = ({ size = 9 }) => <svg viewBox="0 0 24 24" fill="#E8A030" style={{ width: size, height: size }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+
+// ── Phone shell ───────────────────────────────────────────────
 function PhoneShell({ children }) {
   return (
     <div style={{ background: '#1A0D06', borderRadius: 44, padding: 9, boxShadow: '0 32px 80px rgba(44,26,14,0.3), 0 0 0 1px rgba(255,255,255,0.06)', width: 260 }}>
       <div style={{ background: C, borderRadius: 36, overflow: 'hidden', height: 520, display: 'flex', flexDirection: 'column' }}>
-        {/* Status bar */}
-        <div style={{ padding: '12px 16px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: C }}>
+        <div style={{ padding: '12px 16px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: E }}>9:41</span>
           <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
             <div style={{ display: 'flex', gap: 1.5, alignItems: 'flex-end' }}>
@@ -50,11 +48,11 @@ function PhoneShell({ children }) {
 }
 
 // ── Bottom nav ────────────────────────────────────────────────
-function BottomNav({ active }) {
+function BottomNav({ active, onNav }) {
   const items = [
     { key: 'home',    label: 'HOME',    Icon: Ico.Home    },
     { key: 'search',  label: 'SEARCH',  Icon: Ico.Search  },
-    { key: 'plus',    label: '',        Icon: null        },
+    { key: 'plus' },
     { key: 'chat',    label: 'CHAT',    Icon: Ico.Chat    },
     { key: 'profile', label: 'PROFILE', Icon: Ico.Profile },
   ]
@@ -66,7 +64,7 @@ function BottomNav({ active }) {
             <svg viewBox="0 0 24 24" fill="none" stroke={C} strokeWidth="2.5" strokeLinecap="round" style={{ width: 15, height: 15 }}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
         ) : (
-          <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+          <div key={key} onClick={() => onNav?.(key)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, cursor: 'pointer' }}>
             <Icon style={{ width: 14, height: 14, color: active === key ? E : 'rgba(44,26,14,0.3)' }} />
             <span style={{ fontSize: 6.5, fontWeight: active === key ? 700 : 400, color: active === key ? E : 'rgba(44,26,14,0.35)', letterSpacing: '0.04em' }}>{label}</span>
           </div>
@@ -76,60 +74,219 @@ function BottomNav({ active }) {
   )
 }
 
-// ── Avatar placeholder ────────────────────────────────────────
-function Av({ size = 26 }) {
+// ── Emi avatar ────────────────────────────────────────────────
+function EmiAv({ size = 26 }) {
   return (
     <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D4C4A8', flexShrink: 0 }}>
-      <img src="/creators/emi-avatar.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
+      <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
     </div>
   )
 }
 
+// ── Creator data for search page ──────────────────────────────
+const CREATIVES = [
+  { name: 'Emi Chen',      handle: '@snapsbyemi',   role: 'Wedding Photographer', location: 'Los Angeles', price: '$250', rating: '5.0', bookings: 89,  color: '#D4C4A8', photos: ['/zoe-portfolio/emi-1.jpg','/zoe-portfolio/emi-6.jpg','/zoe-portfolio/emi-7.jpg'], isEmi: true },
+  { name: 'Mia Torres',    handle: '@mia.creates',  role: 'Content Creator',      location: 'New York',    price: '$150', rating: '4.9', bookings: 64,  color: '#E8C8B4', photos: null },
+  { name: 'Dre Park',      handle: '@dre.visuals',  role: 'Videographer',         location: 'Los Angeles', price: '$300', rating: '4.8', bookings: 112, color: '#B8C8E0', photos: null },
+  { name: 'Leila Santos',  handle: '@leilashoots',  role: 'Photographer',         location: 'Miami',       price: '$200', rating: '5.0', bookings: 47,  color: '#C0D8C0', photos: null },
+  { name: 'Nova Kim',      handle: '@nova.studio',  role: 'Creative Director',    location: 'Los Angeles', price: '$400', rating: '4.9', bookings: 38,  color: '#C8B8E0', photos: null },
+  { name: 'Arlo Vega',     handle: '@arlovega',     role: 'Event Photographer',   location: 'Austin',      price: '$180', rating: '4.7', bookings: 55,  color: '#D8C8A8', photos: null },
+]
+
+const CATEGORIES = ['All', 'Photography', 'Video', 'Content', 'Events', 'Styling']
+
+// ── Chat messages ─────────────────────────────────────────────
+const CHAT_MSGS = [
+  { from: 'them', text: 'Hi! Thanks for reaching out 🌸 What kind of shoot are you thinking?' },
+  { from: 'me',   text: 'Hi Emi! I love your portfolio. I\'m planning a wedding in Malibu on June 22nd.' },
+  { from: 'them', text: 'Malibu in June sounds absolutely beautiful ✨ Are you interested in half day or full day coverage?' },
+  { from: 'me',   text: 'Probably full day. What\'s included?' },
+  { from: 'them', text: '300+ edited photos, online gallery, and print release. I also do a quick preview gallery within 48 hours 📸' },
+  { from: 'me',   text: 'That sounds perfect. Is June 22nd available?' },
+  { from: 'them', text: 'Yes! June 22nd is open. Want me to send over a booking request? 🎉' },
+  { from: 'me',   text: 'Yes please!' },
+  { from: 'them', text: 'Done! I just sent the booking request. Can\'t wait to capture your day 💫' },
+]
+
 // ── Interactive phone ─────────────────────────────────────────
 function InteractivePhone() {
-  const [activeTab, setActiveTab]     = useState('Portfolio')
-  const [screen, setScreen]           = useState('profile') // profile | checkout | confirmation | review
-  const [selectedService, setService] = useState(null)
-  const [selectedReview, setReview]   = useState(null)
-  const [selectedImg, setSelectedImg] = useState(null)
-  const [bookDate, setBookDate]       = useState('Jun 22, 2026')
-  const feedRef = useRef(null)
+  const [activeTab,      setActiveTab]     = useState('Portfolio')
+  const [screen,         setScreen]        = useState('profile')
+  const [selectedService,setService]       = useState(null)
+  const [selectedReview, setReview]        = useState(null)
+  const [selectedImg,    setSelectedImg]   = useState(null)
+  const [bookDate,       setBookDate]      = useState('Jun 22, 2026')
+  const [catFilter,      setCatFilter]     = useState('All')
+  const [chatInput,      setChatInput]     = useState('')
+  const [chatMsgs,       setChatMsgs]      = useState(CHAT_MSGS.slice(0, 5))
+  const chatEndRef = useRef(null)
 
   const portfolioImgs = [
-    '/zoe-portfolio/emi-1.jpg', '/zoe-portfolio/emi-2.jpg', '/zoe-portfolio/emi-5.jpg',
-    '/zoe-portfolio/emi-3.jpg', '/zoe-portfolio/emi-4.jpg', '/zoe-portfolio/emi-7.jpg',
-    '/zoe-portfolio/emi-8.jpg', '/zoe-portfolio/emi-6.jpg', '/zoe-portfolio/emi-9.jpg',
+    '/zoe-portfolio/emi-1.jpg','/zoe-portfolio/emi-2.jpg','/zoe-portfolio/emi-5.jpg',
+    '/zoe-portfolio/emi-3.jpg','/zoe-portfolio/emi-4.jpg','/zoe-portfolio/emi-7.jpg',
+    '/zoe-portfolio/emi-8.jpg','/zoe-portfolio/emi-6.jpg','/zoe-portfolio/emi-9.jpg',
   ]
-
   const postMeta = [
-    { tag: 'Wedding',   caption: 'Reception Evening',  likes: 47,  comments: 12 },
-    { tag: 'Candid',    caption: 'Pure Joy',           likes: 83,  comments: 21 },
-    { tag: 'Portrait',  caption: 'Behind the Lens',    likes: 74,  comments: 19 },
-    { tag: 'Candid',    caption: 'On the Run',         likes: 61,  comments: 8  },
-    { tag: 'Wedding',   caption: 'Champagne & Roses',  likes: 102, comments: 34 },
-    { tag: 'Romance',   caption: 'Kiss in the Rain',   likes: 95,  comments: 27 },
-    { tag: 'Editorial', caption: 'Sunset Drive',       likes: 88,  comments: 16 },
-    { tag: 'Romance',   caption: 'Rain & Romance',     likes: 138, comments: 45 },
-    { tag: 'Wedding',   caption: 'Getting Ready',      likes: 113, comments: 38 },
+    { tag: 'Wedding',   caption: 'Reception Evening', likes: 47,  comments: 12 },
+    { tag: 'Candid',    caption: 'Pure Joy',          likes: 83,  comments: 21 },
+    { tag: 'Portrait',  caption: 'Behind the Lens',   likes: 74,  comments: 19 },
+    { tag: 'Candid',    caption: 'On the Run',        likes: 61,  comments: 8  },
+    { tag: 'Wedding',   caption: 'Champagne & Roses', likes: 102, comments: 34 },
+    { tag: 'Romance',   caption: 'Kiss in the Rain',  likes: 95,  comments: 27 },
+    { tag: 'Editorial', caption: 'Sunset Drive',      likes: 88,  comments: 16 },
+    { tag: 'Romance',   caption: 'Rain & Romance',    likes: 138, comments: 45 },
+    { tag: 'Wedding',   caption: 'Getting Ready',     likes: 113, comments: 38 },
   ]
-
   const services = [
     { title: 'Half Day Coverage', price: '$250', unit: '/session', duration: '4 hours', desc: 'Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.', photos: '150+', delivery: '2 weeks' },
     { title: 'Full Day Coverage', price: '$450', unit: '/session', duration: '8 hours', desc: 'Full day from getting ready to reception. 300+ edited photos + online gallery & print release.', photos: '300+', delivery: '3 weeks' },
   ]
-
   const reviews = [
-    { name: 'Sofia R.',   handle: '@sofiareyes',  stars: 5, date: 'May 2026', text: 'Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!' },
-    { name: 'Marcus A.',  handle: '@marcusali',   stars: 5, date: 'Apr 2026', text: 'Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10.' },
-    { name: 'Priya K.',   handle: '@priyak',      stars: 5, date: 'Mar 2026', text: 'Every single photo is a work of art. She captured moments we didn\'t even notice were happening. Truly gifted.' },
-    { name: 'James L.',   handle: '@jamesl',      stars: 5, date: 'Feb 2026', text: 'Emi was calm, fun, and incredibly talented. Our whole wedding party loved her. The photos speak for themselves.' },
+    { name: 'Sofia R.',  handle: '@sofiareyes', stars: 5, date: 'May 2026', text: 'Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!' },
+    { name: 'Marcus A.', handle: '@marcusali',  stars: 5, date: 'Apr 2026', text: 'Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10.' },
+    { name: 'Priya K.',  handle: '@priyak',     stars: 5, date: 'Mar 2026', text: "Every single photo is a work of art. She captured moments we didn't even notice were happening. Truly gifted." },
+    { name: 'James L.',  handle: '@jamesl',     stars: 5, date: 'Feb 2026', text: 'Emi was calm, fun, and incredibly talented. Our whole wedding party loved her. The photos speak for themselves.' },
   ]
 
-  const goBack = () => { setScreen('profile'); setService(null); setReview(null); setSelectedImg(null) }
+  const goBack     = () => { setScreen('profile'); setService(null); setReview(null); setSelectedImg(null) }
+  const goToChat   = () => setScreen('chat')
+  const navActive  = screen === 'search' ? 'search' : screen === 'chat' ? 'chat' : 'profile'
 
-  // ── Image feed ────────────────────────────────────────────
+  const handleNav = (key) => {
+    if      (key === 'search')  setScreen('search')
+    else if (key === 'chat')    goToChat()
+    else                        { setScreen('profile'); setActiveTab('Portfolio') }
+  }
+
+  const sendChat = () => {
+    if (!chatInput.trim()) return
+    const next = [...chatMsgs, { from: 'me', text: chatInput }]
+    setChatMsgs(next)
+    setChatInput('')
+    // Auto-reply
+    const remaining = CHAT_MSGS.slice(next.length - 1)
+    if (remaining.length > 1 && remaining[1]?.from === 'them') {
+      setTimeout(() => setChatMsgs(m => [...m, remaining[1]]), 800)
+    }
+  }
+
+  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [chatMsgs, screen])
+
+  // ── Search / Discover ────────────────────────────────────
+  if (screen === 'search') {
+    return (
+      <PhoneShell>
+        <div style={{ padding: '4px 12px 8px', flexShrink: 0 }}>
+          <div style={{ fontSize: 14, fontWeight: 800, color: E, marginBottom: 8 }}>Explore</div>
+          <div style={{ background: 'white', borderRadius: 20, padding: '7px 12px', display: 'flex', alignItems: 'center', gap: 8, border: '1px solid rgba(44,26,14,0.08)' }}>
+            <Ico.Search style={{ width: 11, height: 11, color: 'rgba(44,26,14,0.35)' }} />
+            <span style={{ fontSize: 10, color: 'rgba(44,26,14,0.35)' }}>Search creatives, styles...</span>
+          </div>
+        </div>
+        {/* Category pills */}
+        <div style={{ padding: '0 12px 8px', display: 'flex', gap: 5, overflowX: 'auto', flexShrink: 0 }} className="no-scrollbar">
+          {CATEGORIES.map(c => (
+            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 11px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 9, fontWeight: 600, whiteSpace: 'nowrap', background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(44,26,14,0.55)', flexShrink: 0, border: `1px solid ${catFilter === c ? E : 'rgba(44,26,14,0.1)'}` }}>
+              {c}
+            </button>
+          ))}
+        </div>
+        {/* Creator list */}
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '0 12px 8px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ fontSize: 8, fontWeight: 700, color: 'rgba(44,26,14,0.4)', letterSpacing: '0.1em', marginBottom: 2 }}>TOP CREATIVES NEAR YOU</div>
+          {CREATIVES.map((cr, i) => (
+            <div key={i} onClick={() => setScreen('profile')} style={{ background: 'white', borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.07)', cursor: 'pointer' }}>
+              <div style={{ padding: '10px 12px', display: 'flex', gap: 10, alignItems: 'center' }}>
+                {/* Avatar */}
+                <div style={{ width: 38, height: 38, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, background: cr.color }}>
+                  {cr.isEmi && <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />}
+                  {!cr.isEmi && <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><span style={{ fontSize: 13, fontWeight: 700, color: E }}>{cr.name[0]}</span></div>}
+                </div>
+                {/* Info */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: E, lineHeight: 1.2 }}>{cr.name}</div>
+                  <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.45)', marginTop: 1 }}>{cr.role}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3 }}>
+                    <div style={{ display: 'flex', gap: 1 }}>{[0,1,2,3,4].map(j => <StarFilled key={j} size={7} />)}</div>
+                    <span style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.45)' }}>{cr.rating} · {cr.bookings} bookings</span>
+                  </div>
+                </div>
+                {/* Price + location */}
+                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: E }}>{cr.price}</div>
+                  <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 1 }}>{cr.location}</div>
+                </div>
+              </div>
+              {/* Mini photo strip */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 1.5, padding: '0 10px 10px' }}>
+                {[0,1,2].map(j => (
+                  <div key={j} style={{ aspectRatio: '4/3', borderRadius: 7, overflow: 'hidden', background: `${cr.color}99` }}>
+                    {cr.photos ? <img src={cr.photos[j]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} /> : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <BottomNav active={navActive} onNav={handleNav} />
+      </PhoneShell>
+    )
+  }
+
+  // ── Chat screen ──────────────────────────────────────────
+  if (screen === 'chat') {
+    return (
+      <PhoneShell>
+        {/* Header */}
+        <div style={{ padding: '4px 12px 8px', borderBottom: '1px solid rgba(44,26,14,0.07)', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0, background: 'white' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
+          </button>
+          <EmiAv size={28} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
+            <div style={{ fontSize: 8, color: '#1A5A48', fontWeight: 600 }}>● Active now</div>
+          </div>
+          <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(44,26,14,0.3)' }} />
+        </div>
+        {/* Messages */}
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
+          {chatMsgs.map((msg, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: msg.from === 'me' ? 'flex-end' : 'flex-start', gap: 5, alignItems: 'flex-end' }}>
+              {msg.from === 'them' && <EmiAv size={20} />}
+              <div style={{
+                maxWidth: '75%', padding: '7px 10px', borderRadius: msg.from === 'me' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
+                background: msg.from === 'me' ? E : 'white',
+                color: msg.from === 'me' ? C : E,
+                fontSize: 9.5, lineHeight: 1.45,
+                boxShadow: '0 1px 4px rgba(44,26,14,0.08)',
+              }}>{msg.text}</div>
+            </div>
+          ))}
+          <div ref={chatEndRef} />
+        </div>
+        {/* Input */}
+        <div style={{ padding: '8px 10px 10px', borderTop: '1px solid rgba(44,26,14,0.07)', background: 'white', display: 'flex', gap: 7, alignItems: 'center', flexShrink: 0 }}>
+          <div style={{ flex: 1, background: '#F0E8DC', borderRadius: 20, padding: '6px 12px', display: 'flex', alignItems: 'center' }}>
+            <input
+              value={chatInput}
+              onChange={e => setChatInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && sendChat()}
+              placeholder="Message Emi..."
+              style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: 9.5, color: E, width: '100%', fontFamily: 'inherit' }}
+            />
+          </div>
+          <button onClick={sendChat} style={{ width: 28, height: 28, borderRadius: '50%', background: E, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Ico.Send style={{ width: 11, height: 11, color: C }} />
+          </button>
+        </div>
+        <BottomNav active={navActive} onNav={handleNav} />
+      </PhoneShell>
+    )
+  }
+
+  // ── Image feed ───────────────────────────────────────────
   if (screen === 'imagefeed') {
-    const postRefs = {}
     return (
       <PhoneShell>
         <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
@@ -139,16 +296,15 @@ function InteractivePhone() {
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
         </div>
         <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
-          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }) } }}>
+          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }) }}}>
           {postMeta.map((post, i) => (
             <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
-              <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <Av size={22} />
+              <div style={{ padding: '6px 10px', display: 'flex', gap: 6, alignItems: 'center' }}>
+                <EmiAv size={22} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 10, color: E }}>Emi Chen</div>
                   <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>Los Angeles</div>
                 </div>
-                <svg viewBox="0 0 24 24" fill={E} style={{ width: 13, height: 13, opacity: 0.25 }}><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
               </div>
               <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D4C4A8' }}>
                 <img src={portfolioImgs[i]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
@@ -164,23 +320,22 @@ function InteractivePhone() {
                     <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.comments}</span>
                   </div>
                 </div>
-                <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="1.8" style={{ width: 12, height: 12 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               </div>
               <div style={{ padding: '0 10px 8px' }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
-                  <Ico.Bolt style={{ width: 6, height: 6, color: '#7A3A10' }} /> {post.tag}
+                  {post.tag}
                 </div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{post.caption}</div>
               </div>
             </div>
           ))}
         </div>
-        <BottomNav active="profile" />
+        <BottomNav active="profile" onNav={handleNav} />
       </PhoneShell>
     )
   }
 
-  // ── Checkout screen ───────────────────────────────────────
+  // ── Checkout ─────────────────────────────────────────────
   if (screen === 'checkout' && selectedService) {
     const s = selectedService
     return (
@@ -191,21 +346,16 @@ function InteractivePhone() {
           </button>
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Book Package</div>
         </div>
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: C, padding: '12px 12px' }}>
-          {/* Package summary card */}
-          <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 10 }}>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: C, padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 800, color: E }}>{s.title}</div>
-                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 3, color: 'rgba(44,26,14,0.5)' }}>
-                  <Ico.Clock style={{ width: 9, height: 9 }} />
-                  <span style={{ fontSize: 9 }}>{s.duration}</span>
+                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.5)' }}>
+                  <Ico.Clock style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9 }}>{s.duration}</span>
                 </div>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <span style={{ fontSize: 16, fontWeight: 800, color: E }}>{s.price}</span>
-                <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)' }}>{s.unit}</span>
-              </div>
+              <div><span style={{ fontSize: 16, fontWeight: 800, color: E }}>{s.price}</span><span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)' }}>{s.unit}</span></div>
             </div>
             <div style={{ borderTop: '1px solid rgba(44,26,14,0.07)', marginTop: 10, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 5 }}>
               {[`${s.photos} edited photos`, `Delivery in ${s.delivery}`, 'Online gallery + print release', 'Secure payment via Stripe'].map(item => (
@@ -216,39 +366,14 @@ function InteractivePhone() {
               ))}
             </div>
           </div>
-
-          {/* Creative */}
-          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 10, display: 'flex', gap: 10, alignItems: 'center' }}>
-            <Av size={32} />
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
-              <div style={{ display: 'flex', gap: 2, marginTop: 2 }}>
-                {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 8, height: 8 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
-                <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)', marginLeft: 2 }}>5.0 · 89 bookings</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Date */}
-          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 10 }}>
+          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
             <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 7 }}>SELECT DATE</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {['Jun 22', 'Jun 28', 'Jul 5', 'Jul 12'].map(d => (
-                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(44,26,14,0.1)'}`, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(44,26,14,0.6)', fontSize: 9, fontWeight: 600, cursor: 'pointer' }}>{d}</button>
+                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, cursor: 'pointer', fontSize: 9, fontWeight: 600, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(44,26,14,0.6)', border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(44,26,14,0.1)'}` }}>{d}</button>
               ))}
             </div>
           </div>
-
-          {/* Location */}
-          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
-            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 5 }}>LOCATION</div>
-            <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              <Ico.Map style={{ width: 11, height: 11, color: 'rgba(44,26,14,0.4)' }} />
-              <span style={{ fontSize: 10, color: E }}>Malibu, CA</span>
-            </div>
-          </div>
-
-          {/* Total + confirm */}
           <div style={{ background: E, borderRadius: 14, padding: '12px 14px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
               <span style={{ fontSize: 10, color: 'rgba(248,242,232,0.6)' }}>Total due</span>
@@ -259,12 +384,12 @@ function InteractivePhone() {
             </button>
           </div>
         </div>
-        <BottomNav active="profile" />
+        <BottomNav active="profile" onNav={handleNav} />
       </PhoneShell>
     )
   }
 
-  // ── Confirmation screen ───────────────────────────────────
+  // ── Confirmation ─────────────────────────────────────────
   if (screen === 'confirmation') {
     return (
       <PhoneShell>
@@ -274,8 +399,7 @@ function InteractivePhone() {
           </div>
           <div style={{ fontSize: 16, fontWeight: 800, color: E, textAlign: 'center', marginBottom: 6 }}>Booking Confirmed!</div>
           <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
-            {selectedService?.title} with Emi Chen<br />
-            {bookDate} · Malibu, CA
+            {selectedService?.title} with Emi Chen<br/>{bookDate} · Malibu, CA
           </div>
           <div style={{ background: 'white', borderRadius: 14, padding: '12px 16px', width: '100%', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
             {[['Package', selectedService?.title], ['Date', bookDate], ['Amount', selectedService?.price], ['Status', 'Confirmed ✓']].map(([k, v]) => (
@@ -285,16 +409,14 @@ function InteractivePhone() {
               </div>
             ))}
           </div>
-          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 28px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
-            Back to Profile
-          </button>
+          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 28px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>Back to Profile</button>
         </div>
-        <BottomNav active="profile" />
+        <BottomNav active="profile" onNav={handleNav} />
       </PhoneShell>
     )
   }
 
-  // ── Review detail ─────────────────────────────────────────
+  // ── Review detail ────────────────────────────────────────
   if (screen === 'review' && selectedReview) {
     const r = selectedReview
     return (
@@ -305,8 +427,7 @@ function InteractivePhone() {
           </button>
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Review</div>
         </div>
-        <div style={{ flex: 1, padding: '20px 16px', background: C, display: 'flex', flexDirection: 'column', gap: 14 }}>
-          {/* Reviewer */}
+        <div style={{ flex: 1, padding: '16px', background: C, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', border: '1px solid rgba(44,26,14,0.07)' }}>
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -317,44 +438,28 @@ function InteractivePhone() {
                 <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.4)' }}>{r.handle} · {r.date}</div>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: 2, marginBottom: 10 }}>
-              {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 11, height: 11 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
-            </div>
-            <div style={{ fontSize: 12, color: 'rgba(44,26,14,0.7)', lineHeight: 1.6 }}>"{r.text}"</div>
+            <div style={{ display: 'flex', gap: 2, marginBottom: 10 }}>{[0,1,2,3,4].map(i => <StarFilled key={i} size={11} />)}</div>
+            <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.7)', lineHeight: 1.6 }}>"{r.text}"</div>
           </div>
-          {/* About Emi */}
-          <div style={{ background: 'white', borderRadius: 16, padding: '12px 16px', border: '1px solid rgba(44,26,14,0.07)', display: 'flex', gap: 10, alignItems: 'center' }}>
-            <Av size={34} />
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
-              <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)', marginTop: 1 }}>5.0 ★ · 89 bookings · Los Angeles</div>
-            </div>
-          </div>
-          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer', width: '100%' }}>
-            Back to Profile
-          </button>
+          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer', width: '100%' }}>Back to Profile</button>
         </div>
-        <BottomNav active="profile" />
+        <BottomNav active="profile" onNav={handleNav} />
       </PhoneShell>
     )
   }
 
-  // ── Profile screen ────────────────────────────────────────
+  // ── Profile (default) ─────────────────────────────────────
   return (
     <PhoneShell>
-      {/* Header */}
-      <div style={{ padding: '4px 14px 8px', flexShrink: 0 }}>
+      <div style={{ padding: '2px 14px 6px', flexShrink: 0 }}>
         <div style={{ fontSize: 7.5, fontWeight: 700, letterSpacing: '0.24em', color: 'rgba(44,26,14,0.35)' }}>V I S I O N</div>
-        <div style={{ fontSize: 16, fontWeight: 800, color: E, lineHeight: 1.1 }}>@snapsbyemi</div>
+        <div style={{ fontSize: 16, fontWeight: 800, color: E }}>@snapsbyemi</div>
       </div>
-
-      {/* Scrollable profile content */}
       <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
-
-        {/* Avatar + stat cards */}
-        <div style={{ padding: '0 14px 10px', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 52, height: 52, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(44,26,14,0.12)', background: '#D4C4A8' }}>
-            <img src="/creators/emi-avatar.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
+        {/* Stats */}
+        <div style={{ padding: '0 14px 8px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 50, height: 50, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(44,26,14,0.12)', background: '#D4C4A8' }}>
+            <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />
           </div>
           <div style={{ display: 'flex', gap: 6, flex: 1 }}>
             {[['5.0 ★', 'RATING'], ['89', 'BOOKED']].map(([v, l]) => (
@@ -365,43 +470,33 @@ function InteractivePhone() {
             ))}
           </div>
         </div>
-
-        {/* Name + tag + location + bio */}
+        {/* Bio */}
         <div style={{ padding: '0 14px 8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
             <span style={{ fontSize: 14, fontWeight: 800, color: E }}>Emi</span>
             <span style={{ background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(44,26,14,0.45)', marginBottom: 4 }}>
-            <Ico.Map style={{ width: 9, height: 9 }} />
-            <span style={{ fontSize: 9.5 }}>Los Angeles</span>
+            <Ico.Map style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9.5 }}>Los Angeles</span>
           </div>
           <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
         </div>
-
-        {/* Message button */}
-        <div style={{ padding: '0 14px 10px' }}>
-          <div style={{ background: '#EFE5D8', borderRadius: 22, padding: '8px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)' }}>
+        {/* Message button — clickable */}
+        <div style={{ padding: '0 14px 8px' }}>
+          <button onClick={goToChat} style={{ width: '100%', background: '#EFE5D8', borderRadius: 22, padding: '8px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)', cursor: 'pointer' }}>
             <Ico.Msg style={{ width: 10, height: 10, color: E }} />
             <span style={{ fontSize: 10.5, fontWeight: 700, color: E }}>Message Emi Chen</span>
-          </div>
+          </button>
         </div>
-
         {/* Tabs */}
         <div style={{ padding: '0 14px 0', display: 'flex', gap: 5 }}>
           {[['Portfolio', Ico.Eye], ['Services', Ico.Bolt], ['Reviews', Ico.Star]].map(([label, Icon]) => (
-            <button key={label} onClick={() => setActiveTab(label)} style={{
-              display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 999, border: 'none', cursor: 'pointer',
-              background: activeTab === label ? E : 'transparent',
-              color: activeTab === label ? C : 'rgba(44,26,14,0.45)',
-              fontSize: 9.5, fontWeight: activeTab === label ? 700 : 500,
-            }}>
+            <button key={label} onClick={() => setActiveTab(label)} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 999, border: 'none', cursor: 'pointer', background: activeTab === label ? E : 'transparent', color: activeTab === label ? C : 'rgba(44,26,14,0.45)', fontSize: 9.5, fontWeight: activeTab === label ? 700 : 500 }}>
               <Icon style={{ width: 9, height: 9 }} /> {label}
             </button>
           ))}
         </div>
-
-        {/* Tab content */}
+        {/* Portfolio */}
         {activeTab === 'Portfolio' && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2, marginTop: 8 }}>
             {portfolioImgs.map((src, i) => (
@@ -411,17 +506,16 @@ function InteractivePhone() {
             ))}
           </div>
         )}
-
+        {/* Services */}
         {activeTab === 'Services' && (
           <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {services.map((s) => (
+            {services.map(s => (
               <div key={s.title} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                   <div>
                     <div style={{ fontSize: 11, fontWeight: 800, color: E }}>{s.title}</div>
                     <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.45)' }}>
-                      <Ico.Clock style={{ width: 8, height: 8 }} />
-                      <span style={{ fontSize: 8.5 }}>{s.duration}</span>
+                      <Ico.Clock style={{ width: 8, height: 8 }} /><span style={{ fontSize: 8.5 }}>{s.duration}</span>
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
@@ -437,30 +531,26 @@ function InteractivePhone() {
             ))}
           </div>
         )}
-
+        {/* Reviews */}
         {activeTab === 'Reviews' && (
           <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {/* Summary */}
             <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', display: 'flex', gap: 14, alignItems: 'center' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 24, fontWeight: 800, color: E }}>5.0</div>
-                <div style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
-                  {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 9, height: 9 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
-                </div>
+                <div style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>{[0,1,2,3,4].map(i => <StarFilled key={i} />)}</div>
                 <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 2 }}>89 reviews</div>
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {[5,4,3].map(n => (
                   <div key={n} style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
                     <span style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.45)', width: 6 }}>{n}</span>
-                    <div style={{ flex: 1, height: 4, background: '#EFE5D4', borderRadius: 999, overflow: 'hidden' }}>
-                      <div style={{ width: n === 5 ? '96%' : n === 4 ? '3%' : '1%', height: '100%', background: E, borderRadius: 999 }} />
+                    <div style={{ flex: 1, height: 4, background: '#EFE5D4', borderRadius: 999 }}>
+                      <div style={{ width: n===5?'96%':n===4?'3%':'1%', height: '100%', background: E, borderRadius: 999 }}/>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            {/* Individual reviews */}
             {reviews.map((r, i) => (
               <div key={i} onClick={() => { setReview(r); setScreen('review') }} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', cursor: 'pointer' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
@@ -473,9 +563,7 @@ function InteractivePhone() {
                       <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{r.date}</div>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: 1 }}>
-                    {[0,1,2,3,4].map(i => <svg key={i} viewBox="0 0 24 24" fill="#E8A030" style={{ width: 8, height: 8 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
-                  </div>
+                  <div style={{ display: 'flex', gap: 1 }}>{[0,1,2,3,4].map(j => <StarFilled key={j} size={8} />)}</div>
                 </div>
                 <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
                 <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.35)', marginTop: 5, fontWeight: 600 }}>Tap to read full review →</div>
@@ -483,20 +571,19 @@ function InteractivePhone() {
             ))}
           </div>
         )}
-
       </div>
-      <BottomNav active="profile" />
+      <BottomNav active={navActive} onNav={handleNav} />
     </PhoneShell>
   )
 }
 
-// ── Main page ─────────────────────────────────────────────────
+// ── Page ──────────────────────────────────────────────────────
 export default function DownloadPage() {
   const [installPrompt, setInstallPrompt] = useState(null)
-  const [installed, setInstalled]         = useState(false)
+  const [installed,     setInstalled]     = useState(false)
 
   useEffect(() => {
-    const handler = (e) => { e.preventDefault(); setInstallPrompt(e) }
+    const handler = e => { e.preventDefault(); setInstallPrompt(e) }
     window.addEventListener('beforeinstallprompt', handler)
     window.addEventListener('appinstalled', () => setInstalled(true))
     return () => window.removeEventListener('beforeinstallprompt', handler)
@@ -514,7 +601,7 @@ export default function DownloadPage() {
   }
 
   return (
-    <div style={{ background: '#F8F2E8', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: C, minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
 
       {/* Nav */}
       <header style={{ borderBottom: '1px solid rgba(44,26,14,0.08)', background: 'rgba(248,242,232,0.95)', backdropFilter: 'blur(8px)', position: 'sticky', top: 0, zIndex: 50 }}>
@@ -524,64 +611,57 @@ export default function DownloadPage() {
         </div>
       </header>
 
-      {/* Main */}
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '60px 24px' }}>
-
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(44,26,14,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
-        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 16 }}>
+        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 12 }}>
           Vision on your<br />home screen.
         </h1>
-        <p style={{ fontSize: 15, color: 'rgba(44,26,14,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 48 }}>
+        <p style={{ fontSize: 15, color: 'rgba(44,26,14,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
           Available on iPhone and Android. No App Store needed — install directly from your browser.
         </p>
 
-        {/* Phone + floating labels */}
-        <div style={{ position: 'relative', marginBottom: 48 }}>
+        {/* Download button — above the phone */}
+        <button
+          onClick={handleInstall}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: E, color: C, padding: '14px 30px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 700, boxShadow: '0 8px 30px rgba(44,26,14,0.2)', transition: 'opacity 0.15s', marginBottom: 10 }}
+          onMouseOver={e => e.currentTarget.style.opacity = '0.85'}
+          onMouseOut={e => e.currentTarget.style.opacity = '1'}
+        >
+          <Ico.Download style={{ width: 17, height: 17 }} />
+          {installed ? 'Installed ✓' : 'Download Vision'}
+        </button>
+        <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.4)', textAlign: 'center', marginBottom: 40 }}>
+          🍎 iPhone · 🤖 Android · 💻 Desktop &nbsp;—&nbsp; no app store required
+        </p>
 
-          {/* Left label */}
-          <div style={{ position: 'absolute', left: -140, top: '38%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none' }}>
-            <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '6px 14px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 12px rgba(44,26,14,0.08)' }}>
+        {/* Phone + floating labels */}
+        <div style={{ position: 'relative' }}>
+          {/* Left label — more space */}
+          <div style={{ position: 'absolute', left: -190, top: '38%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 12, pointerEvents: 'none' }}>
+            <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '7px 16px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(44,26,14,0.08)' }}>
               scroll to explore
             </div>
-            <svg width="48" height="20" viewBox="0 0 48 20" fill="none">
-              <path d="M2 14 Q 14 18 30 10 Q 38 6 46 7" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-              <path d="M41 3 L47 7 L40 10" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            <svg width="52" height="22" viewBox="0 0 52 22" fill="none">
+              <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+              <path d="M44 4 L50 8 L43 11" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
             </svg>
           </div>
-
-          {/* Right label */}
-          <div style={{ position: 'absolute', right: -150, top: '55%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none' }}>
-            <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ transform: 'scaleX(-1)' }}>
-              <path d="M2 14 Q 14 18 30 10 Q 38 6 46 7" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-              <path d="M41 3 L47 7 L40 10" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          {/* Right label — more space */}
+          <div style={{ position: 'absolute', right: -195, top: '55%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 12, pointerEvents: 'none' }}>
+            <svg width="52" height="22" viewBox="0 0 52 22" fill="none" style={{ transform: 'scaleX(-1)' }}>
+              <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+              <path d="M44 4 L50 8 L43 11" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
             </svg>
-            <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 16, padding: '9px 16px', boxShadow: '0 2px 12px rgba(44,26,14,0.08)', display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 16, padding: '10px 18px', boxShadow: '0 2px 14px rgba(44,26,14,0.08)', display: 'flex', flexDirection: 'column', gap: 3 }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: E, whiteSpace: 'nowrap' }}>interactive preview</div>
-              <div style={{ fontSize: 12, fontWeight: 400, color: 'rgba(44,26,14,0.45)', whiteSpace: 'nowrap' }}>tap &amp; scroll</div>
+              <div style={{ fontSize: 12, color: 'rgba(44,26,14,0.45)', whiteSpace: 'nowrap' }}>tap &amp; scroll</div>
             </div>
           </div>
 
           <InteractivePhone />
         </div>
-
-        {/* Download button */}
-        <button
-          onClick={handleInstall}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: E, color: C, padding: '15px 32px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 16, fontWeight: 700, boxShadow: '0 8px 30px rgba(44,26,14,0.2)', transition: 'opacity 0.15s', marginBottom: 16 }}
-          onMouseOver={e => e.currentTarget.style.opacity = '0.85'}
-          onMouseOut={e => e.currentTarget.style.opacity = '1'}
-        >
-          <Ico.Download style={{ width: 18, height: 18 }} />
-          {installed ? 'Installed ✓' : 'Download Vision'}
-        </button>
-
-        <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.4)', textAlign: 'center' }}>
-          🍎 iPhone · 🤖 Android · 💻 Desktop &nbsp;—&nbsp; no app store required
-        </p>
-
       </main>
 
-      {/* Footer */}
       <footer style={{ borderTop: '1px solid rgba(44,26,14,0.08)', padding: '20px 24px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
           <span style={{ fontSize: 11, color: 'rgba(44,26,14,0.35)' }}>© {new Date().getFullYear()} Vision. All rights reserved.</span>
@@ -592,7 +672,6 @@ export default function DownloadPage() {
           </div>
         </div>
       </footer>
-
     </div>
   )
 }
