@@ -1815,91 +1815,6 @@ function SharedVision() {
   )
 }
 
-// ─── For Creatives ────────────────────────────────────────────
-function ForCreatives() {
-  const benefits = [
-    { Scene: SceneShowcase, t: "Showcase your aesthetic",       d: "Upload portfolio work with style tags. Your visual identity is your pitch.",                bg: "#FBE9D6", ic: "#7A3A10", Icon: Ico.Palette },
-    { Scene: ScenePackages, t: "List packages & set your price", d: "Create clear, bookable packages so clients know exactly what they are getting.",          bg: "#E6F0E6", ic: "#2A5A2A", Icon: Ico.Layers },
-    { Scene: SceneCalendar, t: "Control your availability",      d: "Set weekly slots and toggle instant booking. You decide when and how you work.",          bg: "#EDE6F5", ic: "#4A2A7A", Icon: Ico.Calendar },
-    { Scene: ScenePayment,  t: "Get paid directly",              d: "Stripe Connect deposits straight to your bank. Track earnings in one dashboard.",         bg: "#E2EEF6", ic: "#1A4A6A", Icon: Ico.Sparkle },
-  ]
-  return (
-    <section id="creatives" className="py-16 sm:py-24 bg-cream-100">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
-          {/* Left: 2x2 themed Pixar scene mosaic, matching the 4 benefits */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-4">
-              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "3/4", background: "#F4E4D0", padding: "12px" }}>
-                <SceneShowcase />
-              </div>
-              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "4/3", background: "#D8E0D0", padding: "12px" }}>
-                <ScenePackages />
-              </div>
-            </div>
-            <div className="flex flex-col gap-4 mt-8">
-              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "4/3", background: "#E0D4F0", padding: "12px" }}>
-                <SceneCalendar />
-              </div>
-              <div className="rounded-3xl overflow-hidden shadow-card" style={{ aspectRatio: "3/4", background: "#D4E0EC", padding: "12px" }}>
-                <ScenePayment />
-              </div>
-            </div>
-          </div>
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Creatives</span>
-            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">get paid for your creative vision.</h2>
-            <p className="mt-4 text-espresso/60 text-base leading-relaxed">Vision is built for creatives who are serious about their work. Build a profile that shows your aesthetic, set your packages, and let clients come to you.</p>
-            <div className="mt-8 space-y-5">
-              {benefits.map((b, i) => {
-                const IconC = b.Icon
-                return (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: b.bg }}>
-                      <IconC style={{ width: 18, height: 18, color: b.ic }} />
-                    </div>
-                    <div>
-                      <div className="font-bold text-sm text-espresso">{b.t}</div>
-                      <div className="text-sm text-espresso/60 mt-0.5 leading-relaxed">{b.d}</div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-            <a href={APP_URL} className="mt-9 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3.5 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
-              Become a Creative <Ico.Arrow className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-
-        {/* Platform trust cards — 4 unique ones not already in the benefits list above */}
-        <div className="mt-16 pt-14 border-t border-cream-200/60">
-          <p className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 mb-8 text-center">Built into every interaction</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { Icon: Ico.Eye,    t: "Filter by creatives, styles & ideas", d: "Search by style, not just job title.",          bg: "#FAF4D6", ic: "#6A5010" },
-              { Icon: Ico.Chat,   t: "In-app collaboration",                d: "Message, align, and confirm in one thread.",     bg: "#EDE6F5", ic: "#4A2A7A" },
-              { Icon: Ico.Star,   t: "Ratings & reviews",                   d: "Build trust through verified client feedback.",  bg: "#D6EEE8", ic: "#1A5A48" },
-              { Icon: Ico.Download, t: "No app store needed",               d: "Install directly from your browser, any device.",bg: "#E2EEF6", ic: "#1A4A6A" },
-            ].map((f, i) => {
-              const IconC = f.Icon
-              return (
-                <div key={i} className="bg-white rounded-3xl p-6 shadow-card border border-cream-200/50">
-                  <div className="w-11 h-11 rounded-2xl flex items-center justify-center" style={{ background: f.bg }}>
-                    <IconC style={{ width: 20, height: 20, color: f.ic }} />
-                  </div>
-                  <h3 className="mt-4 font-bold text-sm text-espresso">{f.t}</h3>
-                  <p className="mt-1.5 text-espresso/60 text-xs leading-relaxed">{f.d}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 
 // ─── Final CTA ────────────────────────────────────────────────
 function FinalCTA() {
@@ -2008,7 +1923,7 @@ export default function App() {
         <HowItWorks />
         <Categories />
         <SharedVision />
-        <ForCreatives />
+
         <FinalCTA />
       </main>
       <Footer />
