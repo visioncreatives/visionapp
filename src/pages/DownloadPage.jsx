@@ -660,6 +660,177 @@ export default function DownloadPage() {
 
           <InteractivePhone />
         </div>
+
+        {/* ── Install Instructions ─────────────────────────────── */}
+        <div style={{ marginTop: 80, width: '100%', maxWidth: 760 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(44,26,14,0.4)', textAlign: 'center', marginBottom: 8 }}>HOW TO INSTALL</p>
+          <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 800, color: E, textAlign: 'center', marginBottom: 48, letterSpacing: '-0.02em' }}>Add Vision to your home screen</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 32 }}>
+
+            {/* iOS */}
+            <div style={{ background: 'white', borderRadius: 24, padding: 28, border: '1.5px solid rgba(44,26,14,0.08)', boxShadow: '0 4px 24px rgba(44,26,14,0.06)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
+                {/* Apple logo */}
+                <div style={{ width: 34, height: 34, borderRadius: 10, background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg viewBox="0 0 24 24" fill="white" style={{ width: 18, height: 18 }}><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: E }}>iPhone / iPad</div>
+                  <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.45)' }}>Safari browser required</div>
+                </div>
+              </div>
+
+              {[
+                {
+                  n: 1,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+                  title: 'Open in Safari',
+                  desc: <>Go to <span style={{ fontWeight: 700, color: E }}>downloadvision.lovable.app</span> in Safari (not Chrome)</>
+                },
+                {
+                  n: 2,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>,
+                  title: 'Tap the Share button',
+                  desc: 'Tap the Share icon at the bottom of Safari — it looks like a box with an arrow pointing up'
+                },
+                {
+                  n: 3,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
+                  title: 'Add to Home Screen',
+                  desc: 'Scroll down in the share sheet and tap "Add to Home Screen"'
+                },
+                {
+                  n: 4,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><polyline points="20 6 9 17 4 12"/></svg>,
+                  title: 'Tap Add',
+                  desc: 'Confirm by tapping "Add" in the top right. Vision will appear on your home screen!'
+                },
+              ].map(({ n, icon, title, desc }) => (
+                <div key={n} style={{ display: 'flex', gap: 14, marginBottom: n < 4 ? 18 : 0, alignItems: 'flex-start' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'rgba(44,26,14,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    {icon}
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 3 }}>
+                      <span style={{ fontSize: 10, fontWeight: 800, background: E, color: C, borderRadius: 999, width: 16, height: 16, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: E }}>{title}</span>
+                    </div>
+                    <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.55)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* iOS visual hint */}
+              <div style={{ marginTop: 22, borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.1)' }}>
+                <div style={{ background: '#F2F2F7', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 7, background: 'linear-gradient(135deg,#6E40C9,#B04FC9)', flexShrink: 0 }}/>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: '#000' }}>Vision</div>
+                    <div style={{ fontSize: 10, color: 'rgba(0,0,0,0.45)' }}>downloadvision.lovable.app</div>
+                  </div>
+                </div>
+                <div style={{ background: 'white', padding: '10px 14px 6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(0,0,0,0.07)', paddingBottom: 10, marginBottom: 6 }}>
+                    <span style={{ fontSize: 11, color: '#007AFF', fontWeight: 600 }}>Add to Home Screen</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#007AFF" strokeWidth="2.2" strokeLinecap="round" style={{ width: 13, height: 13 }}><polyline points="9 18 15 12 9 6"/></svg>
+                  </div>
+                  <div style={{ display: 'flex', gap: 12, paddingBottom: 8 }}>
+                    {[
+                      { icon: '📤', label: 'Share' },
+                      { icon: '🔖', label: 'Bookmarks' },
+                      { icon: '📋', label: 'Copy Link' },
+                    ].map(({ icon, label }) => (
+                      <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                        <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>{icon}</div>
+                        <span style={{ fontSize: 9, color: 'rgba(0,0,0,0.5)' }}>{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Android */}
+            <div style={{ background: 'white', borderRadius: 24, padding: 28, border: '1.5px solid rgba(44,26,14,0.08)', boxShadow: '0 4px 24px rgba(44,26,14,0.06)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 22 }}>
+                {/* Android logo */}
+                <div style={{ width: 34, height: 34, borderRadius: 10, background: '#3DDC84', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg viewBox="0 0 24 24" fill="white" style={{ width: 20, height: 20 }}><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: E }}>Android</div>
+                  <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.45)' }}>Chrome browser required</div>
+                </div>
+              </div>
+
+              {[
+                {
+                  n: 1,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+                  title: 'Open in Chrome',
+                  desc: <>Go to <span style={{ fontWeight: 700, color: E }}>downloadvision.lovable.app</span> in Google Chrome</>
+                },
+                {
+                  n: 2,
+                  icon: <svg viewBox="0 0 24 24" fill={E} style={{ width: 18, height: 18 }}><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>,
+                  title: 'Tap the menu (⋮)',
+                  desc: 'Tap the three-dot menu in the top right corner of Chrome'
+                },
+                {
+                  n: 3,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
+                  title: 'Add to Home Screen',
+                  desc: 'Tap "Add to Home screen" or "Install app" from the menu'
+                },
+                {
+                  n: 4,
+                  icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}><polyline points="20 6 9 17 4 12"/></svg>,
+                  title: 'Tap Install',
+                  desc: 'Tap "Install" on the prompt. Vision will be added to your home screen instantly!'
+                },
+              ].map(({ n, icon, title, desc }) => (
+                <div key={n} style={{ display: 'flex', gap: 14, marginBottom: n < 4 ? 18 : 0, alignItems: 'flex-start' }}>
+                  <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'rgba(44,26,14,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    {icon}
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 3 }}>
+                      <span style={{ fontSize: 10, fontWeight: 800, background: E, color: C, borderRadius: 999, width: 16, height: 16, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: E }}>{title}</span>
+                    </div>
+                    <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.55)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Android visual hint */}
+              <div style={{ marginTop: 22, borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.1)', background: '#F8F9FA' }}>
+                <div style={{ padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid rgba(0,0,0,0.07)', background: 'white' }}>
+                  <div style={{ flex: 1, background: 'rgba(0,0,0,0.05)', borderRadius: 20, padding: '5px 12px', fontSize: 10, color: 'rgba(0,0,0,0.4)' }}>downloadvision.lovable.app</div>
+                  <svg viewBox="0 0 24 24" fill="rgba(0,0,0,0.4)" style={{ width: 18, height: 18, flexShrink: 0 }}><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+                </div>
+                <div style={{ padding: '8px 0' }}>
+                  {['New tab', 'New incognito tab', 'Add to Home screen', 'Install app', 'Bookmarks'].map((item, i) => (
+                    <div key={item} style={{ padding: '8px 18px', fontSize: 12, color: i === 2 || i === 3 ? '#1a73e8' : 'rgba(0,0,0,0.7)', fontWeight: i === 2 || i === 3 ? 700 : 400, background: i === 2 ? 'rgba(26,115,232,0.06)' : 'transparent' }}>
+                      {i === 2 ? '📲 ' : i === 3 ? '⬇️ ' : ''}{item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom tip */}
+          <div style={{ marginTop: 28, padding: '14px 20px', background: 'rgba(44,26,14,0.04)', borderRadius: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontSize: 20 }}>💡</span>
+            <p style={{ margin: 0, fontSize: 13, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>
+              <strong style={{ color: E }}>Already installed?</strong> Open Vision directly from your home screen. It runs like a native app — no browser bar, full screen.
+            </p>
+          </div>
+        </div>
+
       </main>
 
       <footer style={{ borderTop: '1px solid rgba(44,26,14,0.08)', padding: '20px 24px' }}>
