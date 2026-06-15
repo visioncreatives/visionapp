@@ -94,9 +94,9 @@ const CREATIVES = [
   { name: 'Leila', location: 'Miami',       img: '/creators/leila.jpg' },
   { name: 'Nova',  location: 'New York',    img: '/creators/nova.jpg'  },
   { name: 'Sage',  location: 'Austin',      img: '/creators/sage.jpg'  },
-  { name: 'Emi',   location: 'Los Angeles', img: '/creators/emi.jpg'   },
-  { name: 'Kai',   location: 'Seattle',     img: '/creators/kai.jpg'   },
-  { name: 'Zoe',   location: 'Nashville',   img: '/creators/zoe.jpg'   },
+  { name: 'Emi',    location: 'Los Angeles', img: '/creators/emi.jpg'    },
+  { name: 'Marcus', location: 'Houston',     img: '/creators/marcus.jpg' },
+  { name: 'Ava',    location: 'Nashville',   img: '/creators/ava.jpg'    },
 ]
 
 const CATEGORIES = ['For you', 'Photography', 'Videography', 'Content', 'Events', 'Styling']
