@@ -776,8 +776,19 @@ export default function DownloadPage() {
               </div>
             )}
 
+            {/* CTA button after steps */}
+            <a
+              href={APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 24, background: E, color: C, padding: '13px 0', borderRadius: 999, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(44,26,14,0.18)' }}
+            >
+              <Ico.Download style={{ width: 16, height: 16 }} />
+              Open Vision App
+            </a>
+
             {/* Tip */}
-            <div style={{ marginTop: 24, padding: '12px 16px', background: 'rgba(44,26,14,0.04)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(44,26,14,0.04)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 18 }}>💡</span>
               <p style={{ margin: 0, fontSize: 12, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>
                 <strong style={{ color: E }}>Already installed?</strong> Open from your home screen — it runs full-screen like a native app.
