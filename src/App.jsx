@@ -1873,12 +1873,11 @@ function HowItWorks() {
     <section id="how" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
-        {/* Header — label + heading left, toggle only shows on mobile here */}
-        <div className="mb-8 sm:mb-14 max-w-xl">
-          <div className="flex items-center justify-between gap-4 mb-2 sm:mb-3">
+        {/* Header — label left, toggle right, heading below */}
+        <div className="mb-8 sm:mb-14">
+          <div className="flex items-center justify-between gap-4 mb-3">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
-            {/* Mobile toggle — hidden on desktop (desktop toggle is above the phone) */}
-            <div className="lg:hidden inline-flex bg-cream-200/80 p-1 rounded-full">
+            <div className="inline-flex bg-cream-200/80 p-1 rounded-full">
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
                   className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
@@ -1886,7 +1885,7 @@ function HowItWorks() {
               ))}
             </div>
           </div>
-          <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">simple for both sides of a creative collaboration.</h2>
+          <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
         </div>
 
         {/* ── MOBILE layout: phone on top (small), steps below ── */}
@@ -1960,15 +1959,7 @@ function HowItWorks() {
               </div>
             ))}
           </div>
-          <div className="flex flex-col items-center gap-5">
-            {/* Desktop toggle — sits above the phone */}
-            <div className="inline-flex bg-cream-200/80 p-1 rounded-full self-start">
-              {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
-                <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
-                >{l}</button>
-              ))}
-            </div>
+          <div className="flex justify-center">
             <ActivePhone />
           </div>
         </div>
