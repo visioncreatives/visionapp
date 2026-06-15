@@ -641,26 +641,18 @@ export default function DownloadPage() {
         {/* ── Side-by-side: phone + install guide ── */}
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 64, width: '100%', maxWidth: 900, flexWrap: 'wrap', justifyContent: 'center' }}>
 
-          {/* Left: phone with floating labels */}
+          {/* Left: phone with single floating label */}
           <div style={{ position: 'relative', flexShrink: 0 }}>
-            <div style={{ position: 'absolute', left: -155, top: '38%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none' }}>
-              <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '7px 14px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(44,26,14,0.08)' }}>
-                scroll to explore
+            {/* Single label — left side, arrow in cream so it's visible against dark phone frame */}
+            <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
+              <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(44,26,14,0.1)' }}>
+                tap &amp; scroll to explore
               </div>
-              <svg width="44" height="20" viewBox="0 0 52 22" fill="none">
-                <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                <path d="M44 4 L50 8 L43 11" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              {/* Cream arrow with dark shadow so it reads over the phone frame */}
+              <svg width="48" height="22" viewBox="0 0 52 22" fill="none" style={{ filter: 'drop-shadow(0 1px 2px rgba(44,26,14,0.18))' }}>
+                <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={C} strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                <path d="M44 4 L50 8 L43 11" stroke={C} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-            </div>
-            <div style={{ position: 'absolute', right: -148, top: '60%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 10, pointerEvents: 'none' }}>
-              <svg width="44" height="20" viewBox="0 0 52 22" fill="none" style={{ transform: 'scaleX(-1)' }}>
-                <path d="M2 16 Q 16 20 32 11 Q 40 7 50 8" stroke={E} strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                <path d="M44 4 L50 8 L43 11" stroke={E} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              </svg>
-              <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 14, padding: '8px 14px', boxShadow: '0 2px 14px rgba(44,26,14,0.08)', display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap' }}>interactive preview</div>
-                <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.45)', whiteSpace: 'nowrap' }}>tap &amp; scroll</div>
-              </div>
             </div>
             <InteractivePhone />
           </div>
