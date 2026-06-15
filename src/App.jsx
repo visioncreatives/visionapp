@@ -1615,55 +1615,136 @@ function Categories() {
   )
 }
 
-// ─── Discover Creatives ───────────────────────────────────────
-function DiscoverSection() {
+
+// ─── How It Works ─────────────────────────────────────────────
+function HowItWorks() {
+  const [tab, setTab]           = useState("hire")
+  const [activeStep, setActiveStep] = useState(0)
+
+  const steps = {
+    hire: [
+      { n: "01", t: "Browse & discover",         d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.",         bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
+        tags: ["Filter by vibe", "Search by location", "Real portfolios"] },
+      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                             bg: "#E2EEF6", tc: "#1A4A6A", Phone: ProfilePhone,
+        tags: ["Portfolio gallery", "Honest pricing", "Check availability"] },
+      { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",     bg: "#E6F0E6", tc: "#2A5A2A", Phone: ChatPhone,
+        tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
+    ],
+    create: [
+      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.",         bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
+        tags: ["Upload your portfolio", "Set your packages", "Show your aesthetic"] },
+      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",            bg: "#EDE6F5", tc: "#4A2A7A", Phone: DiscoverPhone,
+        tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
+      { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",           bg: "#D6EEE8", tc: "#1A5A48", Phone: ProfilePhone,
+        tags: ["Auto payout ~2 days", "Track earnings", "Stripe Connect"] },
+    ],
+  }
+
+  const currentSteps = steps[tab]
+  const ActivePhone  = currentSteps[activeStep].Phone
+
   return (
-    <section id="discover" className="py-16 sm:py-24 bg-cream-100">
+    <section id="how" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="max-w-2xl mb-12">
-          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Discover</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">Find creatives for every kind of project.</h2>
-          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Browse by category, location, budget, and availability — with real portfolios and transparent pricing.</p>
+
+        {/* Header row */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-14">
+          <div className="max-w-xl">
+            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
+            <h2 className="mt-2 sm:mt-3 text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">simple for both sides of a creative collaboration.</h2>
+          </div>
+          <div className="inline-flex bg-cream-200/80 p-1 rounded-full self-start">
+            {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
+              <button
+                key={k}
+                onClick={() => { setTab(k); setActiveStep(0) }}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
+              >{l}</button>
+            ))}
+          </div>
         </div>
-        {/* Creator tiles — not clickable */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-          {DISCOVER_PROFILES.map((c, i) => (
-            <div key={i}>
-              <div className="relative overflow-hidden rounded-2xl bg-cream-200" style={{ aspectRatio: "3/4" }}>
-                <img
-                  src={`/creators/${c.img}.jpg`}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent)" }} />
-                {/* Name + location */}
-                <div className="absolute inset-x-0 bottom-0 p-2.5 text-white">
-                  <div className="font-bold text-xs leading-tight">{c.name.split(" ")[0]}</div>
-                  <div className="flex items-center gap-1 text-[10px] opacity-90 mt-0.5">
-                    <Ico.Map style={{ width: 8, height: 8 }} /> {c.loc}
+
+        {/* ── MOBILE layout: phone on top (small), steps below ── */}
+        <div className="lg:hidden">
+          {/* Phone — compact, centered */}
+          <div className="flex justify-center mb-5">
+            <div style={{ transform: 'scale(0.58)', transformOrigin: 'top center', height: 300 }}>
+              <ActivePhone />
+            </div>
+          </div>
+          {/* Steps — compact rows, no expanded description */}
+          <div className="flex flex-col gap-2">
+            {currentSteps.map((s, i) => (
+              <div
+                key={i}
+                onClick={() => setActiveStep(i)}
+                className={`rounded-2xl px-4 py-3 cursor-pointer transition-all border ${
+                  activeStep === i
+                    ? "bg-white shadow-card border-cream-200/50"
+                    : "border-transparent hover:bg-white/50"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="inline-block font-bold text-sm px-2.5 py-1 rounded-lg flex-shrink-0" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
+                  <h3 className="font-bold text-sm text-espresso leading-snug">{s.t}</h3>
+                  {activeStep === i && (
+                    <svg className="ml-auto flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  )}
+                </div>
+                {activeStep === i && (
+                  <div className="flex flex-wrap gap-1.5 mt-2 pl-10">
+                    {s.tags.map(tag => (
+                      <span key={tag} className="text-xs font-semibold px-2.5 py-0.5 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── DESKTOP layout: steps left, phone right ── */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-20 items-center">
+          <div className="flex flex-col gap-3">
+            {currentSteps.map((s, i) => (
+              <div
+                key={i}
+                onClick={() => setActiveStep(i)}
+                className={`rounded-2xl px-6 py-5 cursor-pointer transition-all border ${
+                  activeStep === i
+                    ? "bg-white shadow-card border-cream-200/50"
+                    : "border-transparent hover:bg-white/50"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <span className="inline-block font-bold text-base px-3 py-1.5 rounded-xl flex-shrink-0 mt-0.5" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-lg text-espresso">{s.t}</h3>
+                    {activeStep === i && (
+                      <>
+                        <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          {s.tags.map(tag => (
+                            <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
-              {/* Below the image, role + price line */}
-              <div className="mt-2 px-1 flex items-center justify-between">
-                <span className="text-[10px] text-espresso/55 font-medium truncate">{c.role}</span>
-                <span className="text-[11px] font-bold text-espresso">{c.price}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 text-center">
-          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3.5 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
-            Explore All Creatives <Ico.Arrow className="w-4 h-4" />
-          </a>
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <ActivePhone />
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-// ─── For Any Project ──────────────────────────────────────────
+// ─── Shared Vision ─────────────────────────────────────────────
 function SharedVision() {
   const projects = [
     { label: "A content shoot",     bg: "#F5E6C0", c: "#6A4A10" },
@@ -1734,378 +1815,6 @@ function SharedVision() {
   )
 }
 
-// ─── Booking Phone ────────────────────────────────────────────
-function BookingPhone() {
-  const [instant, setInstant] = useState(true)
-  return (
-    <PhoneShell>
-      {/* Top bar */}
-      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
-        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>Book a Creative</div>
-      </div>
-
-      {/* Order summary card */}
-      <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
-        <div style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 5 }}>ORDER SUMMARY</div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 3 }}>
-          <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Golden Hour Shoot</span>
-          <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>$180<span style={{ fontSize: 8, fontWeight: 500, color: "rgba(44,26,14,0.45)" }}>/session</span></span>
-        </div>
-        <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)", lineHeight: 1.4, marginBottom: 6 }}>Outdoor lifestyle shoot · 3 hours. Includes 100+ edited photos delivered within 5 days.</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-          <div style={{ width: 18, height: 18, borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><Avatar.Emi size={18} /></div>
-          <span style={{ fontSize: 8, color: "rgba(44,26,14,0.6)" }}>You're booking with <strong style={{ color: "#2C1A0E" }}>Emi Chen</strong></span>
-        </div>
-      </div>
-
-      {/* Instant Book toggle */}
-      <div style={{ margin: "0 10px 8px", background: instant ? "#2C1A0E" : "white", borderRadius: 12, padding: "9px 12px", border: "1px solid rgba(44,26,14,0.12)", flexShrink: 0, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between" }}
-           onClick={() => setInstant(v => !v)}>
-        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-          <span style={{ fontSize: 11 }}>⚡</span>
-          <div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: instant ? "#F8F2E8" : "#2C1A0E" }}>Instant Book</div>
-            <div style={{ fontSize: 7.5, color: instant ? "rgba(248,242,232,0.6)" : "rgba(44,26,14,0.45)" }}>Confirmed automatically</div>
-          </div>
-        </div>
-        <div style={{ width: 26, height: 14, borderRadius: 99, background: instant ? "#F8F2E8" : "rgba(44,26,14,0.15)", position: "relative", transition: "all 0.2s" }}>
-          <div style={{ position: "absolute", top: 2, left: instant ? 14 : 2, width: 10, height: 10, borderRadius: "50%", background: instant ? "#2C1A0E" : "#F8F2E8", transition: "left 0.2s" }} />
-        </div>
-      </div>
-
-      {/* Booking details */}
-      <div style={{ margin: "0 10px 6px", background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
-        <div style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 7 }}>BOOKING DETAILS</div>
-
-        <div style={{ fontSize: 7.5, fontWeight: 600, color: "#2C1A0E", marginBottom: 3 }}>Preferred date</div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#FAF8F4", borderRadius: 8, padding: "6px 9px", marginBottom: 7, border: "1px solid rgba(44,26,14,0.08)" }}>
-          <span style={{ fontSize: 9, color: "#2C1A0E" }}>Sat, Jun 14, 2026</span>
-          <Ico.Calendar style={{ width: 9, height: 9, color: "rgba(44,26,14,0.4)" }} />
-        </div>
-
-        <div style={{ display: "flex", gap: 6, marginBottom: 7 }}>
-          {[["From", "5:00 PM"], ["To", "8:00 PM"]].map(([l, v]) => (
-            <div key={l} style={{ flex: 1 }}>
-              <div style={{ fontSize: 7.5, fontWeight: 600, color: "#2C1A0E", marginBottom: 3 }}>{l}</div>
-              <div style={{ display: "flex", alignItems: "center", gap: 4, background: "#FAF8F4", borderRadius: 8, padding: "5px 8px", border: "1px solid rgba(44,26,14,0.08)" }}>
-                <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.35)" }} />
-                <span style={{ fontSize: 8.5, color: "#2C1A0E", flex: 1 }}>{v}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ fontSize: 7.5, fontWeight: 600, color: "#2C1A0E", marginBottom: 3 }}>Location</div>
-        <div style={{ background: "#FAF8F4", borderRadius: 8, padding: "6px 9px", marginBottom: 0, border: "1px solid rgba(44,26,14,0.08)" }}>
-          <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.35)" }}>Where should the project happen?</span>
-        </div>
-      </div>
-
-      {/* Price breakdown */}
-      <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "9px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
-        {[["Subtotal (3 hr × $60/hr)", "$180.00"]].map(([l, v]) => (
-          <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>{l}</span>
-            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>{v}</span>
-          </div>
-        ))}
-        <div style={{ borderTop: "1px solid rgba(44,26,14,0.07)", paddingTop: 5, display: "flex", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 9, fontWeight: 700, color: "#2C1A0E" }}>Estimated total</span>
-          <span style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E" }}>$189.00</span>
-        </div>
-      </div>
-
-      {/* CTA */}
-      <div style={{ margin: "0 10px", flexShrink: 0 }}>
-        <div style={{ background: "#2C1A0E", borderRadius: 18, padding: "8px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#F8F2E8", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
-          {instant ? "⚡" : <Ico.Check style={{ width: 10, height: 10 }} />}
-          {instant ? "Instant Book · $189 est." : "Request to Book · $189 est."}
-        </div>
-        <div style={{ textAlign: "center", fontSize: 7, color: "rgba(44,26,14,0.35)", marginTop: 4 }}>No payment is taken until confirmed.</div>
-      </div>
-
-      <BottomNav active="home" />
-    </PhoneShell>
-  )
-}
-
-// ─── Listing Phone ─────────────────────────────────────────────
-function ListingPhone() {
-  const [showModal, setShowModal] = useState(true)
-  return (
-    <PhoneShell>
-      {/* Top bar */}
-      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
-        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>Project Listing</div>
-      </div>
-
-      {/* Hero image placeholder */}
-      <div style={{ margin: "0 10px 8px", height: 80, borderRadius: 10, overflow: "hidden", flexShrink: 0, background: "#D6E4D8", position: "relative" }}>
-        <img src="/projects/content-shoot.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(44,26,14,0.45) 0%, transparent 60%)" }} />
-      </div>
-
-      {/* Title + tags */}
-      <div style={{ padding: "0 12px 5px", flexShrink: 0 }}>
-        <div style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E", marginBottom: 5 }}>Summer Campaign Shoot</div>
-        <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 5 }}>
-          {[["Active","#D6EEE8","#1A5A48"], ["$200 budget","#FBE9D6","#7A3A10"], ["✦ Editorial","#EDE6F5","#4A2A7A"]].map(([l,bg,c]) => (
-            <span key={l} style={{ fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 600, background: bg, color: c }}>{l}</span>
-          ))}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 7.5, color: "rgba(44,26,14,0.5)" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 2 }}><Ico.Map style={{ width: 7, height: 7 }} /> Brooklyn, NY</span>
-          <span style={{ display: "flex", alignItems: "center", gap: 2 }}><Ico.Calendar style={{ width: 7, height: 7 }} /> Jun 20 · 10AM–1PM</span>
-        </div>
-      </div>
-
-      {/* About + Notes */}
-      <div style={{ padding: "0 10px", display: "flex", flexDirection: "column", gap: 5, flexShrink: 0 }}>
-        {[["ABOUT", "Looking for a photographer for a summer clothing campaign. Clean, bright, editorial feel."], ["NOTES", "3–4 looks. Bring your own equipment. Final selects due within 1 week."]].map(([h, t]) => (
-          <div key={h} style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.06)" }}>
-            <div style={{ fontSize: 6, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.35)", marginBottom: 3 }}>{h}</div>
-            <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.7)", lineHeight: 1.35 }}>{t}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Apply button */}
-      <div style={{ padding: "8px 10px 4px", flexShrink: 0 }}>
-        <div onClick={() => setShowModal(true)} style={{ background: "#2C1A0E", borderRadius: 16, padding: "7px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#F8F2E8", cursor: "pointer" }}>Apply</div>
-      </div>
-
-      {/* Apply modal overlay */}
-      {showModal && (
-        <div style={{ position: "absolute", inset: 0, background: "rgba(44,26,14,0.45)", borderRadius: "inherit", display: "flex", alignItems: "flex-end", zIndex: 10 }}>
-          <div style={{ width: "100%", background: "#FAF8F4", borderRadius: "16px 16px 0 0", padding: "14px 14px 16px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-              <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Apply to listing</span>
-              <span onClick={() => setShowModal(false)} style={{ cursor: "pointer", fontSize: 14, color: "rgba(44,26,14,0.4)", lineHeight: 1 }}>×</span>
-            </div>
-            <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", marginBottom: 7, border: "1px solid rgba(44,26,14,0.08)" }}>
-              <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.35)", lineHeight: 1.4 }}>Introduce yourself and your approach...</div>
-            </div>
-            <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", marginBottom: 10, border: "1px solid rgba(44,26,14,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.35)" }}>Proposed price ($)</span>
-              <Ico.Arrow style={{ width: 9, height: 9, color: "rgba(44,26,14,0.3)", transform: "rotate(90deg)" }} />
-            </div>
-            <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "7px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#F8F2E8" }}>Send application</div>
-          </div>
-        </div>
-      )}
-
-      <BottomNav active="home" />
-    </PhoneShell>
-  )
-}
-
-// ─── Payouts Phone ─────────────────────────────────────────────
-function PayoutsPhone() {
-  return (
-    <PhoneShell>
-      {/* Top bar */}
-      <div style={{ padding: "4px 12px 8px", flexShrink: 0 }}>
-        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-        <div style={{ fontSize: 13, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>Payouts</div>
-        <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.45)", marginTop: 1 }}>Track your earnings and withdraw to your bank.</div>
-      </div>
-
-      {/* Balance card */}
-      <div style={{ margin: "0 10px 8px", background: "#2C1A0E", borderRadius: 14, padding: "12px 14px", flexShrink: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 4 }}>
-          <Ico.Download style={{ width: 9, height: 9, color: "rgba(248,242,232,0.6)" }} />
-          <span style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(248,242,232,0.6)" }}>AVAILABLE BALANCE</span>
-        </div>
-        <div style={{ fontSize: 26, fontWeight: 800, color: "#F8F2E8", letterSpacing: "-0.02em", marginBottom: 4 }}>$840.00</div>
-        <div style={{ fontSize: 7.5, color: "rgba(248,242,232,0.5)", lineHeight: 1.4 }}>Funds paid out automatically ~2 days after each booking.</div>
-      </div>
-
-      {/* Pending / Lifetime */}
-      <div style={{ margin: "0 10px 8px", display: "flex", gap: 6, flexShrink: 0 }}>
-        {[["PENDING", "$0.00"], ["LIFETIME", "$1,140.00"]].map(([l, v]) => (
-          <div key={l} style={{ flex: 1, background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.06)" }}>
-            <div style={{ fontSize: 6, letterSpacing: "0.1em", fontWeight: 700, color: "rgba(44,26,14,0.35)", marginBottom: 3 }}>{l}</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Payout method */}
-      <div style={{ margin: "0 10px 8px", background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.06)", flexShrink: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-            <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#F0EBE0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Ico.Download style={{ width: 10, height: 10, color: "#2C1A0E" }} />
-            </div>
-            <div>
-              <div style={{ fontSize: 9, fontWeight: 700, color: "#2C1A0E" }}>Payout method</div>
-              <div style={{ fontSize: 7.5, color: "rgba(44,26,14,0.45)" }}>Stripe Bank ····4891</div>
-            </div>
-          </div>
-          <span style={{ fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, background: "#D6EEE8", color: "#1A5A48" }}>✓ Ready</span>
-        </div>
-      </div>
-
-      {/* Activity */}
-      <div style={{ margin: "0 10px", flexShrink: 0 }}>
-        <div style={{ fontSize: 6.5, letterSpacing: "0.12em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 6 }}>ACTIVITY</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-          {[
-            { name: "Sofia R.", date: "6/8/2026",  amt: "+$420.00" },
-            { name: "Alex M.",  date: "6/2/2026",  amt: "+$220.00" },
-            { name: "Jordan T.",date: "5/28/2026", amt: "+$200.00" },
-          ].map((r) => (
-            <div key={r.name} style={{ background: "white", borderRadius: 10, padding: "7px 10px", border: "1px solid rgba(44,26,14,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EFE5D4", flexShrink: 0 }} />
-                <div>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: "#2C1A0E" }}>{r.name}</div>
-                  <div style={{ fontSize: 7, color: "rgba(44,26,14,0.4)" }}>Paid out · {r.date}</div>
-                </div>
-              </div>
-              <span style={{ fontSize: 10, fontWeight: 700, color: "#1A5A48" }}>{r.amt}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <BottomNav active="profile" />
-    </PhoneShell>
-  )
-}
-
-// ─── How It Works ─────────────────────────────────────────────
-function HowItWorks() {
-  const [tab, setTab]           = useState("hire")
-  const [activeStep, setActiveStep] = useState(0)
-
-  const steps = {
-    hire: [
-      { n: "01", t: "Browse & discover",         d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.",         bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
-        tags: ["Filter by vibe", "Search by location", "Real portfolios"] },
-      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                             bg: "#E2EEF6", tc: "#1A4A6A", Phone: ProfilePhone,
-        tags: ["Portfolio gallery", "Honest pricing", "Check availability"] },
-      { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",     bg: "#E6F0E6", tc: "#2A5A2A", Phone: BookingPhone,
-        tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
-    ],
-    create: [
-      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.",         bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
-        tags: ["Upload your portfolio", "Set your packages", "Show your aesthetic"] },
-      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",            bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
-        tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
-      { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",           bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
-        tags: ["Auto payout ~2 days", "Track earnings", "Stripe Connect"] },
-    ],
-  }
-
-  const currentSteps = steps[tab]
-  const ActivePhone  = currentSteps[activeStep].Phone
-
-  return (
-    <section id="how" className="py-16 sm:py-24 bg-cream-100">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-
-        {/* Header row */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
-          <div className="max-w-xl">
-            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
-            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">simple for both sides of a creative collaboration.</h2>
-          </div>
-          <div className="inline-flex bg-cream-200/80 p-1 rounded-full self-start">
-            {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
-              <button
-                key={k}
-                onClick={() => { setTab(k); setActiveStep(0) }}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
-              >{l}</button>
-            ))}
-          </div>
-        </div>
-
-        {/* Two-col on desktop, stacked on mobile: steps first, then phone */}
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-20 lg:items-center">
-
-          {/* Clickable steps with feature tags — on top on mobile, left on desktop */}
-          <div className="flex flex-col gap-3 order-first lg:order-none">
-            {currentSteps.map((s, i) => (
-              <div
-                key={i}
-                onClick={() => setActiveStep(i)}
-                className={`rounded-2xl px-6 py-5 cursor-pointer transition-all border ${
-                  activeStep === i
-                    ? "bg-white shadow-card border-cream-200/50"
-                    : "border-transparent hover:bg-white/50"
-                }`}
-              >
-                <div className="flex items-start gap-4">
-                  <span className="inline-block font-bold text-base px-3 py-1.5 rounded-xl flex-shrink-0 mt-0.5" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg text-espresso">{s.t}</h3>
-                    {activeStep === i && (
-                      <>
-                        <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
-                        <div className="flex flex-wrap gap-2 mt-3">
-                          {s.tags.map(tag => (
-                            <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Phone mockup — visible on all screen sizes */}
-          <div className="flex justify-center order-last lg:order-none">
-            <div className="scale-75 sm:scale-90 md:scale-100 origin-top">
-              <ActivePhone />
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── App Showcase ─────────────────────────────────────────────
-function AppShowcase() {
-  const screens = [
-    { Phone: DiscoverPhone, label: "Discover Creatives", bg: "#E6F0E6", tc: "#2A5A2A" },
-    { Phone: ProfilePhone,  label: "View Profiles",      bg: "#FAF4D6", tc: "#6A5010" },
-    { Phone: ChatPhone,     label: "Collaborate & Book", bg: "#EDE6F5", tc: "#4A2A7A" },
-  ]
-  return (
-    <section className="py-16 sm:py-24 overflow-hidden" style={{ background: "#FDFAF5" }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="max-w-2xl mb-14">
-          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">The App</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">book & collaborate without the back-and-forth.</h2>
-          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Browse portfolios, send project requests, message in-app, and pay — all in one clean flow.</p>
-        </div>
-        {/* Horizontal scroll on mobile, row on sm+ */}
-        <div className="flex gap-8 overflow-x-auto pb-4 sm:pb-0 sm:justify-center -mx-5 px-5 sm:mx-0 sm:px-0 snap-x snap-mandatory sm:snap-none">
-          {screens.map((s, i) => {
-            const Phone = s.Phone
-            return (
-              <div key={i} className="flex flex-col items-center gap-4 flex-shrink-0 snap-center sm:flex-1">
-                <div className="scale-90 sm:scale-100 origin-top">
-                  <Phone />
-                </div>
-                <span style={{ background: s.bg, color: s.tc, fontSize: 12, fontWeight: 700, padding: "5px 16px", borderRadius: 999 }}>{s.label}</span>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ─── For Creatives ────────────────────────────────────────────
 function ForCreatives() {
   const benefits = [
@@ -2162,94 +1871,35 @@ function ForCreatives() {
             </a>
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
 
-// ─── Trust ────────────────────────────────────────────────────
-function TrustSection() {
-  const items = [
-    { Icon: Ico.Eye,      t: "Filter by creatives, styles & ideas", d: "Search by style, not just job title.",           bg: "#FAF4D6", ic: "#6A5010" },
-    { Icon: Ico.Layers,   t: "Clear packages & pricing",    d: "No DMs to get a rate. Everything upfront.",           bg: "#E2EEF6", ic: "#1A4A6A" },
-    { Icon: Ico.Calendar, t: "Real-time availability",      d: "See open slots and book without the wait.",           bg: "#E6F0E6", ic: "#2A5A2A" },
-    { Icon: Ico.Chat,     t: "In-app collaboration",        d: "Message, align, and confirm in one thread.",          bg: "#EDE6F5", ic: "#4A2A7A" },
-    { Icon: Ico.Sparkle,  t: "Stripe-secured payments",     d: "Safe checkout for clients, direct pay for creatives.",bg: "#FBE9E9", ic: "#7A2A2A" },
-    { Icon: Ico.Star,     t: "Ratings & reviews",           d: "Build trust through verified client feedback.",       bg: "#D6EEE8", ic: "#1A5A48" },
-    { Icon: Ico.User,     t: "Verified creative profiles",  d: "Real portfolios. Real people. Real work.",            bg: "#FBE9D6", ic: "#7A3A10" },
-    { Icon: Ico.Download, t: "PWA — no app store needed",   d: "Install directly from your browser, any device.",     bg: "#E2EEF6", ic: "#1A4A6A" },
-  ]
-  return (
-    <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">The Platform</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">built for the way creative work actually happens.</h2>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {items.map((f, i) => {
-            const IconC = f.Icon
-            return (
-              <div key={i} className="bg-white rounded-3xl p-6 shadow-card border border-cream-200/50 hover:-translate-y-1 transition-transform">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center" style={{ background: f.bg }}>
-                  <IconC style={{ width: 20, height: 20, color: f.ic }} />
+        {/* Platform trust cards — 4 unique ones not already in the benefits list above */}
+        <div className="mt-16 pt-14 border-t border-cream-200/60">
+          <p className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 mb-8 text-center">Built into every interaction</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { Icon: Ico.Eye,    t: "Filter by creatives, styles & ideas", d: "Search by style, not just job title.",          bg: "#FAF4D6", ic: "#6A5010" },
+              { Icon: Ico.Chat,   t: "In-app collaboration",                d: "Message, align, and confirm in one thread.",     bg: "#EDE6F5", ic: "#4A2A7A" },
+              { Icon: Ico.Star,   t: "Ratings & reviews",                   d: "Build trust through verified client feedback.",  bg: "#D6EEE8", ic: "#1A5A48" },
+              { Icon: Ico.Download, t: "No app store needed",               d: "Install directly from your browser, any device.",bg: "#E2EEF6", ic: "#1A4A6A" },
+            ].map((f, i) => {
+              const IconC = f.Icon
+              return (
+                <div key={i} className="bg-white rounded-3xl p-6 shadow-card border border-cream-200/50">
+                  <div className="w-11 h-11 rounded-2xl flex items-center justify-center" style={{ background: f.bg }}>
+                    <IconC style={{ width: 20, height: 20, color: f.ic }} />
+                  </div>
+                  <h3 className="mt-4 font-bold text-sm text-espresso">{f.t}</h3>
+                  <p className="mt-1.5 text-espresso/60 text-xs leading-relaxed">{f.d}</p>
                 </div>
-                <h3 className="mt-4 font-bold text-sm text-espresso">{f.t}</h3>
-                <p className="mt-1.5 text-espresso/60 text-xs leading-relaxed">{f.d}</p>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── PWA ──────────────────────────────────────────────────────
-function PWA() {
-  return (
-    <section id="download" className="py-16 sm:py-24 bg-cream-100">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="bg-espresso rounded-[2.5rem] p-8 sm:p-14 grid lg:grid-cols-2 gap-10 items-center relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10" style={{ background: "#F2C4A0", filter: "blur(60px)" }} />
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full opacity-10" style={{ background: "#B8C8E8", filter: "blur(60px)" }} />
-          <div className="relative">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "rgba(248,242,232,0.12)", color: "#F8F2E8" }}>
-              <Ico.Download style={{ width: 12, height: 12 }} /> Progressive Web App
-            </span>
-            <h2 className="text-cream-50 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">Vision lives in your pocket.</h2>
-            <p className="mt-5 text-cream-50/65 text-base leading-relaxed max-w-lg">Install Vision directly from your browser — no App Store, no friction. Add it to your home screen and it feels exactly like a native app.</p>
-            <a href="/download" className="mt-8 inline-flex items-center gap-2 bg-cream-50 text-espresso px-6 py-3.5 rounded-full font-semibold hover:bg-cream-100 transition-colors">
-              Install Vision App <Ico.Arrow className="w-4 h-4" />
-            </a>
-          </div>
-          <div className="flex justify-center lg:justify-end">
-            <div style={{ width: 160 }}>
-              <div style={{ background: "#3A2A1A", borderRadius: 32, padding: 7, boxShadow: "0 20px 40px rgba(0,0,0,0.4)" }}>
-                <div style={{ background: "#F8F2E8", borderRadius: 26, padding: 18, display: "flex", flexDirection: "column", alignItems: "center", minHeight: 270 }}>
-                  <div style={{ width: 50, height: 50, borderRadius: 14, background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
-                    <span style={{ color: "#F8F2E8", fontSize: 22, fontWeight: 800, letterSpacing: "0.05em" }}>V</span>
-                  </div>
-                  <p style={{ fontSize: 7, letterSpacing: "0.28em", fontWeight: 700, color: "#2C1A0E", marginBottom: 2 }}>V I S I O N</p>
-                  <p style={{ fontSize: 7, color: "rgba(44,26,14,0.5)", marginBottom: 16 }}>Creative Marketplace</p>
-                  <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 6 }}>
-                    {[100, 80, 60].map((w, i) => <div key={i} style={{ height: 6, background: "#EFE5D4", borderRadius: 8, width: `${w}%` }} />)}
-                  </div>
-                  <div style={{ marginTop: 16, display: "flex", gap: 8, width: "100%", justifyContent: "center" }}>
-                    {[Avatar.Emi, Avatar.Mia, Avatar.Dre].map((Av, i) => (
-                      <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #F8F2E8" }}><Av size={28} /></div>
-                    ))}
-                  </div>
-                  <button style={{ marginTop: 14, background: "#2C1A0E", color: "#F8F2E8", border: "none", borderRadius: 18, padding: "6px 18px", fontSize: 8, fontWeight: 700, cursor: "pointer" }}>Install App</button>
-                </div>
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
       </div>
     </section>
   )
 }
+
 
 // ─── Final CTA ────────────────────────────────────────────────
 function FinalCTA() {
@@ -2286,6 +1936,12 @@ function FinalCTA() {
           <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-cream-200 text-espresso px-8 py-4 rounded-full font-semibold hover:bg-cream-50 transition-colors text-base">
             Become a Creative
           </a>
+        </div>
+        <div className="mt-4 flex justify-center">
+          <Link to="/download" className="inline-flex items-center justify-center gap-2 text-espresso/60 hover:text-espresso text-sm font-medium transition-colors group">
+            <Ico.Download className="w-4 h-4 group-hover:text-espresso transition-colors" />
+            Install Vision App
+          </Link>
         </div>
         <div className="mt-10 flex justify-center items-center gap-3">
           <div className="flex -space-x-2">
@@ -2351,11 +2007,8 @@ export default function App() {
         <Hero />
         <HowItWorks />
         <Categories />
-        <DiscoverSection />
         <SharedVision />
-        <AppShowcase />
-        <TrustSection />
-        <PWA />
+        <ForCreatives />
         <FinalCTA />
       </main>
       <Footer />
