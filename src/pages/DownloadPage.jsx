@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-const APP_URL = 'https://photo-petal-palette.lovable.app'
+const APP_URL = 'https://downloadvision.lovable.app'
 const E = '#2C1A0E'
 const C = '#F8F2E8'
 
