@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // ============================================================
@@ -28,6 +28,12 @@ const Ico = {
   Film:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></svg>,
   Wand:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="m15 4-9 9 6 6 9-9-6-6ZM4 20l2-2M9 4l2 2M4 9l2 2M14 19l2 2M19 14l2 2"/></svg>,
   Layers:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="m12 2 10 6.5-10 6.5L2 8.5 12 2Z"/><path d="m20 13 2 1.5-10 6.5L2 14.5l2-1.5"/></svg>,
+  Back:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" {...p}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>,
+  Profile:  (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  Msg:      (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  Bolt:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  Clock:    (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+  Send:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>,
 }
 
 // ─── Realistic creator avatars ────────────────────────────────
@@ -520,6 +526,48 @@ function ArtTile({ bg, variant = 0, price, label, style = {} }) {
 // ─── Phone shell + bottom nav ─────────────────────────────────
 const PW = 260
 const PH = 520
+const E = '#2C1A0E'
+const C = '#F8F2E8'
+
+// ── Data for InteractivePhone ──────────────────────────────────
+const CREATIVES = [
+  { name: 'Mia',   location: 'Los Angeles', img: '/creators/mia.jpg'   },
+  { name: 'Diego', location: 'Chicago',     img: '/creators/diego.jpg' },
+  { name: 'Yumi',  location: 'Seoul',       img: '/creators/yumi.jpg'  },
+  { name: 'Ellie', location: 'Los Angeles', img: '/creators/ellie.jpg' },
+  { name: 'Luca',  location: 'Portland',    img: '/creators/luca.jpg'  },
+  { name: 'Dre',   location: 'Atlanta',     img: '/creators/dre.jpg'   },
+  { name: 'Leila', location: 'Miami',       img: '/creators/leila.jpg' },
+  { name: 'Nova',  location: 'New York',    img: '/creators/nova.jpg'  },
+  { name: 'Sage',  location: 'Austin',      img: '/creators/sage.jpg'  },
+  { name: 'Emi',   location: 'Los Angeles', img: '/creators/emi.jpg'   },
+  { name: 'Nia',   location: 'Houston',     img: '/creators/nia.jpg'   },
+  { name: 'Zara',  location: 'Nashville',   img: '/creators/zara.jpg'  },
+]
+
+const CATEGORIES = ['For you', 'Photography', 'Videography', 'Content', 'Events', 'Styling']
+
+const CHAT_MSGS = [
+  { from: 'them', text: 'Hi! Thanks for reaching out 🌸 What kind of shoot are you thinking?' },
+  { from: 'me',   text: 'Hi Emi! I love your portfolio. I\'m planning a wedding in Malibu on June 22nd.' },
+  { from: 'them', text: 'Malibu in June sounds absolutely beautiful ✨ Are you interested in half day or full day coverage?' },
+  { from: 'me',   text: 'Probably full day. What\'s included?' },
+  { from: 'them', text: '300+ edited photos, online gallery, and print release. I also do a quick preview gallery within 48 hours 📸' },
+  { from: 'me',   text: 'That sounds perfect. Is June 22nd available?' },
+  { from: 'them', text: 'Yes! June 22nd is open. Want me to send over a booking request? 🎉' },
+  { from: 'me',   text: 'Yes please!' },
+  { from: 'them', text: 'Done! I just sent the booking request. Can\'t wait to capture your day 💫' },
+]
+
+const StarFilled = ({ size = 9 }) => <svg viewBox="0 0 24 24" fill="#E8A030" style={{ width: size, height: size }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+
+function EmiAv({ size = 26 }) {
+  return (
+    <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D4C4A8', flexShrink: 0 }}>
+      <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
+    </div>
+  )
+}
 
 function PhoneShell({ children }) {
   return (
@@ -541,7 +589,7 @@ function PhoneShell({ children }) {
   )
 }
 
-function BottomNav({ active = "home" }) {
+function BottomNav({ active = "home", onNav }) {
   const items = [
     { k: "home",    I: Ico.Home,   l: "HOME" },
     { k: "search",  I: Ico.Search, l: "SEARCH" },
@@ -564,7 +612,7 @@ function BottomNav({ active = "home" }) {
         const on = active === it.k
         const Icon = it.I
         return (
-          <div key={it.k} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1, flex: 1 }}>
+          <div key={it.k} onClick={() => onNav?.(it.k)} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1, flex: 1, cursor: "pointer" }}>
             <Icon style={{ width: 16, height: 16, color: on ? "#2C1A0E" : "rgba(44,26,14,0.28)" }} />
             <span style={{ fontSize: 6, letterSpacing: "0.07em", color: on ? "#2C1A0E" : "rgba(44,26,14,0.28)", fontWeight: on ? 700 : 400 }}>{it.l}</span>
           </div>
@@ -962,345 +1010,460 @@ function FeedScroll({ startIndex, posts, imgs, c }) {
 
 // ─── HeroProfilePhone (fully interactive hero phone) ──────────
 function HeroProfilePhone() {
-  const c = CREATORS[0]
-  const [screen, setScreen] = useState("profile") // "profile" | "booking" | "chat" | "image"
-  const [activeTab, setActiveTab] = useState("Portfolio")
-  const [selectedImg, setSelectedImg] = useState(null)
-  const [instantBook, setInstantBook] = useState(true)
+  const [activeTab,      setActiveTab]     = useState('Portfolio')
+  const [screen,         setScreen]        = useState('profile')
+  const [selectedService,setService]       = useState(null)
+  const [selectedReview, setReview]        = useState(null)
+  const [selectedImg,    setSelectedImg]   = useState(null)
+  const [bookDate,       setBookDate]      = useState('Jun 22, 2026')
+  const [catFilter,      setCatFilter]     = useState('All')
+  const [chatInput,      setChatInput]     = useState('')
+  const [chatMsgs,       setChatMsgs]      = useState(CHAT_MSGS.slice(0, 5))
+  const chatEndRef = useRef(null)
 
   const portfolioImgs = [
-    "/zoe-portfolio/emi-1.jpg",
-    "/zoe-portfolio/emi-2.jpg",
-    "/zoe-portfolio/emi-3.jpg",
-    "/zoe-portfolio/emi-4.jpg",
-    "/zoe-portfolio/emi-5.jpg",
-    "/zoe-portfolio/emi-6.jpg",
-    "/zoe-portfolio/emi-7.jpg",
-    "/zoe-portfolio/emi-8.jpg",
-    "/zoe-portfolio/emi-9.jpg",
+    '/zoe-portfolio/emi-1.jpg','/zoe-portfolio/emi-2.jpg','/zoe-portfolio/emi-5.jpg',
+    '/zoe-portfolio/emi-3.jpg','/zoe-portfolio/emi-4.jpg','/zoe-portfolio/emi-7.jpg',
+    '/zoe-portfolio/emi-8.jpg','/zoe-portfolio/emi-6.jpg','/zoe-portfolio/emi-9.jpg',
   ]
-
+  const postMeta = [
+    { tag: 'Wedding',   caption: 'Reception Evening', likes: 47,  comments: 12 },
+    { tag: 'Candid',    caption: 'Pure Joy',          likes: 83,  comments: 21 },
+    { tag: 'Portrait',  caption: 'Behind the Lens',   likes: 74,  comments: 19 },
+    { tag: 'Candid',    caption: 'On the Run',        likes: 61,  comments: 8  },
+    { tag: 'Wedding',   caption: 'Champagne & Roses', likes: 102, comments: 34 },
+    { tag: 'Romance',   caption: 'Kiss in the Rain',  likes: 95,  comments: 27 },
+    { tag: 'Editorial', caption: 'Sunset Drive',      likes: 88,  comments: 16 },
+    { tag: 'Romance',   caption: 'Rain & Romance',    likes: 138, comments: 45 },
+    { tag: 'Wedding',   caption: 'Getting Ready',     likes: 113, comments: 38 },
+  ]
   const services = [
-    {
-      title: "Half Day Coverage",
-      price: "$250",
-      unit: "/session",
-      duration: "4 hours",
-      desc: "Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.",
-    },
-    {
-      title: "Full Day Coverage",
-      price: "$450",
-      unit: "/session",
-      duration: "8 hours",
-      desc: "Full day from getting ready to reception. 300+ edited photos + online gallery & print release.",
-    },
+    { title: 'Half Day Coverage', price: '$250', unit: '/session', duration: '4 hours', desc: 'Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.', photos: '150+', delivery: '2 weeks' },
+    { title: 'Full Day Coverage', price: '$450', unit: '/session', duration: '8 hours', desc: 'Full day from getting ready to reception. 300+ edited photos + online gallery & print release.', photos: '300+', delivery: '3 weeks' },
   ]
-
   const reviews = [
-    { name: "Sofia R.", handle: "@sofiareyes", stars: 5, text: "Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!" },
-    { name: "Marcus A.", handle: "@marcusali", stars: 5, text: "Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10." },
+    { name: 'Sofia R.',  handle: '@sofiareyes', stars: 5, date: 'May 2026', text: 'Emi made us feel so at ease — our photos came out absolutely stunning. Booked her again for our anniversary shoot!' },
+    { name: 'Marcus A.', handle: '@marcusali',  stars: 5, date: 'Apr 2026', text: 'Professional, creative, and so easy to work with. The gallery was delivered ahead of schedule. 10/10.' },
+    { name: 'Priya K.',  handle: '@priyak',     stars: 5, date: 'Mar 2026', text: "Every single photo is a work of art. She captured moments we didn't even notice were happening. Truly gifted." },
+    { name: 'James L.',  handle: '@jamesl',     stars: 5, date: 'Feb 2026', text: 'Emi was calm, fun, and incredibly talented. Our whole wedding party loved her. The photos speak for themselves.' },
   ]
 
-  const chatMsgs = [
-    { f: "me",   t: "Hi Emi! I saw your portfolio and I love your style." },
-    { f: "them", t: "Thank you so much! What kind of shoot are you thinking?" },
-    { f: "me",   t: "Wedding — June 22nd in Malibu. Half day package." },
-    { f: "them", t: "That sounds beautiful! I'm available June 22. Want to book the Half Day package?" },
-    { f: "me",   t: "Yes! Let's do it." },
-    { f: "them", t: "Booking confirmed! Can't wait to capture your day ✨" },
-  ]
+  const goBack     = () => { setScreen('profile'); setService(null); setReview(null); setSelectedImg(null) }
+  const goToChat   = () => setScreen('chat')
+  const navActive  = screen === 'search' ? 'search' : screen === 'chat' ? 'chat' : 'profile'
 
-  const goBack = () => { setScreen("profile"); setSelectedImg(null) }
+  const handleNav = (key) => {
+    if      (key === 'search')  setScreen('search')
+    else if (key === 'chat')    goToChat()
+    else                        { setScreen('profile'); setActiveTab('Portfolio') }
+  }
 
-  // ── IMAGE FEED SCREEN (Instagram-style continuous scroll) ──
-  if (screen === "image" && selectedImg !== null) {
-    const postMeta = [
-      { tag: "Wedding",   caption: "Reception Evening",   likes: 47,  comments: 12 },
-      { tag: "Candid",    caption: "Pure Joy",            likes: 83,  comments: 21 },
-      { tag: "Candid",    caption: "On the Run",          likes: 61,  comments: 8  },
-      { tag: "Wedding",   caption: "Champagne & Roses",   likes: 102, comments: 34 },
-      { tag: "Portrait",  caption: "Behind the Lens",     likes: 74,  comments: 19 },
-      { tag: "Romance",   caption: "Rain & Romance",      likes: 138, comments: 45 },
-      { tag: "Romance",   caption: "Kiss in the Rain",    likes: 95,  comments: 27 },
-      { tag: "Editorial", caption: "Sunset Drive",        likes: 88,  comments: 16 },
-      { tag: "Wedding",   caption: "Getting Ready",       likes: 113, comments: 38 },
-    ]
+  const sendChat = () => {
+    if (!chatInput.trim()) return
+    const next = [...chatMsgs, { from: 'me', text: chatInput }]
+    setChatMsgs(next)
+    setChatInput('')
+    const remaining = CHAT_MSGS.slice(next.length - 1)
+    if (remaining.length > 1 && remaining[1]?.from === 'them') {
+      setTimeout(() => setChatMsgs(m => [...m, remaining[1]]), 800)
+    }
+  }
+
+  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [chatMsgs, screen])
+
+  // ── Search / Discover ────────────────────────────────────
+  if (screen === 'search') {
     return (
       <PhoneShell>
-        {/* Sticky header */}
-        <div style={{ padding: "6px 10px", display: "flex", alignItems: "center", flexShrink: 0, borderBottom: "1px solid rgba(44,26,14,0.07)", background: "white", zIndex: 2, position: "relative" }}>
-          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", position: "absolute", left: 10 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-          </button>
-          <div style={{ flex: 1, textAlign: "center", fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Portfolio</div>
+        {/* Header */}
+        <div style={{ padding: '4px 12px 6px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexShrink: 0 }}>
+          <div>
+            <div style={{ fontSize: 8, fontWeight: 800, color: E, letterSpacing: '0.22em', marginBottom: 1 }}>V I S I O N</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: E, lineHeight: 1.25 }}>find creatives that<br/>match your vision</div>
+          </div>
+          <div style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(44,26,14,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2 }}>
+            <Ico.Search style={{ width: 12, height: 12, color: E }} />
+          </div>
         </div>
-
-        {/* Scrollable feed */}
-        <FeedScroll startIndex={selectedImg} posts={postMeta} imgs={portfolioImgs} c={c} />
-
-        <BottomNav active="profile" />
+        {/* Category pills */}
+        <div style={{ padding: '0 12px 7px', display: 'flex', gap: 5, overflowX: 'auto', flexShrink: 0 }} className="no-scrollbar">
+          {CATEGORIES.map(c => (
+            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 10px', borderRadius: 999, cursor: 'pointer', fontSize: 8.5, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0, border: `1.5px solid ${catFilter === c ? E : 'rgba(44,26,14,0.13)'}`, background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(44,26,14,0.6)' }}>
+              {c}
+            </button>
+          ))}
+        </div>
+        {/* Scrollable grid */}
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '0 12px 8px' }}>
+          {/* Section label */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: E }}>Discover creatives</span>
+            <span style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)', fontWeight: 500 }}>See all →</span>
+          </div>
+          {/* 3-col photo grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 4 }}>
+            {CREATIVES.map((cr, i) => (
+              <div key={i} onClick={() => setScreen('profile')} style={{ borderRadius: 10, overflow: 'hidden', cursor: 'pointer', position: 'relative', aspectRatio: '3/4', background: '#C8B8A8' }}>
+                <img src={cr.img} alt={cr.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+                {/* Gradient overlay */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 50%)' }} />
+                {/* Name + location */}
+                <div style={{ position: 'absolute', bottom: 5, left: 6, right: 4 }}>
+                  <div style={{ fontSize: 8.5, fontWeight: 700, color: 'white', lineHeight: 1.2 }}>{cr.name}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: 1 }}>
+                    <Ico.Map style={{ width: 6, height: 6, color: 'rgba(255,255,255,0.8)' }} />
+                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.8)', fontWeight: 400 }}>{cr.location}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <BottomNav active="search" onNav={handleNav} />
       </PhoneShell>
     )
   }
 
-  // ── CHAT SCREEN ──
-  if (screen === "chat") {
+  // ── Chat screen ──────────────────────────────────────────
+  if (screen === 'chat') {
     return (
       <PhoneShell>
         {/* Header */}
-        <div style={{ padding: "6px 12px 8px", borderBottom: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <div style={{ padding: '4px 12px 8px', borderBottom: '1px solid rgba(44,26,14,0.07)', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0, background: 'white' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
           </button>
-          <div style={{ borderRadius: "50%", overflow: "hidden" }}><c.Av size={26} /></div>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{c.name}</div>
-            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>Wedding Photographer · {c.location}</div>
+          <EmiAv size={28} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
+            <div style={{ fontSize: 8, color: '#1A5A48', fontWeight: 600 }}>● Active now</div>
           </div>
+          <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(44,26,14,0.3)' }} />
         </div>
         {/* Messages */}
-        <div className="no-scrollbar" style={{ flex: 1, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 5, overflowY: "auto" }}>
-          {chatMsgs.map((m, i) => (
-            <div key={i} style={{ display: "flex", justifyContent: m.f === "me" ? "flex-end" : "flex-start" }}>
-              <div style={{ maxWidth: "80%", padding: "6px 9px", borderRadius: m.f === "me" ? "12px 12px 3px 12px" : "12px 12px 12px 3px", background: m.f === "me" ? "#2C1A0E" : "white", color: m.f === "me" ? "#F8F2E8" : "#2C1A0E", fontSize: 9, lineHeight: 1.4, border: m.f === "me" ? "none" : "1px solid rgba(44,26,14,0.07)" }}>{m.t}</div>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
+          {chatMsgs.map((msg, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: msg.from === 'me' ? 'flex-end' : 'flex-start', gap: 5, alignItems: 'flex-end' }}>
+              {msg.from === 'them' && <EmiAv size={20} />}
+              <div style={{
+                maxWidth: '75%', padding: '7px 10px', borderRadius: msg.from === 'me' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
+                background: msg.from === 'me' ? E : 'white',
+                color: msg.from === 'me' ? C : E,
+                fontSize: 9.5, lineHeight: 1.45,
+                boxShadow: '0 1px 4px rgba(44,26,14,0.08)',
+              }}>{msg.text}</div>
             </div>
           ))}
-          <div style={{ alignSelf: "center", background: "#E6F0E6", color: "#2A5A2A", fontSize: 8, fontWeight: 600, padding: "3px 10px", borderRadius: 18, display: "flex", alignItems: "center", gap: 3 }}>
-            <Ico.Check style={{ width: 8, height: 8 }} /> Booking confirmed · Jun 22, Malibu
-          </div>
+          <div ref={chatEndRef} />
         </div>
         {/* Input */}
-        <div style={{ padding: "6px 10px", borderTop: "1px solid rgba(44,26,14,0.07)", display: "flex", gap: 6, flexShrink: 0 }}>
-          <div style={{ flex: 1, background: "white", borderRadius: 18, padding: "5px 10px", fontSize: 9, color: "rgba(44,26,14,0.35)", border: "1px solid rgba(44,26,14,0.08)" }}>Message</div>
-          <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Ico.Arrow style={{ width: 11, height: 11, color: "#F8F2E8" }} />
+        <div style={{ padding: '8px 10px 10px', borderTop: '1px solid rgba(44,26,14,0.07)', background: 'white', display: 'flex', gap: 7, alignItems: 'center', flexShrink: 0 }}>
+          <div style={{ flex: 1, background: '#F0E8DC', borderRadius: 20, padding: '6px 12px', display: 'flex', alignItems: 'center' }}>
+            <input
+              value={chatInput}
+              onChange={e => setChatInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && sendChat()}
+              placeholder="Message Emi..."
+              style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: 9.5, color: E, width: '100%', fontFamily: 'inherit' }}
+            />
           </div>
+          <button onClick={sendChat} style={{ width: 28, height: 28, borderRadius: '50%', background: E, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Ico.Send style={{ width: 11, height: 11, color: C }} />
+          </button>
         </div>
-        <BottomNav active="chat" />
+        <BottomNav active={navActive} onNav={handleNav} />
       </PhoneShell>
     )
   }
 
-  // ── BOOKING SCREEN ──
-  if (screen === "booking") {
+  // ── Image feed ───────────────────────────────────────────
+  if (screen === 'imagefeed') {
     return (
       <PhoneShell>
-        {/* Header */}
-        <div style={{ padding: "6px 12px 8px", borderBottom: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-          <button onClick={goBack} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round" style={{ width: 14, height: 14 }}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
           </button>
-          <span style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E" }}>Book Package</span>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
         </div>
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
-          {/* Package summary */}
-          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Half Day Coverage</div>
-                <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)", marginTop: 2 }}>with {c.name}</div>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
+          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }) }}}>
+          {postMeta.map((post, i) => (
+            <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
+              <div style={{ padding: '6px 10px', display: 'flex', gap: 6, alignItems: 'center' }}>
+                <EmiAv size={22} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, fontSize: 10, color: E }}>Emi Chen</div>
+                  <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>Los Angeles</div>
+                </div>
               </div>
-              <div style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>$250</div>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 6 }}>
-              <div style={{ borderRadius: "50%", overflow: "hidden" }}><c.Av size={18} /></div>
-              <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)" }}>5.0 ★ · 4 hours · 150+ photos</span>
-            </div>
-          </div>
-          {/* Instant Book toggle */}
-          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", display: "flex", alignItems: "center", gap: 4 }}>
-                <span>⚡</span> Instant Book
+              <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D4C4A8' }}>
+                <img src={portfolioImgs[i]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
               </div>
-              <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)", marginTop: 2 }}>Confirmed automatically</div>
-            </div>
-            <div onClick={() => setInstantBook(!instantBook)} style={{ width: 34, height: 20, borderRadius: 999, background: instantBook ? "#2C1A0E" : "rgba(44,26,14,0.15)", cursor: "pointer", position: "relative", transition: "background 0.2s", flexShrink: 0 }}>
-              <div style={{ position: "absolute", top: 3, left: instantBook ? 17 : 3, width: 14, height: 14, borderRadius: "50%", background: "white", transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.2)" }} />
-            </div>
-          </div>
-          {/* Date & Time */}
-          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", display: "flex", flexDirection: "column", gap: 8 }}>
-            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Date & Time</div>
-            <div style={{ display: "flex", gap: 6 }}>
-              <div style={{ flex: 1, border: "1px solid rgba(44,26,14,0.12)", borderRadius: 8, padding: "6px 8px" }}>
-                <div style={{ fontSize: 7, color: "rgba(44,26,14,0.4)", marginBottom: 2 }}>DATE</div>
-                <div style={{ fontSize: 10, fontWeight: 600, color: "#2C1A0E" }}>Jun 22, 2025</div>
+              <div style={{ padding: '7px 10px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                  <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="1.8" style={{ width: 13, height: 13 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.likes}</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                    <Ico.Chat style={{ width: 12, height: 12, color: 'rgba(44,26,14,0.5)' }} />
+                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.comments}</span>
+                  </div>
+                </div>
               </div>
-              <div style={{ flex: 1, border: "1px solid rgba(44,26,14,0.12)", borderRadius: 8, padding: "6px 8px" }}>
-                <div style={{ fontSize: 7, color: "rgba(44,26,14,0.4)", marginBottom: 2 }}>TIME</div>
-                <div style={{ fontSize: 10, fontWeight: 600, color: "#2C1A0E" }}>10:00 AM</div>
+              <div style={{ padding: '0 10px 8px' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
+                  {post.tag}
+                </div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{post.caption}</div>
               </div>
-            </div>
-          </div>
-          {/* Price summary */}
-          <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
-            <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", marginBottom: 8 }}>Price Summary</div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-              <span style={{ fontSize: 9, color: "rgba(44,26,14,0.6)" }}>Half Day Coverage</span>
-              <span style={{ fontSize: 9, color: "#2C1A0E", fontWeight: 600 }}>$250.00</span>
-            </div>
-            <div style={{ borderTop: "1px dashed rgba(44,26,14,0.1)", paddingTop: 6, display: "flex", justifyContent: "space-between" }}>
-              <span style={{ fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>Total</span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>$250.00</span>
-            </div>
-          </div>
-          {/* CTA */}
-          <div style={{ background: "#2C1A0E", borderRadius: 18, padding: "10px 0", textAlign: "center", fontSize: 10, fontWeight: 700, color: "#F8F2E8", cursor: "pointer" }}>
-            {instantBook ? "⚡ Confirm Instant Book" : "Send Booking Request"}
-          </div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
-            <Ico.Check style={{ width: 8, height: 8, color: "#2A5A2A" }} />
-            <span style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>Secured via Stripe · No charge until confirmed</span>
-          </div>
-        </div>
-      </PhoneShell>
-    )
-  }
-
-  // ── PROFILE SCREEN (default) ──
-  return (
-    <PhoneShell>
-      {/* Top bar */}
-      <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
-        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
-      </div>
-
-      {/* Scrollable content area */}
-      <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto" }}>
-
-        {/* Stats row */}
-        <div style={{ padding: "0 12px 8px", display: "flex", alignItems: "center", gap: 6 }}>
-          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 44, height: 44 }}>
-            <c.Av size={44} />
-          </div>
-          {[["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
-            <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "5px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
-              <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
             </div>
           ))}
         </div>
+        <BottomNav active="profile" onNav={handleNav} />
+      </PhoneShell>
+    )
+  }
 
-        {/* Name + pill */}
-        <div style={{ padding: "0 12px 2px", display: "flex", alignItems: "center", gap: 5 }}>
-          <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name.split(" ")[0]}</span>
-          <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
+  // ── Checkout ─────────────────────────────────────────────
+  if (screen === 'checkout' && selectedService) {
+    const s = selectedService
+    return (
+      <PhoneShell>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
+          </button>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Book Package</div>
         </div>
-
-        {/* Location */}
-        <div style={{ padding: "0 12px 4px", display: "flex", alignItems: "center", gap: 3 }}>
-          <Ico.Map style={{ width: 8, height: 8, color: "rgba(44,26,14,0.5)" }} />
-          <span style={{ fontSize: 9, color: "rgba(44,26,14,0.55)" }}>{c.location}</span>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: C, padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 800, color: E }}>{s.title}</div>
+                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.5)' }}>
+                  <Ico.Clock style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9 }}>{s.duration}</span>
+                </div>
+              </div>
+              <div><span style={{ fontSize: 16, fontWeight: 800, color: E }}>{s.price}</span><span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)' }}>{s.unit}</span></div>
+            </div>
+            <div style={{ borderTop: '1px solid rgba(44,26,14,0.07)', marginTop: 10, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {[`${s.photos} edited photos`, `Delivery in ${s.delivery}`, 'Online gallery + print release', 'Secure payment via Stripe'].map(item => (
+                <div key={item} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                  <Ico.Check style={{ width: 10, height: 10, color: '#1A5A48', flexShrink: 0 }} />
+                  <span style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)' }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
+            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 7 }}>SELECT DATE</div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {['Jun 22', 'Jun 28', 'Jul 5', 'Jul 12'].map(d => (
+                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, cursor: 'pointer', fontSize: 9, fontWeight: 600, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(44,26,14,0.6)', border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(44,26,14,0.1)'}` }}>{d}</button>
+              ))}
+            </div>
+          </div>
+          <div style={{ background: E, borderRadius: 14, padding: '12px 14px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+              <span style={{ fontSize: 10, color: 'rgba(248,242,232,0.6)' }}>Total due</span>
+              <span style={{ fontSize: 14, fontWeight: 800, color: C }}>{s.price}</span>
+            </div>
+            <button onClick={() => setScreen('confirmation')} style={{ width: '100%', background: C, color: E, border: 'none', borderRadius: 10, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+              Confirm & Pay
+            </button>
+          </div>
         </div>
+        <BottomNav active="profile" onNav={handleNav} />
+      </PhoneShell>
+    )
+  }
 
+  // ── Confirmation ─────────────────────────────────────────
+  if (screen === 'confirmation') {
+    return (
+      <PhoneShell>
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px 18px', background: C }}>
+          <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#D6EEE8', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
+            <Ico.Check style={{ width: 24, height: 24, color: '#1A5A48' }} />
+          </div>
+          <div style={{ fontSize: 16, fontWeight: 800, color: E, textAlign: 'center', marginBottom: 6 }}>Booking Confirmed!</div>
+          <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
+            {selectedService?.title} with Emi Chen<br/>{bookDate} · Malibu, CA
+          </div>
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 16px', width: '100%', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
+            {[['Package', selectedService?.title], ['Date', bookDate], ['Amount', selectedService?.price], ['Status', 'Confirmed ✓']].map(([k, v]) => (
+              <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(44,26,14,0.05)' }}>
+                <span style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)' }}>{k}</span>
+                <span style={{ fontSize: 9, fontWeight: 700, color: k === 'Status' ? '#1A5A48' : E }}>{v}</span>
+              </div>
+            ))}
+          </div>
+          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 28px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>Back to Profile</button>
+        </div>
+        <BottomNav active="profile" onNav={handleNav} />
+      </PhoneShell>
+    )
+  }
+
+  // ── Review detail ────────────────────────────────────────
+  if (screen === 'review' && selectedReview) {
+    const r = selectedReview
+    return (
+      <PhoneShell>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+          <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
+            <Ico.Back style={{ width: 14, height: 14 }} />
+          </button>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Review</div>
+        </div>
+        <div style={{ flex: 1, padding: '16px', background: C, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', border: '1px solid rgba(44,26,14,0.07)' }}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: 14, fontWeight: 700, color: E }}>{r.name[0]}</span>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: E }}>{r.name}</div>
+                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.4)' }}>{r.handle} · {r.date}</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 2, marginBottom: 10 }}>{[0,1,2,3,4].map(i => <StarFilled key={i} size={11} />)}</div>
+            <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.7)', lineHeight: 1.6 }}>"{r.text}"</div>
+          </div>
+          <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer', width: '100%' }}>Back to Profile</button>
+        </div>
+        <BottomNav active="profile" onNav={handleNav} />
+      </PhoneShell>
+    )
+  }
+
+  // ── Profile (default) ─────────────────────────────────────
+  return (
+    <PhoneShell>
+      <div style={{ padding: '2px 14px 6px', flexShrink: 0 }}>
+        <div style={{ fontSize: 7.5, fontWeight: 700, letterSpacing: '0.24em', color: 'rgba(44,26,14,0.35)' }}>V I S I O N</div>
+        <div style={{ fontSize: 16, fontWeight: 800, color: E }}>@snapsbyemi</div>
+      </div>
+      <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
+        {/* Stats */}
+        <div style={{ padding: '0 14px 8px', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 50, height: 50, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(44,26,14,0.12)', background: '#D4C4A8' }}>
+            <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />
+          </div>
+          <div style={{ display: 'flex', gap: 6, flex: 1 }}>
+            {[['5.0 ★', 'RATING'], ['89', 'BOOKED']].map(([v, l]) => (
+              <div key={l} style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 4px', textAlign: 'center', border: '1px solid rgba(44,26,14,0.07)' }}>
+                <div style={{ fontSize: 13, fontWeight: 800, color: E }}>{v}</div>
+                <div style={{ fontSize: 7, color: 'rgba(44,26,14,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Bio */}
-        <div style={{ padding: "0 12px 6px" }}>
-          <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.35, margin: 0 }}>Wedding photographer capturing timeless moments. Available for bookings.</p>
-        </div>
-
-        {/* Message button */}
-        <div style={{ padding: "0 12px 6px" }}>
-          <div
-            onClick={() => setScreen("chat")}
-            style={{ background: "rgba(44,26,14,0.08)", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, cursor: "pointer" }}
-          >
-            <Ico.Chat style={{ width: 10, height: 10 }} /> Message Emi Chen
+        <div style={{ padding: '0 14px 8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
+            <span style={{ fontSize: 14, fontWeight: 800, color: E }}>Emi</span>
+            <span style={{ background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
           </div>
-        </div>
-
-        {/* Tabs — sticky inside scroll */}
-        <div style={{ padding: "0 12px 8px", position: "sticky", top: 0, background: "#F8F2E8", zIndex: 2 }}>
-          <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
-            {[
-              { label: "Portfolio",     icon: <Ico.Eye    style={{ width: 7, height: 7 }} /> },
-              { label: "Services", icon: <Ico.Layers style={{ width: 7, height: 7 }} /> },
-              { label: "Reviews",  icon: <Ico.Star   style={{ width: 7, height: 7 }} /> },
-            ].map(({ label, icon }) => (
-              <span
-                key={label}
-                onClick={() => setActiveTab(label)}
-                style={{
-                  flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600,
-                  whiteSpace: "nowrap", cursor: "pointer", textAlign: "center",
-                  display: "flex", alignItems: "center", justifyContent: "center", gap: 3,
-                  background: activeTab === label ? "#2C1A0E" : "transparent",
-                  color: activeTab === label ? "#F8F2E8" : "rgba(44,26,14,0.45)",
-                  transition: "all 0.15s",
-                }}
-              >{icon}{label}</span>
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(44,26,14,0.45)', marginBottom: 4 }}>
+            <Ico.Map style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9.5 }}>Los Angeles</span>
           </div>
+          <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
         </div>
-
-        {/* WORK — 3-col portrait grid, tappable */}
-        {activeTab === "Portfolio" && (
-          <div style={{ padding: "0 12px 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
+        {/* Message button — clickable */}
+        <div style={{ padding: '0 14px 8px' }}>
+          <button onClick={goToChat} style={{ width: '100%', background: '#EFE5D8', borderRadius: 22, padding: '8px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)', cursor: 'pointer' }}>
+            <Ico.Msg style={{ width: 10, height: 10, color: E }} />
+            <span style={{ fontSize: 10.5, fontWeight: 700, color: E }}>Message Emi Chen</span>
+          </button>
+        </div>
+        {/* Tabs */}
+        <div style={{ padding: '0 14px 0', display: 'flex', gap: 5 }}>
+          {[['Portfolio', Ico.Eye], ['Services', Ico.Bolt], ['Reviews', Ico.Star]].map(([label, Icon]) => (
+            <button key={label} onClick={() => setActiveTab(label)} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 999, border: 'none', cursor: 'pointer', background: activeTab === label ? E : 'transparent', color: activeTab === label ? C : 'rgba(44,26,14,0.45)', fontSize: 9.5, fontWeight: activeTab === label ? 700 : 500 }}>
+              <Icon style={{ width: 9, height: 9 }} /> {label}
+            </button>
+          ))}
+        </div>
+        {/* Portfolio */}
+        {activeTab === 'Portfolio' && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2, marginTop: 8 }}>
             {portfolioImgs.map((src, i) => (
-              <div
-                key={i}
-                onClick={() => { setSelectedImg(i); setScreen("image") }}
-                style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4", cursor: "pointer" }}
-              >
-                <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
+              <div key={i} onClick={() => { setSelectedImg(i); setScreen('imagefeed') }} style={{ aspectRatio: '3/4', background: '#D4C4A8', overflow: 'hidden', cursor: 'pointer' }}>
+                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
               </div>
             ))}
           </div>
         )}
-
-        {/* SERVICES — package cards with Book CTA */}
-        {activeTab === "Services" && (
-          <div style={{ padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 8 }}>
-            {services.map((s) => (
-              <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 3 }}>
-                  <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{s.title}</span>
-                  <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>{s.price}<span style={{ fontSize: 9, fontWeight: 500, color: "rgba(44,26,14,0.5)" }}>{s.unit}</span></span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 5 }}>
-                  <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
-                  <span style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{s.duration}</span>
-                </div>
-                <p style={{ fontSize: 8.5, color: "rgba(44,26,14,0.65)", lineHeight: 1.4, margin: "0 0 8px" }}>{s.desc}</p>
-                <div
-                  onClick={() => setScreen("booking")}
-                  style={{ background: "#2C1A0E", borderRadius: 12, padding: "5px 0", textAlign: "center", fontSize: 8.5, fontWeight: 700, color: "#F8F2E8", cursor: "pointer" }}
-                >
-                  Book This Package
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* REVIEWS */}
-        {activeTab === "Reviews" && (
-          <div style={{ padding: "0 12px 12px", display: "flex", flexDirection: "column", gap: 8 }}>
-            {reviews.map((r) => (
-              <div key={r.handle} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EFE5D4", flexShrink: 0 }} />
-                    <div>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{r.name}</div>
-                      <div style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>{r.handle}</div>
+        {/* Services */}
+        {activeTab === 'Services' && (
+          <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {services.map(s => (
+              <div key={s.title} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                  <div>
+                    <div style={{ fontSize: 11, fontWeight: 800, color: E }}>{s.title}</div>
+                    <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.45)' }}>
+                      <Ico.Clock style={{ width: 8, height: 8 }} /><span style={{ fontSize: 8.5 }}>{s.duration}</span>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: 1 }}>
-                    {[...Array(r.stars)].map((_, i) => <Ico.Star key={i} style={{ width: 8, height: 8, color: "#C8A040" }} />)}
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{ fontSize: 15, fontWeight: 800, color: E }}>{s.price}</span>
+                    <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{s.unit}</div>
                   </div>
                 </div>
-                <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.4, margin: 0 }}>{r.text}</p>
+                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.55)', lineHeight: 1.5, marginBottom: 10 }}>{s.desc}</div>
+                <button onClick={() => { setService(s); setScreen('checkout') }} style={{ width: '100%', background: E, color: C, border: 'none', borderRadius: 20, padding: '8px 0', fontSize: 10, fontWeight: 700, cursor: 'pointer' }}>
+                  Book This Package
+                </button>
               </div>
             ))}
           </div>
         )}
-
+        {/* Reviews */}
+        {activeTab === 'Reviews' && (
+          <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', display: 'flex', gap: 14, alignItems: 'center' }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 24, fontWeight: 800, color: E }}>5.0</div>
+                <div style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>{[0,1,2,3,4].map(i => <StarFilled key={i} />)}</div>
+                <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 2 }}>89 reviews</div>
+              </div>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {[5,4,3].map(n => (
+                  <div key={n} style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                    <span style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.45)', width: 6 }}>{n}</span>
+                    <div style={{ flex: 1, height: 4, background: '#EFE5D4', borderRadius: 999 }}>
+                      <div style={{ width: n===5?'96%':n===4?'3%':'1%', height: '100%', background: E, borderRadius: 999 }}/>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {reviews.map((r, i) => (
+              <div key={i} onClick={() => { setReview(r); setScreen('review') }} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', cursor: 'pointer' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                  <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
+                    <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name[0]}</span>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name}</div>
+                      <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{r.date}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 1 }}>{[0,1,2,3,4].map(j => <StarFilled key={j} size={8} />)}</div>
+                </div>
+                <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
+                <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.35)', marginTop: 5, fontWeight: 600 }}>Tap to read full review →</div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-
-      <BottomNav active="profile" />
+      <BottomNav active={navActive} onNav={handleNav} />
     </PhoneShell>
   )
 }
@@ -1399,9 +1562,13 @@ function Hero() {
         </div>
 
         {/* Mobile — scale phone to fit smaller screens */}
-        <div className="flex md:hidden justify-center">
+        <div className="flex md:hidden justify-center flex-col items-center gap-4">
           <div className="scale-90 xs:scale-95 origin-top">
             <HeroProfilePhone />
+          </div>
+          {/* Mobile label below phone */}
+          <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>
+            tap & scroll to explore
           </div>
         </div>
       </div>
@@ -1857,18 +2024,11 @@ function HowItWorks() {
           </div>
         </div>
 
-        {/* Two-col: phone left, steps right */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+        {/* Two-col on desktop, stacked on mobile: steps first, then phone */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-20 lg:items-center">
 
-          {/* Phone mockup — hidden on mobile (steps-only), scales on tablet */}
-          <div className="hidden sm:flex justify-center">
-            <div className="scale-90 md:scale-100 origin-top">
-              <ActivePhone />
-            </div>
-          </div>
-
-          {/* Clickable steps with feature tags */}
-          <div className="flex flex-col gap-3">
+          {/* Clickable steps with feature tags — on top on mobile, left on desktop */}
+          <div className="flex flex-col gap-3 order-first lg:order-none">
             {currentSteps.map((s, i) => (
               <div
                 key={i}
@@ -1897,6 +2057,13 @@ function HowItWorks() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Phone mockup — visible on all screen sizes */}
+          <div className="flex justify-center order-last lg:order-none">
+            <div className="scale-75 sm:scale-90 md:scale-100 origin-top">
+              <ActivePhone />
+            </div>
           </div>
 
         </div>
@@ -2003,7 +2170,7 @@ function ForCreatives() {
 // ─── Trust ────────────────────────────────────────────────────
 function TrustSection() {
   const items = [
-    { Icon: Ico.Eye,      t: "Aesthetic-first discovery",   d: "Search by style, not just job title.",                bg: "#FAF4D6", ic: "#6A5010" },
+    { Icon: Ico.Eye,      t: "Filter by creatives, styles & ideas", d: "Search by style, not just job title.",           bg: "#FAF4D6", ic: "#6A5010" },
     { Icon: Ico.Layers,   t: "Clear packages & pricing",    d: "No DMs to get a rate. Everything upfront.",           bg: "#E2EEF6", ic: "#1A4A6A" },
     { Icon: Ico.Calendar, t: "Real-time availability",      d: "See open slots and book without the wait.",           bg: "#E6F0E6", ic: "#2A5A2A" },
     { Icon: Ico.Chat,     t: "In-app collaboration",        d: "Message, align, and confirm in one thread.",          bg: "#EDE6F5", ic: "#4A2A7A" },
@@ -2040,11 +2207,6 @@ function TrustSection() {
 
 // ─── PWA ──────────────────────────────────────────────────────
 function PWA() {
-  const steps = [
-    { n: "1", t: "Open joinvision.app/download in Safari or Chrome", bg: "#FBE9D6", c: "#7A3A10" },
-    { n: "2", t: "Tap Share, then Add to Home Screen",      bg: "#E6F0E6", c: "#2A5A2A" },
-    { n: "3", t: "Launch from your home screen anytime",    bg: "#E2EEF6", c: "#1A4A6A" },
-  ]
   return (
     <section id="download" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
@@ -2057,14 +2219,6 @@ function PWA() {
             </span>
             <h2 className="text-cream-50 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">Vision lives in your pocket.</h2>
             <p className="mt-5 text-cream-50/65 text-base leading-relaxed max-w-lg">Install Vision directly from your browser — no App Store, no friction. Add it to your home screen and it feels exactly like a native app.</p>
-            <div className="mt-8 flex flex-col gap-3">
-              {steps.map((s) => (
-                <div key={s.n} className="flex items-center gap-3">
-                  <span style={{ background: s.bg, color: s.c, fontWeight: 700, fontSize: 11, width: 24, height: 24, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{s.n}</span>
-                  <span className="text-cream-50/75 text-sm">{s.t}</span>
-                </div>
-              ))}
-            </div>
             <a href="/download" className="mt-8 inline-flex items-center gap-2 bg-cream-50 text-espresso px-6 py-3.5 rounded-full font-semibold hover:bg-cream-100 transition-colors">
               Install Vision App <Ico.Arrow className="w-4 h-4" />
             </a>
@@ -2195,10 +2349,10 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <HowItWorks />
         <Categories />
         <DiscoverSection />
         <SharedVision />
-        <HowItWorks />
         <AppShowcase />
         <TrustSection />
         <PWA />
