@@ -2041,7 +2041,7 @@ function TrustSection() {
 // ─── PWA ──────────────────────────────────────────────────────
 function PWA() {
   const steps = [
-    { n: "1", t: "Open joinvision.app in Safari or Chrome", bg: "#FBE9D6", c: "#7A3A10" },
+    { n: "1", t: "Open joinvision.app/download in Safari or Chrome", bg: "#FBE9D6", c: "#7A3A10" },
     { n: "2", t: "Tap Share, then Add to Home Screen",      bg: "#E6F0E6", c: "#2A5A2A" },
     { n: "3", t: "Launch from your home screen anytime",    bg: "#E2EEF6", c: "#1A4A6A" },
   ]
@@ -2065,8 +2065,8 @@ function PWA() {
                 </div>
               ))}
             </div>
-            <a href={APP_URL} className="mt-8 inline-flex items-center gap-2 bg-cream-50 text-espresso px-6 py-3.5 rounded-full font-semibold hover:bg-cream-100 transition-colors">
-              Open Vision App <Ico.Arrow className="w-4 h-4" />
+            <a href="/download" className="mt-8 inline-flex items-center gap-2 bg-cream-50 text-espresso px-6 py-3.5 rounded-full font-semibold hover:bg-cream-100 transition-colors">
+              Install Vision App <Ico.Arrow className="w-4 h-4" />
             </a>
           </div>
           <div className="flex justify-center lg:justify-end">
