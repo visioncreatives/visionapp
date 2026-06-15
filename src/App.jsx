@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 // REPLACE THIS WITH YOUR LOVABLE / PWA URL
 // Example: const APP_URL = "https://your-app.lovable.app"
 // ============================================================
-const APP_URL = "https://app.joinvision.app"
+const APP_URL = "/download"
 
 // ─── Icons ────────────────────────────────────────────────────
 const Ico = {
