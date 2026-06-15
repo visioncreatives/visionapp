@@ -85,15 +85,21 @@ function EmiAv({ size = 26 }) {
 
 // ── Creator data for search page ──────────────────────────────
 const CREATIVES = [
-  { name: 'Emi Chen',      handle: '@snapsbyemi',   role: 'Wedding Photographer', location: 'Los Angeles', price: '$250', rating: '5.0', bookings: 89,  color: '#D4C4A8', photos: ['/zoe-portfolio/emi-1.jpg','/zoe-portfolio/emi-6.jpg','/zoe-portfolio/emi-7.jpg'], isEmi: true },
-  { name: 'Mia Torres',    handle: '@mia.creates',  role: 'Content Creator',      location: 'New York',    price: '$150', rating: '4.9', bookings: 64,  color: '#E8C8B4', photos: null },
-  { name: 'Dre Park',      handle: '@dre.visuals',  role: 'Videographer',         location: 'Los Angeles', price: '$300', rating: '4.8', bookings: 112, color: '#B8C8E0', photos: null },
-  { name: 'Leila Santos',  handle: '@leilashoots',  role: 'Photographer',         location: 'Miami',       price: '$200', rating: '5.0', bookings: 47,  color: '#C0D8C0', photos: null },
-  { name: 'Nova Kim',      handle: '@nova.studio',  role: 'Creative Director',    location: 'Los Angeles', price: '$400', rating: '4.9', bookings: 38,  color: '#C8B8E0', photos: null },
-  { name: 'Arlo Vega',     handle: '@arlovega',     role: 'Event Photographer',   location: 'Austin',      price: '$180', rating: '4.7', bookings: 55,  color: '#D8C8A8', photos: null },
+  { name: 'Mia',   location: 'Los Angeles', img: '/creators/mia.jpg'   },
+  { name: 'Diego', location: 'Chicago',     img: '/creators/diego.jpg' },
+  { name: 'Yumi',  location: 'Seoul',       img: '/creators/yumi.jpg'  },
+  { name: 'Ellie', location: 'Los Angeles', img: '/creators/ellie.jpg' },
+  { name: 'Luca',  location: 'Portland',    img: '/creators/luca.jpg'  },
+  { name: 'Dre',   location: 'Atlanta',     img: '/creators/dre.jpg'   },
+  { name: 'Leila', location: 'Miami',       img: '/creators/leila.jpg' },
+  { name: 'Nova',  location: 'New York',    img: '/creators/nova.jpg'  },
+  { name: 'Sage',  location: 'Austin',      img: '/creators/sage.jpg'  },
+  { name: 'Emi',   location: 'Los Angeles', img: '/creators/emi.jpg'   },
+  { name: 'Kai',   location: 'Seattle',     img: '/creators/kai.jpg'   },
+  { name: 'Zoe',   location: 'Nashville',   img: '/creators/zoe.jpg'   },
 ]
 
-const CATEGORIES = ['All', 'Photography', 'Video', 'Content', 'Events', 'Styling']
+const CATEGORIES = ['For you', 'Photography', 'Videography', 'Content', 'Events', 'Styling']
 
 // ── Chat messages ─────────────────────────────────────────────
 const CHAT_MSGS = [
@@ -176,59 +182,51 @@ function InteractivePhone() {
   if (screen === 'search') {
     return (
       <PhoneShell>
-        <div style={{ padding: '4px 12px 8px', flexShrink: 0 }}>
-          <div style={{ fontSize: 14, fontWeight: 800, color: E, marginBottom: 8 }}>Explore</div>
-          <div style={{ background: 'white', borderRadius: 20, padding: '7px 12px', display: 'flex', alignItems: 'center', gap: 8, border: '1px solid rgba(44,26,14,0.08)' }}>
-            <Ico.Search style={{ width: 11, height: 11, color: 'rgba(44,26,14,0.35)' }} />
-            <span style={{ fontSize: 10, color: 'rgba(44,26,14,0.35)' }}>Search creatives, styles...</span>
+        {/* Header */}
+        <div style={{ padding: '4px 12px 6px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexShrink: 0 }}>
+          <div>
+            <div style={{ fontSize: 8, fontWeight: 800, color: E, letterSpacing: '0.22em', marginBottom: 1 }}>V I S I O N</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: E, lineHeight: 1.25 }}>find creatives that<br/>match your vision</div>
+          </div>
+          <div style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(44,26,14,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2 }}>
+            <Ico.Search style={{ width: 12, height: 12, color: E }} />
           </div>
         </div>
         {/* Category pills */}
-        <div style={{ padding: '0 12px 8px', display: 'flex', gap: 5, overflowX: 'auto', flexShrink: 0 }} className="no-scrollbar">
+        <div style={{ padding: '0 12px 7px', display: 'flex', gap: 5, overflowX: 'auto', flexShrink: 0 }} className="no-scrollbar">
           {CATEGORIES.map(c => (
-            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 11px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 9, fontWeight: 600, whiteSpace: 'nowrap', background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(44,26,14,0.55)', flexShrink: 0, border: `1px solid ${catFilter === c ? E : 'rgba(44,26,14,0.1)'}` }}>
+            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 10px', borderRadius: 999, cursor: 'pointer', fontSize: 8.5, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0, border: `1.5px solid ${catFilter === c ? E : 'rgba(44,26,14,0.13)'}`, background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(44,26,14,0.6)' }}>
               {c}
             </button>
           ))}
         </div>
-        {/* Creator list */}
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '0 12px 8px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ fontSize: 8, fontWeight: 700, color: 'rgba(44,26,14,0.4)', letterSpacing: '0.1em', marginBottom: 2 }}>TOP CREATIVES NEAR YOU</div>
-          {CREATIVES.map((cr, i) => (
-            <div key={i} onClick={() => setScreen('profile')} style={{ background: 'white', borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.07)', cursor: 'pointer' }}>
-              <div style={{ padding: '10px 12px', display: 'flex', gap: 10, alignItems: 'center' }}>
-                {/* Avatar */}
-                <div style={{ width: 38, height: 38, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, background: cr.color }}>
-                  {cr.isEmi && <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />}
-                  {!cr.isEmi && <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><span style={{ fontSize: 13, fontWeight: 700, color: E }}>{cr.name[0]}</span></div>}
-                </div>
-                {/* Info */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: E, lineHeight: 1.2 }}>{cr.name}</div>
-                  <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.45)', marginTop: 1 }}>{cr.role}</div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3 }}>
-                    <div style={{ display: 'flex', gap: 1 }}>{[0,1,2,3,4].map(j => <StarFilled key={j} size={7} />)}</div>
-                    <span style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.45)' }}>{cr.rating} · {cr.bookings} bookings</span>
+        {/* Scrollable grid */}
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '0 12px 8px' }}>
+          {/* Section label */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: E }}>Discover creatives</span>
+            <span style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)', fontWeight: 500 }}>See all →</span>
+          </div>
+          {/* 3-col photo grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 4 }}>
+            {CREATIVES.map((cr, i) => (
+              <div key={i} onClick={() => setScreen('profile')} style={{ borderRadius: 10, overflow: 'hidden', cursor: 'pointer', position: 'relative', aspectRatio: '3/4', background: '#C8B8A8' }}>
+                <img src={cr.img} alt={cr.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+                {/* Gradient overlay */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 50%)' }} />
+                {/* Name + location */}
+                <div style={{ position: 'absolute', bottom: 5, left: 6, right: 4 }}>
+                  <div style={{ fontSize: 8.5, fontWeight: 700, color: 'white', lineHeight: 1.2 }}>{cr.name}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: 1 }}>
+                    <Ico.Map style={{ width: 6, height: 6, color: 'rgba(255,255,255,0.8)' }} />
+                    <span style={{ fontSize: 7, color: 'rgba(255,255,255,0.8)', fontWeight: 400 }}>{cr.location}</span>
                   </div>
                 </div>
-                {/* Price + location */}
-                <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: E }}>{cr.price}</div>
-                  <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 1 }}>{cr.location}</div>
-                </div>
               </div>
-              {/* Mini photo strip */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 1.5, padding: '0 10px 10px' }}>
-                {[0,1,2].map(j => (
-                  <div key={j} style={{ aspectRatio: '4/3', borderRadius: 7, overflow: 'hidden', background: `${cr.color}99` }}>
-                    {cr.photos ? <img src={cr.photos[j]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} /> : null}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-        <BottomNav active={navActive} onNav={handleNav} />
+        <BottomNav active="search" onNav={handleNav} />
       </PhoneShell>
     )
   }
