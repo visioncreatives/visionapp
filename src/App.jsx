@@ -911,6 +911,231 @@ function ChatPhone() {
   )
 }
 
+// ─── PackagesPhone — profile w/ Services tab open ─────────────
+function PackagesPhone() {
+  const c = CREATORS[0]
+  const services = [
+    { title: "Half Day Coverage", price: "$250", unit: "/session", duration: "4 hours", desc: "150+ edited photos, online gallery. Perfect for intimate ceremonies & elopements." },
+    { title: "Full Day Coverage", price: "$450", unit: "/session", duration: "8 hours", desc: "300+ edited photos, online gallery, and print release. ~2 week delivery." },
+    { title: "Content Mini Shoot", price: "$120", unit: "/session", duration: "1 hour", desc: "Social-ready content in one focused hour. Great for brands & UGC creators." },
+  ]
+  return (
+    <PhoneShell>
+      <div style={{ padding: "4px 12px 4px", flexShrink: 0 }}>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
+      </div>
+      <div style={{ padding: "0 12px 6px", display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+        <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 36, height: 36 }}><c.Av size={36} /></div>
+        {[["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
+          <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "4px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
+            <div style={{ fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
+            <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
+        <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
+          {[["Portfolio", Ico.Eye], ["Services", Ico.Layers], ["Reviews", Ico.Star]].map(([label, Icon]) => (
+            <span key={label} style={{ flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600, whiteSpace: "nowrap", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 3, background: label === "Services" ? "#2C1A0E" : "transparent", color: label === "Services" ? "#F8F2E8" : "rgba(44,26,14,0.45)" }}>
+              <Icon style={{ width: 7, height: 7 }} />{label}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div style={{ flex: 1, overflowY: "hidden", padding: "0 12px", display: "flex", flexDirection: "column", gap: 7 }}>
+        {services.map((s) => (
+          <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 2 }}>
+              <span style={{ fontWeight: 700, fontSize: 10.5, color: "#2C1A0E" }}>{s.title}</span>
+              <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{s.price}<span style={{ fontSize: 8, fontWeight: 500, color: "rgba(44,26,14,0.5)" }}>{s.unit}</span></span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 4 }}>
+              <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
+              <span style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{s.duration}</span>
+            </div>
+            <p style={{ fontSize: 8, color: "rgba(44,26,14,0.6)", lineHeight: 1.4, margin: "0 0 7px" }}>{s.desc}</p>
+            <div style={{ background: "#2C1A0E", borderRadius: 10, padding: "5px 0", textAlign: "center", fontSize: 8, fontWeight: 700, color: "#F8F2E8" }}>Book This Package</div>
+          </div>
+        ))}
+      </div>
+      <BottomNav active="profile" />
+    </PhoneShell>
+  )
+}
+
+// ─── CheckoutPhone — instant book checkout page ────────────────
+function CheckoutPhone() {
+  const c = CREATORS[0]
+  return (
+    <PhoneShell>
+      {/* Header */}
+      <div style={{ padding: "4px 12px 8px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+        <Ico.Back style={{ width: 14, height: 14 }} />
+        <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Book Package</span>
+      </div>
+      <div style={{ flex: 1, overflowY: "hidden", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
+        {/* Creative row */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)" }}>
+          <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={32} /></div>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>Emi Chen</div>
+            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>Wedding Photographer · Los Angeles</div>
+          </div>
+        </div>
+        {/* Package */}
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
+            <span style={{ fontWeight: 700, fontSize: 10.5, color: "#2C1A0E" }}>Full Day Coverage</span>
+            <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>$450</span>
+          </div>
+          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>8 hours · 300+ edited photos</div>
+        </div>
+        {/* Date */}
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)", marginBottom: 2 }}>DATE</div>
+            <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>June 14, 2026 · 10:00 AM</div>
+          </div>
+          <Ico.Calendar style={{ width: 14, height: 14, color: "rgba(44,26,14,0.35)" }} />
+        </div>
+        {/* Instant Book toggle — ON */}
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E", display: "flex", alignItems: "center", gap: 4 }}>
+                <Ico.Bolt style={{ width: 10, height: 10, color: "#C8A040" }} /> Instant Book
+              </div>
+              <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)", marginTop: 1 }}>Auto-confirmed — no waiting</div>
+            </div>
+            {/* Toggle ON */}
+            <div style={{ width: 32, height: 18, borderRadius: 9, background: "#2C1A0E", position: "relative", flexShrink: 0 }}>
+              <div style={{ width: 14, height: 14, borderRadius: "50%", background: "#F8F2E8", position: "absolute", top: 2, right: 2 }} />
+            </div>
+          </div>
+          <div style={{ background: "#FAF4D6", borderRadius: 8, padding: "4px 8px", fontSize: 8, color: "#6A5010", fontWeight: 600 }}>⚡ Confirmed instantly — no charge until booked</div>
+        </div>
+        {/* Price summary */}
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+          {[["Package", "$450.00"], ["Platform fee", "$22.50"], ["Total", "$472.50"]].map(([l, v], i) => (
+            <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 2 ? 4 : 0, borderTop: i === 2 ? "1px solid rgba(44,26,14,0.08)" : "none", paddingTop: i === 2 ? 6 : 0 }}>
+              <span style={{ fontSize: i === 2 ? 10 : 8.5, fontWeight: i === 2 ? 700 : 500, color: i === 2 ? "#2C1A0E" : "rgba(44,26,14,0.55)" }}>{l}</span>
+              <span style={{ fontSize: i === 2 ? 10 : 8.5, fontWeight: i === 2 ? 700 : 500, color: "#2C1A0E" }}>{v}</span>
+            </div>
+          ))}
+        </div>
+        {/* CTA */}
+        <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "10px 0", textAlign: "center", fontSize: 11, fontWeight: 700, color: "#F8F2E8" }}>Book &amp; Pay $472.50</div>
+        <div style={{ textAlign: "center", fontSize: 8, color: "rgba(44,26,14,0.4)" }}>Secured by Stripe · Cancel free before 48h</div>
+      </div>
+    </PhoneShell>
+  )
+}
+
+// ─── ListingPhone — open projects + apply modal ────────────────
+function ListingPhone() {
+  return (
+    <PhoneShell>
+      {/* Top bar */}
+      <div style={{ padding: "4px 12px 6px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+        <Ico.Back style={{ width: 14, height: 14 }} />
+        <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E", flex: 1 }}>Open projects</span>
+        <span style={{ fontSize: 9, color: "rgba(44,26,14,0.4)" }}>1 / 1</span>
+      </div>
+      {/* Project image - Emi's photo */}
+      <div style={{ position: "relative", flexShrink: 0, height: 140, overflow: "hidden" }}>
+        <img src="/zoe-portfolio/emi-1.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+      </div>
+      {/* Apply to listing sheet */}
+      <div style={{ background: "#F8F2E8", borderRadius: "16px 16px 0 0", flex: 1, padding: "10px 12px", display: "flex", flexDirection: "column", gap: 7, overflowY: "hidden", marginTop: -8, position: "relative", zIndex: 2 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+          <span style={{ fontWeight: 800, fontSize: 12, color: "#2C1A0E" }}>Apply to listing</span>
+          <span style={{ fontSize: 14, color: "rgba(44,26,14,0.35)", lineHeight: 1 }}>×</span>
+        </div>
+        {/* Text input */}
+        <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.12)", flexShrink: 0 }}>
+          <div style={{ fontSize: 9, color: "rgba(44,26,14,0.35)" }}>Introduce yourself and your approach...</div>
+          <div style={{ height: 28 }} />
+        </div>
+        {/* Price input */}
+        <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.12)", flexShrink: 0 }}>
+          <div style={{ fontSize: 9, color: "rgba(44,26,14,0.35)" }}>Proposed price ($)</div>
+        </div>
+        {/* Send button */}
+        <div style={{ background: "#2C1A0E", borderRadius: 12, padding: "9px 0", textAlign: "center", fontSize: 10, fontWeight: 700, color: "#F8F2E8", flexShrink: 0 }}>Send application</div>
+        {/* Project details below */}
+        <div style={{ borderTop: "1px solid rgba(44,26,14,0.08)", paddingTop: 8, flexShrink: 0 }}>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", marginBottom: 5 }}>Casual Content Shoot</div>
+          <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 5 }}>
+            {[["Active", "#D6EEE8", "#1A5A48"], ["$100 budget", "#FAF4D6", "#6A5010"], ["✦ Aesthetic", "#FBE9D6", "#7A3A10"]].map(([l, bg, c]) => (
+              <span key={l} style={{ fontSize: 7.5, fontWeight: 600, padding: "2px 7px", borderRadius: 999, background: bg, color: c }}>{l}</span>
+            ))}
+          </div>
+          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>San Francisco · May 12, 9:00 AM – 11:00 AM</div>
+        </div>
+      </div>
+    </PhoneShell>
+  )
+}
+
+// ─── PayoutsPhone — earnings dashboard ────────────────────────
+function PayoutsPhone() {
+  return (
+    <PhoneShell>
+      {/* Header */}
+      <div style={{ padding: "6px 12px 4px", flexShrink: 0 }}>
+        <div style={{ fontWeight: 800, fontSize: 14, color: "#2C1A0E" }}>Payouts</div>
+        <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.5)", marginTop: 1 }}>Track your earnings and withdraw to your bank.</div>
+      </div>
+      <div style={{ flex: 1, overflowY: "hidden", padding: "6px 12px", display: "flex", flexDirection: "column", gap: 7 }}>
+        {/* Available balance card */}
+        <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "12px 14px", flexShrink: 0 }}>
+          <div style={{ fontSize: 7.5, letterSpacing: "0.1em", color: "rgba(248,242,232,0.55)", fontWeight: 600, marginBottom: 4 }}>AVAILABLE BALANCE</div>
+          <div style={{ fontSize: 26, fontWeight: 800, color: "#F8F2E8", lineHeight: 1.1, marginBottom: 6 }}>$260.00</div>
+          <div style={{ fontSize: 8, color: "rgba(248,242,232,0.5)", lineHeight: 1.4 }}>Funds are paid out automatically to your bank ~2 days after each booking.</div>
+        </div>
+        {/* Pending + Lifetime */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, flexShrink: 0 }}>
+          {[["PENDING", "$0.00"], ["LIFETIME", "$260.00"]].map(([l, v]) => (
+            <div key={l} style={{ background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)" }}>
+              <div style={{ fontSize: 7, letterSpacing: "0.08em", color: "rgba(44,26,14,0.4)", marginBottom: 3 }}>{l}</div>
+              <div style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E" }}>{v}</div>
+            </div>
+          ))}
+        </div>
+        {/* Payout method */}
+        <div style={{ background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
+            <span style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>Payout method</span>
+            <span style={{ fontSize: 7.5, fontWeight: 600, color: "#1A5A48", background: "#D6EEE8", padding: "2px 7px", borderRadius: 999 }}>✓ Ready</span>
+          </div>
+          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>Connected · STRIPE BANK ••••2227</div>
+        </div>
+        {/* Activity */}
+        <div style={{ flexShrink: 0 }}>
+          <div style={{ fontSize: 7.5, letterSpacing: "0.1em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 6 }}>ACTIVITY</div>
+          {[
+            { name: "Julie", date: "Paid out · 5/12/2026", amount: "+$165.00", img: "/creators/mia.jpg" },
+            { name: "Sarah K.", date: "Paid out · 5/8/2026",  amount: "+$95.00",  img: "/creators/ellie.jpg" },
+          ].map((a) => (
+            <div key={a.name} style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)", marginBottom: 6 }}>
+              <div style={{ width: 28, height: 28, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#D4C4A8" }}>
+                <img src={a.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => e.target.style.display = 'none'} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{a.name}</div>
+                <div style={{ fontSize: 7.5, color: "rgba(44,26,14,0.45)" }}>{a.date}</div>
+              </div>
+              <span style={{ fontWeight: 700, fontSize: 10, color: "#1A5A48" }}>{a.amount}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <BottomNav active="home" />
+    </PhoneShell>
+  )
+}
+
 // ─── Header ───────────────────────────────────────────────────
 function Header() {
   const [open, setOpen] = useState(false)
@@ -1623,19 +1848,19 @@ function HowItWorks() {
 
   const steps = {
     hire: [
-      { n: "01", t: "Browse & discover",         d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.",         bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
+      { n: "01", t: "Browse & discover",         d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.",      bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
         tags: ["Filter by vibe", "Search by location", "Real portfolios"] },
-      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                             bg: "#E2EEF6", tc: "#1A4A6A", Phone: ProfilePhone,
+      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                          bg: "#E2EEF6", tc: "#1A4A6A", Phone: PackagesPhone,
         tags: ["Portfolio gallery", "Honest pricing", "Check availability"] },
-      { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",     bg: "#E6F0E6", tc: "#2A5A2A", Phone: ChatPhone,
+      { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",  bg: "#E6F0E6", tc: "#2A5A2A", Phone: CheckoutPhone,
         tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
     ],
     create: [
-      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.",         bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
+      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.",      bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
         tags: ["Upload your portfolio", "Set your packages", "Show your aesthetic"] },
-      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",            bg: "#EDE6F5", tc: "#4A2A7A", Phone: DiscoverPhone,
+      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",          bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
         tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
-      { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",           bg: "#D6EEE8", tc: "#1A5A48", Phone: ProfilePhone,
+      { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",        bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
         tags: ["Auto payout ~2 days", "Track earnings", "Stripe Connect"] },
     ],
   }
@@ -1647,21 +1872,21 @@ function HowItWorks() {
     <section id="how" className="py-16 sm:py-24 bg-cream-100">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
-        {/* Header row */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-14">
-          <div className="max-w-xl">
+        {/* Header row — label + toggle on same line, heading below */}
+        <div className="mb-8 sm:mb-14 max-w-xl">
+          <div className="flex items-center justify-between gap-4 mb-2 sm:mb-3">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
-            <h2 className="mt-2 sm:mt-3 text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">simple for both sides of a creative collaboration.</h2>
+            <div className="inline-flex bg-cream-200/80 p-1 rounded-full">
+              {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
+                <button
+                  key={k}
+                  onClick={() => { setTab(k); setActiveStep(0) }}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
+                >{l}</button>
+              ))}
+            </div>
           </div>
-          <div className="inline-flex bg-cream-200/80 p-1 rounded-full self-start">
-            {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
-              <button
-                key={k}
-                onClick={() => { setTab(k); setActiveStep(0) }}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
-              >{l}</button>
-            ))}
-          </div>
+          <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">simple for both sides of a creative collaboration.</h2>
         </div>
 
         {/* ── MOBILE layout: phone on top (small), steps below ── */}
