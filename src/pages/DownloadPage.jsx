@@ -623,8 +623,8 @@ export default function DownloadPage() {
 
         {/* Top heading */}
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(44,26,14,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
-        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 12 }}>
-          Vision on your<br />home screen.
+        <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 12, whiteSpace: 'nowrap' }}>
+          Vision on your home screen.
         </h1>
         <p style={{ fontSize: 15, color: 'rgba(44,26,14,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
           Available on iPhone and Android. No App Store needed — install directly from your browser.
