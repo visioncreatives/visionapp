@@ -1162,7 +1162,7 @@ function Header() {
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
             <a href="#for-creatives" onClick={() => setOpen(false)}>For Creatives</a>
-            <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Install App</a>
+            <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
             <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
           </div>
         </div>
@@ -2126,7 +2126,7 @@ function Footer() {
           <a href="#discover" className="hover:text-espresso transition-colors">Discover Creatives</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
           <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
-          <a href="#download" className="hover:text-espresso transition-colors">Install App</a>
+          <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </div>
       </div>
       <div className="border-t border-cream-200/70 py-5 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/40">
