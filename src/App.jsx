@@ -1789,12 +1789,12 @@ function Hero() {
 
         {/* Mobile — scale phone to fit smaller screens */}
         <div className="flex md:hidden justify-center flex-col items-center gap-4">
+          {/* Mobile label above phone */}
+          <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>
+            tap &amp; scroll to explore
+          </div>
           <div className="scale-90 xs:scale-95 origin-top">
             <HeroProfilePhone />
-          </div>
-          {/* Mobile label below phone */}
-          <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>
-            tap & scroll to explore
           </div>
         </div>
       </div>
@@ -1849,16 +1849,16 @@ function HowItWorks() {
 
   const steps = {
     hire: [
-      { n: "01", t: "Browse & discover",         d: "Search by aesthetic, category, location, and price. Filter to find creatives who match your exact vision.",      bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
-        tags: ["Filter by vibe", "Search by location", "Real portfolios"] },
+      { n: "01", t: "Browse & discover",         d: "Search by category, location, and price. Filter to find creatives who match your exact vision.",      bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
+        tags: ["Filter by category", "Search by location", "Real portfolios"] },
       { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                          bg: "#E2EEF6", tc: "#1A4A6A", Phone: PackagesPhone,
         tags: ["Portfolio gallery", "Honest pricing", "Check availability"] },
       { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",  bg: "#E6F0E6", tc: "#2A5A2A", Phone: CheckoutPhone,
         tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
     ],
     create: [
-      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, style tags, location, and packages. Your aesthetic is the first thing they see.",      bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
-        tags: ["Upload your portfolio", "Set your packages", "Show your aesthetic"] },
+      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, location, and packages. Your profile is the first thing clients see.",      bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
+        tags: ["Upload your portfolio", "Set your packages", "Show your work"] },
       { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",          bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
         tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
       { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",        bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
