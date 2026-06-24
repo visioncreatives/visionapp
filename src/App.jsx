@@ -1705,10 +1705,10 @@ function Hero() {
     { l: "Design",      bg: "#D6EEE8", c: "#1A5A48" },
   ]
   return (
-    <section id="top" className="relative overflow-hidden bg-cream-100">
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-30" style={{ background: "#F2C4A0", filter: "blur(90px)" }} />
-      <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
-      <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
+    <section id="top" className="relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(90px)" }} />
+      <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-30" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
+      <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-25" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-20 pb-8 sm:pb-24 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
@@ -1815,8 +1815,10 @@ function Categories() {
     { Icon: Ico.User,     label: "Content Creation", desc: "Social, UGC, influencer, lifestyle",      bg: "#E2EEF6", ic: "#1A4A6A" },
   ]
   return (
-    <section className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+    <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+      <div className="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full opacity-35" style={{ background: "#F5DFA0", filter: "blur(90px)" }} />
+      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-25" style={{ background: "#F0C8A0", filter: "blur(80px)" }} />
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
@@ -1870,8 +1872,10 @@ function HowItWorks() {
   const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
-    <section id="how" className="py-16 sm:py-24 bg-cream-100">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+    <section id="how" className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+      <div className="absolute -top-20 right-0 w-[450px] h-[450px] rounded-full opacity-30" style={{ background: "#B8C8E8", filter: "blur(100px)" }} />
+      <div className="absolute bottom-10 -left-20 w-80 h-80 rounded-full opacity-25" style={{ background: "#C8B8E0", filter: "blur(80px)" }} />
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
         {/* Header — label left, toggle right, heading below */}
         <div className="mb-8 sm:mb-14">
@@ -1990,8 +1994,10 @@ function SharedVision() {
     { src: "/projects/photoshoot.jpg",     title: "Photoshoot",      pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg"   }, z: 5 },
   ]
   return (
-    <section id="for-creatives" className="py-16 sm:py-24" style={{ background: "#FDFAF5" }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+    <section id="for-creatives" className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+      <div className="absolute top-10 -right-24 w-[400px] h-[400px] rounded-full opacity-30" style={{ background: "#B8D8C0", filter: "blur(90px)" }} />
+      <div className="absolute -bottom-10 left-10 w-72 h-72 rounded-full opacity-25" style={{ background: "#F0C8A0", filter: "blur(80px)" }} />
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           <div>
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
@@ -2053,7 +2059,7 @@ function FinalCTA() {
     { l: "Brands & Clients",  bg: "#E2EEF6", c: "#1A4A6A" },
   ]
   return (
-    <section className="py-20 sm:py-32 relative overflow-hidden" style={{ background: "#FDFAF5" }}>
+    <section className="py-20 sm:py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full opacity-25" style={{ background: "#F2C4A0", filter: "blur(80px)" }} />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
