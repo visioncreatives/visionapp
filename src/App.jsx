@@ -776,8 +776,8 @@ function ProfilePhone() {
 
       {/* Message button */}
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
-        <div style={{ background: "rgba(44,26,14,0.08)", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 9, fontWeight: 700, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
-          <Ico.Chat style={{ width: 10, height: 10 }} /> Message Emi Chen
+        <div style={{ background: "#FFFFFF", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 8, fontWeight: 600, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, border: "1px solid rgba(44,26,14,0.1)" }}>
+          <Ico.Chat style={{ width: 9, height: 9 }} /> Message Emi Chen
         </div>
       </div>
 
@@ -1600,9 +1600,9 @@ function HeroProfilePhone() {
         </div>
         {/* Message button — clickable */}
         <div style={{ padding: '0 14px 8px' }}>
-          <button onClick={goToChat} style={{ width: '100%', background: '#EFE5D8', borderRadius: 22, padding: '8px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)', cursor: 'pointer' }}>
-            <Ico.Msg style={{ width: 10, height: 10, color: E }} />
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: E }}>Message Emi Chen</span>
+          <button onClick={goToChat} style={{ width: '100%', background: '#FFFFFF', borderRadius: 22, padding: '7px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(44,26,14,0.1)', cursor: 'pointer' }}>
+            <Ico.Msg style={{ width: 9, height: 9, color: E }} />
+            <span style={{ fontSize: 9, fontWeight: 600, color: E }}>Message Emi Chen</span>
           </button>
         </div>
         {/* Tabs */}
@@ -1705,8 +1705,7 @@ function Hero() {
     { l: "Design",      bg: "#D6EEE8", c: "#1A5A48" },
   ]
   return (
-    <section id="top" className="relative overflow-hidden" style={{ background: "#FFFFFF" }}>
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(90px)" }} />
+    <section id="top" className="relative" style={{ background: "#FFFFFF" }}>
       <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-30" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
       <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-25" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
 
@@ -1759,7 +1758,7 @@ function Hero() {
         {/* Right side — Emi Chen profile preview */}
         <div className="hidden md:flex justify-center relative overflow-visible">
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-80 h-80 rounded-full opacity-40" style={{ background: "#F2C4A0", filter: "blur(70px)" }} />
+            <div className="w-80 h-80 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
           </div>
           <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
             <HeroProfilePhone />
@@ -1815,9 +1814,7 @@ function Categories() {
     { Icon: Ico.User,     label: "Content Creation", desc: "Social, UGC, influencer, lifestyle",      bg: "#E2EEF6", ic: "#1A4A6A" },
   ]
   return (
-    <section className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
-      <div className="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full opacity-35" style={{ background: "#F5DFA0", filter: "blur(90px)" }} />
-      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-25" style={{ background: "#F0C8A0", filter: "blur(80px)" }} />
+    <section className="py-16 sm:py-24 relative" style={{ background: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
@@ -1872,9 +1869,9 @@ function HowItWorks() {
   const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
-    <section id="how" className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
-      <div className="absolute -top-20 right-0 w-[450px] h-[450px] rounded-full opacity-30" style={{ background: "#B8C8E8", filter: "blur(100px)" }} />
-      <div className="absolute bottom-10 -left-20 w-80 h-80 rounded-full opacity-25" style={{ background: "#C8B8E0", filter: "blur(80px)" }} />
+    <section id="how" className="py-16 sm:py-24 relative" style={{ background: "#FFFFFF" }}>
+      <div className="absolute -top-20 right-0 w-[450px] h-[450px] rounded-full opacity-25" style={{ background: "#B8C8E8", filter: "blur(100px)" }} />
+      <div className="absolute bottom-10 -left-20 w-80 h-80 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(80px)" }} />
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
         {/* Header — label left, toggle right, heading below */}
@@ -1994,9 +1991,8 @@ function SharedVision() {
     { src: "/projects/photoshoot.jpg",     title: "Photoshoot",      pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg"   }, z: 5 },
   ]
   return (
-    <section id="for-creatives" className="py-16 sm:py-24 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
-      <div className="absolute top-10 -right-24 w-[400px] h-[400px] rounded-full opacity-30" style={{ background: "#B8D8C0", filter: "blur(90px)" }} />
-      <div className="absolute -bottom-10 left-10 w-72 h-72 rounded-full opacity-25" style={{ background: "#F0C8A0", filter: "blur(80px)" }} />
+    <section id="for-creatives" className="py-16 sm:py-24 relative" style={{ background: "#FFFFFF" }}>
+      <div className="absolute top-10 -right-24 w-[400px] h-[400px] rounded-full opacity-25" style={{ background: "#B8D8C0", filter: "blur(90px)" }} />
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           <div>
@@ -2059,9 +2055,8 @@ function FinalCTA() {
     { l: "Brands & Clients",  bg: "#E2EEF6", c: "#1A4A6A" },
   ]
   return (
-    <section className="py-20 sm:py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+    <section className="py-20 sm:py-32 relative" style={{ background: "#FFFFFF" }}>
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-80 h-80 rounded-full opacity-25" style={{ background: "#F2C4A0", filter: "blur(80px)" }} />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
         <div className="absolute top-1/2 left-0 w-64 h-64 rounded-full opacity-15" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
       </div>

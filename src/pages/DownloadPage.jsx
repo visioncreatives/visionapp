@@ -483,9 +483,9 @@ function InteractivePhone() {
         </div>
         {/* Message button — clickable */}
         <div style={{ padding: '0 14px 8px' }}>
-          <button onClick={goToChat} style={{ width: '100%', background: '#EFE5D8', borderRadius: 22, padding: '8px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, border: '1px solid rgba(44,26,14,0.08)', cursor: 'pointer' }}>
-            <Ico.Msg style={{ width: 10, height: 10, color: E }} />
-            <span style={{ fontSize: 10.5, fontWeight: 700, color: E }}>Message Emi Chen</span>
+          <button onClick={goToChat} style={{ width: '100%', background: '#FFFFFF', borderRadius: 22, padding: '7px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(44,26,14,0.1)', cursor: 'pointer' }}>
+            <Ico.Msg style={{ width: 9, height: 9, color: E }} />
+            <span style={{ fontSize: 9, fontWeight: 600, color: E }}>Message Emi Chen</span>
           </button>
         </div>
         {/* Tabs */}
@@ -610,8 +610,8 @@ export default function DownloadPage() {
 
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'fixed', top: '-100px', right: '-100px', width: 500, height: 500, borderRadius: '50%', background: '#F2C4A0', opacity: 0.35, filter: 'blur(90px)', pointerEvents: 'none', zIndex: 0 }} />
       <div style={{ position: 'fixed', bottom: '-80px', left: '-80px', width: 400, height: 400, borderRadius: '50%', background: '#B8C8E8', opacity: 0.28, filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'fixed', top: '30%', right: '-60px', width: 350, height: 350, borderRadius: '50%', background: '#C8B8E0', opacity: 0.20, filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
       {/* Nav */}
       <header style={{ borderBottom: '1px solid rgba(0,0,0,0.06)', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
