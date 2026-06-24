@@ -1140,7 +1140,7 @@ function PayoutsPhone() {
 function Header() {
   const [open, setOpen] = useState(false)
   return (
-    <header className="sticky top-0 z-50 bg-cream-100/85 backdrop-blur-md border-b border-cream-200/60">
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-black/[0.06]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
         <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/65 font-medium">
@@ -1157,7 +1157,7 @@ function Header() {
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-cream-200/60 bg-cream-100">
+        <div className="md:hidden border-t border-black/[0.06] bg-white">
           <div className="px-5 py-4 flex flex-col gap-4 text-espresso/80 font-medium">
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
@@ -1881,10 +1881,10 @@ function HowItWorks() {
         <div className="mb-8 sm:mb-14">
           <div className="flex items-center justify-between gap-4 mb-3">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
-            <div className="inline-flex bg-cream-200/80 p-1 rounded-full">
+            <div className="inline-flex bg-white/70 backdrop-blur-sm p-1 rounded-full shadow-sm border border-black/[0.06]">
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50" : "text-espresso/60"}`}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/50"}`}
                 >{l}</button>
               ))}
             </div>
@@ -2104,7 +2104,7 @@ function FinalCTA() {
 // ─── Footer ───────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="bg-cream-100 border-t border-cream-200/80">
+    <footer className="bg-white border-t border-black/[0.06]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid sm:grid-cols-4 gap-8 items-start">
         <div className="sm:col-span-2">
           <p className="font-bold tracking-vision text-espresso text-sm">V I S I O N</p>
@@ -2135,7 +2135,7 @@ function Footer() {
           <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </div>
       </div>
-      <div className="border-t border-cream-200/70 py-5 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/40">
+      <div className="border-t border-black/[0.05] py-5 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/40">
         <span>© {new Date().getFullYear()} Vision. All rights reserved.</span>
         <span>Stripe-secured payments · Built for PWA access</span>
       </div>
