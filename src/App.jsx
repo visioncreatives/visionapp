@@ -573,7 +573,7 @@ function PhoneShell({ children }) {
   return (
     <div style={{ width: PW, flexShrink: 0 }}>
       <div style={{ background: "#2C1A0E", borderRadius: 40, padding: 9, boxShadow: "0 24px 48px -12px rgba(44,26,14,0.45)" }}>
-        <div style={{ background: "#F8F2E8", borderRadius: 32, overflow: "hidden", height: PH, display: "flex", flexDirection: "column" }}>
+        <div style={{ background: "#FFFFFF", borderRadius: 32, overflow: "hidden", height: PH, display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 16px 2px", fontSize: 9, color: "rgba(44,26,14,0.5)", fontWeight: 600, flexShrink: 0 }}>
             <span>9:41</span>
             <span style={{ display: "flex", gap: 3 }}>
@@ -1765,7 +1765,7 @@ function Hero() {
             <HeroProfilePhone />
             {/* Solid arrow: scroll hint — left of phone */}
             <div className="hidden xl:flex absolute flex-col items-end gap-2" style={{ right: "calc(100% + 16px)", top: "36%" }}>
-              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>
+              <div style={{ background: "#EDE6F5", border: "1.5px solid rgba(74,42,122,0.15)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#4A2A7A", whiteSpace: "nowrap" }}>
                 scroll to explore
               </div>
               <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", alignSelf: "flex-end" }}>
@@ -1779,9 +1779,9 @@ function Hero() {
                 <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-              <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 16, padding: "9px 16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>interactive preview</div>
-                <div style={{ fontSize: 12, fontWeight: 400, color: "rgba(44,26,14,0.45)", whiteSpace: "nowrap" }}>tap &amp; scroll</div>
+              <div style={{ background: "#EDE6F5", border: "1.5px solid rgba(74,42,122,0.15)", borderRadius: 16, padding: "9px 16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "#4A2A7A", whiteSpace: "nowrap" }}>interactive preview</div>
+                <div style={{ fontSize: 12, fontWeight: 400, color: "rgba(74,42,122,0.5)", whiteSpace: "nowrap" }}>tap &amp; scroll</div>
               </div>
             </div>
           </div>
@@ -1790,7 +1790,7 @@ function Hero() {
         {/* Mobile — scale phone to fit smaller screens */}
         <div className="flex md:hidden justify-center flex-col items-center gap-4">
           {/* Mobile label above phone */}
-          <div style={{ background: "#F8F2E8", border: "1.5px solid rgba(44,26,14,0.12)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#2C1A0E", whiteSpace: "nowrap" }}>
+          <div style={{ background: "#EDE6F5", border: "1.5px solid rgba(74,42,122,0.15)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#4A2A7A", whiteSpace: "nowrap" }}>
             tap &amp; scroll to explore
           </div>
           <div className="scale-90 xs:scale-95 origin-top">

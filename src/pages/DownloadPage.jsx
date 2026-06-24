@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const APP_URL = 'https://live.joinvision.app'
 const E = '#2C1A0E'
-const C = '#F8F2E8'
+const C = '#FFFFFF'
 
 // ── Icons ─────────────────────────────────────────────────────
 const Ico = {
@@ -609,10 +609,12 @@ export default function DownloadPage() {
   }
 
   return (
-    <div style={{ background: C, minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'fixed', top: '-100px', right: '-100px', width: 500, height: 500, borderRadius: '50%', background: '#F2C4A0', opacity: 0.35, filter: 'blur(90px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div style={{ position: 'fixed', bottom: '-80px', left: '-80px', width: 400, height: 400, borderRadius: '50%', background: '#B8C8E8', opacity: 0.28, filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
 
       {/* Nav */}
-      <header style={{ borderBottom: '1px solid rgba(44,26,14,0.08)', background: 'rgba(248,242,232,0.95)', backdropFilter: 'blur(8px)', position: 'sticky', top: 0, zIndex: 50 }}>
+      <header style={{ borderBottom: '1px solid rgba(0,0,0,0.06)', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
           <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(44,26,14,0.5)', textDecoration: 'none' }}>← Back</Link>
@@ -657,7 +659,7 @@ export default function DownloadPage() {
             }}>
               {/* Single label — left side, arrow in cream so it's visible against dark phone frame */}
               <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
-                <div style={{ background: C, border: '1.5px solid rgba(44,26,14,0.12)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: E, whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(44,26,14,0.1)' }}>
+                <div style={{ background: '#EDE6F5', border: '1.5px solid rgba(74,42,122,0.15)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#4A2A7A', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(74,42,122,0.1)' }}>
                   tap &amp; scroll to explore
                 </div>
                 {/* Cream arrow with dark shadow so it reads over the phone frame */}
@@ -799,7 +801,7 @@ export default function DownloadPage() {
 
       </main>
 
-      <footer style={{ borderTop: '1px solid rgba(44,26,14,0.08)', padding: '20px 24px' }}>
+      <footer style={{ borderTop: '1px solid rgba(0,0,0,0.06)', padding: '20px 24px', background: '#FFFFFF', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
           <span style={{ fontSize: 11, color: 'rgba(44,26,14,0.35)' }}>© {new Date().getFullYear()} Vision. All rights reserved.</span>
           <div style={{ display: 'flex', gap: 20 }}>
