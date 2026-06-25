@@ -612,8 +612,8 @@ export default function DownloadPage() {
     <div style={{ background: '#ECECEC', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
 
       {/* Nav — floating pill */}
-      <header style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 16px 8px' }}>
-        <div style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(12px)', borderRadius: 16, border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 2px 16px rgba(0,0,0,0.07)', maxWidth: 1100, margin: '0 auto' }}>
+      <header style={{ padding: '12px 16px 8px' }}>
+        <div style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(12px)', borderRadius: 16, border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 2px 16px rgba(0,0,0,0.07)' }}>
           <div style={{ padding: '0 24px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
             <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(58,58,58,0.5)', textDecoration: 'none' }}>← Back</Link>
@@ -623,11 +623,11 @@ export default function DownloadPage() {
 
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 16px 16px' }}>
       {/* White card wrapping all content */}
-      <div style={{ background: '#FFFFFF', borderRadius: 24, width: '100%', maxWidth: 960, padding: '52px 32px 64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ background: '#FFFFFF', borderRadius: 24, width: '100%', maxWidth: 960, padding: isMobile ? '36px 20px 48px' : '52px 32px 64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
         {/* Top heading */}
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(58,58,58,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
-        <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 12, whiteSpace: 'nowrap' }}>
+        <h1 style={{ fontSize: 'clamp(1.4rem, 5vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: 12, maxWidth: 380 }}>
           Vision on your home screen.
         </h1>
         <p style={{ fontSize: 15, color: 'rgba(58,58,58,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
@@ -649,7 +649,7 @@ export default function DownloadPage() {
         </p>
 
         {/* ── Side-by-side: phone + install guide ── */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 64, width: '100%', maxWidth: 900, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: isMobile ? 32 : 64, width: '100%', maxWidth: 900, flexWrap: 'wrap', justifyContent: 'center' }}>
 
           {/* Left: phone with single floating label */}
           {/* On mobile we scale the whole unit (phone + label) so the label stays on-screen */}
@@ -659,8 +659,8 @@ export default function DownloadPage() {
               transform: isMobile ? 'scale(0.6)' : 'none',
               transformOrigin: 'top center',
             }}>
-              {/* Single label — left side, arrow in cream so it's visible against dark phone frame */}
-              <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
+              {/* Single label — left side, hidden on mobile since scale moves it off-screen */}
+              <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
                 <div style={{ background: '#E2EAF4', border: '1.5px solid rgba(107,143,191,0.2)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#6B8FBF', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(107,143,191,0.1)' }}>
                   tap &amp; scroll to explore
                 </div>

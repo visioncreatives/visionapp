@@ -1140,8 +1140,8 @@ function PayoutsPhone() {
 function Header() {
   const [open, setOpen] = useState(false)
   return (
-    <header className="sticky top-0 z-50 px-3 sm:px-4 pt-3 pb-2">
-      <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-card border border-black/[0.05] max-w-7xl mx-auto">
+    <header className="px-3 sm:px-4 pt-3 pb-2">
+      <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-card border border-black/[0.05]">
         <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
           <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
           <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
@@ -1792,7 +1792,7 @@ function Hero() {
           <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
             tap &amp; scroll to explore
           </div>
-          <div className="scale-90 xs:scale-95 origin-top">
+          <div className="scale-[0.82] sm:scale-90 origin-top">
             <HeroProfilePhone />
           </div>
         </div>
@@ -1979,60 +1979,48 @@ function SharedVision() {
     { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
     { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
   ]
-  // Compact 2-column, 3-row staggered collage that aligns with text height on the left
-  // Slight rotations + small overlaps give an editorial feel without making things big
   const cards = [
-    { src: "/projects/content-shoot.jpg",  title: "Content Shoot",   pos: { top: "0%",   left: "10%",  width: "40%", rotate: "-2deg"   }, z: 3 },
-    { src: "/projects/brand-campaign.jpg", title: "Brand Campaign",  pos: { top: "4%",   left: "55%",  width: "38%", rotate: "2deg"    }, z: 2 },
-    { src: "/projects/editorial.jpg",      title: "Editorial",       pos: { top: "33%",  left: "0%",   width: "42%", rotate: "1.5deg"  }, z: 4 },
-    { src: "/projects/music-video.jpg",    title: "Music Video",     pos: { top: "37%",  left: "48%",  width: "40%", rotate: "-1.5deg" }, z: 3 },
-    { src: "/projects/photoshoot.jpg",     title: "Photoshoot",      pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg"   }, z: 5 },
+    { src: "/projects/content-shoot.jpg",  title: "Content Shoot"  },
+    { src: "/projects/brand-campaign.jpg", title: "Brand Campaign" },
+    { src: "/projects/editorial.jpg",      title: "Couples Shoot"  },
+    { src: "/projects/music-video.jpg",    title: "Music Video"    },
+    { src: "/projects/photoshoot.jpg",     title: "Photoshoot"     },
   ]
   return (
-    <section id="for-creatives" className="py-16 sm:py-24 bg-white rounded-3xl">
+    <section id="for-creatives" className="py-16 sm:py-20 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
-            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">find the right creative for your next project, shoot, or idea.</h2>
-            <p className="mt-5 text-espresso/60 text-base leading-relaxed max-w-lg">Whatever you are building — a brand, an event, a campaign, a personal moment — there is a creative on Vision who can bring it to life.</p>
-            <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-lg">Search by category, location, budget, or the kind of work you need. Real portfolios, real availability, no guesswork.</p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {projects.map(({ label, bg, c }) => (
-                <span key={label} style={{ background: bg, color: c, fontSize: 12, padding: "6px 14px", borderRadius: 999, fontWeight: 600 }}>{label}</span>
-              ))}
-            </div>
-            <a href={APP_URL} className="mt-8 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3.5 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
-              Find a Creative <Ico.Arrow className="w-4 h-4" />
-            </a>
-          </div>
-          {/* Right: compact staggered collage, sized to align with text height */}
-          <div className="relative w-full" style={{ paddingBottom: "100%" }}>
-            {cards.map((card, i) => (
-              <div
-                key={i}
-                className="absolute group transition-transform duration-300 hover:scale-105 hover:z-50"
-                style={{
-                  top: card.pos.top,
-                  left: card.pos.left,
-                  width: card.pos.width,
-                  zIndex: card.z,
-                  transform: `rotate(${card.pos.rotate})`,
-                }}
-              >
-                <div className="relative bg-white rounded-2xl overflow-hidden shadow-soft border border-gray-100">
-                  <div style={{ aspectRatio: "4/3", overflow: "hidden", background: "#EFE5D4" }}>
-                    <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  </div>
-                  {/* Bottom gradient + title overlay on the image */}
-                  <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent 75%)" }}>
-                    <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
-                  </div>
-                </div>
+
+        {/* Heading block */}
+        <div className="mb-8 sm:mb-10">
+          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
+          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-2xl">find the right creative for your next project, shoot, or idea.</h2>
+          <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-xl">Whatever you are building — a brand, event, campaign, or personal moment — there is a creative on Vision who can bring it to life.</p>
+        </div>
+
+        {/* Horizontal image strip */}
+        <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
+          {cards.map((card, i) => (
+            <div key={i} className="flex-shrink-0 relative rounded-2xl overflow-hidden" style={{ width: 220, height: 270, background: "#e8e8e8" }}>
+              <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent 80%)" }}>
+                <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
               </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pills + CTA row */}
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft flex-shrink-0">
+            Find a Creative <Ico.Arrow className="w-4 h-4" />
+          </a>
+          <div className="flex flex-wrap gap-2">
+            {projects.map(({ label, bg, c }) => (
+              <span key={label} style={{ background: bg, color: c, fontSize: 12, padding: "5px 13px", borderRadius: 999, fontWeight: 600 }}>{label}</span>
             ))}
           </div>
         </div>
+
       </div>
     </section>
   )
