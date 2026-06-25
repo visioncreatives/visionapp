@@ -1709,7 +1709,7 @@ function Hero() {
   return (
     <section id="top" className="relative bg-white rounded-3xl overflow-hidden">
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 sm:pt-28 pb-14 sm:pb-32 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-10 sm:pb-20 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#E2EAF4", color: "#6B8FBF" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
@@ -1814,7 +1814,7 @@ function Categories() {
     { label: "Content Creation", tags: "Social · UGC · Influencer · Lifestyle"         },
   ]
   return (
-    <section className="py-20 sm:py-28 bg-white rounded-3xl">
+    <section className="py-12 sm:py-16 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         {/* Two-column layout: sticky heading left, list right */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
@@ -1869,11 +1869,11 @@ function HowItWorks() {
   const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
-    <section id="how" className="py-20 sm:py-28 bg-white rounded-3xl">
+    <section id="how" className="py-12 sm:py-16 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
         {/* Header — label + heading. Toggle lives inside the steps column on desktop, below heading on mobile */}
-        <div className="mb-8 sm:mb-14">
+        <div className="mb-6 sm:mb-10">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 block mb-4">How it works</span>
           <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
           {/* Toggle — mobile only (desktop version lives inside steps column) */}
@@ -1993,11 +1993,11 @@ function SharedVision() {
     { src: "/projects/photoshoot.jpg",     title: "Photoshoot"     },
   ]
   return (
-    <section id="for-creatives" className="py-20 sm:py-28 bg-white rounded-3xl">
+    <section id="for-creatives" className="py-12 sm:py-16 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
         {/* Heading block */}
-        <div className="mb-10 sm:mb-12">
+        <div className="mb-7 sm:mb-9">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-2xl">find the right creative for your next project, shoot, or idea.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-xl">Whatever you are building — a brand, event, campaign, or personal moment — there is a creative on Vision who can bring it to life.</p>
@@ -2043,7 +2043,7 @@ function SharedVision() {
 // ─── Final CTA ────────────────────────────────────────────────
 function FinalCTA() {
   return (
-    <section className="py-24 sm:py-40 bg-white rounded-3xl">
+    <section className="py-14 sm:py-20 bg-white rounded-3xl">
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
