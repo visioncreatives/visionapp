@@ -1709,7 +1709,7 @@ function Hero() {
   return (
     <section id="top" className="relative bg-white rounded-3xl overflow-hidden">
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-20 pb-8 sm:pb-24 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 sm:pt-28 pb-14 sm:pb-32 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#E2EAF4", color: "#6B8FBF" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
@@ -1814,18 +1814,18 @@ function Categories() {
     { Icon: Ico.User,     label: "Content Creation", desc: "Social, UGC, influencer, lifestyle",      bg: "#E2EEF6", ic: "#1A4A6A" },
   ]
   return (
-    <section className="py-16 sm:py-24 bg-white rounded-3xl">
+    <section className="py-20 sm:py-28 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed">Vision is for every kind of creative discipline — explore the categories below.</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
           {cats.map((c, i) => {
             const IconC = c.Icon
             return (
-              <a key={i} href={APP_URL} className="bg-white rounded-3xl p-5 shadow-card border border-cream-200/50 hover:-translate-y-1 transition-transform block">
+              <a key={i} href={APP_URL} className="bg-white rounded-3xl p-6 shadow-card border border-cream-200/50 hover:-translate-y-1 transition-transform block">
                 <div className="w-11 h-11 rounded-2xl flex items-center justify-center mb-4" style={{ background: c.bg }}>
                   <IconC style={{ width: 20, height: 20, color: c.ic }} />
                 </div>
@@ -1869,7 +1869,7 @@ function HowItWorks() {
   const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
-    <section id="how" className="py-16 sm:py-24 bg-white rounded-3xl">
+    <section id="how" className="py-20 sm:py-28 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
         {/* Header — label left, toggle right, heading below */}
@@ -1987,20 +1987,32 @@ function SharedVision() {
     { src: "/projects/photoshoot.jpg",     title: "Photoshoot"     },
   ]
   return (
-    <section id="for-creatives" className="py-16 sm:py-20 bg-white rounded-3xl">
+    <section id="for-creatives" className="py-20 sm:py-28 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
         {/* Heading block */}
-        <div className="mb-8 sm:mb-10">
+        <div className="mb-10 sm:mb-12">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-2xl">find the right creative for your next project, shoot, or idea.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-xl">Whatever you are building — a brand, event, campaign, or personal moment — there is a creative on Vision who can bring it to life.</p>
         </div>
 
-        {/* Horizontal image strip */}
-        <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
+        {/* Image strip — 5 equal columns on desktop, horizontal scroll on mobile */}
+        <div className="hidden sm:grid sm:grid-cols-5 gap-3">
           {cards.map((card, i) => (
-            <div key={i} className="flex-shrink-0 relative rounded-2xl overflow-hidden" style={{ width: 220, height: 270, background: "#e8e8e8" }}>
+            <div key={i} className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "3/4", background: "#e8e8e8" }}>
+              <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent 80%)" }}>
+                <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: horizontal scroll strip */}
+        <div className="flex sm:hidden gap-3 overflow-x-auto no-scrollbar pb-1">
+          {cards.map((card, i) => (
+            <div key={i} className="flex-shrink-0 relative rounded-2xl overflow-hidden" style={{ width: 160, height: 200, background: "#e8e8e8" }}>
               <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent 80%)" }}>
                 <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
@@ -2010,7 +2022,7 @@ function SharedVision() {
         </div>
 
         {/* Pills + CTA row */}
-        <div className="mt-6 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft flex-shrink-0">
             Find a Creative <Ico.Arrow className="w-4 h-4" />
           </a>
@@ -2040,7 +2052,7 @@ function FinalCTA() {
     { l: "Brands & Clients",  bg: "#E2EEF6", c: "#1A4A6A" },
   ]
   return (
-    <section className="py-20 sm:py-32 bg-white rounded-3xl">
+    <section className="py-24 sm:py-40 bg-white rounded-3xl">
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
