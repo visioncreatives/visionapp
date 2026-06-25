@@ -1872,14 +1872,14 @@ function HowItWorks() {
     <section id="how" className="py-20 sm:py-28 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
-        {/* Header — label left, toggle right, heading below */}
+        {/* Header — label + small toggle on same row, heading full-width below */}
         <div className="mb-8 sm:mb-14">
-          <div className="flex items-center justify-between gap-4 mb-3">
+          <div className="flex items-center justify-between gap-4 mb-4">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
-            <div className="inline-flex bg-white/70 backdrop-blur-sm p-1 rounded-full shadow-sm border border-black/[0.06]">
+            <div className="inline-flex bg-cream-100 p-1 rounded-full border border-black/[0.06]">
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-[#3A3A3A] text-white shadow-sm" : "text-espresso/50"}`}
+                  className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/40 hover:text-espresso/60"}`}
                 >{l}</button>
               ))}
             </div>
@@ -1887,81 +1887,74 @@ function HowItWorks() {
           <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
         </div>
 
-        {/* ── MOBILE layout: phone on top (small), steps below ── */}
+        {/* ── MOBILE layout: phone top, steps as numbered rows ── */}
         <div className="lg:hidden">
-          {/* Phone — compact, centered */}
-          <div className="flex justify-center mb-5">
+          <div className="flex justify-center mb-8">
             <div style={{ transform: 'scale(0.58)', transformOrigin: 'top center', height: 300 }}>
               <ActivePhone />
             </div>
           </div>
-          {/* Steps — compact rows, no expanded description */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col">
             {currentSteps.map((s, i) => (
               <div
                 key={i}
                 onClick={() => setActiveStep(i)}
-                className={`rounded-2xl px-4 py-3 cursor-pointer transition-all border ${
-                  activeStep === i
-                    ? "bg-white shadow-card border-gray-100"
-                    : "border-transparent hover:bg-gray-50"
-                }`}
+                className="flex gap-4 items-start py-5 border-t border-espresso/10 cursor-pointer"
               >
-                <div className="flex items-center gap-3">
-                  <span className="inline-block font-bold text-sm px-2.5 py-1 rounded-lg flex-shrink-0" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
-                  <h3 className="font-bold text-sm text-espresso leading-snug">{s.t}</h3>
+                <span className={`text-4xl font-bold flex-shrink-0 leading-none transition-colors ${activeStep === i ? "text-espresso/20" : "text-espresso/10"}`}>{s.n}</span>
+                <div className="flex-1 pt-1">
+                  <h3 className={`font-bold text-sm leading-snug transition-colors ${activeStep === i ? "text-espresso" : "text-espresso/40"}`}>{s.t}</h3>
                   {activeStep === i && (
-                    <svg className="ml-auto flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <>
+                      <p className="mt-1.5 text-espresso/55 text-xs leading-relaxed">{s.d}</p>
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {s.tags.map(tag => (
+                          <span key={tag} className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                        ))}
+                      </div>
+                    </>
                   )}
                 </div>
-                {activeStep === i && (
-                  <div className="flex flex-wrap gap-1.5 mt-2 pl-10">
-                    {s.tags.map(tag => (
-                      <span key={tag} className="text-xs font-semibold px-2.5 py-0.5 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
+            <div className="border-t border-espresso/10" />
           </div>
         </div>
 
-        {/* ── DESKTOP layout: steps left, phone right ── */}
+        {/* ── DESKTOP layout: phone LEFT, steps RIGHT ── */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-20 items-center">
-          <div className="flex flex-col gap-3">
+          {/* Phone — left */}
+          <div className="flex justify-center">
+            <ActivePhone />
+          </div>
+          {/* Steps — right, ghost numbers with thin dividers */}
+          <div className="flex flex-col">
             {currentSteps.map((s, i) => (
               <div
                 key={i}
                 onClick={() => setActiveStep(i)}
-                className={`rounded-2xl px-6 py-5 cursor-pointer transition-all border ${
-                  activeStep === i
-                    ? "bg-white shadow-card border-gray-100"
-                    : "border-transparent hover:bg-gray-50"
-                }`}
+                className="flex gap-6 items-start py-7 border-t border-espresso/10 cursor-pointer group"
               >
-                <div className="flex items-start gap-4">
-                  <span className="inline-block font-bold text-base px-3 py-1.5 rounded-xl flex-shrink-0 mt-0.5" style={{ background: s.bg, color: s.tc }}>{s.n}</span>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg text-espresso">{s.t}</h3>
-                    {activeStep === i && (
-                      <>
-                        <p className="mt-2 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
-                        <div className="flex flex-wrap gap-2 mt-3">
-                          {s.tags.map(tag => (
-                            <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
+                <span className={`text-6xl font-bold flex-shrink-0 leading-none transition-colors ${activeStep === i ? "text-espresso/20" : "text-espresso/10"}`}>{s.n}</span>
+                <div className="flex-1 pt-3">
+                  <h3 className={`font-bold text-xl leading-snug transition-colors ${activeStep === i ? "text-espresso" : "text-espresso/35 group-hover:text-espresso/60"}`}>{s.t}</h3>
+                  {activeStep === i && (
+                    <>
+                      <p className="mt-2.5 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {s.tags.map(tag => (
+                          <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
-          </div>
-          <div className="flex justify-center">
-            <ActivePhone />
+            <div className="border-t border-espresso/10" />
           </div>
         </div>
+
       </div>
     </section>
   )
