@@ -1804,34 +1804,51 @@ function Hero() {
 // ─── Creative Categories ──────────────────────────────────────
 function Categories() {
   const cats = [
-    { Icon: Ico.Eye,      label: "Photography",      desc: "Portrait, brand, editorial, events",      bg: "#FAF4D6", ic: "#6A5010" },
-    { Icon: Ico.Film,     label: "Videography",      desc: "Content, reels, brand films, events",     bg: "#E2EEF6", ic: "#1A4A6A" },
-    { Icon: Ico.Palette,  label: "Styling",          desc: "Fashion, lifestyle, wardrobe curation",   bg: "#E6F0E6", ic: "#2A5A2A" },
-    { Icon: Ico.Wand,     label: "Creative Dir.",    desc: "Art direction, concept, visual strategy", bg: "#EDE6F5", ic: "#4A2A7A" },
-    { Icon: Ico.Sparkle,  label: "Makeup & Beauty",  desc: "Editorial, events, personal, brand",      bg: "#FBE9E9", ic: "#7A2A2A" },
-    { Icon: Ico.Layers,   label: "Branding & Design",desc: "Identity, graphics, campaigns",           bg: "#D6EEE8", ic: "#1A5A48" },
-    { Icon: Ico.Calendar, label: "Events",           desc: "Weddings, activations, brand moments",    bg: "#FBE9D6", ic: "#7A3A10" },
-    { Icon: Ico.User,     label: "Content Creation", desc: "Social, UGC, influencer, lifestyle",      bg: "#E2EEF6", ic: "#1A4A6A" },
+    { Icon: Ico.Eye,      label: "Photography",       bg: "#FAF4D6", ic: "#6A5010" },
+    { Icon: Ico.Film,     label: "Videography",       bg: "#E2EEF6", ic: "#1A4A6A" },
+    { Icon: Ico.Palette,  label: "Styling",           bg: "#E6F0E6", ic: "#2A5A2A" },
+    { Icon: Ico.Wand,     label: "Creative Dir.",     bg: "#EDE6F5", ic: "#4A2A7A" },
+    { Icon: Ico.Sparkle,  label: "Makeup & Beauty",   bg: "#FBE9E9", ic: "#7A2A2A" },
+    { Icon: Ico.Layers,   label: "Branding & Design", bg: "#D6EEE8", ic: "#1A5A48" },
+    { Icon: Ico.Calendar, label: "Events",            bg: "#FBE9D6", ic: "#7A3A10" },
+    { Icon: Ico.User,     label: "Content Creation",  bg: "#E2EEF6", ic: "#1A4A6A" },
   ]
+  // Duplicate each row so the marquee loops seamlessly (animation moves -50%)
+  const row1 = [...cats, ...cats]
+  const row2 = [...[...cats].reverse(), ...[...cats].reverse()]
   return (
-    <section className="py-20 sm:py-28 bg-white rounded-3xl">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+    <section className="py-20 sm:py-28 bg-white rounded-3xl overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-12">
+        <div className="text-center max-w-2xl mx-auto">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed">Vision is for every kind of creative discipline — explore the categories below.</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-          {cats.map((c, i) => {
+      </div>
+      {/* Row 1 — scrolls left */}
+      <div className="overflow-hidden mb-3">
+        <div className="flex gap-3 animate-marquee" style={{ width: 'max-content' }}>
+          {row1.map((c, i) => {
             const IconC = c.Icon
             return (
-              <a key={i} href={APP_URL} className="bg-white rounded-3xl p-6 shadow-card border border-cream-200/50 hover:-translate-y-1 transition-transform block">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center mb-4" style={{ background: c.bg }}>
-                  <IconC style={{ width: 20, height: 20, color: c.ic }} />
-                </div>
-                <div className="font-bold text-sm text-espresso">{c.label}</div>
-                <div className="text-xs text-espresso/55 mt-1 leading-relaxed">{c.desc}</div>
-              </a>
+              <div key={i} className="flex-shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-full" style={{ background: c.bg }}>
+                <IconC style={{ width: 15, height: 15, color: c.ic, flexShrink: 0 }} />
+                <span className="text-sm font-semibold whitespace-nowrap" style={{ color: c.ic }}>{c.label}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      {/* Row 2 — scrolls right */}
+      <div className="overflow-hidden">
+        <div className="flex gap-3 animate-marquee-reverse" style={{ width: 'max-content' }}>
+          {row2.map((c, i) => {
+            const IconC = c.Icon
+            return (
+              <div key={i} className="flex-shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-full" style={{ background: c.bg }}>
+                <IconC style={{ width: 15, height: 15, color: c.ic, flexShrink: 0 }} />
+                <span className="text-sm font-semibold whitespace-nowrap" style={{ color: c.ic }}>{c.label}</span>
+              </div>
             )
           })}
         </div>
@@ -1872,10 +1889,12 @@ function HowItWorks() {
     <section id="how" className="py-20 sm:py-28 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
-        {/* Header — label + small toggle on same row, heading full-width below */}
+        {/* Header — label + heading. Toggle lives inside the steps column on desktop, below heading on mobile */}
         <div className="mb-8 sm:mb-14">
-          <div className="flex items-center justify-between gap-4 mb-4">
-            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">How it works</span>
+          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 block mb-4">How it works</span>
+          <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
+          {/* Toggle — mobile only (desktop version lives inside steps column) */}
+          <div className="mt-5 lg:hidden">
             <div className="inline-flex bg-cream-100 p-1 rounded-full border border-black/[0.06]">
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
@@ -1884,7 +1903,6 @@ function HowItWorks() {
               ))}
             </div>
           </div>
-          <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
         </div>
 
         {/* ── MOBILE layout: phone top, steps as numbered rows ── */}
@@ -1927,7 +1945,18 @@ function HowItWorks() {
           <div className="flex justify-center">
             <ActivePhone />
           </div>
-          {/* Steps — right, ghost numbers with thin dividers */}
+          {/* Steps — right, toggle at top then ghost numbers with thin dividers */}
+          <div>
+            {/* Toggle — desktop only, sits at top of steps column */}
+            <div className="mb-8">
+              <div className="inline-flex bg-cream-100 p-1 rounded-full border border-black/[0.06]">
+                {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
+                  <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/40 hover:text-espresso/60"}`}
+                  >{l}</button>
+                ))}
+              </div>
+            </div>
           <div className="flex flex-col">
             {currentSteps.map((s, i) => (
               <div
@@ -1952,6 +1981,7 @@ function HowItWorks() {
               </div>
             ))}
             <div className="border-t border-espresso/10" />
+          </div>
           </div>
         </div>
 
