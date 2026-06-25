@@ -2053,7 +2053,6 @@ function FinalCTA() {
   ]
   return (
     <section className="py-20 sm:py-32 bg-white rounded-3xl">
-      <div>
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
