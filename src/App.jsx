@@ -1804,53 +1804,36 @@ function Hero() {
 // ─── Creative Categories ──────────────────────────────────────
 function Categories() {
   const cats = [
-    { Icon: Ico.Eye,      label: "Photography",       bg: "#FAF4D6", ic: "#6A5010" },
-    { Icon: Ico.Film,     label: "Videography",       bg: "#E2EEF6", ic: "#1A4A6A" },
-    { Icon: Ico.Palette,  label: "Styling",           bg: "#E6F0E6", ic: "#2A5A2A" },
-    { Icon: Ico.Wand,     label: "Creative Dir.",     bg: "#EDE6F5", ic: "#4A2A7A" },
-    { Icon: Ico.Sparkle,  label: "Makeup & Beauty",   bg: "#FBE9E9", ic: "#7A2A2A" },
-    { Icon: Ico.Layers,   label: "Branding & Design", bg: "#D6EEE8", ic: "#1A5A48" },
-    { Icon: Ico.Calendar, label: "Events",            bg: "#FBE9D6", ic: "#7A3A10" },
-    { Icon: Ico.User,     label: "Content Creation",  bg: "#E2EEF6", ic: "#1A4A6A" },
+    { label: "Photography",      tags: "Portrait · Brand · Editorial · Events"         },
+    { label: "Videography",      tags: "Content · Reels · Brand Films · Events"        },
+    { label: "Styling",          tags: "Fashion · Lifestyle · Wardrobe Curation"       },
+    { label: "Creative Direction", tags: "Art Direction · Concept · Visual Strategy"   },
+    { label: "Makeup & Beauty",  tags: "Editorial · Events · Personal · Brand"         },
+    { label: "Branding & Design",tags: "Identity · Graphics · Campaigns"               },
+    { label: "Events",           tags: "Weddings · Activations · Brand Moments"        },
+    { label: "Content Creation", tags: "Social · UGC · Influencer · Lifestyle"         },
   ]
-  // Duplicate each row so the marquee loops seamlessly (animation moves -50%)
-  const row1 = [...cats, ...cats]
-  const row2 = [...[...cats].reverse(), ...[...cats].reverse()]
   return (
-    <section className="py-20 sm:py-28 bg-white rounded-3xl overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-12">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
-          <p className="mt-4 text-espresso/60 text-base leading-relaxed">Vision is for every kind of creative discipline — explore the categories below.</p>
-        </div>
-      </div>
-      {/* Row 1 — scrolls left */}
-      <div className="overflow-hidden mb-3">
-        <div className="flex gap-3 animate-marquee" style={{ width: 'max-content' }}>
-          {row1.map((c, i) => {
-            const IconC = c.Icon
-            return (
-              <div key={i} className="flex-shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-full" style={{ background: c.bg }}>
-                <IconC style={{ width: 15, height: 15, color: c.ic, flexShrink: 0 }} />
-                <span className="text-sm font-semibold whitespace-nowrap" style={{ color: c.ic }}>{c.label}</span>
+    <section className="py-20 sm:py-28 bg-white rounded-3xl">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        {/* Two-column layout: sticky heading left, list right */}
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
+          {/* Left — label + heading + subtext */}
+          <div className="lg:w-64 lg:flex-shrink-0 lg:pt-2">
+            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
+            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
+            <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Every kind of creative discipline — explore what's possible.</p>
+          </div>
+          {/* Right — editorial list with dividers */}
+          <div className="flex-1">
+            {cats.map((c, i) => (
+              <div key={i} className="flex items-center justify-between gap-6 py-4 border-t border-espresso/10">
+                <span className="font-bold text-base sm:text-lg text-espresso">{c.label}</span>
+                <span className="text-xs sm:text-sm text-espresso/45 text-right">{c.tags}</span>
               </div>
-            )
-          })}
-        </div>
-      </div>
-      {/* Row 2 — scrolls right */}
-      <div className="overflow-hidden">
-        <div className="flex gap-3 animate-marquee-reverse" style={{ width: 'max-content' }}>
-          {row2.map((c, i) => {
-            const IconC = c.Icon
-            return (
-              <div key={i} className="flex-shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-full" style={{ background: c.bg }}>
-                <IconC style={{ width: 15, height: 15, color: c.ic, flexShrink: 0 }} />
-                <span className="text-sm font-semibold whitespace-nowrap" style={{ color: c.ic }}>{c.label}</span>
-              </div>
-            )
-          })}
+            ))}
+            <div className="border-t border-espresso/10" />
+          </div>
         </div>
       </div>
     </section>
