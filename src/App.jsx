@@ -2021,16 +2021,11 @@ function SharedVision() {
           ))}
         </div>
 
-        {/* Pills + CTA row */}
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft flex-shrink-0">
+        {/* CTA */}
+        <div className="mt-8">
+          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
             Find a Creative <Ico.Arrow className="w-4 h-4" />
           </a>
-          <div className="flex flex-wrap gap-2">
-            {projects.map(({ label, bg, c }) => (
-              <span key={label} style={{ background: bg, color: c, fontSize: 12, padding: "5px 13px", borderRadius: 999, fontWeight: 600 }}>{label}</span>
-            ))}
-          </div>
         </div>
 
       </div>
