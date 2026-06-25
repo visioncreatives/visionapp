@@ -1140,33 +1140,35 @@ function PayoutsPhone() {
 function Header() {
   const [open, setOpen] = useState(false)
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-black/[0.06]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
-        <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/65 font-medium">
-          <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
-          <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
-          <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
-          <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
-        </nav>
-        <div className="flex items-center gap-3">
-          <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
-          <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-espresso" aria-label="Menu">
-            {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
-          </button>
-        </div>
-      </div>
-      {open && (
-        <div className="md:hidden border-t border-black/[0.06] bg-white">
-          <div className="px-5 py-4 flex flex-col gap-4 text-espresso/80 font-medium">
-            <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
-            <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
-            <a href="#for-creatives" onClick={() => setOpen(false)}>For Creatives</a>
-            <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
-            <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
+    <header className="sticky top-0 z-50 px-3 sm:px-4 pt-3 pb-2">
+      <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-card border border-black/[0.05] max-w-7xl mx-auto">
+        <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
+          <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
+          <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
+            <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
+            <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
+            <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
+            <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
+          </nav>
+          <div className="flex items-center gap-3">
+            <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
+            <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-espresso" aria-label="Menu">
+              {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
+            </button>
           </div>
         </div>
-      )}
+        {open && (
+          <div className="md:hidden border-t border-black/[0.05] rounded-b-2xl">
+            <div className="px-5 py-4 flex flex-col gap-4 text-espresso/75 font-medium">
+              <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
+              <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
+              <a href="#for-creatives" onClick={() => setOpen(false)}>For Creatives</a>
+              <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
+              <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   )
 }
@@ -1180,7 +1182,7 @@ function FeedScroll({ startIndex, posts, imgs, c }) {
   }, [startIndex])
 
   return (
-    <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", background: "#F8F2E8" }}>
+    <div className="no-scrollbar" style={{ flex: 1, overflowY: "auto", background: "#F2F2F2" }}>
       {posts.map((post, i) => (
         <div key={i} ref={el => postRefs.current[i] = el} style={{ background: "white", marginBottom: 6 }}>
           {/* Per-post mini header */}
@@ -1193,7 +1195,7 @@ function FeedScroll({ startIndex, posts, imgs, c }) {
             <svg viewBox="0 0 24 24" fill="#2C1A0E" style={{ width: 14, height: 14, opacity: 0.3 }}><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
           </div>
           {/* Photo */}
-          <div style={{ width: "100%", aspectRatio: "1/1", background: "#EFE5D4", overflow: "hidden" }}>
+          <div style={{ width: "100%", aspectRatio: "1/1", background: "#F0F0F0", overflow: "hidden" }}>
             <img src={imgs[i]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
           </div>
           {/* Actions */}
@@ -1705,20 +1707,18 @@ function Hero() {
     { l: "Design",      bg: "#D6EEE8", c: "#1A5A48" },
   ]
   return (
-    <section id="top" className="relative" style={{ background: "#FFFFFF" }}>
-      <div className="absolute top-60 -left-32 w-96 h-96 rounded-full opacity-30" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
-      <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full opacity-25" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
+    <section id="top" className="relative bg-white rounded-3xl overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-20 pb-8 sm:pb-24 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#EDE6F5", color: "#4A2A7A" }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#E2EAF4", color: "#6B8FBF" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
           </div>
 
           <h1 className="text-espresso font-bold leading-[1.06] tracking-tight text-4xl sm:text-5xl lg:text-[58px]">
             find creatives<br />
             that match<br />
-            <span style={{ color: "#8B6A3A", fontStyle: "italic", fontWeight: 400 }}>your vision.</span>
+            <span style={{ color: "#6B8FBF", fontStyle: "italic", fontWeight: 400 }}>your vision.</span>
           </h1>
 
           <p className="mt-6 text-espresso/60 text-base sm:text-lg max-w-lg leading-relaxed">
@@ -1743,12 +1743,12 @@ function Hero() {
           <div className="mt-9 flex items-center gap-3">
             <div className="flex -space-x-2">
               {[Avatar.Emi, Avatar.Mia, Avatar.Dre, Avatar.Leila, Avatar.Nova].map((Av, i) => (
-                <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #F8F2E8" }}><Av size={30} /></div>
+                <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #ECECEC" }}><Av size={30} /></div>
               ))}
             </div>
             <div>
               <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((i) => <Ico.Star key={i} style={{ width: 11, height: 11, color: "#C8A040" }} />)}
+                {[1, 2, 3, 4, 5].map((i) => <Ico.Star key={i} style={{ width: 11, height: 11, color: "#6B8FBF" }} />)}
               </div>
               <p className="text-xs text-espresso/50 font-medium mt-0.5">Loved by creatives and clients</p>
             </div>
@@ -1764,7 +1764,7 @@ function Hero() {
             <HeroProfilePhone />
             {/* Solid arrow: scroll hint — left of phone */}
             <div className="hidden xl:flex absolute flex-col items-end gap-2" style={{ right: "calc(100% + 16px)", top: "36%" }}>
-              <div style={{ background: "#EDE6F5", border: "1.5px solid rgba(74,42,122,0.15)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#4A2A7A", whiteSpace: "nowrap" }}>
+              <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
                 scroll to explore
               </div>
               <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", alignSelf: "flex-end" }}>
@@ -1778,9 +1778,9 @@ function Hero() {
                 <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               </svg>
-              <div style={{ background: "#EDE6F5", border: "1.5px solid rgba(74,42,122,0.15)", borderRadius: 16, padding: "9px 16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: "#4A2A7A", whiteSpace: "nowrap" }}>interactive preview</div>
-                <div style={{ fontSize: 12, fontWeight: 400, color: "rgba(74,42,122,0.5)", whiteSpace: "nowrap" }}>tap &amp; scroll</div>
+              <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 16, padding: "9px 16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>interactive preview</div>
+                <div style={{ fontSize: 12, fontWeight: 400, color: "rgba(107,143,191,0.5)", whiteSpace: "nowrap" }}>tap &amp; scroll</div>
               </div>
             </div>
           </div>
@@ -1789,7 +1789,7 @@ function Hero() {
         {/* Mobile — scale phone to fit smaller screens */}
         <div className="flex md:hidden justify-center flex-col items-center gap-4">
           {/* Mobile label above phone */}
-          <div style={{ background: "#EDE6F5", border: "1.5px solid rgba(74,42,122,0.15)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#4A2A7A", whiteSpace: "nowrap" }}>
+          <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
             tap &amp; scroll to explore
           </div>
           <div className="scale-90 xs:scale-95 origin-top">
@@ -1814,8 +1814,8 @@ function Categories() {
     { Icon: Ico.User,     label: "Content Creation", desc: "Social, UGC, influencer, lifestyle",      bg: "#E2EEF6", ic: "#1A4A6A" },
   ]
   return (
-    <section className="py-16 sm:py-24 relative" style={{ background: "#FFFFFF" }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
+    <section className="py-16 sm:py-24 bg-white rounded-3xl">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
           <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
@@ -1869,9 +1869,7 @@ function HowItWorks() {
   const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
-    <section id="how" className="py-16 sm:py-24 relative" style={{ background: "#FFFFFF" }}>
-      <div className="absolute -top-20 right-0 w-[450px] h-[450px] rounded-full opacity-25" style={{ background: "#B8C8E8", filter: "blur(100px)" }} />
-      <div className="absolute bottom-10 -left-20 w-80 h-80 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(80px)" }} />
+    <section id="how" className="py-16 sm:py-24 bg-white rounded-3xl">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
         {/* Header — label left, toggle right, heading below */}
@@ -1881,7 +1879,7 @@ function HowItWorks() {
             <div className="inline-flex bg-white/70 backdrop-blur-sm p-1 rounded-full shadow-sm border border-black/[0.06]">
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/50"}`}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${tab === k ? "bg-[#3A3A3A] text-white shadow-sm" : "text-espresso/50"}`}
                 >{l}</button>
               ))}
             </div>
@@ -1905,8 +1903,8 @@ function HowItWorks() {
                 onClick={() => setActiveStep(i)}
                 className={`rounded-2xl px-4 py-3 cursor-pointer transition-all border ${
                   activeStep === i
-                    ? "bg-white shadow-card border-cream-200/50"
-                    : "border-transparent hover:bg-white/50"
+                    ? "bg-white shadow-card border-gray-100"
+                    : "border-transparent hover:bg-gray-50"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -1937,8 +1935,8 @@ function HowItWorks() {
                 onClick={() => setActiveStep(i)}
                 className={`rounded-2xl px-6 py-5 cursor-pointer transition-all border ${
                   activeStep === i
-                    ? "bg-white shadow-card border-cream-200/50"
-                    : "border-transparent hover:bg-white/50"
+                    ? "bg-white shadow-card border-gray-100"
+                    : "border-transparent hover:bg-gray-50"
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -1991,9 +1989,8 @@ function SharedVision() {
     { src: "/projects/photoshoot.jpg",     title: "Photoshoot",      pos: { top: "68%",  left: "25%",  width: "50%", rotate: "-1deg"   }, z: 5 },
   ]
   return (
-    <section id="for-creatives" className="py-16 sm:py-24 relative" style={{ background: "#FFFFFF" }}>
-      <div className="absolute top-10 -right-24 w-[400px] h-[400px] rounded-full opacity-25" style={{ background: "#B8D8C0", filter: "blur(90px)" }} />
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
+    <section id="for-creatives" className="py-16 sm:py-24 bg-white rounded-3xl">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
           <div>
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
@@ -2023,7 +2020,7 @@ function SharedVision() {
                   transform: `rotate(${card.pos.rotate})`,
                 }}
               >
-                <div className="relative bg-white rounded-2xl overflow-hidden shadow-soft border border-cream-200/40">
+                <div className="relative bg-white rounded-2xl overflow-hidden shadow-soft border border-gray-100">
                   <div style={{ aspectRatio: "4/3", overflow: "hidden", background: "#EFE5D4" }}>
                     <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                   </div>
@@ -2055,11 +2052,8 @@ function FinalCTA() {
     { l: "Brands & Clients",  bg: "#E2EEF6", c: "#1A4A6A" },
   ]
   return (
-    <section className="py-20 sm:py-32 relative" style={{ background: "#FFFFFF" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-20" style={{ background: "#B8C8E8", filter: "blur(80px)" }} />
-        <div className="absolute top-1/2 left-0 w-64 h-64 rounded-full opacity-15" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
-      </div>
+    <section className="py-20 sm:py-32 bg-white rounded-3xl">
+      <div>
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
@@ -2086,7 +2080,7 @@ function FinalCTA() {
         <div className="mt-10 flex justify-center items-center gap-3">
           <div className="flex -space-x-2">
             {Object.values(Avatar).map((Av, i) => (
-              <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #F8F2E8" }}><Av size={34} /></div>
+              <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #ECECEC" }}><Av size={34} /></div>
             ))}
           </div>
           <p className="text-sm text-espresso/50 font-medium text-left">Creatives ready<br />to collaborate</p>
@@ -2099,7 +2093,7 @@ function FinalCTA() {
 // ─── Footer ───────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="bg-white border-t border-black/[0.06]">
+    <footer className="bg-white rounded-3xl mx-3 sm:mx-4 mt-0 mb-4">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid sm:grid-cols-4 gap-8 items-start">
         <div className="sm:col-span-2">
           <p className="font-bold tracking-vision text-espresso text-sm">V I S I O N</p>
@@ -2130,7 +2124,7 @@ function Footer() {
           <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </div>
       </div>
-      <div className="border-t border-black/[0.05] py-5 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/40">
+      <div className="border-t border-gray-100 py-5 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/40">
         <span>© {new Date().getFullYear()} Vision. All rights reserved.</span>
         <span>Stripe-secured payments · Built for PWA access</span>
       </div>
@@ -2141,14 +2135,13 @@ function Footer() {
 // ─── App ──────────────────────────────────────────────────────
 export default function App() {
   return (
-    <div className="bg-cream-100 min-h-screen font-sans">
+    <div className="min-h-screen font-sans" style={{ background: "#ECECEC" }}>
       <Header />
-      <main>
+      <main className="flex flex-col gap-3 px-3 sm:px-4 pb-4">
         <Hero />
         <HowItWorks />
         <Categories />
         <SharedVision />
-
         <FinalCTA />
       </main>
       <Footer />

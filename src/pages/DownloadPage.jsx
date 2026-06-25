@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const APP_URL = 'https://live.joinvision.app'
-const E = '#2C1A0E'
+const E = '#3A3A3A'
 const C = '#FFFFFF'
 
 // ── Icons ─────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ function PhoneShell({ children }) {
             <div style={{ display: 'flex', gap: 1.5, alignItems: 'flex-end' }}>
               {[4,6,8,10].map((h,i) => <div key={i} style={{ width: 2.5, height: h, background: `rgba(44,26,14,${i<3?0.5:0.2})`, borderRadius: 1 }}/>)}
             </div>
-            <div style={{ width: 18, height: 8, border: '1.5px solid rgba(44,26,14,0.4)', borderRadius: 2.5, position: 'relative', padding: 1.5 }}>
+            <div style={{ width: 18, height: 8, border: '1.5px solid rgba(58,58,58,0.4)', borderRadius: 2.5, position: 'relative', padding: 1.5 }}>
               <div style={{ background: E, borderRadius: 1, height: '100%', width: '75%' }}/>
             </div>
           </div>
@@ -197,7 +197,7 @@ function InteractivePhone() {
         {/* Category pills */}
         <div style={{ padding: '0 12px 7px', display: 'flex', gap: 5, overflowX: 'auto', flexShrink: 0 }} className="no-scrollbar">
           {CATEGORIES.map(c => (
-            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 10px', borderRadius: 999, cursor: 'pointer', fontSize: 8.5, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0, border: `1.5px solid ${catFilter === c ? E : 'rgba(44,26,14,0.13)'}`, background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(44,26,14,0.6)' }}>
+            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 10px', borderRadius: 999, cursor: 'pointer', fontSize: 8.5, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0, border: `1.5px solid ${catFilter === c ? E : 'rgba(44,26,14,0.13)'}`, background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(58,58,58,0.6)' }}>
               {c}
             </button>
           ))}
@@ -303,7 +303,7 @@ function InteractivePhone() {
                 <EmiAv size={22} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 10, color: E }}>Emi Chen</div>
-                  <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>Los Angeles</div>
+                  <div style={{ fontSize: 7.5, color: 'rgba(58,58,58,0.4)' }}>Los Angeles</div>
                 </div>
               </div>
               <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D4C4A8' }}>
@@ -313,11 +313,11 @@ function InteractivePhone() {
                 <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                   <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="1.8" style={{ width: 13, height: 13 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.likes}</span>
+                    <span style={{ fontSize: 8, color: 'rgba(58,58,58,0.5)' }}>{post.likes}</span>
                   </div>
                   <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-                    <Ico.Chat style={{ width: 12, height: 12, color: 'rgba(44,26,14,0.5)' }} />
-                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.comments}</span>
+                    <Ico.Chat style={{ width: 12, height: 12, color: 'rgba(58,58,58,0.5)' }} />
+                    <span style={{ fontSize: 8, color: 'rgba(58,58,58,0.5)' }}>{post.comments}</span>
                   </div>
                 </div>
               </div>
@@ -351,7 +351,7 @@ function InteractivePhone() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 800, color: E }}>{s.title}</div>
-                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.5)' }}>
+                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(58,58,58,0.5)' }}>
                   <Ico.Clock style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9 }}>{s.duration}</span>
                 </div>
               </div>
@@ -361,7 +361,7 @@ function InteractivePhone() {
               {[`${s.photos} edited photos`, `Delivery in ${s.delivery}`, 'Online gallery + print release', 'Secure payment via Stripe'].map(item => (
                 <div key={item} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                   <Ico.Check style={{ width: 10, height: 10, color: '#1A5A48', flexShrink: 0 }} />
-                  <span style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)' }}>{item}</span>
+                  <span style={{ fontSize: 9.5, color: 'rgba(58,58,58,0.65)' }}>{item}</span>
                 </div>
               ))}
             </div>
@@ -370,7 +370,7 @@ function InteractivePhone() {
             <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 7 }}>SELECT DATE</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {['Jun 22', 'Jun 28', 'Jul 5', 'Jul 12'].map(d => (
-                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, cursor: 'pointer', fontSize: 9, fontWeight: 600, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(44,26,14,0.6)', border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(44,26,14,0.1)'}` }}>{d}</button>
+                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, cursor: 'pointer', fontSize: 9, fontWeight: 600, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(58,58,58,0.6)', border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(58,58,58,0.1)'}` }}>{d}</button>
               ))}
             </div>
           </div>
@@ -398,7 +398,7 @@ function InteractivePhone() {
             <Ico.Check style={{ width: 24, height: 24, color: '#1A5A48' }} />
           </div>
           <div style={{ fontSize: 16, fontWeight: 800, color: E, textAlign: 'center', marginBottom: 6 }}>Booking Confirmed!</div>
-          <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
+          <div style={{ fontSize: 11, color: 'rgba(58,58,58,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
             {selectedService?.title} with Emi Chen<br/>{bookDate} · Malibu, CA
           </div>
           <div style={{ background: 'white', borderRadius: 14, padding: '12px 16px', width: '100%', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
@@ -435,7 +435,7 @@ function InteractivePhone() {
               </div>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: E }}>{r.name}</div>
-                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.4)' }}>{r.handle} · {r.date}</div>
+                <div style={{ fontSize: 9, color: 'rgba(58,58,58,0.4)' }}>{r.handle} · {r.date}</div>
               </div>
             </div>
             <div style={{ display: 'flex', gap: 2, marginBottom: 10 }}>{[0,1,2,3,4].map(i => <StarFilled key={i} size={11} />)}</div>
@@ -465,7 +465,7 @@ function InteractivePhone() {
             {[['5.0 ★', 'RATING'], ['89', 'BOOKED']].map(([v, l]) => (
               <div key={l} style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 4px', textAlign: 'center', border: '1px solid rgba(44,26,14,0.07)' }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: E }}>{v}</div>
-                <div style={{ fontSize: 7, color: 'rgba(44,26,14,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>{l}</div>
+                <div style={{ fontSize: 7, color: 'rgba(58,58,58,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>{l}</div>
               </div>
             ))}
           </div>
@@ -479,11 +479,11 @@ function InteractivePhone() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(44,26,14,0.45)', marginBottom: 4 }}>
             <Ico.Map style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9.5 }}>Los Angeles</span>
           </div>
-          <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
+          <div style={{ fontSize: 9.5, color: 'rgba(58,58,58,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
         </div>
         {/* Message button — clickable */}
         <div style={{ padding: '0 14px 8px' }}>
-          <button onClick={goToChat} style={{ width: '100%', background: '#FFFFFF', borderRadius: 22, padding: '7px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(44,26,14,0.1)', cursor: 'pointer' }}>
+          <button onClick={goToChat} style={{ width: '100%', background: '#FFFFFF', borderRadius: 22, padding: '7px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(58,58,58,0.1)', cursor: 'pointer' }}>
             <Ico.Msg style={{ width: 9, height: 9, color: E }} />
             <span style={{ fontSize: 9, fontWeight: 600, color: E }}>Message Emi Chen</span>
           </button>
@@ -520,10 +520,10 @@ function InteractivePhone() {
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <span style={{ fontSize: 15, fontWeight: 800, color: E }}>{s.price}</span>
-                    <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{s.unit}</div>
+                    <div style={{ fontSize: 7.5, color: 'rgba(58,58,58,0.4)' }}>{s.unit}</div>
                   </div>
                 </div>
-                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.55)', lineHeight: 1.5, marginBottom: 10 }}>{s.desc}</div>
+                <div style={{ fontSize: 9, color: 'rgba(58,58,58,0.55)', lineHeight: 1.5, marginBottom: 10 }}>{s.desc}</div>
                 <button onClick={() => { setService(s); setScreen('checkout') }} style={{ width: '100%', background: E, color: C, border: 'none', borderRadius: 20, padding: '8px 0', fontSize: 10, fontWeight: 700, cursor: 'pointer' }}>
                   Book This Package
                 </button>
@@ -538,7 +538,7 @@ function InteractivePhone() {
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 24, fontWeight: 800, color: E }}>5.0</div>
                 <div style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>{[0,1,2,3,4].map(i => <StarFilled key={i} />)}</div>
-                <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 2 }}>89 reviews</div>
+                <div style={{ fontSize: 7.5, color: 'rgba(58,58,58,0.4)', marginTop: 2 }}>89 reviews</div>
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {[5,4,3].map(n => (
@@ -560,12 +560,12 @@ function InteractivePhone() {
                     </div>
                     <div>
                       <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name}</div>
-                      <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{r.date}</div>
+                      <div style={{ fontSize: 7.5, color: 'rgba(58,58,58,0.4)' }}>{r.date}</div>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 1 }}>{[0,1,2,3,4].map(j => <StarFilled key={j} size={8} />)}</div>
                 </div>
-                <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
+                <div style={{ fontSize: 9.5, color: 'rgba(58,58,58,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
                 <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.35)', marginTop: 5, fontWeight: 600 }}>Tap to read full review →</div>
               </div>
             ))}
@@ -609,26 +609,28 @@ export default function DownloadPage() {
   }
 
   return (
-    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'fixed', bottom: '-80px', left: '-80px', width: 400, height: 400, borderRadius: '50%', background: '#B8C8E8', opacity: 0.28, filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
-      <div style={{ position: 'fixed', top: '30%', right: '-60px', width: 350, height: 350, borderRadius: '50%', background: '#C8B8E0', opacity: 0.20, filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0 }} />
+    <div style={{ background: '#ECECEC', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
 
-      {/* Nav */}
-      <header style={{ borderBottom: '1px solid rgba(0,0,0,0.06)', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
-          <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(44,26,14,0.5)', textDecoration: 'none' }}>← Back</Link>
+      {/* Nav — floating pill */}
+      <header style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 16px 8px' }}>
+        <div style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(12px)', borderRadius: 16, border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 2px 16px rgba(0,0,0,0.07)', maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ padding: '0 24px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
+            <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(58,58,58,0.5)', textDecoration: 'none' }}>← Back</Link>
+          </div>
         </div>
       </header>
 
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '60px 24px 80px' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 16px 16px' }}>
+      {/* White card wrapping all content */}
+      <div style={{ background: '#FFFFFF', borderRadius: 24, width: '100%', maxWidth: 960, padding: '52px 32px 64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
         {/* Top heading */}
-        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(44,26,14,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(58,58,58,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
         <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 12, whiteSpace: 'nowrap' }}>
           Vision on your home screen.
         </h1>
-        <p style={{ fontSize: 15, color: 'rgba(44,26,14,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
+        <p style={{ fontSize: 15, color: 'rgba(58,58,58,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
           Available on iPhone and Android. No App Store needed — install directly from your browser.
         </p>
 
@@ -642,7 +644,7 @@ export default function DownloadPage() {
           <Ico.Download style={{ width: 17, height: 17 }} />
           {installed ? 'Installed ✓' : 'Download Vision'}
         </button>
-        <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.4)', textAlign: 'center', marginBottom: 56 }}>
+        <p style={{ fontSize: 12, color: 'rgba(58,58,58,0.4)', textAlign: 'center', marginBottom: 56 }}>
           🍎 iPhone · 🤖 Android · 💻 Desktop &nbsp;—&nbsp; no app store required
         </p>
 
@@ -659,7 +661,7 @@ export default function DownloadPage() {
             }}>
               {/* Single label — left side, arrow in cream so it's visible against dark phone frame */}
               <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
-                <div style={{ background: '#EDE6F5', border: '1.5px solid rgba(74,42,122,0.15)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#4A2A7A', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(74,42,122,0.1)' }}>
+                <div style={{ background: '#E2EAF4', border: '1.5px solid rgba(107,143,191,0.2)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#6B8FBF', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(107,143,191,0.1)' }}>
                   tap &amp; scroll to explore
                 </div>
                 {/* Cream arrow with dark shadow so it reads over the phone frame */}
@@ -674,7 +676,7 @@ export default function DownloadPage() {
 
           {/* Right: tabbed install guide */}
           <div style={{ flex: 1, minWidth: 300, maxWidth: 420 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', color: 'rgba(44,26,14,0.4)', marginBottom: 8 }}>HOW TO INSTALL</p>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', color: 'rgba(58,58,58,0.4)', marginBottom: 8 }}>HOW TO INSTALL</p>
             <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: E, marginBottom: 20, lineHeight: 1.2, letterSpacing: '-0.01em' }}>Add Vision to<br/>your home screen</h2>
 
             {/* Platform tabs */}
@@ -683,7 +685,7 @@ export default function DownloadPage() {
                 { key: 'ios',     label: '🍎  iPhone / iPad' },
                 { key: 'android', label: '🤖  Android' },
               ].map(({ key, label }) => (
-                <button key={key} onClick={() => setPlatform(key)} style={{ padding: '8px 18px', borderRadius: 999, border: `1.5px solid ${platform === key ? E : 'rgba(44,26,14,0.15)'}`, background: platform === key ? E : 'transparent', color: platform === key ? C : 'rgba(44,26,14,0.55)', fontSize: 12, fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s', fontFamily: '"DM Sans",sans-serif' }}>
+                <button key={key} onClick={() => setPlatform(key)} style={{ padding: '8px 18px', borderRadius: 999, border: `1.5px solid ${platform === key ? E : 'rgba(44,26,14,0.15)'}`, background: platform === key ? E : 'transparent', color: platform === key ? C : 'rgba(58,58,58,0.55)', fontSize: 12, fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s', fontFamily: '"DM Sans",sans-serif' }}>
                   {label}
                 </button>
               ))}
@@ -692,11 +694,11 @@ export default function DownloadPage() {
             {/* iOS steps */}
             {platform === 'ios' && (
               <div>
-                <p style={{ fontSize: 11, color: 'rgba(44,26,14,0.4)', marginBottom: 20, fontWeight: 500 }}>Open in <strong style={{ color: E }}>Safari</strong> — Chrome won't work for iOS install</p>
+                <p style={{ fontSize: 11, color: 'rgba(58,58,58,0.4)', marginBottom: 20, fontWeight: 500 }}>Open in <strong style={{ color: E }}>Safari</strong> — Chrome won't work for iOS install</p>
                 {/* Web App Toggle notice */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, background: 'rgba(44,26,14,0.04)', borderRadius: 10, padding: '10px 12px', marginBottom: 20 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, background: 'rgba(58,58,58,0.04)', borderRadius: 10, padding: '10px 12px', marginBottom: 20 }}>
                   <span style={{ fontSize: 16, flexShrink: 0 }}>⚙️</span>
-                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(44,26,14,0.65)', lineHeight: 1.55 }}>
+                  <p style={{ margin: 0, fontSize: 11, color: 'rgba(58,58,58,0.65)', lineHeight: 1.55 }}>
                     <strong style={{ color: E }}>Enable Web App (iOS 16.4+):</strong> Go to <strong style={{ color: E }}>Settings → Safari → Advanced → Experimental Features</strong> and make sure <strong style={{ color: E }}>Web App Manifest</strong> is toggled <span style={{ color: '#1A5A48', fontWeight: 700 }}>ON</span> for the best experience.
                   </p>
                 </div>
@@ -706,18 +708,18 @@ export default function DownloadPage() {
                   { n: 3, icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17 }}><polyline points="20 6 9 17 4 12"/></svg>, title: 'Tap Add to confirm', desc: 'Tap "Add" in the top right corner — Vision appears on your home screen!' },
                 ].map(({ n, icon, title, desc }) => (
                   <div key={n} style={{ display: 'flex', gap: 14, marginBottom: 18, alignItems: 'flex-start' }}>
-                    <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(44,26,14,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</div>
+                    <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(58,58,58,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 3 }}>
                         <span style={{ fontSize: 10, fontWeight: 800, background: E, color: C, borderRadius: 999, width: 17, height: 17, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
                         <span style={{ fontSize: 13, fontWeight: 700, color: E }}>{title}</span>
                       </div>
-                      <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.55)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                      <p style={{ fontSize: 12, color: 'rgba(58,58,58,0.55)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
                     </div>
                   </div>
                 ))}
                 {/* iOS hint */}
-                <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.1)', marginTop: 4 }}>
+                <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(58,58,58,0.1)', marginTop: 4 }}>
                   <div style={{ background: '#F2F2F7', padding: '9px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div style={{ width: 26, height: 26, borderRadius: 7, background: 'linear-gradient(135deg,#6E40C9,#B04FC9)', flexShrink: 0 }}/>
                     <div style={{ flex: 1 }}>
@@ -746,25 +748,25 @@ export default function DownloadPage() {
             {/* Android steps */}
             {platform === 'android' && (
               <div>
-                <p style={{ fontSize: 11, color: 'rgba(44,26,14,0.4)', marginBottom: 20, fontWeight: 500 }}>Open in <strong style={{ color: E }}>Google Chrome</strong> on your Android device</p>
+                <p style={{ fontSize: 11, color: 'rgba(58,58,58,0.4)', marginBottom: 20, fontWeight: 500 }}>Open in <strong style={{ color: E }}>Google Chrome</strong> on your Android device</p>
                 {[
                   { n: 1, icon: <svg viewBox="0 0 24 24" fill={E} style={{ width: 17, height: 17 }}><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>, title: 'Tap the menu (⋮)', desc: 'Tap the three-dot menu in the top right corner of Chrome' },
                   { n: 2, icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17 }}><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>, title: 'Tap "Add to Home screen"', desc: 'Select "Add to Home screen" or "Install app" from the dropdown' },
                   { n: 3, icon: <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 17, height: 17 }}><polyline points="20 6 9 17 4 12"/></svg>, title: 'Tap Install to confirm', desc: 'Tap "Install" on the prompt — Vision is instantly on your home screen!' },
                 ].map(({ n, icon, title, desc }) => (
                   <div key={n} style={{ display: 'flex', gap: 14, marginBottom: 18, alignItems: 'flex-start' }}>
-                    <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(44,26,14,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</div>
+                    <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'rgba(58,58,58,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{icon}</div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 3 }}>
                         <span style={{ fontSize: 10, fontWeight: 800, background: E, color: C, borderRadius: 999, width: 17, height: 17, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
                         <span style={{ fontSize: 13, fontWeight: 700, color: E }}>{title}</span>
                       </div>
-                      <p style={{ fontSize: 12, color: 'rgba(44,26,14,0.55)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
+                      <p style={{ fontSize: 12, color: 'rgba(58,58,58,0.55)', lineHeight: 1.55, margin: 0 }}>{desc}</p>
                     </div>
                   </div>
                 ))}
                 {/* Android hint */}
-                <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(44,26,14,0.1)', marginTop: 4 }}>
+                <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(58,58,58,0.1)', marginTop: 4 }}>
                   <div style={{ background: 'white', padding: '9px 14px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
                     <div style={{ flex: 1, background: 'rgba(0,0,0,0.05)', borderRadius: 20, padding: '4px 11px', fontSize: 10, color: 'rgba(0,0,0,0.4)' }}>live.joinvision.app</div>
                     <svg viewBox="0 0 24 24" fill="rgba(0,0,0,0.4)" style={{ width: 16, height: 16, flexShrink: 0 }}><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
@@ -790,23 +792,24 @@ export default function DownloadPage() {
             </a>
 
             {/* Tip */}
-            <div style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(44,26,14,0.04)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(58,58,58,0.04)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 18 }}>💡</span>
-              <p style={{ margin: 0, fontSize: 12, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>
+              <p style={{ margin: 0, fontSize: 12, color: 'rgba(58,58,58,0.6)', lineHeight: 1.5 }}>
                 <strong style={{ color: E }}>Already installed?</strong> Open from your home screen — it runs full-screen like a native app.
               </p>
             </div>
           </div>
         </div>
 
+      </div>{/* end white card */}
       </main>
 
-      <footer style={{ borderTop: '1px solid rgba(0,0,0,0.06)', padding: '20px 24px', background: '#FFFFFF', position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 11, color: 'rgba(44,26,14,0.35)' }}>© {new Date().getFullYear()} Vision. All rights reserved.</span>
+      <footer style={{ padding: '12px 16px 16px' }}>
+        <div style={{ background: '#FFFFFF', borderRadius: 16, maxWidth: 960, margin: '0 auto', padding: '16px 24px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+          <span style={{ fontSize: 11, color: 'rgba(58,58,58,0.35)' }}>© {new Date().getFullYear()} Vision. All rights reserved.</span>
           <div style={{ display: 'flex', gap: 20 }}>
             {[['/', 'Home'], ['/privacy', 'Privacy'], ['/terms', 'Terms'], ['/faq', 'FAQ']].map(([to, label]) => (
-              <Link key={to} to={to} style={{ fontSize: 11, color: 'rgba(44,26,14,0.35)', textDecoration: 'none' }}>{label}</Link>
+              <Link key={to} to={to} style={{ fontSize: 11, color: 'rgba(58,58,58,0.35)', textDecoration: 'none' }}>{label}</Link>
             ))}
           </div>
         </div>

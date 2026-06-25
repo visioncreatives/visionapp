@@ -8,23 +8,28 @@ export default {
     extend: {
       colors: {
         cream: {
-          50: "#FDFAF5",
-          100: "#F8F2E8",
-          200: "#EFE5D4",
-          300: "#E2D0B8",
+          50: "#F5F5F5",
+          100: "#EDEDED",
+          200: "#E0E0E0",
+          300: "#CCCCCC",
         },
         espresso: {
-          DEFAULT: "#2C1A0E",
-          light: "#4A2E1A",
-          dark: "#1A0D06",
+          DEFAULT: "#3A3A3A",
+          light: "#5A5A5A",
+          dark: "#1A1A1A",
+        },
+        vision: {
+          blue: "#6B8FBF",
+          "blue-light": "#E2EAF4",
+          "blue-mid": "#C4D4E8",
         },
       },
       fontFamily: {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: "0 8px 30px -10px rgba(44,26,14,0.12)",
-        card: "0 2px 16px -4px rgba(44,26,14,0.08)",
+        soft: "0 8px 30px -10px rgba(0,0,0,0.10)",
+        card: "0 2px 16px -4px rgba(0,0,0,0.07)",
       },
       letterSpacing: {
         vision: '0.32em',
