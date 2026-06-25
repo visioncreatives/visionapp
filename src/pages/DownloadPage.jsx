@@ -621,9 +621,9 @@ export default function DownloadPage() {
         </div>
       </header>
 
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 16px 16px' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '0 12px 16px' }}>
       {/* White card wrapping all content */}
-      <div style={{ background: '#FFFFFF', borderRadius: 24, width: '100%', maxWidth: 960, padding: isMobile ? '36px 20px 48px' : '52px 32px 64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ background: '#FFFFFF', borderRadius: 24, width: '100%', padding: isMobile ? '36px 20px 48px' : '52px 48px 64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
         {/* Top heading */}
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(58,58,58,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>

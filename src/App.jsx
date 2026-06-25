@@ -2042,39 +2042,18 @@ function SharedVision() {
 
 // ─── Final CTA ────────────────────────────────────────────────
 function FinalCTA() {
-  const audiences = [
-    { l: "Photographers",     bg: "#FAF4D6", c: "#6A5010" },
-    { l: "Videographers",     bg: "#E2EEF6", c: "#1A4A6A" },
-    { l: "Stylists",          bg: "#E6F0E6", c: "#2A5A2A" },
-    { l: "Designers",         bg: "#EDE6F5", c: "#4A2A7A" },
-    { l: "Creative Directors",bg: "#FBE9E9", c: "#7A2A2A" },
-    { l: "Makeup Artists",    bg: "#D6EEE8", c: "#1A5A48" },
-    { l: "Content Creators",  bg: "#FBE9D6", c: "#7A3A10" },
-    { l: "Brands & Clients",  bg: "#E2EEF6", c: "#1A4A6A" },
-  ]
   return (
     <section className="py-24 sm:py-40 bg-white rounded-3xl">
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
         <p className="mt-5 text-espresso/60 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
-          {audiences.map((a) => (
-            <span key={a.l} style={{ background: a.bg, color: a.c, fontSize: 12, padding: "5px 14px", borderRadius: 999, fontWeight: 600 }}>{a.l}</span>
-          ))}
-        </div>
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-3">
           <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-8 py-4 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
             Explore Creatives <Ico.Arrow className="w-4 h-4" />
           </a>
           <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-cream-200 text-espresso px-8 py-4 rounded-full font-semibold hover:bg-cream-50 transition-colors text-base">
             Become a Creative
-          </a>
-        </div>
-        <div className="mt-4 flex justify-center">
-          <a href={LOVABLE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 text-espresso/60 hover:text-espresso text-sm font-medium transition-colors group">
-            <Ico.Download className="w-4 h-4 group-hover:text-espresso transition-colors" />
-            Install Vision App
           </a>
         </div>
         <div className="mt-10 flex justify-center items-center gap-3">
