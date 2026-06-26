@@ -614,21 +614,17 @@ export default function DownloadPage() {
   }
 
   return (
-    <div style={{ background: '#ECECEC', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', fontFamily: '"DM Sans", system-ui, sans-serif', display: 'flex', flexDirection: 'column' }}>
 
-      {/* Nav — floating pill */}
-      <header style={{ padding: '12px 16px 8px' }}>
-        <div style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(12px)', borderRadius: 16, border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 2px 16px rgba(0,0,0,0.07)' }}>
-          <div style={{ padding: '0 24px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
-            <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(58,58,58,0.5)', textDecoration: 'none' }}>← Back</Link>
-          </div>
+      {/* Nav */}
+      <header style={{ borderBottom: '1px solid rgba(42,42,42,0.08)', background: '#F2F2F2', position: 'sticky', top: 0, zIndex: 50 }}>
+        <div style={{ padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
+          <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
+          <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(42,42,42,0.5)', textDecoration: 'none' }}>← Back</Link>
         </div>
       </header>
 
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '0 12px 16px' }}>
-      {/* White card wrapping all content */}
-      <div style={{ background: '#FFFFFF', borderRadius: 24, width: '100%', padding: isMobile ? '36px 20px 48px' : '52px 48px 64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: isMobile ? '36px 20px 48px' : '52px 48px 64px', alignItems: 'center' }}>
 
         {/* Top heading */}
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(58,58,58,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
@@ -807,17 +803,14 @@ export default function DownloadPage() {
           </div>
         </div>
 
-      </div>{/* end white card */}
       </main>
 
-      <footer style={{ padding: '12px 16px 16px' }}>
-        <div style={{ background: '#FFFFFF', borderRadius: 16, maxWidth: 960, margin: '0 auto', padding: '16px 24px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 11, color: 'rgba(58,58,58,0.35)' }}>© {new Date().getFullYear()} Vision. All rights reserved.</span>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {[['/', 'Home'], ['/privacy', 'Privacy'], ['/terms', 'Terms'], ['/faq', 'FAQ']].map(([to, label]) => (
-              <Link key={to} to={to} style={{ fontSize: 11, color: 'rgba(58,58,58,0.35)', textDecoration: 'none' }}>{label}</Link>
-            ))}
-          </div>
+      <footer style={{ borderTop: '1px solid rgba(42,42,42,0.08)', padding: '20px 24px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12, maxWidth: 1280, margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+        <span style={{ fontSize: 11, color: 'rgba(42,42,42,0.35)' }}>© {new Date().getFullYear()} Vision. All rights reserved.</span>
+        <div style={{ display: 'flex', gap: 20 }}>
+          {[['/', 'Home'], ['/privacy', 'Privacy'], ['/terms', 'Terms'], ['/faq', 'FAQ']].map(([to, label]) => (
+            <Link key={to} to={to} style={{ fontSize: 11, color: 'rgba(42,42,42,0.35)', textDecoration: 'none' }}>{label}</Link>
+          ))}
         </div>
       </footer>
     </div>
