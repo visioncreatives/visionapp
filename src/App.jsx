@@ -1140,35 +1140,33 @@ function PayoutsPhone() {
 function Header() {
   const [open, setOpen] = useState(false)
   return (
-    <header className="px-3 sm:px-4 pt-3 pb-2">
-      <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-card border border-black/[0.05]">
-        <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
-          <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
-          <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
-            <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
-            <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
-            <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
-            <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
-            <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-espresso" aria-label="Menu">
-              {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
-            </button>
+    <header className="rounded-b-3xl" style={{ background: "#ECECEC" }}>
+      <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
+        <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
+        <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
+          <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
+          <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
+          <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
+          <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
+        </nav>
+        <div className="flex items-center gap-3">
+          <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
+          <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-espresso" aria-label="Menu">
+            {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
+          </button>
+        </div>
+      </div>
+      {open && (
+        <div className="md:hidden border-t border-espresso/[0.08]">
+          <div className="px-5 py-4 flex flex-col gap-4 text-espresso/75 font-medium">
+            <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
+            <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
+            <a href="#for-creatives" onClick={() => setOpen(false)}>For Creatives</a>
+            <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
+            <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
           </div>
         </div>
-        {open && (
-          <div className="md:hidden border-t border-black/[0.05] rounded-b-2xl">
-            <div className="px-5 py-4 flex flex-col gap-4 text-espresso/75 font-medium">
-              <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
-              <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
-              <a href="#for-creatives" onClick={() => setOpen(false)}>For Creatives</a>
-              <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
-              <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </header>
   )
 }
@@ -1707,7 +1705,7 @@ function Hero() {
     { l: "Design",      bg: "#D6EEE8", c: "#1A5A48" },
   ]
   return (
-    <section id="top" className="relative bg-white rounded-3xl overflow-hidden">
+    <section id="top" className="relative overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-10 sm:pb-20 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
@@ -1793,25 +1791,22 @@ function Categories() {
     { label: "Content Creation", tags: "Social · UGC · Influencer · Lifestyle"         },
   ]
   return (
-    <section className="py-12 sm:py-16 bg-white rounded-3xl">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8">
-        {/* Two-column layout: sticky heading left, list right */}
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
-          {/* Left — label + heading + subtext */}
-          <div className="lg:w-64 lg:flex-shrink-0 lg:pt-2">
-            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
-            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
-            <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
-          </div>
-          {/* Right — editorial list with dividers, subtle tinted background */}
-          <div className="flex-1 rounded-2xl overflow-hidden" style={{ background: "#F4F6F9" }}>
-            {cats.map((c, i) => (
-              <div key={i} className="flex items-center justify-between gap-6 px-5 py-4 border-t border-espresso/[0.07] first:border-t-0">
-                <span className="font-bold text-base sm:text-lg text-espresso">{c.label}</span>
-                <span className="text-xs sm:text-sm text-espresso/45 text-right">{c.tags}</span>
-              </div>
-            ))}
-          </div>
+    <section id="discover" className="py-12 sm:py-16 overflow-hidden">
+      <div className="flex flex-col lg:flex-row lg:items-stretch gap-10 lg:gap-0">
+        {/* Left — label + heading + subtext, aligned to page content */}
+        <div className="px-5 sm:px-8 lg:pl-16 xl:pl-24 lg:pr-10 lg:w-80 xl:w-96 lg:flex-shrink-0 lg:pt-2">
+          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
+          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
+          <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
+        </div>
+        {/* Right — editorial list, grey box bleeds to right edge, rounded left only */}
+        <div className="flex-1 overflow-hidden rounded-2xl mx-5 sm:mx-8 lg:mx-0 lg:rounded-r-none lg:rounded-l-2xl" style={{ background: "#F4F6F9" }}>
+          {cats.map((c, i) => (
+            <div key={i} className="flex items-center justify-between gap-6 px-5 sm:px-7 py-4 border-t border-espresso/[0.07] first:border-t-0">
+              <span className="font-bold text-base sm:text-lg text-espresso">{c.label}</span>
+              <span className="text-xs sm:text-sm text-espresso/45 text-right">{c.tags}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1847,7 +1842,7 @@ function HowItWorks() {
   const ActivePhone  = currentSteps[activeStep].Phone
 
   return (
-    <section id="how" className="py-12 sm:py-16 bg-white rounded-3xl">
+    <section id="how" className="py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 relative">
 
         {/* Header — label + heading. Toggle lives inside the steps column on desktop, below heading on mobile */}
@@ -1971,7 +1966,7 @@ function SharedVision() {
     { src: "/projects/photoshoot.jpg",     title: "Photoshoot"     },
   ]
   return (
-    <section id="for-creatives" className="py-12 sm:py-16 bg-white rounded-3xl">
+    <section id="for-creatives" className="py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
         {/* Heading block */}
@@ -2021,7 +2016,7 @@ function SharedVision() {
 // ─── Final CTA ────────────────────────────────────────────────
 function FinalCTA() {
   return (
-    <section className="py-14 sm:py-20 bg-white rounded-3xl">
+    <section className="py-14 sm:py-20">
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
@@ -2050,7 +2045,7 @@ function FinalCTA() {
 // ─── Footer ───────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="bg-white rounded-3xl mx-3 sm:mx-4 mt-0 mb-4">
+    <footer className="border-t border-espresso/[0.06]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid sm:grid-cols-4 gap-8 items-start">
         <div className="sm:col-span-2">
           <p className="font-bold tracking-vision text-espresso text-sm">V I S I O N</p>
@@ -2092,9 +2087,9 @@ function Footer() {
 // ─── App ──────────────────────────────────────────────────────
 export default function App() {
   return (
-    <div className="min-h-screen font-sans" style={{ background: "#ECECEC" }}>
+    <div className="min-h-screen font-sans bg-white">
       <Header />
-      <main className="flex flex-col gap-3 px-3 sm:px-4 pb-4">
+      <main className="flex flex-col">
         <Hero />
         <HowItWorks />
         <Categories />

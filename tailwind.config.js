@@ -8,15 +8,15 @@ export default {
     extend: {
       colors: {
         cream: {
-          50: "#F5F5F5",
-          100: "#EDEDED",
-          200: "#E0E0E0",
-          300: "#CCCCCC",
+          50: "#F8F2E8",
+          100: "#EFE5D4",
+          200: "#D4C4A8",
+          300: "#C4A888",
         },
         espresso: {
-          DEFAULT: "#3A3A3A",
-          light: "#5A5A5A",
-          dark: "#1A1A1A",
+          DEFAULT: "#2C1A0E",
+          light: "#5A4A3A",
+          dark: "#1A0D06",
         },
         vision: {
           blue: "#6B8FBF",
