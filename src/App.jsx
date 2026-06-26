@@ -1140,7 +1140,7 @@ function PayoutsPhone() {
 function Header() {
   const [open, setOpen] = useState(false)
   return (
-    <header className="rounded-b-3xl" style={{ background: "#ECECEC" }}>
+    <header style={{ background: "#ECECEC" }}>
       <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
         <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
         <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
@@ -1755,9 +1755,9 @@ function Hero() {
           <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
             <HeroProfilePhone />
             {/* Floating label — above phone */}
-            <div className="hidden xl:flex absolute items-center gap-2" style={{ top: -18, left: "50%", transform: "translateX(-50%)" }}>
+            <div className="hidden xl:flex absolute items-center gap-2" style={{ top: -44, left: "50%", transform: "translateX(-50%)" }}>
               <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
-                Live demo — tap the tabs
+                Live demo — tap & explore
               </div>
             </div>
           </div>
@@ -1767,7 +1767,7 @@ function Hero() {
         <div className="flex md:hidden justify-center flex-col items-center gap-4">
           {/* Mobile label above phone */}
           <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
-            Live demo — tap the tabs
+            Live demo — tap & explore
           </div>
           <div className="scale-[0.82] sm:scale-90 origin-top">
             <HeroProfilePhone />
@@ -1793,11 +1793,16 @@ function Categories() {
   return (
     <section id="discover" className="py-12 sm:py-16 overflow-hidden">
       <div className="flex flex-col lg:flex-row lg:items-stretch gap-10 lg:gap-0">
-        {/* Left — label + heading + subtext, aligned to page content */}
-        <div className="px-5 sm:px-8 lg:pl-16 xl:pl-24 lg:pr-10 lg:w-80 xl:w-96 lg:flex-shrink-0 lg:pt-2">
-          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
-          <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
-          <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
+        {/* Left — label + heading + subtext + CTA */}
+        <div className="px-5 sm:px-8 lg:pl-16 xl:pl-24 lg:pr-10 lg:w-[420px] xl:w-[460px] lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-between lg:py-2">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
+            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
+            <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
+          </div>
+          <a href={APP_URL} className="mt-8 lg:mt-0 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold text-sm hover:bg-espresso-dark transition-colors self-start">
+            Browse all <Ico.Arrow className="w-4 h-4" />
+          </a>
         </div>
         {/* Right — editorial list, grey box bleeds to right edge, rounded left only */}
         <div className="flex-1 overflow-hidden rounded-2xl mx-5 sm:mx-8 lg:mx-0 lg:rounded-r-none lg:rounded-l-2xl" style={{ background: "#F4F6F9" }}>
@@ -2088,9 +2093,11 @@ function Footer() {
 export default function App() {
   return (
     <div className="min-h-screen font-sans bg-white">
-      <Header />
-      <main className="flex flex-col">
+      <div className="rounded-b-3xl" style={{ background: "#ECECEC" }}>
+        <Header />
         <Hero />
+      </div>
+      <main className="flex flex-col">
         <HowItWorks />
         <Categories />
         <SharedVision />
