@@ -28,7 +28,7 @@ const StarFilled = ({ size = 9 }) => <svg viewBox="0 0 24 24" fill="#E8A030" sty
 // ── Phone shell ───────────────────────────────────────────────
 function PhoneShell({ children }) {
   return (
-    <div style={{ background: '#1A0D06', borderRadius: 44, padding: 9, boxShadow: '0 32px 80px rgba(58,58,58,0.3), 0 0 0 1px rgba(255,255,255,0.06)', width: 260 }}>
+    <div style={{ background: '#1A1A1A', borderRadius: 44, padding: 9, boxShadow: '0 32px 80px rgba(58,58,58,0.3), 0 0 0 1px rgba(255,255,255,0.06)', width: 260 }}>
       <div style={{ background: C, borderRadius: 36, overflow: 'hidden', height: 520, display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '12px 16px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: E }}>9:41</span>
@@ -77,7 +77,7 @@ function BottomNav({ active, onNav }) {
 // ── Emi avatar ────────────────────────────────────────────────
 function EmiAv({ size = 26 }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D4C4A8', flexShrink: 0 }}>
+    <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D8D8D8', flexShrink: 0 }}>
       <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
     </div>
   )
@@ -255,7 +255,7 @@ function InteractivePhone() {
           <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(58,58,58,0.3)' }} />
         </div>
         {/* Messages */}
-        <div ref={chatScrollRef} className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
+        <div ref={chatScrollRef} className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F5F5F5' }}>
           {chatMsgs.map((msg, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: msg.from === 'me' ? 'flex-end' : 'flex-start', gap: 5, alignItems: 'flex-end' }}>
               {msg.from === 'them' && <EmiAv size={20} />}
@@ -272,7 +272,7 @@ function InteractivePhone() {
         </div>
         {/* Input */}
         <div style={{ padding: '8px 10px 10px', borderTop: '1px solid rgba(58,58,58,0.07)', background: 'white', display: 'flex', gap: 7, alignItems: 'center', flexShrink: 0 }}>
-          <div style={{ flex: 1, background: '#F0E8DC', borderRadius: 20, padding: '6px 12px', display: 'flex', alignItems: 'center' }}>
+          <div style={{ flex: 1, background: '#F5F5F5', borderRadius: 20, padding: '6px 12px', display: 'flex', alignItems: 'center' }}>
             <input
               value={chatInput}
               onChange={e => setChatInput(e.target.value)}
@@ -300,7 +300,7 @@ function InteractivePhone() {
           </button>
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
         </div>
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F5F5F5' }}
           ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) el.scrollTop = t.offsetTop } }}>
           {postMeta.map((post, i) => (
             <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
@@ -311,7 +311,7 @@ function InteractivePhone() {
                   <div style={{ fontSize: 7.5, color: 'rgba(58,58,58,0.4)' }}>Los Angeles</div>
                 </div>
               </div>
-              <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D4C4A8' }}>
+              <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D8D8D8' }}>
                 <img src={portfolioImgs[i]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
               </div>
               <div style={{ padding: '7px 10px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -327,7 +327,7 @@ function InteractivePhone() {
                 </div>
               </div>
               <div style={{ padding: '0 10px 8px' }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#E2EAF4', color: '#6B8FBF', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
                   {post.tag}
                 </div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{post.caption}</div>
@@ -435,7 +435,7 @@ function InteractivePhone() {
         <div style={{ flex: 1, padding: '16px', background: C, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', border: '1px solid rgba(58,58,58,0.07)' }}>
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D8D8D8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <span style={{ fontSize: 14, fontWeight: 700, color: E }}>{r.name[0]}</span>
               </div>
               <div>
@@ -463,7 +463,7 @@ function InteractivePhone() {
       <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
         {/* Stats */}
         <div style={{ padding: '0 14px 8px', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 50, height: 50, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(58,58,58,0.12)', background: '#D4C4A8' }}>
+          <div style={{ width: 50, height: 50, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(58,58,58,0.12)', background: '#D8D8D8' }}>
             <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />
           </div>
           <div style={{ display: 'flex', gap: 6, flex: 1 }}>
@@ -479,7 +479,7 @@ function InteractivePhone() {
         <div style={{ padding: '0 14px 8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
             <span style={{ fontSize: 14, fontWeight: 800, color: E }}>Emi</span>
-            <span style={{ background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
+            <span style={{ background: '#E2EAF4', color: '#6B8FBF', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(58,58,58,0.45)', marginBottom: 4 }}>
             <Ico.Map style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9.5 }}>Los Angeles</span>
@@ -505,7 +505,7 @@ function InteractivePhone() {
         {activeTab === 'Portfolio' && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2, marginTop: 8 }}>
             {portfolioImgs.map((src, i) => (
-              <div key={i} onClick={() => { setSelectedImg(i); setScreen('imagefeed') }} style={{ aspectRatio: '3/4', background: '#D4C4A8', overflow: 'hidden', cursor: 'pointer' }}>
+              <div key={i} onClick={() => { setSelectedImg(i); setScreen('imagefeed') }} style={{ aspectRatio: '3/4', background: '#D8D8D8', overflow: 'hidden', cursor: 'pointer' }}>
                 <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
               </div>
             ))}
@@ -549,7 +549,7 @@ function InteractivePhone() {
                 {[5,4,3].map(n => (
                   <div key={n} style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
                     <span style={{ fontSize: 7.5, color: 'rgba(58,58,58,0.45)', width: 6 }}>{n}</span>
-                    <div style={{ flex: 1, height: 4, background: '#EFE5D4', borderRadius: 999 }}>
+                    <div style={{ flex: 1, height: 4, background: '#F0F0F0', borderRadius: 999 }}>
                       <div style={{ width: n===5?'96%':n===4?'3%':'1%', height: '100%', background: E, borderRadius: 999 }}/>
                     </div>
                   </div>
@@ -560,7 +560,7 @@ function InteractivePhone() {
               <div key={i} onClick={() => { setReview(r); setScreen('review') }} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(58,58,58,0.07)', cursor: 'pointer' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                   <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
-                    <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#D8D8D8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <span style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name[0]}</span>
                     </div>
                     <div>

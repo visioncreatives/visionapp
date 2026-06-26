@@ -25,13 +25,13 @@ export default function ContactUs() {
         {/* FAQ nudge card */}
         <div
           className="mt-8 rounded-2xl p-6 flex items-start gap-4"
-          style={{ background: '#FBE9D6' }}
+          style={{ background: '#E2EAF4' }}
         >
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ background: '#F4D4B0' }}
+            style={{ background: '#C4D4E8' }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A3A10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B8FBF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
           </div>
@@ -52,13 +52,13 @@ export default function ContactUs() {
         {/* Email card */}
         <div
           className="mt-4 rounded-2xl p-6 flex items-start gap-4"
-          style={{ background: 'white', border: '1px solid rgba(44,26,14,0.08)' }}
+          style={{ background: 'white', border: '1px solid rgba(42,42,42,0.08)' }}
         >
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ background: '#F0EBE4' }}
+            style={{ background: '#F0F0F0' }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A2A2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>

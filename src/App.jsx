@@ -28,7 +28,7 @@ const Ico = {
   Film:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></svg>,
   Wand:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="m15 4-9 9 6 6 9-9-6-6ZM4 20l2-2M9 4l2 2M4 9l2 2M14 19l2 2M19 14l2 2"/></svg>,
   Layers:   (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="m12 2 10 6.5-10 6.5L2 8.5 12 2Z"/><path d="m20 13 2 1.5-10 6.5L2 14.5l2-1.5"/></svg>,
-  Back:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="2.2" strokeLinecap="round" {...p}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>,
+  Back:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="#2A2A2A" strokeWidth="2.2" strokeLinecap="round" {...p}><path d="M19 12H5M12 5l-7 7 7 7"/></svg>,
   Profile:  (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
   Msg:      (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
   Bolt:     (p) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
@@ -93,8 +93,8 @@ function MiniPerson({ x, y, scale = 1, skin = "#F2C9A0", hair = "#3D2512", shirt
       {/* Eyes */}
       <circle cx="-5" cy="2" r="2" fill="white"/>
       <circle cx="5" cy="2" r="2" fill="white"/>
-      <circle cx="-5" cy="2" r="1.2" fill="#1A0D06"/>
-      <circle cx="5" cy="2" r="1.2" fill="#1A0D06"/>
+      <circle cx="-5" cy="2" r="1.2" fill="#1A1A1A"/>
+      <circle cx="5" cy="2" r="1.2" fill="#1A1A1A"/>
       {/* Smile */}
       <path d="M-4 7 Q 0 10 4 7" stroke="#7A3A1A" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
       {/* Blush */}
@@ -122,8 +122,8 @@ function SceneContentShoot() {
       <MiniPerson x={60} y={75} scale={1.1} skin="#E8B89A" hair="#4A2A10" shirt="#A89070"/>
       {/* Camera on photographer */}
       <g transform="translate(75,78)">
-        <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#2C1A0E"/>
-        <circle cx="0" cy="0" r="4" fill="#1A0D06"/>
+        <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#2A2A2A"/>
+        <circle cx="0" cy="0" r="4" fill="#1A1A1A"/>
         <circle cx="0" cy="0" r="2.5" fill="#4A3A28"/>
       </g>
       {/* Tripod hint */}
@@ -143,20 +143,20 @@ function SceneBrandFilm() {
       <line x1="155" y1="10" x2="155" y2="70" stroke="#B8C4D0" strokeWidth="1.5"/>
       <line x1="120" y1="40" x2="190" y2="40" stroke="#B8C4D0" strokeWidth="1.5"/>
       {/* Monitor on desk */}
-      <rect x="10" y="55" width="50" height="32" rx="3" fill="#2C1A0E"/>
+      <rect x="10" y="55" width="50" height="32" rx="3" fill="#2A2A2A"/>
       <rect x="13" y="58" width="44" height="26" rx="1" fill="#5A6878"/>
       {/* Timeline bars */}
       <rect x="16" y="76" width="38" height="2" fill="#B8C4D0"/>
       <rect x="16" y="71" width="20" height="3" fill="#E8A878"/>
       <rect x="38" y="71" width="14" height="3" fill="#8B7AA8"/>
-      <line x1="35" y1="87" x2="35" y2="105" stroke="#2C1A0E" strokeWidth="2"/>
-      <ellipse cx="35" cy="106" rx="14" ry="3" fill="#2C1A0E"/>
+      <line x1="35" y1="87" x2="35" y2="105" stroke="#2A2A2A" strokeWidth="2"/>
+      <ellipse cx="35" cy="106" rx="14" ry="3" fill="#2A2A2A"/>
       {/* Videographer */}
       <MiniPerson x={115} y={80} scale={1.2} skin="#E8B89A" hair="#3A2410" shirt="#9AB0A0"/>
       {/* Gimbal/camera */}
       <g transform="translate(140,78)">
-        <rect x="-3" y="-12" width="6" height="14" rx="1" fill="#2C1A0E"/>
-        <rect x="-9" y="-20" width="18" height="11" rx="2" fill="#2C1A0E"/>
+        <rect x="-3" y="-12" width="6" height="14" rx="1" fill="#2A2A2A"/>
+        <rect x="-9" y="-20" width="18" height="11" rx="2" fill="#2A2A2A"/>
         <circle cx="0" cy="-14" r="3.5" fill="#4A3A28"/>
       </g>
     </svg>
@@ -176,7 +176,7 @@ function SceneIdentity() {
       <rect x="20" y="20" width="10" height="6" fill="#A89878"/>
       <rect x="55" y="22" width="10" height="4" fill="#A89878"/>
       {/* Desk */}
-      <rect x="0" y="95" width="200" height="35" fill="#C4A888"/>
+      <rect x="0" y="95" width="200" height="35" fill="#C4C4C4"/>
       <rect x="0" y="95" width="200" height="3" fill="#A88858"/>
       {/* Designer */}
       <MiniPerson x={100} y={65} scale={1.3} skin="#F2C9A0" hair="#5A3A20" shirt="#9A9AB8"/>
@@ -189,7 +189,7 @@ function SceneIdentity() {
       <rect x="40" y="113" width="42" height="2" fill="#D0C0B0"/>
       <rect x="40" y="116" width="32" height="2" fill="#D0C0B0"/>
       {/* Laptop */}
-      <rect x="120" y="100" width="45" height="22" rx="2" fill="#2C1A0E"/>
+      <rect x="120" y="100" width="45" height="22" rx="2" fill="#2A2A2A"/>
       <rect x="123" y="103" width="39" height="16" rx="1" fill="#E8E0D4"/>
       {/* Logo on laptop screen */}
       <circle cx="142" cy="111" r="4" fill="#8B6AA8"/>
@@ -219,10 +219,10 @@ function SceneBridal() {
       {/* Client (sitting right) */}
       <MiniPerson x={120} y={78} scale={1.4} skin="#C8956A" hair="#3A2410" shirt="#D8B8A8"/>
       {/* Eyes closed indicator on client */}
-      <line x1="115" y1="79" x2="119" y2="79" stroke="#1A0D06" strokeWidth="1.2" strokeLinecap="round"/>
-      <line x1="121" y1="79" x2="125" y2="79" stroke="#1A0D06" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="115" y1="79" x2="119" y2="79" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="121" y1="79" x2="125" y2="79" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round"/>
       {/* Makeup table */}
-      <rect x="0" y="115" width="200" height="15" fill="#C4A888"/>
+      <rect x="0" y="115" width="200" height="15" fill="#C4C4C4"/>
       <rect x="15" y="108" width="14" height="9" rx="1" fill="#D8A088"/>
       <rect x="32" y="106" width="6" height="11" rx="1" fill="#E8C09A"/>
       <rect x="42" y="108" width="10" height="9" rx="1" fill="#C8889A"/>
@@ -253,7 +253,7 @@ function SceneEvent() {
       </g>
       {/* People crowd */}
       <MiniPerson x={75} y={82} scale={0.85} skin="#E8B89A" hair="#3D2512" shirt="#9AB0A0"/>
-      <MiniPerson x={100} y={80} scale={0.9} skin="#C8956A" hair="#1A0D06" shirt="#D8A8B0"/>
+      <MiniPerson x={100} y={80} scale={0.9} skin="#C8956A" hair="#1A1A1A" shirt="#D8A8B0"/>
       <MiniPerson x={125} y={82} scale={0.85} skin="#F2C9A0" hair="#5A3A20" shirt="#A89A78"/>
       {/* Stage / podium */}
       <rect x="60" y="105" width="80" height="20" rx="3" fill="#8B6A48"/>
@@ -329,7 +329,7 @@ function SceneShowcase() {
         <rect x="115" y="142" width="50" height="3" fill="#C8A878"/>
       </g>
       {/* Floor */}
-      <rect x="0" y="170" width="200" height="30" fill="#D4C4A8"/>
+      <rect x="0" y="170" width="200" height="30" fill="#D8D8D8"/>
       <rect x="0" y="170" width="200" height="3" fill="#B8A488"/>
     </svg>
   )
@@ -347,24 +347,24 @@ function ScenePackages() {
         <rect x="30" y="35" width="50" height="6" rx="2" fill="#5A4A38"/>
         <rect x="30" y="46" width="80" height="4" rx="1" fill="#B8A088"/>
         <rect x="30" y="55" width="70" height="4" rx="1" fill="#B8A088"/>
-        <rect x="140" y="40" width="30" height="18" rx="9" fill="#2C1A0E"/>
-        <text x="155" y="52" fontSize="9" fontWeight="700" fill="#F8F2E8" textAnchor="middle">$120</text>
+        <rect x="140" y="40" width="30" height="18" rx="9" fill="#2A2A2A"/>
+        <text x="155" y="52" fontSize="9" fontWeight="700" fill="#FFFFFF" textAnchor="middle">$120</text>
 
         {/* Card 2 */}
         <rect x="20" y="80" width="160" height="48" rx="10" fill="white" stroke="#C8B098" strokeWidth="1"/>
         <rect x="30" y="90" width="60" height="6" rx="2" fill="#5A4A38"/>
         <rect x="30" y="101" width="90" height="4" rx="1" fill="#B8A088"/>
         <rect x="30" y="110" width="60" height="4" rx="1" fill="#B8A088"/>
-        <rect x="140" y="95" width="30" height="18" rx="9" fill="#2C1A0E"/>
-        <text x="155" y="107" fontSize="9" fontWeight="700" fill="#F8F2E8" textAnchor="middle">$220</text>
+        <rect x="140" y="95" width="30" height="18" rx="9" fill="#2A2A2A"/>
+        <text x="155" y="107" fontSize="9" fontWeight="700" fill="#FFFFFF" textAnchor="middle">$220</text>
 
         {/* Card 3 */}
         <rect x="20" y="135" width="160" height="48" rx="10" fill="white" stroke="#C8B098" strokeWidth="1"/>
         <rect x="30" y="145" width="55" height="6" rx="2" fill="#5A4A38"/>
         <rect x="30" y="156" width="75" height="4" rx="1" fill="#B8A088"/>
         <rect x="30" y="165" width="65" height="4" rx="1" fill="#B8A088"/>
-        <rect x="140" y="150" width="30" height="18" rx="9" fill="#2C1A0E"/>
-        <text x="155" y="162" fontSize="9" fontWeight="700" fill="#F8F2E8" textAnchor="middle">$350</text>
+        <rect x="140" y="150" width="30" height="18" rx="9" fill="#2A2A2A"/>
+        <text x="155" y="162" fontSize="9" fontWeight="700" fill="#FFFFFF" textAnchor="middle">$350</text>
       </g>
     </svg>
   )
@@ -378,9 +378,9 @@ function SceneCalendar() {
       {/* Calendar */}
       <rect x="25" y="25" width="150" height="150" rx="12" fill="white" stroke="#B8A4D0" strokeWidth="1"/>
       {/* Header */}
-      <rect x="25" y="25" width="150" height="32" rx="12" fill="#2C1A0E"/>
-      <rect x="25" y="45" width="150" height="12" fill="#2C1A0E"/>
-      <text x="100" y="46" fontSize="11" fontWeight="700" fill="#F8F2E8" textAnchor="middle">June 2026</text>
+      <rect x="25" y="25" width="150" height="32" rx="12" fill="#2A2A2A"/>
+      <rect x="25" y="45" width="150" height="12" fill="#2A2A2A"/>
+      <text x="100" y="46" fontSize="11" fontWeight="700" fill="#FFFFFF" textAnchor="middle">June 2026</text>
       {/* Day labels */}
       {["S","M","T","W","T","F","S"].map((d,i)=>(
         <text key={i} x={37 + i*21} y={70} fontSize="7" fontWeight="600" fill="#8B7A6A" textAnchor="middle">{d}</text>
@@ -398,7 +398,7 @@ function SceneCalendar() {
         return (
           <g key={i}>
             {selected && <circle cx={cx} cy={cy} r="8" fill="#B89AC8"/>}
-            {today && <circle cx={cx} cy={cy} r="8" fill="#2C1A0E"/>}
+            {today && <circle cx={cx} cy={cy} r="8" fill="#2A2A2A"/>}
             {valid && <text x={cx} y={cy+3} fontSize="8" fontWeight={selected || today ? "700" : "500"} fill={selected || today ? "white" : "#5A4A38"} textAnchor="middle">{day}</text>}
           </g>
         )
@@ -416,7 +416,7 @@ function ScenePayment() {
       <rect x="20" y="25" width="160" height="150" rx="14" fill="white" stroke="#A8B8C8" strokeWidth="1"/>
       {/* Heading */}
       <rect x="30" y="35" width="55" height="4" rx="1" fill="#8B98A8"/>
-      <text x="30" y="60" fontSize="22" fontWeight="800" fill="#2C1A0E">$4,820</text>
+      <text x="30" y="60" fontSize="22" fontWeight="800" fill="#2A2A2A">$4,820</text>
       <rect x="30" y="68" width="35" height="3" rx="1" fill="#A8B8C8"/>
       {/* Chart bars */}
       <g>
@@ -425,7 +425,7 @@ function ScenePayment() {
           {h:24,c:"#B8C4D0"},
           {h:32,c:"#B8C4D0"},
           {h:22,c:"#B8C4D0"},
-          {h:38,c:"#2C1A0E"},
+          {h:38,c:"#2A2A2A"},
           {h:30,c:"#B8C4D0"},
           {h:42,c:"#B8C4D0"},
         ].map((b,i)=>(
@@ -517,8 +517,8 @@ function ArtTile({ bg, variant = 0, price, label, style = {} }) {
   return (
     <div style={{ background: bg, borderRadius: 16, position: "relative", overflow: "hidden", ...style }}>
       {patterns[variant % patterns.length]}
-      {price && <span style={{ position: "absolute", bottom: 8, left: 8, background: "rgba(255,255,255,0.92)", color: "#2C1A0E", fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 999 }}>{price}</span>}
-      {label && <span style={{ position: "absolute", top: 8, left: 8, background: "rgba(255,255,255,0.88)", color: "#2C1A0E", fontSize: 8, fontWeight: 600, padding: "2px 7px", borderRadius: 999 }}>{label}</span>}
+      {price && <span style={{ position: "absolute", bottom: 8, left: 8, background: "rgba(255,255,255,0.92)", color: "#2A2A2A", fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 999 }}>{price}</span>}
+      {label && <span style={{ position: "absolute", top: 8, left: 8, background: "rgba(255,255,255,0.88)", color: "#2A2A2A", fontSize: 8, fontWeight: 600, padding: "2px 7px", borderRadius: 999 }}>{label}</span>}
     </div>
   )
 }
@@ -526,8 +526,8 @@ function ArtTile({ bg, variant = 0, price, label, style = {} }) {
 // ─── Phone shell + bottom nav ─────────────────────────────────
 const PW = 260
 const PH = 520
-const E = '#2C1A0E'
-const C = '#F8F2E8'
+const E = '#2A2A2A'
+const C = '#FFFFFF'
 
 // ── Data for InteractivePhone ──────────────────────────────────
 const CREATIVES = [
@@ -563,7 +563,7 @@ const StarFilled = ({ size = 9 }) => <svg viewBox="0 0 24 24" fill="#E8A030" sty
 
 function EmiAv({ size = 26 }) {
   return (
-    <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D4C4A8', flexShrink: 0 }}>
+    <div style={{ width: size, height: size, borderRadius: '50%', overflow: 'hidden', background: '#D8D8D8', flexShrink: 0 }}>
       <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
     </div>
   )
@@ -572,14 +572,14 @@ function EmiAv({ size = 26 }) {
 function PhoneShell({ children }) {
   return (
     <div style={{ width: PW, flexShrink: 0 }}>
-      <div style={{ background: "#2C1A0E", borderRadius: 40, padding: 9, boxShadow: "0 24px 48px -12px rgba(44,26,14,0.45)" }}>
+      <div style={{ background: "#2A2A2A", borderRadius: 40, padding: 9, boxShadow: "0 24px 48px -12px rgba(42,42,42,0.45)" }}>
         <div style={{ background: "#FFFFFF", borderRadius: 32, overflow: "hidden", height: PH, display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 16px 2px", fontSize: 9, color: "rgba(44,26,14,0.5)", fontWeight: 600, flexShrink: 0 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 16px 2px", fontSize: 9, color: "rgba(42,42,42,0.5)", fontWeight: 600, flexShrink: 0 }}>
             <span>9:41</span>
             <span style={{ display: "flex", gap: 3 }}>
-              <span style={{ width: 10, height: 5, background: "rgba(44,26,14,0.4)", borderRadius: 2 }} />
-              <span style={{ width: 10, height: 5, background: "rgba(44,26,14,0.4)", borderRadius: 2 }} />
-              <span style={{ width: 14, height: 7, border: "1.5px solid rgba(44,26,14,0.4)", borderRadius: 2 }} />
+              <span style={{ width: 10, height: 5, background: "rgba(42,42,42,0.4)", borderRadius: 2 }} />
+              <span style={{ width: 10, height: 5, background: "rgba(42,42,42,0.4)", borderRadius: 2 }} />
+              <span style={{ width: 14, height: 7, border: "1.5px solid rgba(42,42,42,0.4)", borderRadius: 2 }} />
             </span>
           </div>
           {children}
@@ -598,13 +598,13 @@ function BottomNav({ active = "home", onNav }) {
     { k: "profile", I: Ico.User,   l: "PROFILE" },
   ]
   return (
-    <div style={{ borderTop: "1px solid rgba(44,26,14,0.08)", background: "white", padding: "6px 4px 14px", display: "flex", alignItems: "center", justifyContent: "space-around", flexShrink: 0, position: "relative", zIndex: 10 }}>
+    <div style={{ borderTop: "1px solid rgba(42,42,42,0.08)", background: "white", padding: "6px 4px 14px", display: "flex", alignItems: "center", justifyContent: "space-around", flexShrink: 0, position: "relative", zIndex: 10 }}>
       {items.map((it) => {
         if (it.k === "plus") {
           return (
             <div key="plus" style={{ marginTop: -18 }}>
-              <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 10px rgba(44,26,14,0.35)" }}>
-                <Ico.Plus style={{ width: 16, height: 16, color: "#F8F2E8" }} />
+              <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#2A2A2A", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 10px rgba(42,42,42,0.35)" }}>
+                <Ico.Plus style={{ width: 16, height: 16, color: "#FFFFFF" }} />
               </div>
             </div>
           )
@@ -613,8 +613,8 @@ function BottomNav({ active = "home", onNav }) {
         const Icon = it.I
         return (
           <div key={it.k} onClick={() => onNav?.(it.k)} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1, flex: 1, cursor: "pointer" }}>
-            <Icon style={{ width: 16, height: 16, color: on ? "#2C1A0E" : "rgba(44,26,14,0.28)" }} />
-            <span style={{ fontSize: 6, letterSpacing: "0.07em", color: on ? "#2C1A0E" : "rgba(44,26,14,0.28)", fontWeight: on ? 700 : 400 }}>{it.l}</span>
+            <Icon style={{ width: 16, height: 16, color: on ? "#2A2A2A" : "rgba(42,42,42,0.28)" }} />
+            <span style={{ fontSize: 6, letterSpacing: "0.07em", color: on ? "#2A2A2A" : "rgba(42,42,42,0.28)", fontWeight: on ? 700 : 400 }}>{it.l}</span>
           </div>
         )
       })}
@@ -636,11 +636,11 @@ function DiscoverPhone() {
       <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div>
-            <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#2C1A0E", marginTop: 2, lineHeight: 1.2 }}>find creatives that<br/>match your vision</div>
+            <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2A2A2A" }}>V I S I O N</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#2A2A2A", marginTop: 2, lineHeight: 1.2 }}>find creatives that<br/>match your vision</div>
           </div>
-          <div style={{ width: 22, height: 22, borderRadius: "50%", background: "white", border: "1px solid rgba(44,26,14,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Ico.Search style={{ width: 10, height: 10, color: "#2C1A0E" }} />
+          <div style={{ width: 22, height: 22, borderRadius: "50%", background: "white", border: "1px solid rgba(42,42,42,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Ico.Search style={{ width: 10, height: 10, color: "#2A2A2A" }} />
           </div>
         </div>
       </div>
@@ -653,14 +653,14 @@ function DiscoverPhone() {
           { l: "Videography", a: false },
           { l: "Content", a: false },
         ].map(({ l, a }) => (
-          <span key={l} style={{ fontSize: 8, padding: "4px 10px", borderRadius: 18, fontWeight: 600, whiteSpace: "nowrap", background: a ? "#2C1A0E" : "white", color: a ? "#F8F2E8" : "rgba(44,26,14,0.6)", border: a ? "none" : "1px solid rgba(44,26,14,0.1)" }}>{l}</span>
+          <span key={l} style={{ fontSize: 8, padding: "4px 10px", borderRadius: 18, fontWeight: 600, whiteSpace: "nowrap", background: a ? "#2A2A2A" : "white", color: a ? "#FFFFFF" : "rgba(42,42,42,0.6)", border: a ? "none" : "1px solid rgba(42,42,42,0.1)" }}>{l}</span>
         ))}
       </div>
 
       {/* "Discover creatives / See all" row */}
       <div style={{ padding: "4px 12px 6px", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
-        <span style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>Discover creatives</span>
-        <span style={{ fontSize: 8, color: "rgba(44,26,14,0.55)", display: "flex", alignItems: "center", gap: 2 }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: "#2A2A2A" }}>Discover creatives</span>
+        <span style={{ fontSize: 8, color: "rgba(42,42,42,0.55)", display: "flex", alignItems: "center", gap: 2 }}>
           See all <Ico.Arrow style={{ width: 7, height: 7 }} />
         </span>
       </div>
@@ -669,7 +669,7 @@ function DiscoverPhone() {
       <div style={{ flex: 1, overflowY: "hidden" }}>
         <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3, alignContent: "start" }}>
         {grid.map((g, i) => (
-          <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#EFE5D4" }}>
+          <div key={i} style={{ position: "relative", aspectRatio: "3/4", borderRadius: 8, overflow: "hidden", background: "#F0F0F0" }}>
             <img src={g.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             {/* Subtle bottom gradient + name */}
             <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "8px 5px 4px", background: "linear-gradient(to top, rgba(0,0,0,0.55), transparent)", color: "white" }}>
@@ -740,8 +740,8 @@ function ProfilePhone() {
     <PhoneShell>
       {/* Top bar */}
       <div style={{ padding: "4px 12px 6px", flexShrink: 0 }}>
-        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2A2A2A" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2A2A2A", marginTop: 1 }}>{c.handle}</div>
       </div>
 
       {/* Stats row */}
@@ -750,40 +750,40 @@ function ProfilePhone() {
           <c.Av size={44} />
         </div>
         {[["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
-          <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "5px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
-            <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
+          <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "5px 2px", textAlign: "center", border: "1px solid rgba(42,42,42,0.04)" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#2A2A2A" }}>{v}</div>
+            <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(42,42,42,0.45)", marginTop: 1 }}>{l}</div>
           </div>
         ))}
       </div>
 
       {/* Name + pill */}
       <div style={{ padding: "0 12px 2px", display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
-        <span style={{ fontWeight: 700, fontSize: 14, color: "#2C1A0E" }}>{c.name.split(" ")[0]}</span>
-        <span style={{ background: "#FBE9D6", color: "#7A3A10", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
+        <span style={{ fontWeight: 700, fontSize: 14, color: "#2A2A2A" }}>{c.name.split(" ")[0]}</span>
+        <span style={{ background: "#E2EAF4", color: "#6B8FBF", fontSize: 7, padding: "2px 7px", borderRadius: 999, fontWeight: 700, letterSpacing: "0.04em" }}>CREATIVE</span>
       </div>
 
       {/* Location */}
       <div style={{ padding: "0 12px 4px", display: "flex", alignItems: "center", gap: 3, flexShrink: 0 }}>
-        <Ico.Map style={{ width: 8, height: 8, color: "rgba(44,26,14,0.5)" }} />
-        <span style={{ fontSize: 9, color: "rgba(44,26,14,0.55)" }}>{c.location}</span>
+        <Ico.Map style={{ width: 8, height: 8, color: "rgba(42,42,42,0.5)" }} />
+        <span style={{ fontSize: 9, color: "rgba(42,42,42,0.55)" }}>{c.location}</span>
       </div>
 
       {/* Bio */}
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
-        <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.35, margin: 0 }}>Wedding photographer capturing timeless moments. Available for bookings.</p>
+        <p style={{ fontSize: 9, color: "rgba(42,42,42,0.7)", lineHeight: 1.35, margin: 0 }}>Wedding photographer capturing timeless moments. Available for bookings.</p>
       </div>
 
       {/* Message button */}
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
-        <div style={{ background: "#FFFFFF", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 8, fontWeight: 600, color: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, border: "1px solid rgba(44,26,14,0.1)" }}>
+        <div style={{ background: "#FFFFFF", borderRadius: 18, padding: "6px 0", textAlign: "center", fontSize: 8, fontWeight: 600, color: "#2A2A2A", display: "flex", alignItems: "center", justifyContent: "center", gap: 4, border: "1px solid rgba(42,42,42,0.1)" }}>
           <Ico.Chat style={{ width: 9, height: 9 }} /> Message Emi Chen
         </div>
       </div>
 
       {/* Tabs — clickable, inside white pill container */}
       <div style={{ padding: "0 12px 8px", flexShrink: 0 }}>
-        <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
+        <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(42,42,42,0.06)" }}>
           {[
             { label: "Portfolio",     icon: <Ico.Eye     style={{ width: 7, height: 7 }} /> },
             { label: "Services", icon: <Ico.Layers  style={{ width: 7, height: 7 }} /> },
@@ -796,8 +796,8 @@ function ProfilePhone() {
                 flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600,
                 whiteSpace: "nowrap", cursor: "pointer", textAlign: "center",
                 display: "flex", alignItems: "center", justifyContent: "center", gap: 3,
-                background: activeTab === label ? "#2C1A0E" : "transparent",
-                color: activeTab === label ? "#F8F2E8" : "rgba(44,26,14,0.45)",
+                background: activeTab === label ? "#2A2A2A" : "transparent",
+                color: activeTab === label ? "#FFFFFF" : "rgba(42,42,42,0.45)",
                 transition: "all 0.15s",
               }}
             >{icon}{label}</span>
@@ -812,7 +812,7 @@ function ProfilePhone() {
         {activeTab === "Portfolio" && (
           <div style={{ padding: "0 12px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
             {portfolioImgs.map((src, i) => (
-              <div key={i} style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#EFE5D4" }}>
+              <div key={i} style={{ aspectRatio: "3/4", borderRadius: 6, overflow: "hidden", background: "#F0F0F0" }}>
                 <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }} />
               </div>
             ))}
@@ -823,17 +823,17 @@ function ProfilePhone() {
         {activeTab === "Services" && (
           <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 8 }}>
             {services.map((s) => (
-              <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+              <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 3 }}>
-                  <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{s.title}</span>
-                  <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>{s.price}<span style={{ fontSize: 9, fontWeight: 500, color: "rgba(44,26,14,0.5)" }}>{s.unit}</span></span>
+                  <span style={{ fontWeight: 700, fontSize: 11, color: "#2A2A2A" }}>{s.title}</span>
+                  <span style={{ fontWeight: 700, fontSize: 12, color: "#2A2A2A" }}>{s.price}<span style={{ fontSize: 9, fontWeight: 500, color: "rgba(42,42,42,0.5)" }}>{s.unit}</span></span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 5 }}>
-                  <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
-                  <span style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{s.duration}</span>
+                  <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(42,42,42,0.4)" }} />
+                  <span style={{ fontSize: 8, color: "rgba(42,42,42,0.45)" }}>{s.duration}</span>
                 </div>
-                <p style={{ fontSize: 8.5, color: "rgba(44,26,14,0.65)", lineHeight: 1.4, margin: "0 0 8px" }}>{s.desc}</p>
-                <div style={{ background: "#2C1A0E", borderRadius: 12, padding: "5px 0", textAlign: "center", fontSize: 8.5, fontWeight: 700, color: "#F8F2E8" }}>
+                <p style={{ fontSize: 8.5, color: "rgba(42,42,42,0.65)", lineHeight: 1.4, margin: "0 0 8px" }}>{s.desc}</p>
+                <div style={{ background: "#2A2A2A", borderRadius: 12, padding: "5px 0", textAlign: "center", fontSize: 8.5, fontWeight: 700, color: "#FFFFFF" }}>
                   Book This Package
                 </div>
               </div>
@@ -845,13 +845,13 @@ function ProfilePhone() {
         {activeTab === "Reviews" && (
           <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 8 }}>
             {reviews.map((r) => (
-              <div key={r.handle} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+              <div key={r.handle} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EFE5D4", flexShrink: 0 }} />
+                    <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#F0F0F0", flexShrink: 0 }} />
                     <div>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{r.name}</div>
-                      <div style={{ fontSize: 8, color: "rgba(44,26,14,0.4)" }}>{r.handle}</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A" }}>{r.name}</div>
+                      <div style={{ fontSize: 8, color: "rgba(42,42,42,0.4)" }}>{r.handle}</div>
                     </div>
                   </div>
                   <div style={{ display: "flex", gap: 1 }}>
@@ -860,7 +860,7 @@ function ProfilePhone() {
                     ))}
                   </div>
                 </div>
-                <p style={{ fontSize: 9, color: "rgba(44,26,14,0.7)", lineHeight: 1.4, margin: 0 }}>{r.text}</p>
+                <p style={{ fontSize: 9, color: "rgba(42,42,42,0.7)", lineHeight: 1.4, margin: 0 }}>{r.text}</p>
               </div>
             ))}
           </div>
@@ -883,27 +883,27 @@ function ChatPhone() {
   ]
   return (
     <PhoneShell>
-      <div style={{ padding: "4px 12px 8px", borderBottom: "1px solid rgba(44,26,14,0.06)", display: "flex", alignItems: "center", gap: 7, flexShrink: 0 }}>
+      <div style={{ padding: "4px 12px 8px", borderBottom: "1px solid rgba(42,42,42,0.06)", display: "flex", alignItems: "center", gap: 7, flexShrink: 0 }}>
         <div style={{ borderRadius: "50%", overflow: "hidden" }}><Avatar.Dre size={28} /></div>
         <div>
-          <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>Dre Williams</div>
-          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>Videographer · Atlanta</div>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "#2A2A2A" }}>Dre Williams</div>
+          <div style={{ fontSize: 8, color: "rgba(42,42,42,0.45)" }}>Videographer · Atlanta</div>
         </div>
       </div>
       <div style={{ flex: 1, padding: "8px 10px", display: "flex", flexDirection: "column", gap: 6, overflowY: "hidden" }}>
         {msgs.map((m, i) => (
           <div key={i} style={{ display: "flex", justifyContent: m.f === "me" ? "flex-end" : "flex-start" }}>
-            <div style={{ maxWidth: "78%", padding: "6px 9px", borderRadius: m.f === "me" ? "12px 12px 3px 12px" : "12px 12px 12px 3px", background: m.f === "me" ? "#2C1A0E" : "white", color: m.f === "me" ? "#F8F2E8" : "#2C1A0E", fontSize: 9, lineHeight: 1.4, border: m.f === "me" ? "none" : "1px solid rgba(44,26,14,0.07)" }}>{m.t}</div>
+            <div style={{ maxWidth: "78%", padding: "6px 9px", borderRadius: m.f === "me" ? "12px 12px 3px 12px" : "12px 12px 12px 3px", background: m.f === "me" ? "#2A2A2A" : "white", color: m.f === "me" ? "#FFFFFF" : "#2A2A2A", fontSize: 9, lineHeight: 1.4, border: m.f === "me" ? "none" : "1px solid rgba(42,42,42,0.07)" }}>{m.t}</div>
           </div>
         ))}
         <div style={{ alignSelf: "center", background: "#E6F0E6", color: "#2A5A2A", fontSize: 8, fontWeight: 600, padding: "3px 10px", borderRadius: 18, display: "flex", alignItems: "center", gap: 3 }}>
           <Ico.Check style={{ width: 8, height: 8 }} /> Booking confirmed — Jun 14, 3:00 PM
         </div>
       </div>
-      <div style={{ padding: "6px 10px", borderTop: "1px solid rgba(44,26,14,0.07)", display: "flex", gap: 6, flexShrink: 0 }}>
-        <div style={{ flex: 1, background: "white", borderRadius: 18, padding: "5px 10px", fontSize: 9, color: "rgba(44,26,14,0.35)", border: "1px solid rgba(44,26,14,0.08)" }}>Message</div>
-        <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Ico.Arrow style={{ width: 11, height: 11, color: "#F8F2E8" }} />
+      <div style={{ padding: "6px 10px", borderTop: "1px solid rgba(42,42,42,0.07)", display: "flex", gap: 6, flexShrink: 0 }}>
+        <div style={{ flex: 1, background: "white", borderRadius: 18, padding: "5px 10px", fontSize: 9, color: "rgba(42,42,42,0.35)", border: "1px solid rgba(42,42,42,0.08)" }}>Message</div>
+        <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#2A2A2A", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Ico.Arrow style={{ width: 11, height: 11, color: "#FFFFFF" }} />
         </div>
       </div>
       <BottomNav active="chat" />
@@ -922,22 +922,22 @@ function PackagesPhone() {
   return (
     <PhoneShell>
       <div style={{ padding: "4px 12px 4px", flexShrink: 0 }}>
-        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2C1A0E" }}>V I S I O N</div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "#2C1A0E", marginTop: 1 }}>{c.handle}</div>
+        <div style={{ fontSize: 7, letterSpacing: "0.22em", fontWeight: 700, color: "#2A2A2A" }}>V I S I O N</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#2A2A2A", marginTop: 1 }}>{c.handle}</div>
       </div>
       <div style={{ padding: "0 12px 6px", display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
         <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0, width: 36, height: 36 }}><c.Av size={36} /></div>
         {[["5.0 ★", "RATING"], [c.bookings, "BOOKED"]].map(([v, l]) => (
-          <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "4px 2px", textAlign: "center", border: "1px solid rgba(44,26,14,0.04)" }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>{v}</div>
-            <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(44,26,14,0.45)", marginTop: 1 }}>{l}</div>
+          <div key={l} style={{ flex: 1, background: "white", borderRadius: 9, padding: "4px 2px", textAlign: "center", border: "1px solid rgba(42,42,42,0.04)" }}>
+            <div style={{ fontSize: 10, fontWeight: 700, color: "#2A2A2A" }}>{v}</div>
+            <div style={{ fontSize: 6, letterSpacing: "0.08em", color: "rgba(42,42,42,0.45)", marginTop: 1 }}>{l}</div>
           </div>
         ))}
       </div>
       <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
-        <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(44,26,14,0.06)" }}>
+        <div style={{ background: "white", borderRadius: 20, padding: "3px", display: "flex", gap: 2, border: "1px solid rgba(42,42,42,0.06)" }}>
           {[["Portfolio", Ico.Eye], ["Services", Ico.Layers], ["Reviews", Ico.Star]].map(([label, Icon]) => (
-            <span key={label} style={{ flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600, whiteSpace: "nowrap", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 3, background: label === "Services" ? "#2C1A0E" : "transparent", color: label === "Services" ? "#F8F2E8" : "rgba(44,26,14,0.45)" }}>
+            <span key={label} style={{ flex: 1, fontSize: 8, padding: "5px 4px", borderRadius: 16, fontWeight: 600, whiteSpace: "nowrap", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 3, background: label === "Services" ? "#2A2A2A" : "transparent", color: label === "Services" ? "#FFFFFF" : "rgba(42,42,42,0.45)" }}>
               <Icon style={{ width: 7, height: 7 }} />{label}
             </span>
           ))}
@@ -945,17 +945,17 @@ function PackagesPhone() {
       </div>
       <div style={{ flex: 1, overflowY: "hidden", padding: "0 12px", display: "flex", flexDirection: "column", gap: 7 }}>
         {services.map((s) => (
-          <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+          <div key={s.title} style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)", flexShrink: 0 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 2 }}>
-              <span style={{ fontWeight: 700, fontSize: 10.5, color: "#2C1A0E" }}>{s.title}</span>
-              <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>{s.price}<span style={{ fontSize: 8, fontWeight: 500, color: "rgba(44,26,14,0.5)" }}>{s.unit}</span></span>
+              <span style={{ fontWeight: 700, fontSize: 10.5, color: "#2A2A2A" }}>{s.title}</span>
+              <span style={{ fontWeight: 700, fontSize: 11, color: "#2A2A2A" }}>{s.price}<span style={{ fontSize: 8, fontWeight: 500, color: "rgba(42,42,42,0.5)" }}>{s.unit}</span></span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 4 }}>
-              <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(44,26,14,0.4)" }} />
-              <span style={{ fontSize: 8, color: "rgba(44,26,14,0.45)" }}>{s.duration}</span>
+              <Ico.Calendar style={{ width: 8, height: 8, color: "rgba(42,42,42,0.4)" }} />
+              <span style={{ fontSize: 8, color: "rgba(42,42,42,0.45)" }}>{s.duration}</span>
             </div>
-            <p style={{ fontSize: 8, color: "rgba(44,26,14,0.6)", lineHeight: 1.4, margin: "0 0 7px" }}>{s.desc}</p>
-            <div style={{ background: "#2C1A0E", borderRadius: 10, padding: "5px 0", textAlign: "center", fontSize: 8, fontWeight: 700, color: "#F8F2E8" }}>Book This Package</div>
+            <p style={{ fontSize: 8, color: "rgba(42,42,42,0.6)", lineHeight: 1.4, margin: "0 0 7px" }}>{s.desc}</p>
+            <div style={{ background: "#2A2A2A", borderRadius: 10, padding: "5px 0", textAlign: "center", fontSize: 8, fontWeight: 700, color: "#FFFFFF" }}>Book This Package</div>
           </div>
         ))}
       </div>
@@ -970,63 +970,63 @@ function CheckoutPhone() {
   return (
     <PhoneShell>
       {/* Header */}
-      <div style={{ padding: "4px 12px 8px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+      <div style={{ padding: "4px 12px 8px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(42,42,42,0.07)", flexShrink: 0 }}>
         <Ico.Back style={{ width: 14, height: 14 }} />
-        <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E" }}>Book Package</span>
+        <span style={{ fontWeight: 700, fontSize: 12, color: "#2A2A2A" }}>Book Package</span>
       </div>
       <div style={{ flex: 1, overflowY: "hidden", padding: "10px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
         {/* Creative row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(42,42,42,0.07)" }}>
           <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={32} /></div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>Emi Chen</div>
-            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>Wedding Photographer · Los Angeles</div>
+            <div style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A" }}>Emi Chen</div>
+            <div style={{ fontSize: 8, color: "rgba(42,42,42,0.5)" }}>Wedding Photographer · Los Angeles</div>
           </div>
         </div>
         {/* Package */}
-        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-            <span style={{ fontWeight: 700, fontSize: 10.5, color: "#2C1A0E" }}>Full Day Coverage</span>
-            <span style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E" }}>$450</span>
+            <span style={{ fontWeight: 700, fontSize: 10.5, color: "#2A2A2A" }}>Full Day Coverage</span>
+            <span style={{ fontWeight: 700, fontSize: 11, color: "#2A2A2A" }}>$450</span>
           </div>
-          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>8 hours · 300+ edited photos</div>
+          <div style={{ fontSize: 8, color: "rgba(42,42,42,0.5)" }}>8 hours · 300+ edited photos</div>
         </div>
         {/* Date */}
-        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
-            <div style={{ fontSize: 8, color: "rgba(44,26,14,0.45)", marginBottom: 2 }}>DATE</div>
-            <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>June 14, 2026 · 10:00 AM</div>
+            <div style={{ fontSize: 8, color: "rgba(42,42,42,0.45)", marginBottom: 2 }}>DATE</div>
+            <div style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A" }}>June 14, 2026 · 10:00 AM</div>
           </div>
-          <Ico.Calendar style={{ width: 14, height: 14, color: "rgba(44,26,14,0.35)" }} />
+          <Ico.Calendar style={{ width: 14, height: 14, color: "rgba(42,42,42,0.35)" }} />
         </div>
         {/* Instant Book toggle — ON */}
-        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
             <div>
-              <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E", display: "flex", alignItems: "center", gap: 4 }}>
+              <div style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A", display: "flex", alignItems: "center", gap: 4 }}>
                 <Ico.Bolt style={{ width: 10, height: 10, color: "#C8A040" }} /> Instant Book
               </div>
-              <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)", marginTop: 1 }}>Auto-confirmed — no waiting</div>
+              <div style={{ fontSize: 8, color: "rgba(42,42,42,0.5)", marginTop: 1 }}>Auto-confirmed — no waiting</div>
             </div>
             {/* Toggle ON */}
-            <div style={{ width: 32, height: 18, borderRadius: 9, background: "#2C1A0E", position: "relative", flexShrink: 0 }}>
-              <div style={{ width: 14, height: 14, borderRadius: "50%", background: "#F8F2E8", position: "absolute", top: 2, right: 2 }} />
+            <div style={{ width: 32, height: 18, borderRadius: 9, background: "#2A2A2A", position: "relative", flexShrink: 0 }}>
+              <div style={{ width: 14, height: 14, borderRadius: "50%", background: "#FFFFFF", position: "absolute", top: 2, right: 2 }} />
             </div>
           </div>
           <div style={{ background: "#FAF4D6", borderRadius: 8, padding: "4px 8px", fontSize: 8, color: "#6A5010", fontWeight: 600 }}>⚡ Confirmed instantly — no charge until booked</div>
         </div>
         {/* Price summary */}
-        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(44,26,14,0.07)" }}>
+        <div style={{ background: "white", borderRadius: 12, padding: "10px 12px", border: "1px solid rgba(42,42,42,0.07)" }}>
           {[["Package", "$450.00"], ["Total", "$450.00"]].map(([l, v], i) => (
-            <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 1 ? 4 : 0, borderTop: i === 1 ? "1px solid rgba(44,26,14,0.08)" : "none", paddingTop: i === 1 ? 6 : 0 }}>
-              <span style={{ fontSize: i === 1 ? 10 : 8.5, fontWeight: i === 1 ? 700 : 500, color: i === 1 ? "#2C1A0E" : "rgba(44,26,14,0.55)" }}>{l}</span>
-              <span style={{ fontSize: i === 1 ? 10 : 8.5, fontWeight: i === 1 ? 700 : 500, color: "#2C1A0E" }}>{v}</span>
+            <div key={l} style={{ display: "flex", justifyContent: "space-between", marginBottom: i < 1 ? 4 : 0, borderTop: i === 1 ? "1px solid rgba(42,42,42,0.08)" : "none", paddingTop: i === 1 ? 6 : 0 }}>
+              <span style={{ fontSize: i === 1 ? 10 : 8.5, fontWeight: i === 1 ? 700 : 500, color: i === 1 ? "#2A2A2A" : "rgba(42,42,42,0.55)" }}>{l}</span>
+              <span style={{ fontSize: i === 1 ? 10 : 8.5, fontWeight: i === 1 ? 700 : 500, color: "#2A2A2A" }}>{v}</span>
             </div>
           ))}
         </div>
         {/* CTA */}
-        <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "10px 0", textAlign: "center", fontSize: 11, fontWeight: 700, color: "#F8F2E8" }}>Book &amp; Pay $450.00</div>
-        <div style={{ textAlign: "center", fontSize: 8, color: "rgba(44,26,14,0.4)" }}>Secured by Stripe · Cancel free before 48h</div>
+        <div style={{ background: "#2A2A2A", borderRadius: 14, padding: "10px 0", textAlign: "center", fontSize: 11, fontWeight: 700, color: "#FFFFFF" }}>Book &amp; Pay $450.00</div>
+        <div style={{ textAlign: "center", fontSize: 8, color: "rgba(42,42,42,0.4)" }}>Secured by Stripe · Cancel free before 48h</div>
       </div>
     </PhoneShell>
   )
@@ -1037,41 +1037,41 @@ function ListingPhone() {
   return (
     <PhoneShell>
       {/* Top bar */}
-      <div style={{ padding: "4px 12px 6px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+      <div style={{ padding: "4px 12px 6px", display: "flex", alignItems: "center", gap: 8, borderBottom: "1px solid rgba(42,42,42,0.07)", flexShrink: 0 }}>
         <Ico.Back style={{ width: 14, height: 14 }} />
-        <span style={{ fontWeight: 700, fontSize: 12, color: "#2C1A0E", flex: 1 }}>Open projects</span>
-        <span style={{ fontSize: 9, color: "rgba(44,26,14,0.4)" }}>1 / 1</span>
+        <span style={{ fontWeight: 700, fontSize: 12, color: "#2A2A2A", flex: 1 }}>Open projects</span>
+        <span style={{ fontSize: 9, color: "rgba(42,42,42,0.4)" }}>1 / 1</span>
       </div>
       {/* Project image - Emi's photo */}
       <div style={{ position: "relative", flexShrink: 0, height: 140, overflow: "hidden" }}>
         <img src="/zoe-portfolio/emi-1.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
       </div>
       {/* Apply to listing sheet */}
-      <div style={{ background: "#F8F2E8", borderRadius: "16px 16px 0 0", flex: 1, padding: "10px 12px", display: "flex", flexDirection: "column", gap: 7, overflowY: "hidden", marginTop: -8, position: "relative", zIndex: 2 }}>
+      <div style={{ background: "#FFFFFF", borderRadius: "16px 16px 0 0", flex: 1, padding: "10px 12px", display: "flex", flexDirection: "column", gap: 7, overflowY: "hidden", marginTop: -8, position: "relative", zIndex: 2 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-          <span style={{ fontWeight: 800, fontSize: 12, color: "#2C1A0E" }}>Apply to listing</span>
-          <span style={{ fontSize: 14, color: "rgba(44,26,14,0.35)", lineHeight: 1 }}>×</span>
+          <span style={{ fontWeight: 800, fontSize: 12, color: "#2A2A2A" }}>Apply to listing</span>
+          <span style={{ fontSize: 14, color: "rgba(42,42,42,0.35)", lineHeight: 1 }}>×</span>
         </div>
         {/* Text input */}
-        <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.12)", flexShrink: 0 }}>
-          <div style={{ fontSize: 9, color: "rgba(44,26,14,0.35)" }}>Introduce yourself and your approach...</div>
+        <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(42,42,42,0.12)", flexShrink: 0 }}>
+          <div style={{ fontSize: 9, color: "rgba(42,42,42,0.35)" }}>Introduce yourself and your approach...</div>
           <div style={{ height: 28 }} />
         </div>
         {/* Price input */}
-        <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.12)", flexShrink: 0 }}>
-          <div style={{ fontSize: 9, color: "rgba(44,26,14,0.35)" }}>Proposed price ($)</div>
+        <div style={{ background: "white", borderRadius: 10, padding: "8px 10px", border: "1px solid rgba(42,42,42,0.12)", flexShrink: 0 }}>
+          <div style={{ fontSize: 9, color: "rgba(42,42,42,0.35)" }}>Proposed price ($)</div>
         </div>
         {/* Send button */}
-        <div style={{ background: "#2C1A0E", borderRadius: 12, padding: "9px 0", textAlign: "center", fontSize: 10, fontWeight: 700, color: "#F8F2E8", flexShrink: 0 }}>Send application</div>
+        <div style={{ background: "#2A2A2A", borderRadius: 12, padding: "9px 0", textAlign: "center", fontSize: 10, fontWeight: 700, color: "#FFFFFF", flexShrink: 0 }}>Send application</div>
         {/* Project details below */}
-        <div style={{ borderTop: "1px solid rgba(44,26,14,0.08)", paddingTop: 8, flexShrink: 0 }}>
-          <div style={{ fontWeight: 700, fontSize: 11, color: "#2C1A0E", marginBottom: 5 }}>Casual Content Shoot</div>
+        <div style={{ borderTop: "1px solid rgba(42,42,42,0.08)", paddingTop: 8, flexShrink: 0 }}>
+          <div style={{ fontWeight: 700, fontSize: 11, color: "#2A2A2A", marginBottom: 5 }}>Casual Content Shoot</div>
           <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 5 }}>
-            {[["Active", "#D6EEE8", "#1A5A48"], ["$100 budget", "#FAF4D6", "#6A5010"], ["✦ Aesthetic", "#FBE9D6", "#7A3A10"]].map(([l, bg, c]) => (
+            {[["Active", "#D6EEE8", "#1A5A48"], ["$100 budget", "#FAF4D6", "#6A5010"], ["✦ Aesthetic", "#E2EAF4", "#6B8FBF"]].map(([l, bg, c]) => (
               <span key={l} style={{ fontSize: 7.5, fontWeight: 600, padding: "2px 7px", borderRadius: 999, background: bg, color: c }}>{l}</span>
             ))}
           </div>
-          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>San Francisco · May 12, 9:00 AM – 11:00 AM</div>
+          <div style={{ fontSize: 8, color: "rgba(42,42,42,0.5)" }}>San Francisco · May 12, 9:00 AM – 11:00 AM</div>
         </div>
       </div>
     </PhoneShell>
@@ -1084,47 +1084,47 @@ function PayoutsPhone() {
     <PhoneShell>
       {/* Header */}
       <div style={{ padding: "6px 12px 4px", flexShrink: 0 }}>
-        <div style={{ fontWeight: 800, fontSize: 14, color: "#2C1A0E" }}>Payouts</div>
-        <div style={{ fontSize: 8.5, color: "rgba(44,26,14,0.5)", marginTop: 1 }}>Track your earnings and withdraw to your bank.</div>
+        <div style={{ fontWeight: 800, fontSize: 14, color: "#2A2A2A" }}>Payouts</div>
+        <div style={{ fontSize: 8.5, color: "rgba(42,42,42,0.5)", marginTop: 1 }}>Track your earnings and withdraw to your bank.</div>
       </div>
       <div style={{ flex: 1, overflowY: "hidden", padding: "6px 12px", display: "flex", flexDirection: "column", gap: 7 }}>
         {/* Available balance card */}
-        <div style={{ background: "#2C1A0E", borderRadius: 14, padding: "12px 14px", flexShrink: 0 }}>
+        <div style={{ background: "#2A2A2A", borderRadius: 14, padding: "12px 14px", flexShrink: 0 }}>
           <div style={{ fontSize: 7.5, letterSpacing: "0.1em", color: "rgba(248,242,232,0.55)", fontWeight: 600, marginBottom: 4 }}>AVAILABLE BALANCE</div>
-          <div style={{ fontSize: 26, fontWeight: 800, color: "#F8F2E8", lineHeight: 1.1, marginBottom: 6 }}>$260.00</div>
+          <div style={{ fontSize: 26, fontWeight: 800, color: "#FFFFFF", lineHeight: 1.1, marginBottom: 6 }}>$260.00</div>
           <div style={{ fontSize: 8, color: "rgba(248,242,232,0.5)", lineHeight: 1.4 }}>Funds are paid out automatically to your bank ~2 days after each booking.</div>
         </div>
         {/* Pending + Lifetime */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 7, flexShrink: 0 }}>
           {[["PENDING", "$0.00"], ["LIFETIME", "$260.00"]].map(([l, v]) => (
-            <div key={l} style={{ background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)" }}>
-              <div style={{ fontSize: 7, letterSpacing: "0.08em", color: "rgba(44,26,14,0.4)", marginBottom: 3 }}>{l}</div>
-              <div style={{ fontWeight: 700, fontSize: 13, color: "#2C1A0E" }}>{v}</div>
+            <div key={l} style={{ background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(42,42,42,0.07)" }}>
+              <div style={{ fontSize: 7, letterSpacing: "0.08em", color: "rgba(42,42,42,0.4)", marginBottom: 3 }}>{l}</div>
+              <div style={{ fontWeight: 700, fontSize: 13, color: "#2A2A2A" }}>{v}</div>
             </div>
           ))}
         </div>
         {/* Payout method */}
-        <div style={{ background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)", flexShrink: 0 }}>
+        <div style={{ background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(42,42,42,0.07)", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 2 }}>
-            <span style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>Payout method</span>
+            <span style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A" }}>Payout method</span>
             <span style={{ fontSize: 7.5, fontWeight: 600, color: "#1A5A48", background: "#D6EEE8", padding: "2px 7px", borderRadius: 999 }}>✓ Ready</span>
           </div>
-          <div style={{ fontSize: 8, color: "rgba(44,26,14,0.5)" }}>Connected · STRIPE BANK ••••2227</div>
+          <div style={{ fontSize: 8, color: "rgba(42,42,42,0.5)" }}>Connected · STRIPE BANK ••••2227</div>
         </div>
         {/* Activity */}
         <div style={{ flexShrink: 0 }}>
-          <div style={{ fontSize: 7.5, letterSpacing: "0.1em", fontWeight: 700, color: "rgba(44,26,14,0.4)", marginBottom: 6 }}>ACTIVITY</div>
+          <div style={{ fontSize: 7.5, letterSpacing: "0.1em", fontWeight: 700, color: "rgba(42,42,42,0.4)", marginBottom: 6 }}>ACTIVITY</div>
           {[
             { name: "Julie", date: "Paid out · 5/12/2026", amount: "+$165.00", img: "/creators/mia.jpg" },
             { name: "Sarah K.", date: "Paid out · 5/8/2026",  amount: "+$95.00",  img: "/creators/ellie.jpg" },
           ].map((a) => (
-            <div key={a.name} style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(44,26,14,0.07)", marginBottom: 6 }}>
-              <div style={{ width: 28, height: 28, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#D4C4A8" }}>
+            <div key={a.name} style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 12, padding: "8px 10px", border: "1px solid rgba(42,42,42,0.07)", marginBottom: 6 }}>
+              <div style={{ width: 28, height: 28, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#D8D8D8" }}>
                 <img src={a.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={e => e.target.style.display = 'none'} />
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{a.name}</div>
-                <div style={{ fontSize: 7.5, color: "rgba(44,26,14,0.45)" }}>{a.date}</div>
+                <div style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A" }}>{a.name}</div>
+                <div style={{ fontSize: 7.5, color: "rgba(42,42,42,0.45)" }}>{a.date}</div>
               </div>
               <span style={{ fontWeight: 700, fontSize: 10, color: "#1A5A48" }}>{a.amount}</span>
             </div>
@@ -1185,10 +1185,10 @@ function FeedScroll({ startIndex, posts, imgs, c }) {
           <div style={{ padding: "7px 10px", display: "flex", alignItems: "center", gap: 7 }}>
             <div style={{ borderRadius: "50%", overflow: "hidden", flexShrink: 0 }}><c.Av size={22} /></div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 700, fontSize: 10, color: "#2C1A0E" }}>{c.name}</div>
-              <div style={{ fontSize: 7.5, color: "rgba(44,26,14,0.4)" }}>{c.location}</div>
+              <div style={{ fontWeight: 700, fontSize: 10, color: "#2A2A2A" }}>{c.name}</div>
+              <div style={{ fontSize: 7.5, color: "rgba(42,42,42,0.4)" }}>{c.location}</div>
             </div>
-            <svg viewBox="0 0 24 24" fill="#2C1A0E" style={{ width: 14, height: 14, opacity: 0.3 }}><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="#2A2A2A" style={{ width: 14, height: 14, opacity: 0.3 }}><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
           </div>
           {/* Photo */}
           <div style={{ width: "100%", aspectRatio: "1/1", background: "#F0F0F0", overflow: "hidden" }}>
@@ -1198,30 +1198,30 @@ function FeedScroll({ startIndex, posts, imgs, c }) {
           <div style={{ padding: "7px 10px 4px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 15, height: 15 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.5)" }}>{post.likes}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2A2A2A" strokeWidth="1.8" style={{ width: 15, height: 15 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span style={{ fontSize: 8.5, color: "rgba(42,42,42,0.5)" }}>{post.likes}</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                <span style={{ fontSize: 8.5, color: "rgba(44,26,14,0.5)" }}>{post.comments}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2A2A2A" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span style={{ fontSize: 8.5, color: "rgba(42,42,42,0.5)" }}>{post.comments}</span>
               </div>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2A2A2A" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </div>
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2C1A0E" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2A2A2A" strokeWidth="1.8" style={{ width: 14, height: 14 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
           </div>
           {/* Tag + caption */}
           <div style={{ padding: "0 10px 6px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 3, background: "#FBE9D6", color: "#7A3A10", fontSize: 7.5, fontWeight: 700, padding: "2px 7px", borderRadius: 999, marginBottom: 4 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 3, background: "#E2EAF4", color: "#6B8FBF", fontSize: 7.5, fontWeight: 700, padding: "2px 7px", borderRadius: 999, marginBottom: 4 }}>
               <Ico.Sparkle style={{ width: 6, height: 6 }} /> {post.tag}
             </div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: "#2C1A0E" }}>{post.caption}</div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: "#2A2A2A" }}>{post.caption}</div>
           </div>
           {/* Comment input */}
           <div style={{ padding: "0 10px 8px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, background: "#F8F2E8", borderRadius: 20, padding: "5px 9px" }}>
-              <span style={{ flex: 1, fontSize: 8.5, color: "rgba(44,26,14,0.35)" }}>Add a comment...</span>
-              <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#2C1A0E", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <Ico.Arrow style={{ width: 8, height: 8, color: "#F8F2E8" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: 6, background: "#FFFFFF", borderRadius: 20, padding: "5px 9px" }}>
+              <span style={{ flex: 1, fontSize: 8.5, color: "rgba(42,42,42,0.35)" }}>Add a comment...</span>
+              <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#2A2A2A", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Ico.Arrow style={{ width: 8, height: 8, color: "#FFFFFF" }} />
               </div>
             </div>
           </div>
@@ -1309,14 +1309,14 @@ function HeroProfilePhone() {
             <div style={{ fontSize: 8, fontWeight: 800, color: E, letterSpacing: '0.22em', marginBottom: 1 }}>V I S I O N</div>
             <div style={{ fontSize: 13, fontWeight: 700, color: E, lineHeight: 1.25 }}>find creatives that<br/>match your vision</div>
           </div>
-          <div style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(44,26,14,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2 }}>
+          <div style={{ width: 28, height: 28, borderRadius: '50%', border: '1.5px solid rgba(42,42,42,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2 }}>
             <Ico.Search style={{ width: 12, height: 12, color: E }} />
           </div>
         </div>
         {/* Category pills */}
         <div style={{ padding: '0 12px 7px', display: 'flex', gap: 5, overflowX: 'auto', flexShrink: 0 }} className="no-scrollbar">
           {CATEGORIES.map(c => (
-            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 10px', borderRadius: 999, cursor: 'pointer', fontSize: 8.5, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0, border: `1.5px solid ${catFilter === c ? E : 'rgba(44,26,14,0.13)'}`, background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(44,26,14,0.6)' }}>
+            <button key={c} onClick={() => setCatFilter(c)} style={{ padding: '4px 10px', borderRadius: 999, cursor: 'pointer', fontSize: 8.5, fontWeight: 600, whiteSpace: 'nowrap', flexShrink: 0, border: `1.5px solid ${catFilter === c ? E : 'rgba(42,42,42,0.13)'}`, background: catFilter === c ? E : 'white', color: catFilter === c ? C : 'rgba(42,42,42,0.6)' }}>
               {c}
             </button>
           ))}
@@ -1326,7 +1326,7 @@ function HeroProfilePhone() {
           {/* Section label */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: E }}>Discover creatives</span>
-            <span style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)', fontWeight: 500 }}>See all →</span>
+            <span style={{ fontSize: 9, color: 'rgba(42,42,42,0.45)', fontWeight: 500 }}>See all →</span>
           </div>
           {/* 3-col photo grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 4 }}>
@@ -1357,7 +1357,7 @@ function HeroProfilePhone() {
     return (
       <PhoneShell>
         {/* Header */}
-        <div style={{ padding: '4px 12px 8px', borderBottom: '1px solid rgba(44,26,14,0.07)', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0, background: 'white' }}>
+        <div style={{ padding: '4px 12px 8px', borderBottom: '1px solid rgba(42,42,42,0.07)', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0, background: 'white' }}>
           <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0 }}>
             <Ico.Back style={{ width: 14, height: 14 }} />
           </button>
@@ -1366,10 +1366,10 @@ function HeroProfilePhone() {
             <div style={{ fontSize: 11, fontWeight: 700, color: E }}>Emi Chen</div>
             <div style={{ fontSize: 8, color: '#1A5A48', fontWeight: 600 }}>● Active now</div>
           </div>
-          <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(44,26,14,0.3)' }} />
+          <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(42,42,42,0.3)' }} />
         </div>
         {/* Messages */}
-        <div ref={chatScrollRef} className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
+        <div ref={chatScrollRef} className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F5F5F5' }}>
           {chatMsgs.map((msg, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: msg.from === 'me' ? 'flex-end' : 'flex-start', gap: 5, alignItems: 'flex-end' }}>
               {msg.from === 'them' && <EmiAv size={20} />}
@@ -1378,15 +1378,15 @@ function HeroProfilePhone() {
                 background: msg.from === 'me' ? E : 'white',
                 color: msg.from === 'me' ? C : E,
                 fontSize: 9.5, lineHeight: 1.45,
-                boxShadow: '0 1px 4px rgba(44,26,14,0.08)',
+                boxShadow: '0 1px 4px rgba(42,42,42,0.08)',
               }}>{msg.text}</div>
             </div>
           ))}
           <div ref={chatEndRef} />
         </div>
         {/* Input */}
-        <div style={{ padding: '8px 10px 10px', borderTop: '1px solid rgba(44,26,14,0.07)', background: 'white', display: 'flex', gap: 7, alignItems: 'center', flexShrink: 0 }}>
-          <div style={{ flex: 1, background: '#F0E8DC', borderRadius: 20, padding: '6px 12px', display: 'flex', alignItems: 'center' }}>
+        <div style={{ padding: '8px 10px 10px', borderTop: '1px solid rgba(42,42,42,0.07)', background: 'white', display: 'flex', gap: 7, alignItems: 'center', flexShrink: 0 }}>
+          <div style={{ flex: 1, background: '#F5F5F5', borderRadius: 20, padding: '6px 12px', display: 'flex', alignItems: 'center' }}>
             <input
               value={chatInput}
               onChange={e => setChatInput(e.target.value)}
@@ -1408,13 +1408,13 @@ function HeroProfilePhone() {
   if (screen === 'imagefeed') {
     return (
       <PhoneShell>
-        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(42,42,42,0.07)', background: 'white', position: 'relative' }}>
           <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
             <Ico.Back style={{ width: 14, height: 14 }} />
           </button>
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
         </div>
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
+        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F5F5F5' }}
           ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) el.scrollTop = t.offsetTop } }}>
           {postMeta.map((post, i) => (
             <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
@@ -1422,26 +1422,26 @@ function HeroProfilePhone() {
                 <EmiAv size={22} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 10, color: E }}>Emi Chen</div>
-                  <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>Los Angeles</div>
+                  <div style={{ fontSize: 7.5, color: 'rgba(42,42,42,0.4)' }}>Los Angeles</div>
                 </div>
               </div>
-              <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D4C4A8' }}>
+              <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#D8D8D8' }}>
                 <img src={portfolioImgs[i]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
               </div>
               <div style={{ padding: '7px 10px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                   <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke={E} strokeWidth="1.8" style={{ width: 13, height: 13 }}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.likes}</span>
+                    <span style={{ fontSize: 8, color: 'rgba(42,42,42,0.5)' }}>{post.likes}</span>
                   </div>
                   <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-                    <Ico.Chat style={{ width: 12, height: 12, color: 'rgba(44,26,14,0.5)' }} />
-                    <span style={{ fontSize: 8, color: 'rgba(44,26,14,0.5)' }}>{post.comments}</span>
+                    <Ico.Chat style={{ width: 12, height: 12, color: 'rgba(42,42,42,0.5)' }} />
+                    <span style={{ fontSize: 8, color: 'rgba(42,42,42,0.5)' }}>{post.comments}</span>
                   </div>
                 </div>
               </div>
               <div style={{ padding: '0 10px 8px' }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, background: '#E2EAF4', color: '#6B8FBF', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999, marginBottom: 3 }}>
                   {post.tag}
                 </div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{post.caption}</div>
@@ -1459,37 +1459,37 @@ function HeroProfilePhone() {
     const s = selectedService
     return (
       <PhoneShell>
-        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(42,42,42,0.07)', background: 'white', position: 'relative' }}>
           <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
             <Ico.Back style={{ width: 14, height: 14 }} />
           </button>
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Book Package</div>
         </div>
         <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: C, padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(42,42,42,0.07)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 800, color: E }}>{s.title}</div>
-                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.5)' }}>
+                <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(42,42,42,0.5)' }}>
                   <Ico.Clock style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9 }}>{s.duration}</span>
                 </div>
               </div>
-              <div><span style={{ fontSize: 16, fontWeight: 800, color: E }}>{s.price}</span><span style={{ fontSize: 8, color: 'rgba(44,26,14,0.45)' }}>{s.unit}</span></div>
+              <div><span style={{ fontSize: 16, fontWeight: 800, color: E }}>{s.price}</span><span style={{ fontSize: 8, color: 'rgba(42,42,42,0.45)' }}>{s.unit}</span></div>
             </div>
-            <div style={{ borderTop: '1px solid rgba(44,26,14,0.07)', marginTop: 10, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 5 }}>
+            <div style={{ borderTop: '1px solid rgba(42,42,42,0.07)', marginTop: 10, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 5 }}>
               {[`${s.photos} edited photos`, `Delivery in ${s.delivery}`, 'Online gallery + print release', 'Secure payment via Stripe'].map(item => (
                 <div key={item} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                   <Ico.Check style={{ width: 10, height: 10, color: '#1A5A48', flexShrink: 0 }} />
-                  <span style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)' }}>{item}</span>
+                  <span style={{ fontSize: 9.5, color: 'rgba(42,42,42,0.65)' }}>{item}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
-            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(44,26,14,0.45)', letterSpacing: '0.08em', marginBottom: 7 }}>SELECT DATE</div>
+          <div style={{ background: 'white', borderRadius: 14, padding: '10px 14px', border: '1px solid rgba(42,42,42,0.07)' }}>
+            <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(42,42,42,0.45)', letterSpacing: '0.08em', marginBottom: 7 }}>SELECT DATE</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {['Jun 22', 'Jun 28', 'Jul 5', 'Jul 12'].map(d => (
-                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, cursor: 'pointer', fontSize: 9, fontWeight: 600, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(44,26,14,0.6)', border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(44,26,14,0.1)'}` }}>{d}</button>
+                <button key={d} onClick={() => setBookDate(d + ', 2026')} style={{ padding: '5px 10px', borderRadius: 10, cursor: 'pointer', fontSize: 9, fontWeight: 600, background: bookDate.startsWith(d) ? E : 'white', color: bookDate.startsWith(d) ? C : 'rgba(42,42,42,0.6)', border: `1.5px solid ${bookDate.startsWith(d) ? E : 'rgba(42,42,42,0.1)'}` }}>{d}</button>
               ))}
             </div>
           </div>
@@ -1517,13 +1517,13 @@ function HeroProfilePhone() {
             <Ico.Check style={{ width: 24, height: 24, color: '#1A5A48' }} />
           </div>
           <div style={{ fontSize: 16, fontWeight: 800, color: E, textAlign: 'center', marginBottom: 6 }}>Booking Confirmed!</div>
-          <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
+          <div style={{ fontSize: 11, color: 'rgba(42,42,42,0.55)', textAlign: 'center', lineHeight: 1.5, marginBottom: 20 }}>
             {selectedService?.title} with Emi Chen<br/>{bookDate} · Malibu, CA
           </div>
-          <div style={{ background: 'white', borderRadius: 14, padding: '12px 16px', width: '100%', border: '1px solid rgba(44,26,14,0.07)', marginBottom: 14 }}>
+          <div style={{ background: 'white', borderRadius: 14, padding: '12px 16px', width: '100%', border: '1px solid rgba(42,42,42,0.07)', marginBottom: 14 }}>
             {[['Package', selectedService?.title], ['Date', bookDate], ['Amount', selectedService?.price], ['Status', 'Confirmed ✓']].map(([k, v]) => (
-              <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(44,26,14,0.05)' }}>
-                <span style={{ fontSize: 9, color: 'rgba(44,26,14,0.45)' }}>{k}</span>
+              <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(42,42,42,0.05)' }}>
+                <span style={{ fontSize: 9, color: 'rgba(42,42,42,0.45)' }}>{k}</span>
                 <span style={{ fontSize: 9, fontWeight: 700, color: k === 'Status' ? '#1A5A48' : E }}>{v}</span>
               </div>
             ))}
@@ -1540,25 +1540,25 @@ function HeroProfilePhone() {
     const r = selectedReview
     return (
       <PhoneShell>
-        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(44,26,14,0.07)', background: 'white', position: 'relative' }}>
+        <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', flexShrink: 0, borderBottom: '1px solid rgba(42,42,42,0.07)', background: 'white', position: 'relative' }}>
           <button onClick={goBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, position: 'absolute', left: 10 }}>
             <Ico.Back style={{ width: 14, height: 14 }} />
           </button>
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Review</div>
         </div>
         <div style={{ flex: 1, padding: '16px', background: C, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', border: '1px solid rgba(44,26,14,0.07)' }}>
+          <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', border: '1px solid rgba(42,42,42,0.07)' }}>
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>
-              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#D8D8D8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <span style={{ fontSize: 14, fontWeight: 700, color: E }}>{r.name[0]}</span>
               </div>
               <div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: E }}>{r.name}</div>
-                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.4)' }}>{r.handle} · {r.date}</div>
+                <div style={{ fontSize: 9, color: 'rgba(42,42,42,0.4)' }}>{r.handle} · {r.date}</div>
               </div>
             </div>
             <div style={{ display: 'flex', gap: 2, marginBottom: 10 }}>{[0,1,2,3,4].map(i => <StarFilled key={i} size={11} />)}</div>
-            <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.7)', lineHeight: 1.6 }}>"{r.text}"</div>
+            <div style={{ fontSize: 11, color: 'rgba(42,42,42,0.7)', lineHeight: 1.6 }}>"{r.text}"</div>
           </div>
           <button onClick={goBack} style={{ background: E, color: C, border: 'none', borderRadius: 24, padding: '10px 0', fontSize: 11, fontWeight: 700, cursor: 'pointer', width: '100%' }}>Back to Profile</button>
         </div>
@@ -1571,20 +1571,20 @@ function HeroProfilePhone() {
   return (
     <PhoneShell>
       <div style={{ padding: '2px 14px 6px', flexShrink: 0 }}>
-        <div style={{ fontSize: 7.5, fontWeight: 700, letterSpacing: '0.24em', color: 'rgba(44,26,14,0.35)' }}>V I S I O N</div>
+        <div style={{ fontSize: 7.5, fontWeight: 700, letterSpacing: '0.24em', color: 'rgba(42,42,42,0.35)' }}>V I S I O N</div>
         <div style={{ fontSize: 16, fontWeight: 800, color: E }}>@snapsbyemi</div>
       </div>
       <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto' }}>
         {/* Stats */}
         <div style={{ padding: '0 14px 8px', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 50, height: 50, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(44,26,14,0.12)', background: '#D4C4A8' }}>
+          <div style={{ width: 50, height: 50, borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid rgba(42,42,42,0.12)', background: '#D8D8D8' }}>
             <img src="/creators/emi.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display='none'} />
           </div>
           <div style={{ display: 'flex', gap: 6, flex: 1 }}>
             {[['5.0 ★', 'RATING'], ['89', 'BOOKED']].map(([v, l]) => (
-              <div key={l} style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 4px', textAlign: 'center', border: '1px solid rgba(44,26,14,0.07)' }}>
+              <div key={l} style={{ flex: 1, background: 'white', borderRadius: 12, padding: '7px 4px', textAlign: 'center', border: '1px solid rgba(42,42,42,0.07)' }}>
                 <div style={{ fontSize: 13, fontWeight: 800, color: E }}>{v}</div>
-                <div style={{ fontSize: 7, color: 'rgba(44,26,14,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>{l}</div>
+                <div style={{ fontSize: 7, color: 'rgba(42,42,42,0.4)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>{l}</div>
               </div>
             ))}
           </div>
@@ -1593,16 +1593,16 @@ function HeroProfilePhone() {
         <div style={{ padding: '0 14px 8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
             <span style={{ fontSize: 14, fontWeight: 800, color: E }}>Emi</span>
-            <span style={{ background: '#FBE9D6', color: '#7A3A10', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
+            <span style={{ background: '#E2EAF4', color: '#6B8FBF', fontSize: 7.5, fontWeight: 700, padding: '2px 7px', borderRadius: 999 }}>CREATIVE</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(44,26,14,0.45)', marginBottom: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'rgba(42,42,42,0.45)', marginBottom: 4 }}>
             <Ico.Map style={{ width: 9, height: 9 }} /><span style={{ fontSize: 9.5 }}>Los Angeles</span>
           </div>
-          <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
+          <div style={{ fontSize: 9.5, color: 'rgba(42,42,42,0.6)', lineHeight: 1.5 }}>Wedding photographer capturing timeless moments. Available for bookings.</div>
         </div>
         {/* Message button — clickable */}
         <div style={{ padding: '0 14px 8px' }}>
-          <button onClick={goToChat} style={{ width: '100%', background: '#FFFFFF', borderRadius: 22, padding: '7px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(44,26,14,0.1)', cursor: 'pointer' }}>
+          <button onClick={goToChat} style={{ width: '100%', background: '#FFFFFF', borderRadius: 22, padding: '7px 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(42,42,42,0.1)', cursor: 'pointer' }}>
             <Ico.Msg style={{ width: 9, height: 9, color: E }} />
             <span style={{ fontSize: 9, fontWeight: 600, color: E }}>Message Emi Chen</span>
           </button>
@@ -1610,7 +1610,7 @@ function HeroProfilePhone() {
         {/* Tabs */}
         <div style={{ padding: '0 14px 0', display: 'flex', gap: 5 }}>
           {[['Portfolio', Ico.Eye], ['Services', Ico.Bolt], ['Reviews', Ico.Star]].map(([label, Icon]) => (
-            <button key={label} onClick={() => setActiveTab(label)} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 999, border: 'none', cursor: 'pointer', background: activeTab === label ? E : 'transparent', color: activeTab === label ? C : 'rgba(44,26,14,0.45)', fontSize: 9.5, fontWeight: activeTab === label ? 700 : 500 }}>
+            <button key={label} onClick={() => setActiveTab(label)} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 999, border: 'none', cursor: 'pointer', background: activeTab === label ? E : 'transparent', color: activeTab === label ? C : 'rgba(42,42,42,0.45)', fontSize: 9.5, fontWeight: activeTab === label ? 700 : 500 }}>
               <Icon style={{ width: 9, height: 9 }} /> {label}
             </button>
           ))}
@@ -1619,7 +1619,7 @@ function HeroProfilePhone() {
         {activeTab === 'Portfolio' && (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 2, marginTop: 8 }}>
             {portfolioImgs.map((src, i) => (
-              <div key={i} onClick={() => { setSelectedImg(i); setScreen('imagefeed') }} style={{ aspectRatio: '3/4', background: '#D4C4A8', overflow: 'hidden', cursor: 'pointer' }}>
+              <div key={i} onClick={() => { setSelectedImg(i); setScreen('imagefeed') }} style={{ aspectRatio: '3/4', background: '#D8D8D8', overflow: 'hidden', cursor: 'pointer' }}>
                 <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
               </div>
             ))}
@@ -1629,20 +1629,20 @@ function HeroProfilePhone() {
         {activeTab === 'Services' && (
           <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
             {services.map(s => (
-              <div key={s.title} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)' }}>
+              <div key={s.title} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(42,42,42,0.07)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                   <div>
                     <div style={{ fontSize: 11, fontWeight: 800, color: E }}>{s.title}</div>
-                    <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(44,26,14,0.45)' }}>
+                    <div style={{ display: 'flex', gap: 3, alignItems: 'center', marginTop: 2, color: 'rgba(42,42,42,0.45)' }}>
                       <Ico.Clock style={{ width: 8, height: 8 }} /><span style={{ fontSize: 8.5 }}>{s.duration}</span>
                     </div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <span style={{ fontSize: 15, fontWeight: 800, color: E }}>{s.price}</span>
-                    <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{s.unit}</div>
+                    <div style={{ fontSize: 7.5, color: 'rgba(42,42,42,0.4)' }}>{s.unit}</div>
                   </div>
                 </div>
-                <div style={{ fontSize: 9, color: 'rgba(44,26,14,0.55)', lineHeight: 1.5, marginBottom: 10 }}>{s.desc}</div>
+                <div style={{ fontSize: 9, color: 'rgba(42,42,42,0.55)', lineHeight: 1.5, marginBottom: 10 }}>{s.desc}</div>
                 <button onClick={() => { setService(s); setScreen('checkout') }} style={{ width: '100%', background: E, color: C, border: 'none', borderRadius: 20, padding: '8px 0', fontSize: 10, fontWeight: 700, cursor: 'pointer' }}>
                   Book This Package
                 </button>
@@ -1653,17 +1653,17 @@ function HeroProfilePhone() {
         {/* Reviews */}
         {activeTab === 'Reviews' && (
           <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', display: 'flex', gap: 14, alignItems: 'center' }}>
+            <div style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(42,42,42,0.07)', display: 'flex', gap: 14, alignItems: 'center' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 24, fontWeight: 800, color: E }}>5.0</div>
                 <div style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>{[0,1,2,3,4].map(i => <StarFilled key={i} />)}</div>
-                <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)', marginTop: 2 }}>89 reviews</div>
+                <div style={{ fontSize: 7.5, color: 'rgba(42,42,42,0.4)', marginTop: 2 }}>89 reviews</div>
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {[5,4,3].map(n => (
                   <div key={n} style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
-                    <span style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.45)', width: 6 }}>{n}</span>
-                    <div style={{ flex: 1, height: 4, background: '#EFE5D4', borderRadius: 999 }}>
+                    <span style={{ fontSize: 7.5, color: 'rgba(42,42,42,0.45)', width: 6 }}>{n}</span>
+                    <div style={{ flex: 1, height: 4, background: '#F0F0F0', borderRadius: 999 }}>
                       <div style={{ width: n===5?'96%':n===4?'3%':'1%', height: '100%', background: E, borderRadius: 999 }}/>
                     </div>
                   </div>
@@ -1671,21 +1671,21 @@ function HeroProfilePhone() {
               </div>
             </div>
             {reviews.map((r, i) => (
-              <div key={i} onClick={() => { setReview(r); setScreen('review') }} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(44,26,14,0.07)', cursor: 'pointer' }}>
+              <div key={i} onClick={() => { setReview(r); setScreen('review') }} style={{ background: 'white', borderRadius: 14, padding: '12px 14px', border: '1px solid rgba(42,42,42,0.07)', cursor: 'pointer' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                   <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
-                    <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#D4C4A8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#D8D8D8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <span style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name[0]}</span>
                     </div>
                     <div>
                       <div style={{ fontSize: 10, fontWeight: 700, color: E }}>{r.name}</div>
-                      <div style={{ fontSize: 7.5, color: 'rgba(44,26,14,0.4)' }}>{r.date}</div>
+                      <div style={{ fontSize: 7.5, color: 'rgba(42,42,42,0.4)' }}>{r.date}</div>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 1 }}>{[0,1,2,3,4].map(j => <StarFilled key={j} size={8} />)}</div>
                 </div>
-                <div style={{ fontSize: 9.5, color: 'rgba(44,26,14,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
-                <div style={{ fontSize: 8.5, color: 'rgba(44,26,14,0.35)', marginTop: 5, fontWeight: 600 }}>Tap to read full review →</div>
+                <div style={{ fontSize: 9.5, color: 'rgba(42,42,42,0.65)', lineHeight: 1.5 }}>"{r.text.slice(0, 80)}…"</div>
+                <div style={{ fontSize: 8.5, color: 'rgba(42,42,42,0.35)', marginTop: 5, fontWeight: 600 }}>Tap to read full review →</div>
               </div>
             ))}
           </div>
@@ -1838,7 +1838,7 @@ function HowItWorks() {
         tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
     ],
     create: [
-      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, location, and packages. Your profile is the first thing clients see.",      bg: "#FBE9D6", tc: "#7A3A10", Phone: ProfilePhone,
+      { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, location, and packages. Your profile is the first thing clients see.",      bg: "#E2EAF4", tc: "#6B8FBF", Phone: ProfilePhone,
         tags: ["Upload your portfolio", "Set your packages", "Show your work"] },
       { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",          bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
         tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
@@ -1964,7 +1964,7 @@ function SharedVision() {
     { label: "A product campaign",  bg: "#D8E8D8", c: "#1A5A2A" },
     { label: "A music video",       bg: "#D8D4C0", c: "#4A3A10" },
     { label: "An event",            bg: "#E8C8B8", c: "#6A2A10" },
-    { label: "A creative identity", bg: "#FBE9D6", c: "#7A3A10" },
+    { label: "A creative identity", bg: "#E2EAF4", c: "#6B8FBF" },
     { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
   ]
   const cards = [
