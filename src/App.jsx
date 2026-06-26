@@ -1725,12 +1725,6 @@ function Hero() {
             Discover and collaborate with photographers, stylists, directors, designers, and creators — for content, branding, events, and everything in between.
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-2">
-            {heroPills.map(({ l, bg, c }) => (
-              <span key={l} style={{ background: bg, color: c, fontSize: 12, padding: "5px 13px", borderRadius: 999, fontWeight: 600 }}>{l}</span>
-            ))}
-          </div>
-
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
             <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-7 py-4 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
               Explore Creatives <Ico.Arrow className="w-4 h-4" />
@@ -1762,25 +1756,10 @@ function Hero() {
           </div>
           <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
             <HeroProfilePhone />
-            {/* Solid arrow: scroll hint — left of phone */}
-            <div className="hidden xl:flex absolute flex-col items-end gap-2" style={{ right: "calc(100% + 16px)", top: "36%" }}>
+            {/* Floating label — above phone */}
+            <div className="hidden xl:flex absolute items-center gap-2" style={{ top: -18, left: "50%", transform: "translateX(-50%)" }}>
               <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
-                scroll to explore
-              </div>
-              <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", alignSelf: "flex-end" }}>
-                <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              </svg>
-            </div>
-            {/* Solid arrow + interactive label — right of phone */}
-            <div className="hidden xl:flex absolute flex-col items-start gap-2" style={{ left: "calc(100% + 16px)", bottom: "26%" }}>
-              <svg width="48" height="20" viewBox="0 0 48 20" fill="none" style={{ display: "block", transform: "scaleX(-1)" }}>
-                <path d="M2 6 Q 14 2 30 10 Q 38 14 46 13" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                <path d="M41 9 L47 13 L40 16" stroke="#2C1A0E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              </svg>
-              <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 16, padding: "9px 16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 3 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>interactive preview</div>
-                <div style={{ fontSize: 12, fontWeight: 400, color: "rgba(107,143,191,0.5)", whiteSpace: "nowrap" }}>tap &amp; scroll</div>
+                Live demo — tap the tabs
               </div>
             </div>
           </div>
@@ -1790,7 +1769,7 @@ function Hero() {
         <div className="flex md:hidden justify-center flex-col items-center gap-4">
           {/* Mobile label above phone */}
           <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
-            tap &amp; scroll to explore
+            Live demo — tap the tabs
           </div>
           <div className="scale-[0.82] sm:scale-90 origin-top">
             <HeroProfilePhone />
@@ -1821,18 +1800,17 @@ function Categories() {
           {/* Left — label + heading + subtext */}
           <div className="lg:w-64 lg:flex-shrink-0 lg:pt-2">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
-            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, in one place.</h2>
-            <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Every kind of creative discipline — explore what's possible.</p>
+            <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
+            <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
           </div>
-          {/* Right — editorial list with dividers */}
-          <div className="flex-1">
+          {/* Right — editorial list with dividers, subtle tinted background */}
+          <div className="flex-1 rounded-2xl overflow-hidden" style={{ background: "#F4F6F9" }}>
             {cats.map((c, i) => (
-              <div key={i} className="flex items-center justify-between gap-6 py-4 border-t border-espresso/10">
+              <div key={i} className="flex items-center justify-between gap-6 px-5 py-4 border-t border-espresso/[0.07] first:border-t-0">
                 <span className="font-bold text-base sm:text-lg text-espresso">{c.label}</span>
                 <span className="text-xs sm:text-sm text-espresso/45 text-right">{c.tags}</span>
               </div>
             ))}
-            <div className="border-t border-espresso/10" />
           </div>
         </div>
       </div>
