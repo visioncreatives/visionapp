@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/assets/:path*",    "destination": "https://photo-petal-palette.lovable.app/assets/:path*" },
+    { "source": "/icons/:path*",     "destination": "https://photo-petal-palette.lovable.app/icons/:path*" },
+    { "source": "/manifest.json",    "destination": "https://photo-petal-palette.lovable.app/manifest.json" },
+    { "source": "/sw.js",            "destination": "https://photo-petal-palette.lovable.app/sw.js" },
+    { "source": "/workbox-:hash.js", "destination": "https://photo-petal-palette.lovable.app/workbox-:hash.js" },
+    { "source": "/(.*)",             "destination": "/" }
+  ]
+}
