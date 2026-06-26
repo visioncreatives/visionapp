@@ -1146,7 +1146,6 @@ function Header() {
         <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
           <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
-          <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
           <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </nav>
         <div className="flex items-center gap-3">
@@ -1161,7 +1160,6 @@ function Header() {
           <div className="px-5 py-4 flex flex-col gap-4 text-espresso/75 font-medium">
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
-            <a href="#for-creatives" onClick={() => setOpen(false)}>For Creatives</a>
             <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
             <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
           </div>
