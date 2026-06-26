@@ -91,18 +91,18 @@ function FAQItem({ q, a }) {
   const [open, setOpen] = useState(false)
   return (
     <div
-      className="border border-cream-200/80 rounded-2xl overflow-hidden"
+      className="border border-vision-blue/20 rounded-2xl overflow-hidden"
       style={{ background: 'white' }}
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left text-espresso font-semibold text-sm hover:bg-cream-100/60 transition-colors"
+        className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left text-espresso font-semibold text-sm hover:bg-vision-blue-light/50 transition-colors"
       >
         {q}
         <Chevron open={open} />
       </button>
       {open && (
-        <div className="px-6 pb-5 text-sm text-espresso/65 leading-relaxed border-t border-cream-200/50 pt-4">
+        <div className="px-6 pb-5 text-sm text-espresso/65 leading-relaxed border-t border-vision-blue/15 pt-4">
           {a}
         </div>
       )}
@@ -112,9 +112,9 @@ function FAQItem({ q, a }) {
 
 export default function FAQ() {
   return (
-    <div className="bg-cream-100 min-h-screen font-sans">
+    <div className="bg-white min-h-screen font-sans">
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-cream-100/95 backdrop-blur-sm border-b border-cream-200/60">
+      <header className="sticky top-0 z-50 border-b border-espresso/[0.08]" style={{ background: "#F2F2F2" }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
           <Link to="/" className="font-bold tracking-vision text-espresso text-sm">V I S I O N</Link>
           <Link to="/contact" className="text-sm font-semibold text-espresso/70 hover:text-espresso transition-colors">Contact Us</Link>
@@ -147,7 +147,7 @@ export default function FAQ() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-cream-200/80 py-8 px-5 sm:px-8 text-center text-xs text-espresso/40">
+      <footer className="border-t border-espresso/[0.08] py-8 px-5 sm:px-8 text-center text-xs text-espresso/40">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
           <span>© {new Date().getFullYear()} Vision. All rights reserved.</span>
           <div className="flex gap-5">

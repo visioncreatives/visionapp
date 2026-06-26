@@ -127,7 +127,8 @@ function InteractivePhone() {
   const [catFilter,      setCatFilter]     = useState('All')
   const [chatInput,      setChatInput]     = useState('')
   const [chatMsgs,       setChatMsgs]      = useState(CHAT_MSGS.slice(0, 5))
-  const chatEndRef = useRef(null)
+  const chatEndRef    = useRef(null)
+  const chatScrollRef = useRef(null)
 
   const portfolioImgs = [
     '/zoe-portfolio/emi-1.jpg','/zoe-portfolio/emi-2.jpg','/zoe-portfolio/emi-5.jpg',
@@ -137,13 +138,13 @@ function InteractivePhone() {
   const postMeta = [
     { tag: 'Wedding',   caption: 'Reception Evening', likes: 47,  comments: 12 },
     { tag: 'Candid',    caption: 'Pure Joy',          likes: 83,  comments: 21 },
-    { tag: 'Portrait',  caption: 'Behind the Lens',   likes: 74,  comments: 19 },
-    { tag: 'Candid',    caption: 'On the Run',        likes: 61,  comments: 8  },
-    { tag: 'Wedding',   caption: 'Champagne & Roses', likes: 102, comments: 34 },
-    { tag: 'Romance',   caption: 'Kiss in the Rain',  likes: 95,  comments: 27 },
-    { tag: 'Editorial', caption: 'Sunset Drive',      likes: 88,  comments: 16 },
+    { tag: 'Wedding',   caption: 'Champagne & Roses', likes: 74,  comments: 19 },
+    { tag: 'Portrait',  caption: 'Behind the Lens',   likes: 61,  comments: 8  },
+    { tag: 'Candid',    caption: 'On the Run',        likes: 102, comments: 34 },
+    { tag: 'Wedding',   caption: 'Getting Ready',     likes: 95,  comments: 27 },
+    { tag: 'Romance',   caption: 'Kiss in the Rain',  likes: 88,  comments: 16 },
     { tag: 'Romance',   caption: 'Rain & Romance',    likes: 138, comments: 45 },
-    { tag: 'Wedding',   caption: 'Getting Ready',     likes: 113, comments: 38 },
+    { tag: 'Editorial', caption: 'Sunset Drive',      likes: 113, comments: 38 },
   ]
   const services = [
     { title: 'Half Day Coverage', price: '$250', unit: '/session', duration: '4 hours', desc: 'Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.', photos: '150+', delivery: '2 weeks' },
@@ -178,7 +179,11 @@ function InteractivePhone() {
     }
   }
 
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [chatMsgs, screen])
+  useEffect(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight
+    }
+  }, [chatMsgs, screen])
 
   // ── Search / Discover ────────────────────────────────────
   if (screen === 'search') {
@@ -250,7 +255,7 @@ function InteractivePhone() {
           <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(58,58,58,0.3)' }} />
         </div>
         {/* Messages */}
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
+        <div ref={chatScrollRef} className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
           {chatMsgs.map((msg, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: msg.from === 'me' ? 'flex-end' : 'flex-start', gap: 5, alignItems: 'flex-end' }}>
               {msg.from === 'them' && <EmiAv size={20} />}
@@ -296,7 +301,7 @@ function InteractivePhone() {
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
         </div>
         <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
-          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }) }}}>
+          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) el.scrollTop = t.offsetTop } }}>
           {postMeta.map((post, i) => (
             <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
               <div style={{ padding: '6px 10px', display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -658,7 +663,8 @@ export default function DownloadPage() {
               position: 'relative',
               transform: isMobile ? 'scale(0.6)' : 'none',
               transformOrigin: 'top center',
-            }}>
+            }}
+              onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
               {/* Single label — left side, hidden on mobile since scale moves it off-screen */}
               <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
                 <div style={{ background: '#E2EAF4', border: '1.5px solid rgba(107,143,191,0.2)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#6B8FBF', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(107,143,191,0.1)' }}>

@@ -1140,7 +1140,7 @@ function PayoutsPhone() {
 function Header() {
   const [open, setOpen] = useState(false)
   return (
-    <header style={{ background: "#ECECEC" }}>
+    <header style={{ background: "#F2F2F2" }}>
       <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
         <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
         <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
@@ -1242,7 +1242,8 @@ function HeroProfilePhone() {
   const [catFilter,      setCatFilter]     = useState('All')
   const [chatInput,      setChatInput]     = useState('')
   const [chatMsgs,       setChatMsgs]      = useState(CHAT_MSGS.slice(0, 5))
-  const chatEndRef = useRef(null)
+  const chatEndRef    = useRef(null)
+  const chatScrollRef = useRef(null)
 
   const portfolioImgs = [
     '/zoe-portfolio/emi-1.jpg','/zoe-portfolio/emi-2.jpg','/zoe-portfolio/emi-5.jpg',
@@ -1252,13 +1253,13 @@ function HeroProfilePhone() {
   const postMeta = [
     { tag: 'Wedding',   caption: 'Reception Evening', likes: 47,  comments: 12 },
     { tag: 'Candid',    caption: 'Pure Joy',          likes: 83,  comments: 21 },
-    { tag: 'Portrait',  caption: 'Behind the Lens',   likes: 74,  comments: 19 },
-    { tag: 'Candid',    caption: 'On the Run',        likes: 61,  comments: 8  },
-    { tag: 'Wedding',   caption: 'Champagne & Roses', likes: 102, comments: 34 },
-    { tag: 'Romance',   caption: 'Kiss in the Rain',  likes: 95,  comments: 27 },
-    { tag: 'Editorial', caption: 'Sunset Drive',      likes: 88,  comments: 16 },
+    { tag: 'Wedding',   caption: 'Champagne & Roses', likes: 74,  comments: 19 },
+    { tag: 'Portrait',  caption: 'Behind the Lens',   likes: 61,  comments: 8  },
+    { tag: 'Candid',    caption: 'On the Run',        likes: 102, comments: 34 },
+    { tag: 'Wedding',   caption: 'Getting Ready',     likes: 95,  comments: 27 },
+    { tag: 'Romance',   caption: 'Kiss in the Rain',  likes: 88,  comments: 16 },
     { tag: 'Romance',   caption: 'Rain & Romance',    likes: 138, comments: 45 },
-    { tag: 'Wedding',   caption: 'Getting Ready',     likes: 113, comments: 38 },
+    { tag: 'Editorial', caption: 'Sunset Drive',      likes: 113, comments: 38 },
   ]
   const services = [
     { title: 'Half Day Coverage', price: '$250', unit: '/session', duration: '4 hours', desc: 'Perfect for intimate ceremonies & elopements. Includes 150+ edited photos delivered in 2 weeks.', photos: '150+', delivery: '2 weeks' },
@@ -1292,7 +1293,11 @@ function HeroProfilePhone() {
     }
   }
 
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [chatMsgs, screen])
+  useEffect(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight
+    }
+  }, [chatMsgs, screen])
 
   // ── Search / Discover ────────────────────────────────────
   if (screen === 'search') {
@@ -1364,7 +1369,7 @@ function HeroProfilePhone() {
           <Ico.Msg style={{ width: 14, height: 14, color: 'rgba(44,26,14,0.3)' }} />
         </div>
         {/* Messages */}
-        <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
+        <div ref={chatScrollRef} className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '10px 10px', display: 'flex', flexDirection: 'column', gap: 6, background: '#F0E8DC' }}>
           {chatMsgs.map((msg, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: msg.from === 'me' ? 'flex-end' : 'flex-start', gap: 5, alignItems: 'flex-end' }}>
               {msg.from === 'them' && <EmiAv size={20} />}
@@ -1386,7 +1391,6 @@ function HeroProfilePhone() {
               value={chatInput}
               onChange={e => setChatInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && sendChat()}
-              onFocus={e => e.target.focus({ preventScroll: true })}
               placeholder="Message Emi..."
               style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: 9.5, color: E, width: '100%', fontFamily: 'inherit' }}
             />
@@ -1411,7 +1415,7 @@ function HeroProfilePhone() {
           <div style={{ flex: 1, textAlign: 'center', fontWeight: 700, fontSize: 12, color: E }}>Portfolio</div>
         </div>
         <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', background: '#F0E8DC' }}
-          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }) }}}>
+          ref={el => { if (el && selectedImg !== null) { const t = el.querySelectorAll('[data-post]')[selectedImg]; if (t) el.scrollTop = t.offsetTop } }}>
           {postMeta.map((post, i) => (
             <div key={i} data-post={i} style={{ background: 'white', marginBottom: 5 }}>
               <div style={{ padding: '6px 10px', display: 'flex', gap: 6, alignItems: 'center' }}>
@@ -1725,7 +1729,7 @@ function Hero() {
             <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-7 py-4 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
               Explore Creatives <Ico.Arrow className="w-4 h-4" />
             </a>
-            <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-cream-200 text-espresso px-7 py-4 rounded-full font-semibold hover:bg-cream-50 transition-colors text-base">
+            <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-7 py-4 rounded-full font-semibold hover:bg-vision-blue-light transition-colors text-base">
               Become a Creative
             </a>
           </div>
@@ -1750,7 +1754,8 @@ function Hero() {
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="w-80 h-80 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
           </div>
-          <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top">
+          <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top"
+            onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
             <HeroProfilePhone />
             {/* Floating label — above phone */}
             <div className="hidden xl:flex absolute items-center gap-2" style={{ top: -44, left: "50%", transform: "translateX(-50%)" }}>
@@ -1767,7 +1772,8 @@ function Hero() {
           <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
             Live demo — tap & explore
           </div>
-          <div className="scale-[0.82] sm:scale-90 origin-top">
+          <div className="scale-[0.82] sm:scale-90 origin-top"
+            onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
             <HeroProfilePhone />
           </div>
         </div>
@@ -1854,7 +1860,7 @@ function HowItWorks() {
           <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
           {/* Toggle — mobile only (desktop version lives inside steps column) */}
           <div className="mt-5 lg:hidden">
-            <div className="inline-flex bg-cream-100 p-1 rounded-full border border-black/[0.06]">
+            <div className="inline-flex p-1 rounded-full border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/40 hover:text-espresso/60"}`}
@@ -1908,7 +1914,7 @@ function HowItWorks() {
           <div>
             {/* Toggle — desktop only, sits at top of steps column */}
             <div className="mb-8">
-              <div className="inline-flex bg-cream-100 p-1 rounded-full border border-black/[0.06]">
+              <div className="inline-flex p-1 rounded-full border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
                 {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                   <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/40 hover:text-espresso/60"}`}
@@ -2028,7 +2034,7 @@ function FinalCTA() {
           <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-8 py-4 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
             Explore Creatives <Ico.Arrow className="w-4 h-4" />
           </a>
-          <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-cream-200 text-espresso px-8 py-4 rounded-full font-semibold hover:bg-cream-50 transition-colors text-base">
+          <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-8 py-4 rounded-full font-semibold hover:bg-vision-blue-light transition-colors text-base">
             Become a Creative
           </a>
         </div>
@@ -2091,7 +2097,7 @@ function Footer() {
 export default function App() {
   return (
     <div className="min-h-screen font-sans bg-white">
-      <div className="rounded-b-3xl" style={{ background: "#ECECEC" }}>
+      <div className="rounded-b-[3rem]" style={{ background: "#F2F2F2" }}>
         <Header />
         <Hero />
       </div>
