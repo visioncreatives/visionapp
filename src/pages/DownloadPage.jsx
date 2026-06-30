@@ -638,7 +638,7 @@ export default function DownloadPage() {
         {/* Download button */}
         <button
           onClick={handleInstall}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: E, color: C, padding: '14px 30px', borderRadius: 999, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 700, boxShadow: '0 8px 30px rgba(58,58,58,0.2)', transition: 'opacity 0.15s', marginBottom: 10 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: E, color: C, padding: '14px 30px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 15, fontWeight: 700, boxShadow: '0 8px 30px rgba(58,58,58,0.2)', transition: 'opacity 0.15s', marginBottom: 10 }}
           onMouseOver={e => e.currentTarget.style.opacity = '0.85'}
           onMouseOut={e => e.currentTarget.style.opacity = '1'}
         >
@@ -663,7 +663,7 @@ export default function DownloadPage() {
               onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
               {/* Single label — left side, hidden on mobile since scale moves it off-screen */}
               <div style={{ position: 'absolute', left: -168, top: '42%', transform: 'translateY(-50%)', display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 8, pointerEvents: 'none' }}>
-                <div style={{ background: '#E2EAF4', border: '1.5px solid rgba(107,143,191,0.2)', borderRadius: 999, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#6B8FBF', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(107,143,191,0.1)' }}>
+                <div style={{ background: '#E2EAF4', border: '1.5px solid rgba(107,143,191,0.2)', borderRadius: 8, padding: '8px 16px', fontSize: 11, fontWeight: 700, color: '#6B8FBF', whiteSpace: 'nowrap', boxShadow: '0 2px 14px rgba(107,143,191,0.1)' }}>
                   tap &amp; scroll to explore
                 </div>
                 {/* Cream arrow with dark shadow so it reads over the phone frame */}
@@ -687,7 +687,7 @@ export default function DownloadPage() {
                 { key: 'ios',     label: '🍎  iPhone / iPad' },
                 { key: 'android', label: '🤖  Android' },
               ].map(({ key, label }) => (
-                <button key={key} onClick={() => setPlatform(key)} style={{ padding: '8px 18px', borderRadius: 999, border: `1.5px solid ${platform === key ? E : 'rgba(58,58,58,0.15)'}`, background: platform === key ? E : 'transparent', color: platform === key ? C : 'rgba(58,58,58,0.55)', fontSize: 12, fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s', fontFamily: '"DM Sans",sans-serif' }}>
+                <button key={key} onClick={() => setPlatform(key)} style={{ padding: '8px 18px', borderRadius: 8, border: `1.5px solid ${platform === key ? E : 'rgba(58,58,58,0.15)'}`, background: platform === key ? E : 'transparent', color: platform === key ? C : 'rgba(58,58,58,0.55)', fontSize: 12, fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s', fontFamily: '"DM Sans",sans-serif' }}>
                   {label}
                 </button>
               ))}
@@ -787,7 +787,7 @@ export default function DownloadPage() {
               href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 24, background: E, color: C, padding: '13px 0', borderRadius: 999, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(58,58,58,0.18)' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 24, background: E, color: C, padding: '13px 0', borderRadius: 8, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(58,58,58,0.18)' }}
             >
               <Ico.Download style={{ width: 16, height: 16 }} />
               Open Vision App

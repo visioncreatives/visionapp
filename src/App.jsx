@@ -1149,7 +1149,7 @@ function Header() {
           <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </nav>
         <div className="flex items-center gap-3">
-          <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-full text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
+          <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
           <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-espresso" aria-label="Menu">
             {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
           </button>
@@ -1161,7 +1161,7 @@ function Header() {
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
             <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
-            <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-full font-semibold mt-1">Explore Creatives</a>
+            <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-lg font-semibold mt-1">Explore Creatives</a>
           </div>
         </div>
       )}
@@ -1711,7 +1711,7 @@ function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-10 sm:pb-20 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: "#E2EAF4", color: "#6B8FBF" }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold mb-5" style={{ background: "#E2EAF4", color: "#6B8FBF" }}>
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
           </div>
 
@@ -1726,10 +1726,10 @@ function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
-            <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-7 py-4 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
+            <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-7 py-4 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
               Explore Creatives <Ico.Arrow className="w-4 h-4" />
             </a>
-            <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-7 py-4 rounded-full font-semibold hover:bg-vision-blue-light transition-colors text-base">
+            <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-7 py-4 rounded-lg font-semibold hover:bg-vision-blue-light transition-colors text-base">
               Become a Creative
             </a>
           </div>
@@ -1759,7 +1759,7 @@ function Hero() {
             <HeroProfilePhone />
             {/* Floating label — above phone */}
             <div className="hidden xl:flex absolute items-center gap-2" style={{ top: -44, left: "50%", transform: "translateX(-50%)" }}>
-              <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
+              <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 8, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
                 Live demo — tap & explore
               </div>
             </div>
@@ -1769,7 +1769,7 @@ function Hero() {
         {/* Mobile — scale phone to fit smaller screens */}
         <div className="flex md:hidden justify-center flex-col items-center gap-4">
           {/* Mobile label above phone */}
-          <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 999, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
+          <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 8, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
             Live demo — tap & explore
           </div>
           <div className="scale-[0.82] sm:scale-90 origin-top"
@@ -1804,7 +1804,7 @@ function Categories() {
             <h2 className="mt-3 text-espresso text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
             <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
           </div>
-          <a href={APP_URL} className="mt-8 lg:mt-0 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold text-sm hover:bg-espresso-dark transition-colors self-start">
+          <a href={APP_URL} className="mt-8 lg:mt-0 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-espresso-dark transition-colors self-start">
             Browse all <Ico.Arrow className="w-4 h-4" />
           </a>
         </div>
@@ -1860,10 +1860,10 @@ function HowItWorks() {
           <h2 className="text-espresso text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
           {/* Toggle — mobile only (desktop version lives inside steps column) */}
           <div className="mt-5 lg:hidden">
-            <div className="inline-flex p-1 rounded-full border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
+            <div className="inline-flex p-1 rounded-[10px] border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
               {[["hire", "Hiring"], ["create", "Creating"]].map(([k, l]) => (
                 <button key={k} onClick={() => { setTab(k); setActiveStep(0) }}
-                  className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/40 hover:text-espresso/60"}`}
+                  className={`px-4 py-1.5 rounded-[7px] text-xs font-semibold transition-colors ${tab === k ? "bg-espresso text-cream-50 shadow-sm" : "text-espresso/40 hover:text-espresso/60"}`}
                 >{l}</button>
               ))}
             </div>
@@ -1892,7 +1892,7 @@ function HowItWorks() {
                       <p className="mt-1.5 text-espresso/55 text-xs leading-relaxed">{s.d}</p>
                       <div className="flex flex-wrap gap-1.5 mt-3">
                         {s.tags.map(tag => (
-                          <span key={tag} className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                          <span key={tag} className="text-xs font-semibold px-2.5 py-1 rounded-[4px]" style={{ background: s.bg, color: s.tc }}>{tag}</span>
                         ))}
                       </div>
                     </>
@@ -1937,7 +1937,7 @@ function HowItWorks() {
                       <p className="mt-2.5 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
                       <div className="flex flex-wrap gap-2 mt-4">
                         {s.tags.map(tag => (
-                          <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: s.bg, color: s.tc }}>{tag}</span>
+                          <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-[4px]" style={{ background: s.bg, color: s.tc }}>{tag}</span>
                         ))}
                       </div>
                     </>
@@ -2011,7 +2011,7 @@ function SharedVision() {
 
         {/* CTA */}
         <div className="mt-8">
-          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
+          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
             Find a Creative <Ico.Arrow className="w-4 h-4" />
           </a>
         </div>
@@ -2031,10 +2031,10 @@ function FinalCTA() {
         <h2 className="mt-4 text-espresso text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
         <p className="mt-5 text-espresso/60 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-3">
-          <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-8 py-4 rounded-full font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
+          <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-8 py-4 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
             Explore Creatives <Ico.Arrow className="w-4 h-4" />
           </a>
-          <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-8 py-4 rounded-full font-semibold hover:bg-vision-blue-light transition-colors text-base">
+          <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-8 py-4 rounded-lg font-semibold hover:bg-vision-blue-light transition-colors text-base">
             Become a Creative
           </a>
         </div>
