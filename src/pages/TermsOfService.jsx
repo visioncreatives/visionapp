@@ -16,7 +16,7 @@ export default function TermsOfService() {
 
       <main className="max-w-2xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
         <p className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Legal</p>
-        <h1 className="mt-3 text-3xl sm:text-4xl font-bold text-espresso leading-tight">Terms of Service</h1>
+        <h1 className="mt-3 text-3xl sm:text-4xl font-serif font-bold text-espresso leading-tight">Terms of Service</h1>
         <p className="mt-3 text-sm text-espresso/50">Effective date: {EFFECTIVE}</p>
 
         <div className="mt-10 space-y-8 text-sm text-espresso/70 leading-relaxed">

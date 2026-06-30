@@ -123,7 +123,7 @@ export default function FAQ() {
 
       <main className="max-w-2xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
         <p className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Support</p>
-        <h1 className="mt-3 text-3xl sm:text-4xl font-bold text-espresso leading-tight">Frequently Asked Questions</h1>
+        <h1 className="mt-3 text-3xl sm:text-4xl font-serif font-bold text-espresso leading-tight">Frequently Asked Questions</h1>
         <p className="mt-4 text-espresso/60 text-base leading-relaxed">
           Can't find what you're looking for?{' '}
           <Link to="/contact" className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">
