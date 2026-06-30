@@ -628,7 +628,7 @@ export default function DownloadPage() {
 
         {/* Top heading */}
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(58,58,58,0.4)', marginBottom: 12, textAlign: 'center' }}>GET THE APP</p>
-        <h1 style={{ fontSize: 'clamp(1.4rem, 5vw, 3rem)', fontWeight: 800, color: E, textAlign: 'center', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: 12, maxWidth: 380, fontFamily: '"Cormorant Garamond", Georgia, serif' }}>
+        <h1 style={{ fontSize: 'clamp(1.4rem, 5vw, 3rem)', fontWeight: 300, color: E, textAlign: 'center', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: 12, maxWidth: 380, fontFamily: '"Cormorant Garamond", Georgia, serif' }}>
           Vision on your home screen.
         </h1>
         <p style={{ fontSize: 15, color: 'rgba(58,58,58,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
@@ -679,7 +679,7 @@ export default function DownloadPage() {
           {/* Right: tabbed install guide */}
           <div style={{ flex: 1, minWidth: 300, maxWidth: 420 }}>
             <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', color: 'rgba(58,58,58,0.4)', marginBottom: 8 }}>HOW TO INSTALL</p>
-            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: E, marginBottom: 20, lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: '"Cormorant Garamond", Georgia, serif' }}>Add Vision to<br/>your home screen</h2>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 300, color: E, marginBottom: 20, lineHeight: 1.2, letterSpacing: '-0.01em', fontFamily: '"Cormorant Garamond", Georgia, serif' }}>Add Vision to<br/>your home screen</h2>
 
             {/* Platform tabs */}
             <div style={{ display: 'flex', gap: 8, marginBottom: 24 }}>

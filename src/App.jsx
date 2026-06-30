@@ -1715,10 +1715,10 @@ function Hero() {
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
           </div>
 
-          <h1 className="text-espresso font-serif font-bold leading-[1.06] tracking-tight text-4xl sm:text-5xl lg:text-[58px]">
+          <h1 className="text-espresso font-serif font-light leading-[1.06] tracking-tight text-4xl sm:text-5xl lg:text-[58px]">
             find creatives<br />
             that match<br />
-            <span style={{ color: "#6B8FBF", fontStyle: "italic", fontWeight: 400 }}>your vision.</span>
+            <span style={{ color: "#6B8FBF", fontStyle: "italic", fontWeight: 300 }}>your vision.</span>
           </h1>
 
           <p className="mt-6 text-espresso/60 text-base sm:text-lg max-w-lg leading-relaxed">
@@ -1801,7 +1801,7 @@ function Categories() {
         <div className="px-5 sm:px-8 lg:pl-16 xl:pl-24 lg:pr-10 lg:w-[420px] xl:w-[460px] lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-between lg:py-2">
           <div>
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
-            <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-bold leading-tight">every type of creative, all in <em>one place.</em></h2>
+            <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-tight">every type of creative, all in <em>one place.</em></h2>
             <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
           </div>
           <a href={APP_URL} className="mt-8 lg:mt-0 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-espresso-dark transition-colors self-start">
@@ -1857,7 +1857,7 @@ function HowItWorks() {
         {/* Header — label + heading. Toggle lives inside the steps column on desktop, below heading on mobile */}
         <div className="mb-6 sm:mb-10">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 block mb-4">How it works</span>
-          <h2 className="text-espresso font-serif text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
+          <h2 className="text-espresso font-serif text-2xl sm:text-4xl lg:text-5xl font-normal leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
           {/* Toggle — mobile only (desktop version lives inside steps column) */}
           <div className="mt-5 lg:hidden">
             <div className="inline-flex p-1 rounded-[10px] border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
@@ -1981,7 +1981,7 @@ function SharedVision() {
         {/* Heading block */}
         <div className="mb-7 sm:mb-9">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
-          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight max-w-2xl">find the right creative for your next project, shoot, or idea.</h2>
+          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight max-w-2xl">find the right creative for your next project, shoot, or idea.</h2>
           <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-xl">Whatever you are building — a brand, event, campaign, or personal moment — there is a creative on Vision who can bring it to life.</p>
         </div>
 
@@ -2028,7 +2028,7 @@ function FinalCTA() {
     <section className="py-14 sm:py-20">
       <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
-        <h2 className="mt-4 text-espresso font-serif text-3xl sm:text-5xl font-bold leading-tight">bring your vision to life.</h2>
+        <h2 className="mt-4 text-espresso font-serif text-3xl sm:text-5xl font-normal leading-tight">bring your vision to life.</h2>
         <p className="mt-5 text-espresso/60 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
         <div className="mt-10 flex flex-col sm:flex-row justify-center gap-3">
           <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-8 py-4 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">

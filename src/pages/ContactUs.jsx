@@ -13,7 +13,7 @@ export default function ContactUs() {
 
       <main className="max-w-xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
         <p className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Get in Touch</p>
-        <h1 className="mt-3 text-3xl sm:text-4xl font-serif font-bold text-espresso leading-tight">Contact Us</h1>
+        <h1 className="mt-3 text-3xl sm:text-4xl font-serif font-light text-espresso leading-tight">Contact Us</h1>
         <p className="mt-4 text-espresso/60 text-base leading-relaxed">
           We're here to help. Before reaching out, check our{' '}
           <Link to="/faq" className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">
