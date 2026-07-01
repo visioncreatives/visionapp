@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { LogoLockup } from './Logo'
 
 // ============================================================
 // Landing page CTAs → local download/install guide
@@ -1142,7 +1143,7 @@ function Header() {
   return (
     <header style={{ background: "#F2F2F2" }}>
       <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
-        <a href="#top" className="text-espresso font-bold tracking-vision text-sm">V I S I O N</a>
+        <a href="#top" aria-label="Vision home"><LogoLockup size={28} /></a>
         <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
           <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
@@ -2057,7 +2058,7 @@ function Footer() {
     <footer className="border-t border-espresso/[0.06]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid sm:grid-cols-4 gap-8 items-start">
         <div className="sm:col-span-2">
-          <p className="font-bold tracking-vision text-espresso text-sm">V I S I O N</p>
+          <LogoLockup size={24} />
           <p className="mt-3 text-espresso/55 text-sm max-w-xs leading-relaxed">A modern creative marketplace — discover, collaborate with, and hire creatives for content, branding, events, and everything in between.</p>
           <div className="mt-4 flex flex-wrap gap-1.5">
             {[

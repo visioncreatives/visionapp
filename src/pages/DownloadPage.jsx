@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { LogoLockup } from '../Logo'
 
 const APP_URL = 'https://live.joinvision.app'
 const E = '#3A3A3A'
@@ -619,7 +620,7 @@ export default function DownloadPage() {
       {/* Nav */}
       <header style={{ borderBottom: '1px solid rgba(42,42,42,0.08)', background: '#F2F2F2', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
-          <Link to="/" style={{ fontWeight: 700, letterSpacing: '0.3em', fontSize: 13, color: E, textDecoration: 'none' }}>V I S I O N</Link>
+          <Link to="/" aria-label="Vision home" style={{ textDecoration: 'none' }}><LogoLockup size={26} /></Link>
           <Link to="/" style={{ fontSize: 13, fontWeight: 600, color: 'rgba(42,42,42,0.5)', textDecoration: 'none' }}>← Back</Link>
         </div>
       </header>

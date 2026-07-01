@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { LogoLockup } from '../Logo'
 
 const CONTACT = 'hello@joinvision.app'
 const EFFECTIVE = 'May 26, 2025'
@@ -9,7 +10,7 @@ export default function TermsOfService() {
       {/* Nav */}
       <header className="sticky top-0 z-50 border-b border-espresso/[0.08]" style={{ background: "#F2F2F2" }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
-          <Link to="/" className="font-bold tracking-vision text-espresso text-sm">V I S I O N</Link>
+          <Link to="/" aria-label="Vision home"><LogoLockup size={26} /></Link>
           <Link to="/contact" className="text-sm font-semibold text-espresso/70 hover:text-espresso transition-colors">Contact Us</Link>
         </div>
       </header>

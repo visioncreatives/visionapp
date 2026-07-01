@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { LogoLockup } from '../Logo'
 
 export default function ContactUs() {
   return (
@@ -6,7 +7,7 @@ export default function ContactUs() {
       {/* Nav */}
       <header className="sticky top-0 z-50 border-b border-espresso/[0.08]" style={{ background: "#F2F2F2" }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
-          <Link to="/" className="font-bold tracking-vision text-espresso text-sm">V I S I O N</Link>
+          <Link to="/" aria-label="Vision home"><LogoLockup size={26} /></Link>
           <Link to="/faq" className="text-sm font-semibold text-espresso/70 hover:text-espresso transition-colors">FAQ</Link>
         </div>
       </header>
