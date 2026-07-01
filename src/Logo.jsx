@@ -32,7 +32,7 @@ export function LogoLockup({ size = 28, color = "#2A2A2A" }) {
           lineHeight: 1,
         }}
       >
-        V I S I O N
+        I S I O N
       </span>
     </span>
   )
