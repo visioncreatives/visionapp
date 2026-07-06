@@ -1716,13 +1716,13 @@ function Hero() {
             <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
           </div>
 
-          <h1 className="text-espresso font-serif font-light leading-[1.06] tracking-tight text-4xl sm:text-5xl lg:text-[58px]">
+          <h1 className="text-espresso font-serif font-light leading-[0.82] tracking-tight text-4xl sm:text-5xl lg:text-[58px]">
             find creatives<br />
             that match<br />
             <span style={{ color: "#6B8FBF", fontStyle: "italic", fontWeight: 300 }}>your vision.</span>
           </h1>
 
-          <p className="mt-6 text-espresso/60 text-base sm:text-lg max-w-lg leading-relaxed">
+          <p className="mt-6 text-espresso/60 text-base sm:text-lg max-w-lg leading-[1.35]">
             Discover and collaborate with photographers, stylists, directors, designers, and creators — for content, branding, events, and everything in between.
           </p>
 
