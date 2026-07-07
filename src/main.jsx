@@ -6,7 +6,6 @@ import FAQ from './pages/FAQ.jsx'
 import ContactUs from './pages/ContactUs.jsx'
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 import TermsOfService from './pages/TermsOfService.jsx'
-import DownloadPage from './pages/DownloadPage.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,7 +13,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/download" element={<DownloadPage />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />

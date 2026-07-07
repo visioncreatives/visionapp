@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom'
 import { LogoLockup } from './Logo'
 
 // ============================================================
-// Landing page CTAs → local download/install guide
+// Landing page CTAs
+// APP_URL     → App Store listing (primary CTA)
+// WEB_APP_URL → the live web app, for people who'd rather not download
+// TODO: replace APP_URL with the real App Store URL once the listing is live
 // ============================================================
-const APP_URL = "/download"
-const LOVABLE_URL = "https://live.joinvision.app"
+const APP_URL = "https://apps.apple.com/app/id0000000000"
+const WEB_APP_URL = "https://live.joinvision.app"
 
 // ─── Icons ────────────────────────────────────────────────────
 const Ico = {
@@ -1162,11 +1165,11 @@ function Header() {
       }}
     >
       <div className="px-5 sm:px-7 h-16 flex items-center justify-between">
-        <a href="#top" aria-label="Vision home"><LogoLockup size={26} color={solid ? "#2A2A2A" : "#FFFFFF"} light={!solid} /></a>
+        <a href="#top" aria-label="Vision home"><LogoLockup size={21} color={solid ? "#2A2A2A" : "#FFFFFF"} light={!solid} /></a>
         <nav className={`hidden md:flex items-center gap-7 text-sm font-medium transition-colors duration-300 ${linkColor}`}>
           <a href="#discover" className="transition-colors">Discover</a>
           <a href="#how" className="transition-colors">How it Works</a>
-          <Link to="/download" className="transition-colors">Install App</Link>
+          <a href={WEB_APP_URL} className="transition-colors">Continue on Web</a>
         </nav>
         <div className="flex items-center gap-3">
           <a
@@ -1174,7 +1177,7 @@ function Header() {
             className="hidden sm:inline-flex items-center px-4 py-2 rounded text-sm font-semibold transition-colors duration-300"
             style={solid ? { background: "#2A2A2A", color: "#FFFFFF" } : { background: "#FFFFFF", color: "#2A2A2A" }}
           >
-            Explore Creatives
+            Download on the App Store
           </a>
           <button onClick={() => setOpen(!open)} className={`md:hidden p-2 transition-colors duration-300 ${iconColor}`} aria-label="Menu">
             {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
@@ -1186,8 +1189,8 @@ function Header() {
           <div className="px-5 py-4 flex flex-col gap-4 text-espresso/75 font-medium">
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
-            <Link to="/download" onClick={() => setOpen(false)}>Install App</Link>
-            <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-lg font-semibold mt-1">Explore Creatives</a>
+            <a href={WEB_APP_URL} onClick={() => setOpen(false)}>Continue on Web</a>
+            <a href={APP_URL} className="bg-espresso text-cream-50 text-center py-2.5 rounded-lg font-semibold mt-1">Download on the App Store</a>
           </div>
         </div>
       )}
@@ -1776,12 +1779,15 @@ function Hero() {
           <Reveal delay={270}>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a href={APP_URL} className="btn-hero btn-hero--primary">
-                Explore Creatives <Ico.Arrow className="w-4 h-4" />
+                Download on the App Store <Ico.Arrow className="w-4 h-4" />
               </a>
               <a href={APP_URL} className="btn-hero btn-hero--secondary">
                 Become a Creative
               </a>
             </div>
+            <a href={WEB_APP_URL} className="link-underline inline-flex items-center gap-1.5 mt-5 text-white/60 text-sm">
+              Prefer not to download? Continue on the web
+            </a>
           </Reveal>
         </div>
 
@@ -2097,12 +2103,15 @@ function FinalCTA() {
           <p className="mt-5 text-white/70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own, Vision is where it starts.</p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
             <a href={APP_URL} className="btn-hero btn-hero--primary">
-              Explore Creatives <Ico.Arrow className="w-4 h-4" />
+              Download on the App Store <Ico.Arrow className="w-4 h-4" />
             </a>
             <a href={APP_URL} className="btn-hero btn-hero--secondary">
               Become a Creative
             </a>
           </div>
+          <a href={WEB_APP_URL} className="link-underline inline-flex items-center gap-1.5 mt-5 text-white/60 text-sm">
+            Prefer not to download? Continue on the web
+          </a>
           <div className="mt-10 flex justify-center items-center gap-3">
             <div className="flex -space-x-2">
               {Object.values(Avatar).map((Av, i) => (
@@ -2138,12 +2147,13 @@ function Footer() {
           <a href="#discover" className="hover:text-espresso transition-colors">Discover Creatives</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
           <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
-          <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
+          <a href={APP_URL} className="hover:text-espresso transition-colors">Download on the App Store</a>
+          <a href={WEB_APP_URL} className="hover:text-espresso transition-colors">Continue on the Web</a>
         </div>
       </div>
       <div className="border-t border-espresso/[0.05] py-6 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/35">
         <span>© {new Date().getFullYear()} Vision. All rights reserved.</span>
-        <span>Stripe-secured payments · Built for PWA access</span>
+        <span>Stripe-secured payments · Available on the App Store</span>
       </div>
     </footer>
   )

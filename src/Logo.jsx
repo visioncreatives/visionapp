@@ -30,7 +30,7 @@ export function LogoLockup({ size = 14, color = "#2A2A2A", light = false }) {
       <span
         style={{
           fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontWeight: 700,
+          fontWeight: 600,
           letterSpacing: "0.32em",
           fontSize: size,
           color,
