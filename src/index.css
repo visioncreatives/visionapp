@@ -74,3 +74,23 @@ body {
 .img-hover-scale:hover img {
   transform: scale(1.035);
 }
+
+/* Cohesive outlined button pair — for CTAs on photography */
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  border: 1px solid rgba(255,255,255,0.7);
+  transition: background-color 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.btn-hero--primary { background: rgba(255,255,255,0.14); }
+.btn-hero--primary:hover { background: rgba(255,255,255,0.26); }
+.btn-hero--secondary { background: transparent; border-color: rgba(255,255,255,0.4); }
+.btn-hero--secondary:hover { border-color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.08); }

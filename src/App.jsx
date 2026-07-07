@@ -1140,24 +1140,49 @@ function PayoutsPhone() {
 // ─── Header ───────────────────────────────────────────────────
 function Header() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  const solid = scrolled || open
+  const linkColor = solid ? "text-espresso/55 hover:text-espresso" : "text-white/80 hover:text-white"
+  const iconColor = solid ? "text-espresso" : "text-white"
+
   return (
-    <header style={{ background: "#F2F2F2" }}>
-      <div className="px-5 sm:px-7 h-14 flex items-center justify-between">
-        <a href="#top" aria-label="Vision home"><LogoLockup size={28} /></a>
-        <nav className="hidden md:flex items-center gap-7 text-sm text-espresso/55 font-medium">
-          <a href="#discover" className="hover:text-espresso transition-colors">Discover</a>
-          <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
-          <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
+    <header
+      className="fixed top-0 inset-x-0 z-50 transition-colors duration-300"
+      style={{
+        background: solid ? "rgba(255,255,255,0.96)" : "transparent",
+        borderBottom: solid ? "1px solid rgba(42,42,42,0.06)" : "1px solid transparent",
+      }}
+    >
+      <div className="px-5 sm:px-7 h-16 flex items-center justify-between">
+        <a href="#top" aria-label="Vision home"><LogoLockup size={26} color={solid ? "#2A2A2A" : "#FFFFFF"} /></a>
+        <nav className={`hidden md:flex items-center gap-7 text-sm font-medium transition-colors duration-300 ${linkColor}`}>
+          <a href="#discover" className="transition-colors">Discover</a>
+          <a href="#how" className="transition-colors">How it Works</a>
+          <Link to="/download" className="transition-colors">Install App</Link>
         </nav>
         <div className="flex items-center gap-3">
-          <a href={APP_URL} className="hidden sm:inline-flex items-center bg-espresso text-cream-50 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-espresso-dark transition-colors">Explore Creatives</a>
-          <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-espresso" aria-label="Menu">
+          <a
+            href={APP_URL}
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded text-sm font-semibold transition-colors duration-300"
+            style={solid ? { background: "#2A2A2A", color: "#FFFFFF" } : { background: "#FFFFFF", color: "#2A2A2A" }}
+          >
+            Explore Creatives
+          </a>
+          <button onClick={() => setOpen(!open)} className={`md:hidden p-2 transition-colors duration-300 ${iconColor}`} aria-label="Menu">
             {open ? <Ico.Close style={{ width: 20, height: 20 }} /> : <Ico.Menu style={{ width: 20, height: 20 }} />}
           </button>
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-espresso/[0.08]">
+        <div className="md:hidden border-t border-espresso/[0.08]" style={{ background: "#FFFFFF" }}>
           <div className="px-5 py-4 flex flex-col gap-4 text-espresso/75 font-medium">
             <a href="#discover" onClick={() => setOpen(false)}>Discover</a>
             <a href="#how" onClick={() => setOpen(false)}>How it Works</a>
@@ -1731,6 +1756,7 @@ function Hero() {
         />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(18,16,14,0.82) 0%, rgba(18,16,14,0.32) 42%, rgba(18,16,14,0.06) 62%, transparent 78%)" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(18,16,14,0.30) 0%, transparent 50%)" }} />
+        <div className="absolute inset-x-0 top-0" style={{ height: 140, background: "linear-gradient(to bottom, rgba(18,16,14,0.55) 0%, transparent 100%)" }} />
 
         <div className="relative h-full max-w-7xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-14 sm:pb-20">
           <Reveal>
@@ -1744,15 +1770,15 @@ function Hero() {
           </Reveal>
           <Reveal delay={180}>
             <p className="mt-6 text-white/75 text-base sm:text-lg max-w-md leading-relaxed">
-              Photographers, stylists, directors, and designers — for content, branding, events, and everything in between.
+              Photographers, stylists, directors, and designers, for content, branding, events, and everything in between.
             </p>
           </Reveal>
           <Reveal delay={270}>
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <a href={APP_URL} className="inline-flex items-center gap-2 bg-white text-espresso px-7 py-3.5 rounded font-semibold hover:bg-cream-100 transition-colors text-sm tracking-wide">
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <a href={APP_URL} className="btn-hero btn-hero--primary">
                 Explore Creatives <Ico.Arrow className="w-4 h-4" />
               </a>
-              <a href={APP_URL} className="link-underline inline-flex items-center gap-2 text-white font-semibold text-sm tracking-wide">
+              <a href={APP_URL} className="btn-hero btn-hero--secondary">
                 Become a Creative
               </a>
             </div>
@@ -1846,7 +1872,7 @@ function HowItWorks() {
     hire: [
       { n: "01", t: "Browse & discover",         d: "Search by category, location, and price. Filter to find creatives who match your exact vision.",      bg: "#FAF4D6", tc: "#6A5010", Phone: DiscoverPhone,
         tags: ["Filter by category", "Search by location", "Real portfolios"] },
-      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability — all in one clean profile.",                          bg: "#E2EEF6", tc: "#1A4A6A", Phone: PackagesPhone,
+      { n: "02", t: "View portfolios & packages", d: "See real work, transparent pricing, and open availability, all in one clean profile.",                          bg: "#E2EEF6", tc: "#1A4A6A", Phone: PackagesPhone,
         tags: ["Portfolio gallery", "Honest pricing", "Check availability"] },
       { n: "03", t: "Instant Book or Request",    d: "Toggle Instant Book for automatic confirmation, or send a request to chat first. Pay securely through Stripe.",  bg: "#E6F0E6", tc: "#2A5A2A", Phone: CheckoutPhone,
         tags: ["⚡ Instant Book", "Secure via Stripe", "No charge until confirmed"] },
@@ -1854,7 +1880,7 @@ function HowItWorks() {
     create: [
       { n: "01", t: "Build your creative profile", d: "Showcase your portfolio, location, and packages. Your profile is the first thing clients see.",      bg: "#E2EAF4", tc: "#6B8FBF", Phone: ProfilePhone,
         tags: ["Upload your portfolio", "Set your packages", "Show your work"] },
-      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price — all from inside the app.",          bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
+      { n: "02", t: "Apply to project listings",   d: "Browse open project listings, pitch your approach, and propose your price, all from inside the app.",          bg: "#EDE6F5", tc: "#4A2A7A", Phone: ListingPhone,
         tags: ["Browse open listings", "Pitch your approach", "Propose your rate"] },
       { n: "03", t: "Collaborate & get paid",       d: "Accept bookings, message clients in-app, and get paid automatically via Stripe Connect within 2 days.",        bg: "#D6EEE8", tc: "#1A5A48", Phone: PayoutsPhone,
         tags: ["Auto payout ~2 days", "Track earnings", "Stripe Connect"] },
@@ -2014,8 +2040,8 @@ function Testimonial() {
     <section className="py-16 sm:py-24" style={{ background: "#F4F6F9" }}>
       <Reveal className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
         <p className="text-espresso font-serif font-light leading-[1.05] tracking-[-0.075em] text-2xl sm:text-3xl lg:text-[38px]">
-          "Every single photo is a work of art. She captured moments we didn't even notice were happening —
-          <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}> truly gifted.</span>"
+          "Every single photo is a work of art. She captured moments we didn't even notice were happening.
+          <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}> Truly gifted.</span>"
         </p>
         <div className="mt-7 flex items-center justify-center gap-3">
           <div style={{ borderRadius: "50%", overflow: "hidden" }}><Avatar.Nova size={36} /></div>
@@ -2037,7 +2063,7 @@ function SeeItInAction() {
           <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-[0.75] tracking-[-0.075em] max-w-md">
             a portfolio that <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>works</span> as hard as you do.
           </h2>
-          <p className="mt-4 text-espresso/55 text-sm leading-relaxed max-w-sm">Real portfolios, transparent pricing, and messaging — all in one profile. Tap around, it's live.</p>
+          <p className="mt-4 text-espresso/55 text-sm leading-relaxed max-w-sm">Real portfolios, transparent pricing, and messaging, all in one profile. Tap around, it's live.</p>
         </Reveal>
         <Reveal delay={120} className="flex justify-center">
           <div onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
@@ -2068,12 +2094,12 @@ function FinalCTA() {
           <h2 className="mt-4 text-white font-serif font-light text-4xl sm:text-6xl leading-[0.75] tracking-[-0.075em]">
             bring your <span className="font-script" style={{ fontSize: "1.15em", color: "#D8E4F2" }}>vision</span> to life.
           </h2>
-          <p className="mt-5 text-white/70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
-          <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-x-8 gap-y-4">
-            <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-white text-espresso px-8 py-4 rounded font-semibold hover:bg-cream-100 transition-colors text-base">
+          <p className="mt-5 text-white/70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own, Vision is where it starts.</p>
+          <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href={APP_URL} className="btn-hero btn-hero--primary">
               Explore Creatives <Ico.Arrow className="w-4 h-4" />
             </a>
-            <a href={APP_URL} className="link-underline inline-flex items-center justify-center gap-2 text-white font-semibold text-base">
+            <a href={APP_URL} className="btn-hero btn-hero--secondary">
               Become a Creative
             </a>
           </div>
@@ -2098,7 +2124,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-20 grid sm:grid-cols-4 gap-10 items-start">
         <div className="sm:col-span-2">
           <LogoLockup size={22} />
-          <p className="mt-4 text-espresso/50 text-sm max-w-xs leading-relaxed">A modern creative marketplace — discover, collaborate with, and hire creatives for content, branding, events, and everything in between.</p>
+          <p className="mt-4 text-espresso/50 text-sm max-w-xs leading-relaxed">A modern creative marketplace to discover, collaborate with, and hire creatives for content, branding, events, and everything in between.</p>
         </div>
         <div className="flex flex-col gap-3 text-sm text-espresso/55">
           <p className="font-semibold text-espresso/70 text-xs uppercase tracking-vision-sm mb-1">Company</p>
