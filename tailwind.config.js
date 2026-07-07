@@ -27,6 +27,7 @@ export default {
       fontFamily: {
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        script: ['"Allura"', 'cursive'],
       },
       boxShadow: {
         soft: "0 8px 30px -10px rgba(0,0,0,0.10)",

@@ -1697,88 +1697,87 @@ function HeroProfilePhone() {
   )
 }
 
+// ─── Reveal — lightweight scroll-triggered reveal, no dependency ──
+function Reveal({ children, className = "", delay = 0, as: Tag = "div" }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); io.unobserve(el) } },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <Tag ref={ref} className={`reveal ${visible ? "is-visible" : ""} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </Tag>
+  )
+}
+
 // ─── Hero ─────────────────────────────────────────────────────
 function Hero() {
-  const heroPills = [
-    { l: "Photography", bg: "#FAF4D6", c: "#6A5010" },
-    { l: "Styling",     bg: "#E6F0E6", c: "#2A5A2A" },
-    { l: "Branding",    bg: "#E2EEF6", c: "#1A4A6A" },
-    { l: "Content",     bg: "#EDE6F5", c: "#4A2A7A" },
-    { l: "Events",      bg: "#FBE9E9", c: "#7A2A2A" },
-    { l: "Design",      bg: "#D6EEE8", c: "#1A5A48" },
-  ]
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section id="top" className="relative">
+      <div className="relative h-[88vh] min-h-[600px] max-h-[860px] w-full overflow-hidden">
+        <img
+          src="/projects/content-shoot.jpg"
+          alt="A photographer, stylist, and models collaborating on a studio shoot"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: "center 32%" }}
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(18,16,14,0.82) 0%, rgba(18,16,14,0.32) 42%, rgba(18,16,14,0.06) 62%, transparent 78%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(18,16,14,0.30) 0%, transparent 50%)" }} />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-10 sm:pt-16 pb-10 sm:pb-20 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold mb-5" style={{ background: "#E2EAF4", color: "#6B8FBF" }}>
-            <Ico.Sparkle style={{ width: 12, height: 12 }} /> The creative marketplace
-          </div>
-
-          <h1 className="text-espresso font-serif font-light leading-[0.82] tracking-tight text-4xl sm:text-5xl lg:text-[58px]">
-            find creatives<br />
-            that match<br />
-            <span style={{ color: "#6B8FBF", fontStyle: "italic", fontWeight: 300 }}>your vision.</span>
-          </h1>
-
-          <p className="mt-6 text-espresso/60 text-base sm:text-lg max-w-lg leading-[1.35]">
-            Discover and collaborate with photographers, stylists, directors, designers, and creators — for content, branding, events, and everything in between.
-          </p>
-
-          <div className="mt-9 flex flex-col sm:flex-row gap-3">
-            <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-7 py-4 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
-              Explore Creatives <Ico.Arrow className="w-4 h-4" />
-            </a>
-            <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-7 py-4 rounded-lg font-semibold hover:bg-vision-blue-light transition-colors text-base">
-              Become a Creative
-            </a>
-          </div>
-
-          <div className="mt-9 flex items-center gap-3">
-            <div className="flex -space-x-2">
-              {[Avatar.Emi, Avatar.Mia, Avatar.Dre, Avatar.Leila, Avatar.Nova].map((Av, i) => (
-                <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #ECECEC" }}><Av size={30} /></div>
-              ))}
+        <div className="relative h-full max-w-7xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-14 sm:pb-20">
+          <Reveal>
+            <span className="block text-white/70 text-xs font-semibold uppercase tracking-vision-sm mb-5">The creative marketplace</span>
+          </Reveal>
+          <Reveal delay={90}>
+            <h1 className="text-white font-serif font-light leading-[0.95] tracking-tight text-5xl sm:text-6xl lg:text-[80px] max-w-3xl">
+              find creatives<br />
+              that match <span className="font-script" style={{ fontSize: "1.15em", color: "#D8E4F2" }}>your vision</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={180}>
+            <p className="mt-6 text-white/75 text-base sm:text-lg max-w-md leading-relaxed">
+              Photographers, stylists, directors, and designers — for content, branding, events, and everything in between.
+            </p>
+          </Reveal>
+          <Reveal delay={270}>
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <a href={APP_URL} className="inline-flex items-center gap-2 bg-white text-espresso px-7 py-3.5 rounded font-semibold hover:bg-cream-100 transition-colors text-sm tracking-wide">
+                Explore Creatives <Ico.Arrow className="w-4 h-4" />
+              </a>
+              <a href={APP_URL} className="link-underline inline-flex items-center gap-2 text-white font-semibold text-sm tracking-wide">
+                Become a Creative
+              </a>
             </div>
-            <div>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((i) => <Ico.Star key={i} style={{ width: 11, height: 11, color: "#6B8FBF" }} />)}
-              </div>
-              <p className="text-xs text-espresso/50 font-medium mt-0.5">Loved by creatives and clients</p>
-            </div>
-          </div>
+          </Reveal>
         </div>
 
-        {/* Right side — Emi Chen profile preview */}
-        <div className="hidden md:flex justify-center relative overflow-visible">
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-80 h-80 rounded-full opacity-20" style={{ background: "#C8B8E0", filter: "blur(70px)" }} />
-          </div>
-          <div className="relative scale-90 md:scale-95 lg:scale-100 origin-top"
-            onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
-            <HeroProfilePhone />
-            {/* Floating label — above phone */}
-            <div className="hidden xl:flex absolute items-center gap-2" style={{ top: -44, left: "50%", transform: "translateX(-50%)" }}>
-              <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 8, padding: "6px 14px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
-                Live demo — tap & explore
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile — scale phone to fit smaller screens */}
-        <div className="flex md:hidden justify-center flex-col items-center gap-4">
-          {/* Mobile label above phone */}
-          <div style={{ background: "#E2EAF4", border: "1.5px solid rgba(107,143,191,0.2)", borderRadius: 8, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#6B8FBF", whiteSpace: "nowrap" }}>
-            Live demo — tap & explore
-          </div>
-          <div className="scale-[0.82] sm:scale-90 origin-top"
-            onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
-            <HeroProfilePhone />
-          </div>
+        <div className="hidden sm:flex absolute right-6 sm:right-8 bottom-8 flex-col items-center gap-2 text-white/45">
+          <span className="text-[10px] font-semibold uppercase tracking-vision-sm" style={{ writingMode: "vertical-rl" }}>Scroll</span>
+          <span style={{ width: 1, height: 34, background: "rgba(255,255,255,0.4)" }} />
         </div>
       </div>
+    </section>
+  )
+}
+
+// ─── Manifesto ────────────────────────────────────────────────
+function Manifesto() {
+  return (
+    <section className="py-20 sm:py-32">
+      <Reveal className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+        <p className="text-espresso font-serif font-light leading-[1.15] text-3xl sm:text-4xl lg:text-[52px]">
+          Every creative has <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>a story.</span><br className="hidden sm:block" />
+          Vision is where it gets told.
+        </p>
+      </Reveal>
     </section>
   )
 }
@@ -1796,27 +1795,41 @@ function Categories() {
     { label: "Content Creation", tags: "Social · UGC · Influencer · Lifestyle"         },
   ]
   return (
-    <section id="discover" className="py-12 sm:py-16 overflow-hidden">
-      <div className="flex flex-col lg:flex-row lg:items-stretch gap-10 lg:gap-0">
-        {/* Left — label + heading + subtext + CTA */}
-        <div className="px-5 sm:px-8 lg:pl-16 xl:pl-24 lg:pr-10 lg:w-[420px] xl:w-[460px] lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-between lg:py-2">
-          <div>
+    <section id="discover" className="py-16 sm:py-24 overflow-hidden">
+      <div className="flex flex-col lg:flex-row lg:items-stretch">
+        {/* Left — bleeding photograph, asymmetrical against the list */}
+        <Reveal className="relative lg:w-[38%] flex-shrink-0 mx-5 sm:mx-8 lg:mx-0 rounded-2xl lg:rounded-none overflow-hidden img-hover-scale" style={{ minHeight: 280 }}>
+          <img
+            src="/projects/brand-campaign.jpg"
+            alt="A creative director guiding models during a brand campaign shoot"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "center 20%" }}
+            loading="lazy"
+            decoding="async"
+          />
+        </Reveal>
+
+        {/* Right — label + heading + editorial list */}
+        <div className="flex-1 mt-8 lg:mt-0 lg:pl-14 xl:pl-20 flex flex-col justify-center">
+          <Reveal className="px-5 sm:px-8 lg:px-0 mb-8">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
             <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-tight">every type of creative, all in <em>one place.</em></h2>
-            <p className="mt-4 text-espresso/55 text-sm leading-relaxed">Discover talent, collaborate with confidence, and bring ideas to life.</p>
+          </Reveal>
+
+          <div className="px-5 sm:px-8 lg:px-0 border-t border-espresso/[0.08]">
+            {cats.map((c, i) => (
+              <Reveal key={i} delay={i * 40} className="flex items-center justify-between gap-6 py-4 border-b border-espresso/[0.08]">
+                <span className="font-bold text-base sm:text-lg text-espresso">{c.label}</span>
+                <span className="hidden sm:block text-xs sm:text-sm text-espresso/40 text-right">{c.tags}</span>
+              </Reveal>
+            ))}
           </div>
-          <a href={APP_URL} className="mt-8 lg:mt-0 inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-espresso-dark transition-colors self-start">
-            Browse all <Ico.Arrow className="w-4 h-4" />
-          </a>
-        </div>
-        {/* Right — editorial list, grey box bleeds to right edge, rounded left only */}
-        <div className="flex-1 overflow-hidden rounded-2xl mx-5 sm:mx-8 lg:mx-0 lg:rounded-r-none lg:rounded-l-2xl" style={{ background: "#F4F6F9" }}>
-          {cats.map((c, i) => (
-            <div key={i} className="flex items-center justify-between gap-6 px-5 sm:px-7 py-4 border-t border-espresso/[0.07] first:border-t-0">
-              <span className="font-bold text-base sm:text-lg text-espresso">{c.label}</span>
-              <span className="text-xs sm:text-sm text-espresso/45 text-right">{c.tags}</span>
-            </div>
-          ))}
+
+          <Reveal className="px-5 sm:px-8 lg:px-0 mt-8">
+            <a href={APP_URL} className="link-underline inline-flex items-center gap-2 text-espresso font-semibold text-sm">
+              Browse all creatives <Ico.Arrow className="w-4 h-4" />
+            </a>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -1958,95 +1971,129 @@ function HowItWorks() {
 
 // ─── Shared Vision ─────────────────────────────────────────────
 function SharedVision() {
-  const projects = [
-    { label: "A content shoot",     bg: "#F5E6C0", c: "#6A4A10" },
-    { label: "A brand launch",      bg: "#C8D4E8", c: "#1A3A6A" },
-    { label: "A wedding",           bg: "#EDD8E8", c: "#5A2A6A" },
-    { label: "A product campaign",  bg: "#D8E8D8", c: "#1A5A2A" },
-    { label: "A music video",       bg: "#D8D4C0", c: "#4A3A10" },
-    { label: "An event",            bg: "#E8C8B8", c: "#6A2A10" },
-    { label: "A creative identity", bg: "#E2EAF4", c: "#6B8FBF" },
-    { label: "A personal idea",     bg: "#D6EEE8", c: "#1A5A48" },
-  ]
   const cards = [
-    { src: "/projects/content-shoot.jpg",  title: "Content Shoot"  },
-    { src: "/projects/brand-campaign.jpg", title: "Brand Campaign" },
-    { src: "/projects/editorial.jpg",      title: "Couples Shoot"  },
-    { src: "/projects/music-video.jpg",    title: "Music Video"    },
-    { src: "/projects/photoshoot.jpg",     title: "Photoshoot"     },
+    { src: "/projects/editorial.jpg",   title: "A Wedding",     sub: "Candid, unscripted moments" },
+    { src: "/projects/music-video.jpg", title: "A Music Video", sub: "Built from the ground up" },
+    { src: "/projects/photoshoot.jpg",  title: "A Campaign",    sub: "Styled for golden hour" },
   ]
   return (
-    <section id="for-creatives" className="py-12 sm:py-16">
+    <section id="for-creatives" className="py-16 sm:py-24">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
-        {/* Heading block */}
-        <div className="mb-7 sm:mb-9">
+        <Reveal className="mb-10 sm:mb-16 max-w-2xl">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
-          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight max-w-2xl">find the right creative for your next project, shoot, or idea.</h2>
-          <p className="mt-4 text-espresso/60 text-base leading-relaxed max-w-xl">Whatever you are building — a brand, event, campaign, or personal moment — there is a creative on Vision who can bring it to life.</p>
-        </div>
+          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight">
+            find the right creative for your next <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>idea.</span>
+          </h2>
+        </Reveal>
 
-        {/* Image strip — 5 equal columns on desktop, horizontal scroll on mobile */}
-        <div className="hidden sm:grid sm:grid-cols-5 gap-3">
+        {/* Asymmetrical editorial strip — varied heights, not a uniform grid */}
+        <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
           {cards.map((card, i) => (
-            <div key={i} className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "3/4", background: "#e8e8e8" }}>
-              <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent 80%)" }}>
-                <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
+            <Reveal
+              key={i}
+              delay={i * 100}
+              className={`img-hover-scale relative rounded-2xl overflow-hidden ${i === 1 ? "sm:mt-14" : ""}`}
+              style={{ aspectRatio: i === 1 ? "3/4.6" : "3/4", background: "#e8e8e8" }}
+            >
+              <img src={card.src} alt={card.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+              <div className="absolute inset-x-0 bottom-0 p-5" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 70%)" }}>
+                <div className="text-white font-serif text-xl leading-tight">{card.title}</div>
+                <div className="text-white/70 text-xs mt-1">{card.sub}</div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Mobile: horizontal scroll strip */}
-        <div className="flex sm:hidden gap-3 overflow-x-auto no-scrollbar pb-1">
-          {cards.map((card, i) => (
-            <div key={i} className="flex-shrink-0 relative rounded-2xl overflow-hidden" style={{ width: 160, height: 200, background: "#e8e8e8" }}>
-              <img src={card.src} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              <div className="absolute inset-x-0 bottom-0 p-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), transparent 80%)" }}>
-                <div className="text-white font-bold text-sm leading-tight">{card.title}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="mt-8">
-          <a href={APP_URL} className="inline-flex items-center gap-2 bg-espresso text-cream-50 px-6 py-3 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft">
-            Find a Creative <Ico.Arrow className="w-4 h-4" />
+        <Reveal className="mt-10 sm:mt-14">
+          <a href={APP_URL} className="link-underline inline-flex items-center gap-2 text-espresso font-semibold text-sm">
+            Find a creative <Ico.Arrow className="w-4 h-4" />
           </a>
-        </div>
+        </Reveal>
 
       </div>
     </section>
   )
 }
 
+// ─── Testimonial ────────────────────────────────────────────────
+function Testimonial() {
+  return (
+    <section className="py-16 sm:py-24" style={{ background: "#F4F6F9" }}>
+      <Reveal className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
+        <p className="text-espresso font-serif font-light leading-[1.3] text-2xl sm:text-3xl lg:text-[38px]">
+          "Every single photo is a work of art. She captured moments we didn't even notice were happening —
+          <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}> truly gifted.</span>"
+        </p>
+        <div className="mt-7 flex items-center justify-center gap-3">
+          <div style={{ borderRadius: "50%", overflow: "hidden" }}><Avatar.Nova size={36} /></div>
+          <span className="text-sm text-espresso/55 font-medium">Priya K., booked a photographer on Vision</span>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
+
+// ─── See It In Action — relocated interactive profile demo ─────
+function SeeItInAction() {
+  return (
+    <section className="py-16 sm:py-24 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <Reveal>
+          <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">See it in action</span>
+          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-tight max-w-md">
+            a portfolio that <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>works</span> as hard as you do.
+          </h2>
+          <p className="mt-4 text-espresso/55 text-sm leading-relaxed max-w-sm">Real portfolios, transparent pricing, and messaging — all in one profile. Tap around, it's live.</p>
+        </Reveal>
+        <Reveal delay={120} className="flex justify-center">
+          <div onFocus={(e) => { const y = window.scrollY; requestAnimationFrame(() => window.scrollTo(0, y)) }}>
+            <HeroProfilePhone />
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
 
 // ─── Final CTA ────────────────────────────────────────────────
 function FinalCTA() {
   return (
-    <section className="py-14 sm:py-20">
-      <div className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
-        <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Join Vision</span>
-        <h2 className="mt-4 text-espresso font-serif text-3xl sm:text-5xl font-normal leading-tight">bring your vision to life.</h2>
-        <p className="mt-5 text-espresso/60 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
-        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-3">
-          <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-espresso text-cream-50 px-8 py-4 rounded-lg font-semibold hover:bg-espresso-dark transition-colors shadow-soft text-base">
-            Explore Creatives <Ico.Arrow className="w-4 h-4" />
-          </a>
-          <a href={APP_URL} className="inline-flex items-center justify-center bg-white border border-vision-blue/30 text-espresso px-8 py-4 rounded-lg font-semibold hover:bg-vision-blue-light transition-colors text-base">
-            Become a Creative
-          </a>
-        </div>
-        <div className="mt-10 flex justify-center items-center gap-3">
-          <div className="flex -space-x-2">
-            {Object.values(Avatar).map((Av, i) => (
-              <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid #ECECEC" }}><Av size={34} /></div>
-            ))}
+    <section className="relative">
+      <div className="relative overflow-hidden" style={{ minHeight: 560 }}>
+        <img
+          src="/projects/content-shoot.jpg"
+          alt="A creative team collaborating on a studio shoot"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: "center 65%" }}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(18,16,14,0.62)" }} />
+        <Reveal className="relative max-w-3xl mx-auto px-5 sm:px-8 py-24 sm:py-32 text-center">
+          <span className="text-xs font-semibold uppercase tracking-vision-sm text-white/60">Join Vision</span>
+          <h2 className="mt-4 text-white font-serif font-light text-4xl sm:text-6xl leading-tight">
+            bring your <span className="font-script" style={{ fontSize: "1.15em", color: "#D8E4F2" }}>vision</span> to life.
+          </h2>
+          <p className="mt-5 text-white/70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
+          <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-x-8 gap-y-4">
+            <a href={APP_URL} className="inline-flex items-center justify-center gap-2 bg-white text-espresso px-8 py-4 rounded font-semibold hover:bg-cream-100 transition-colors text-base">
+              Explore Creatives <Ico.Arrow className="w-4 h-4" />
+            </a>
+            <a href={APP_URL} className="link-underline inline-flex items-center justify-center gap-2 text-white font-semibold text-base">
+              Become a Creative
+            </a>
           </div>
-          <p className="text-sm text-espresso/50 font-medium text-left">Creatives ready<br />to collaborate</p>
-        </div>
+          <div className="mt-10 flex justify-center items-center gap-3">
+            <div className="flex -space-x-2">
+              {Object.values(Avatar).map((Av, i) => (
+                <div key={i} style={{ borderRadius: "50%", overflow: "hidden", outline: "2px solid rgba(255,255,255,0.5)" }}><Av size={34} /></div>
+              ))}
+            </div>
+            <p className="text-sm text-white/70 font-medium text-left">Creatives ready<br />to collaborate</p>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -2055,38 +2102,28 @@ function FinalCTA() {
 // ─── Footer ───────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="border-t border-espresso/[0.06]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid sm:grid-cols-4 gap-8 items-start">
+    <footer className="border-t border-espresso/[0.05]">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-20 grid sm:grid-cols-4 gap-10 items-start">
         <div className="sm:col-span-2">
-          <LogoLockup size={24} />
-          <p className="mt-3 text-espresso/55 text-sm max-w-xs leading-relaxed">A modern creative marketplace — discover, collaborate with, and hire creatives for content, branding, events, and everything in between.</p>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {[
-              { l: "Photography", bg: "#FAF4D6", c: "#6A5010" },
-              { l: "Styling",     bg: "#E6F0E6", c: "#2A5A2A" },
-              { l: "Branding",    bg: "#E2EEF6", c: "#1A4A6A" },
-              { l: "Content",     bg: "#EDE6F5", c: "#4A2A7A" },
-            ].map((p) => (
-              <span key={p.l} style={{ background: p.bg, color: p.c, fontSize: 10, padding: "3px 10px", borderRadius: 999, fontWeight: 600 }}>{p.l}</span>
-            ))}
-          </div>
+          <LogoLockup size={22} />
+          <p className="mt-4 text-espresso/50 text-sm max-w-xs leading-relaxed">A modern creative marketplace — discover, collaborate with, and hire creatives for content, branding, events, and everything in between.</p>
         </div>
-        <div className="flex flex-col gap-2 text-sm text-espresso/60">
-          <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Company</p>
+        <div className="flex flex-col gap-3 text-sm text-espresso/55">
+          <p className="font-semibold text-espresso/70 text-xs uppercase tracking-vision-sm mb-1">Company</p>
           <Link to="/privacy" className="hover:text-espresso transition-colors">Privacy Policy</Link>
           <Link to="/terms" className="hover:text-espresso transition-colors">Terms of Service</Link>
           <Link to="/faq" className="hover:text-espresso transition-colors">FAQ</Link>
           <Link to="/contact" className="hover:text-espresso transition-colors">Contact</Link>
         </div>
-        <div className="flex flex-col gap-2 text-sm text-espresso/60">
-          <p className="font-semibold text-espresso/80 text-xs uppercase tracking-vision-sm mb-1">Platform</p>
+        <div className="flex flex-col gap-3 text-sm text-espresso/55">
+          <p className="font-semibold text-espresso/70 text-xs uppercase tracking-vision-sm mb-1">Platform</p>
           <a href="#discover" className="hover:text-espresso transition-colors">Discover Creatives</a>
           <a href="#how" className="hover:text-espresso transition-colors">How it Works</a>
           <a href="#for-creatives" className="hover:text-espresso transition-colors">For Creatives</a>
           <Link to="/download" className="hover:text-espresso transition-colors">Install App</Link>
         </div>
       </div>
-      <div className="border-t border-gray-100 py-5 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/40">
+      <div className="border-t border-espresso/[0.05] py-6 px-5 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-espresso/35">
         <span>© {new Date().getFullYear()} Vision. All rights reserved.</span>
         <span>Stripe-secured payments · Built for PWA access</span>
       </div>
@@ -2098,14 +2135,15 @@ function Footer() {
 export default function App() {
   return (
     <div className="min-h-screen font-sans bg-white">
-      <div className="rounded-b-[3rem]" style={{ background: "#F2F2F2" }}>
-        <Header />
-        <Hero />
-      </div>
+      <Header />
+      <Hero />
       <main className="flex flex-col">
-        <HowItWorks />
+        <Manifesto />
         <Categories />
+        <HowItWorks />
         <SharedVision />
+        <Testimonial />
+        <SeeItInAction />
         <FinalCTA />
       </main>
       <Footer />
