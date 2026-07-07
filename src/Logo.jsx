@@ -3,11 +3,12 @@
  *
  * Props:
  *   size  — height in px (width scales proportionally). Default: 32.
+ *   light — use the white variant, for dark/photo backgrounds. Default: false.
  */
-export function LogoMark({ size = 32 }) {
+export function LogoMark({ size = 32, light = false }) {
   return (
     <img
-      src="/plain V logo letter.png"
+      src={light ? "/plain V logo letter white.png" : "/plain V logo letter.png"}
       alt="Vision"
       height={size}
       style={{ height: size, width: "auto", display: "block" }}
@@ -18,10 +19,10 @@ export function LogoMark({ size = 32 }) {
 /**
  * Full logo lockup: mark + "V I S I O N" wordmark side by side.
  */
-export function LogoLockup({ size = 14, color = "#2A2A2A" }) {
+export function LogoLockup({ size = 14, color = "#2A2A2A", light = false }) {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
-      <LogoMark size={size} />
+      <LogoMark size={size} light={light} />
       <span
         style={{
           fontFamily: '"DM Sans", system-ui, sans-serif',

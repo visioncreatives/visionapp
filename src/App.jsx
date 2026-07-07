@@ -1162,7 +1162,7 @@ function Header() {
       }}
     >
       <div className="px-5 sm:px-7 h-16 flex items-center justify-between">
-        <a href="#top" aria-label="Vision home"><LogoLockup size={26} color={solid ? "#2A2A2A" : "#FFFFFF"} /></a>
+        <a href="#top" aria-label="Vision home"><LogoLockup size={26} color={solid ? "#2A2A2A" : "#FFFFFF"} light={!solid} /></a>
         <nav className={`hidden md:flex items-center gap-7 text-sm font-medium transition-colors duration-300 ${linkColor}`}>
           <a href="#discover" className="transition-colors">Discover</a>
           <a href="#how" className="transition-colors">How it Works</a>
@@ -1897,7 +1897,7 @@ function HowItWorks() {
         {/* Header — label + heading. Toggle lives inside the steps column on desktop, below heading on mobile */}
         <div className="mb-6 sm:mb-10">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 block mb-4">How it works</span>
-          <h2 className="text-espresso font-serif text-2xl sm:text-4xl lg:text-5xl font-normal leading-[0.75] tracking-[-0.075em] max-w-xl">simple for both sides of a creative <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>collaboration.</span></h2>
+          <h2 className="text-espresso font-serif text-2xl sm:text-4xl lg:text-5xl font-normal leading-[0.75] tracking-[-0.075em] lg:whitespace-nowrap">simple for both sides of a creative <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>collaboration.</span></h2>
           {/* Toggle — mobile only (desktop version lives inside steps column) */}
           <div className="mt-5 lg:hidden">
             <div className="inline-flex p-1 rounded-[10px] border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
