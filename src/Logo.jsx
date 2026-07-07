@@ -18,7 +18,7 @@ export function LogoMark({ size = 32 }) {
 /**
  * Full logo lockup: mark + "V I S I O N" wordmark side by side.
  */
-export function LogoLockup({ size = 24, color = "#2A2A2A" }) {
+export function LogoLockup({ size = 14, color = "#2A2A2A" }) {
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
       <LogoMark size={size} />
