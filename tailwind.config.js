@@ -25,7 +25,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         script: ['"Allura"', 'cursive'],
       },

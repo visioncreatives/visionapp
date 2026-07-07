@@ -574,7 +574,7 @@ function PhoneShell({ children }) {
   return (
     <div style={{ width: PW, flexShrink: 0 }}>
       <div style={{ background: "#2A2A2A", borderRadius: 40, padding: 9, boxShadow: "0 24px 48px -12px rgba(42,42,42,0.45)" }}>
-        <div style={{ background: "#FFFFFF", borderRadius: 32, overflow: "hidden", height: PH, display: "flex", flexDirection: "column" }}>
+        <div style={{ background: "#FFFFFF", borderRadius: 32, overflow: "hidden", height: PH, display: "flex", flexDirection: "column", fontFamily: '"DM Sans", system-ui, sans-serif' }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 16px 2px", fontSize: 9, color: "rgba(42,42,42,0.5)", fontWeight: 600, flexShrink: 0 }}>
             <span>9:41</span>
             <span style={{ display: "flex", gap: 3 }}>
@@ -1737,7 +1737,7 @@ function Hero() {
             <span className="block text-white/70 text-xs font-semibold uppercase tracking-vision-sm mb-5">The creative marketplace</span>
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="text-white font-serif font-light leading-[0.95] tracking-tight text-5xl sm:text-6xl lg:text-[80px] max-w-3xl">
+            <h1 className="text-white font-serif font-light leading-[0.75] tracking-[-0.075em] text-5xl sm:text-6xl lg:text-[80px] max-w-3xl">
               find creatives<br />
               that match <span className="font-script" style={{ fontSize: "1.15em", color: "#D8E4F2" }}>your vision</span>
             </h1>
@@ -1773,7 +1773,7 @@ function Manifesto() {
   return (
     <section className="py-20 sm:py-32">
       <Reveal className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-espresso font-serif font-light leading-[1.15] text-3xl sm:text-4xl lg:text-[52px]">
+        <p className="text-espresso font-serif font-light leading-[0.75] tracking-[-0.075em] text-3xl sm:text-4xl lg:text-[52px]">
           Every creative has <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>a story.</span><br className="hidden sm:block" />
           Vision is where it gets told.
         </p>
@@ -1813,7 +1813,7 @@ function Categories() {
         <div className="flex-1 mt-8 lg:mt-0 lg:pl-14 xl:pl-20 flex flex-col justify-center">
           <Reveal className="px-5 sm:px-8 lg:px-0 mb-8">
             <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">Creative Categories</span>
-            <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-tight">every type of creative, all in <em>one place.</em></h2>
+            <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-[0.75] tracking-[-0.075em]">every type of creative, all in <em>one place.</em></h2>
           </Reveal>
 
           <div className="px-5 sm:px-8 lg:px-0 border-t border-espresso/[0.08]">
@@ -1871,7 +1871,7 @@ function HowItWorks() {
         {/* Header — label + heading. Toggle lives inside the steps column on desktop, below heading on mobile */}
         <div className="mb-6 sm:mb-10">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50 block mb-4">How it works</span>
-          <h2 className="text-espresso font-serif text-2xl sm:text-4xl lg:text-5xl font-normal leading-tight max-w-xl">simple for both sides of a creative collaboration.</h2>
+          <h2 className="text-espresso font-serif text-2xl sm:text-4xl lg:text-5xl font-normal leading-[0.75] tracking-[-0.075em] max-w-xl">simple for both sides of a creative <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>collaboration.</span></h2>
           {/* Toggle — mobile only (desktop version lives inside steps column) */}
           <div className="mt-5 lg:hidden">
             <div className="inline-flex p-1 rounded-[10px] border border-vision-blue/20" style={{ background: "#E2EAF4" }}>
@@ -1898,17 +1898,13 @@ function HowItWorks() {
                 onClick={() => setActiveStep(i)}
                 className="flex gap-4 items-start py-5 border-t border-espresso/10 cursor-pointer"
               >
-                <span className={`text-4xl font-bold flex-shrink-0 leading-none transition-colors ${activeStep === i ? "text-espresso/20" : "text-espresso/10"}`}>{s.n}</span>
+                <span className={`font-serif font-light text-5xl flex-shrink-0 leading-none transition-colors ${activeStep === i ? "text-espresso/25" : "text-espresso/10"}`}>{s.n}</span>
                 <div className="flex-1 pt-1">
                   <h3 className={`font-bold text-sm leading-snug transition-colors ${activeStep === i ? "text-espresso" : "text-espresso/40"}`}>{s.t}</h3>
                   {activeStep === i && (
                     <>
-                      <p className="mt-1.5 text-espresso/55 text-xs leading-relaxed">{s.d}</p>
-                      <div className="flex flex-wrap gap-1.5 mt-3">
-                        {s.tags.map(tag => (
-                          <span key={tag} className="text-xs font-semibold px-2.5 py-1 rounded-[4px]" style={{ background: s.bg, color: s.tc }}>{tag}</span>
-                        ))}
-                      </div>
+                      <p className="mt-2 text-espresso/55 text-sm leading-relaxed">{s.d}</p>
+                      <p className="mt-3 text-xs text-espresso/40 font-medium">{s.tags.join(" · ")}</p>
                     </>
                   )}
                 </div>
@@ -1943,17 +1939,13 @@ function HowItWorks() {
                 onClick={() => setActiveStep(i)}
                 className="flex gap-6 items-start py-7 border-t border-espresso/10 cursor-pointer group"
               >
-                <span className={`text-6xl font-bold flex-shrink-0 leading-none transition-colors ${activeStep === i ? "text-espresso/20" : "text-espresso/10"}`}>{s.n}</span>
+                <span className={`font-serif font-light text-7xl flex-shrink-0 leading-none transition-colors ${activeStep === i ? "text-espresso/25" : "text-espresso/10"}`}>{s.n}</span>
                 <div className="flex-1 pt-3">
                   <h3 className={`font-bold text-xl leading-snug transition-colors ${activeStep === i ? "text-espresso" : "text-espresso/35 group-hover:text-espresso/60"}`}>{s.t}</h3>
                   {activeStep === i && (
                     <>
-                      <p className="mt-2.5 text-espresso/60 text-sm leading-relaxed">{s.d}</p>
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {s.tags.map(tag => (
-                          <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-[4px]" style={{ background: s.bg, color: s.tc }}>{tag}</span>
-                        ))}
-                      </div>
+                      <p className="mt-3 text-espresso/60 text-base leading-relaxed">{s.d}</p>
+                      <p className="mt-4 text-sm text-espresso/40 font-medium">{s.tags.join(" · ")}</p>
                     </>
                   )}
                 </div>
@@ -1982,7 +1974,7 @@ function SharedVision() {
 
         <Reveal className="mb-10 sm:mb-16 max-w-2xl">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">For Any Project</span>
-          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight">
+          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-[0.75] tracking-[-0.075em]">
             find the right creative for your next <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>idea.</span>
           </h2>
         </Reveal>
@@ -2021,7 +2013,7 @@ function Testimonial() {
   return (
     <section className="py-16 sm:py-24" style={{ background: "#F4F6F9" }}>
       <Reveal className="max-w-3xl mx-auto px-5 sm:px-8 text-center">
-        <p className="text-espresso font-serif font-light leading-[1.3] text-2xl sm:text-3xl lg:text-[38px]">
+        <p className="text-espresso font-serif font-light leading-[1.05] tracking-[-0.075em] text-2xl sm:text-3xl lg:text-[38px]">
           "Every single photo is a work of art. She captured moments we didn't even notice were happening —
           <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}> truly gifted.</span>"
         </p>
@@ -2042,7 +2034,7 @@ function SeeItInAction() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <Reveal>
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-espresso/50">See it in action</span>
-          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-tight max-w-md">
+          <h2 className="mt-3 text-espresso font-serif text-3xl sm:text-4xl font-normal leading-[0.75] tracking-[-0.075em] max-w-md">
             a portfolio that <span className="font-script" style={{ fontSize: "1.2em", color: "#6B8FBF" }}>works</span> as hard as you do.
           </h2>
           <p className="mt-4 text-espresso/55 text-sm leading-relaxed max-w-sm">Real portfolios, transparent pricing, and messaging — all in one profile. Tap around, it's live.</p>
@@ -2073,7 +2065,7 @@ function FinalCTA() {
         <div className="absolute inset-0" style={{ background: "rgba(18,16,14,0.62)" }} />
         <Reveal className="relative max-w-3xl mx-auto px-5 sm:px-8 py-24 sm:py-32 text-center">
           <span className="text-xs font-semibold uppercase tracking-vision-sm text-white/60">Join Vision</span>
-          <h2 className="mt-4 text-white font-serif font-light text-4xl sm:text-6xl leading-tight">
+          <h2 className="mt-4 text-white font-serif font-light text-4xl sm:text-6xl leading-[0.75] tracking-[-0.075em]">
             bring your <span className="font-script" style={{ fontSize: "1.15em", color: "#D8E4F2" }}>vision</span> to life.
           </h2>
           <p className="mt-5 text-white/70 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">Whether you are hiring a creative or ready to share your own — Vision is where it starts.</p>
