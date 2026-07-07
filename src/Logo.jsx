@@ -6,12 +6,16 @@
  *   light — use the white variant, for dark/photo backgrounds. Default: false.
  */
 export function LogoMark({ size = 32, light = false }) {
+  // The source image has ~49% vertical padding around the glyph, so the
+  // rendered box needs to be ~1.5x the target visual size to make the
+  // actual "V" glyph line up with the cap-height of the wordmark text.
+  const boxHeight = size * 1.5
   return (
     <img
       src={light ? "/plain V logo letter white.png" : "/plain V logo letter.png"}
       alt="Vision"
-      height={size}
-      style={{ height: size, width: "auto", display: "block" }}
+      height={boxHeight}
+      style={{ height: boxHeight, width: "auto", display: "block" }}
     />
   )
 }
@@ -28,7 +32,7 @@ export function LogoLockup({ size = 14, color = "#2A2A2A", light = false }) {
           fontFamily: '"DM Sans", system-ui, sans-serif',
           fontWeight: 700,
           letterSpacing: "0.32em",
-          fontSize: 14,
+          fontSize: size,
           color,
           lineHeight: 1,
         }}
