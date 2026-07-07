@@ -7,7 +7,7 @@
 export function LogoMark({ size = 32 }) {
   return (
     <img
-      src="/logo transparent.png"
+      src="/plain V logo letter.png"
       alt="Vision"
       height={size}
       style={{ height: size, width: "auto", display: "block" }}
