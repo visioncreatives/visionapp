@@ -31,12 +31,13 @@ export default function PrivacyPolicy() {
             <h2 className="font-bold text-espresso text-base mb-2">2. Information We Collect</h2>
             <p className="mb-2">We collect information you provide directly to us, including:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Account information (name, email address, profile photo)</li>
+              <li>Account information (name, email address, date of birth, profile photo)</li>
               <li>Profile content (portfolio images, bio, location, service packages)</li>
               <li>Communications sent through the in-app messaging system</li>
               <li>Booking and transaction details</li>
               <li>Device and browser information for app functionality</li>
             </ul>
+            <p className="mt-2">Your date of birth is collected solely to verify and enforce Vision's 18+ age requirement. It is never displayed publicly or shared with other users, and is used only for eligibility verification, legal compliance, fraud prevention, and account security. It is stored securely in accordance with the data handling practices described in this policy.</p>
           </section>
 
           <section>
@@ -85,7 +86,7 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="font-bold text-espresso text-base mb-2">9. Children's Privacy</h2>
-            <p>Vision is not directed to children under 13. We do not knowingly collect personal information from children. If you believe a child has provided us information, please contact us and we will delete it.</p>
+            <p>Vision requires all users to be at least 18 years old, and the Service is not directed to or intended for use by anyone under 18. We do not knowingly collect personal information from anyone under 18. If we learn that we have collected information from a user under 18, we will delete that information and terminate the associated account.</p>
           </section>
 
           <section>

@@ -34,7 +34,13 @@ export default function TermsOfService() {
 
           <section>
             <h2 className="font-bold text-espresso text-base mb-2">3. Eligibility</h2>
-            <p>You must be at least 18 years old to use Vision. By using the Service, you represent that you are 18 or older and have the legal capacity to enter into these Terms.</p>
+            <p className="mb-2">Vision is intended for adult use only. By creating an account, you agree that:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>You must be at least 18 years old to create an account or use Vision</li>
+              <li>You represent and warrant that you are at least 18 years old and legally able to enter into binding agreements</li>
+              <li>You are responsible for providing accurate information, including your date of birth, when registering</li>
+              <li>Vision may suspend or terminate any account found to belong to a user under 18</li>
+            </ul>
           </section>
 
           <section>
