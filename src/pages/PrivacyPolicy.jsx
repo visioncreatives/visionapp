@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { LogoLockup } from '../Logo'
 
 const CONTACT = 'hello@joinvision.app'
-const EFFECTIVE = 'May 26, 2025'
+const EFFECTIVE = 'July 16, 2026'
 
 export default function PrivacyPolicy() {
   return (
@@ -65,13 +65,15 @@ export default function PrivacyPolicy() {
               <li>With other users, to the extent necessary to complete a booking (e.g., your name and profile are visible to users you transact with)</li>
               <li>With Stripe for payment processing</li>
               <li>With service providers who assist our operations, under confidentiality obligations</li>
-              <li>If required by law or to protect the rights and safety of Vision and its users</li>
+              <li>If required by law, subpoena, or other legal process, or to protect the rights, property, and safety of Vision, our users, or the public</li>
+              <li>In connection with a merger, acquisition, financing, or sale of assets, subject to this policy's protections</li>
             </ul>
+            <p className="mt-2">We do not sell your personal information to third parties, and have not done so in the preceding 12 months.</p>
           </section>
 
           <section>
             <h2 className="font-bold text-espresso text-base mb-2">6. Data Retention</h2>
-            <p>We retain your information for as long as your account is active or as needed to provide services. You may request deletion of your account and associated data by emailing <a href={`mailto:${CONTACT}`} className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">{CONTACT}</a>.</p>
+            <p>We retain your information for as long as your account is active or as needed to provide services, comply with our legal obligations, resolve disputes, and enforce our agreements. You may request deletion of your account and associated data by emailing <a href={`mailto:${CONTACT}`} className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">{CONTACT}</a>, subject to any records we are required or permitted to retain by law.</p>
           </section>
 
           <section>
@@ -81,21 +83,43 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="font-bold text-espresso text-base mb-2">8. Your Rights</h2>
-            <p>Depending on your jurisdiction, you may have rights to access, correct, delete, or export your personal data. To exercise these rights, contact us at <a href={`mailto:${CONTACT}`} className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">{CONTACT}</a>.</p>
+            <p className="mb-2">Depending on your jurisdiction (including under laws such as the California Consumer Privacy Act), you may have the right to:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Know what categories of personal information we collect and how we use it (see Section 2 and Section 3)</li>
+              <li>Access, correct, delete, or export your personal data</li>
+              <li>Opt out of the sale or sharing of your personal information (Vision does not sell your personal information)</li>
+              <li>Not be discriminated against for exercising any of these rights</li>
+            </ul>
+            <p className="mt-2">To exercise these rights, contact us at <a href={`mailto:${CONTACT}`} className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">{CONTACT}</a>. We may need to verify your identity before fulfilling your request.</p>
           </section>
 
           <section>
-            <h2 className="font-bold text-espresso text-base mb-2">9. Children's Privacy</h2>
+            <h2 className="font-bold text-espresso text-base mb-2">9. Security</h2>
+            <p>We use commercially reasonable administrative, technical, and physical safeguards designed to protect your information. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security. You are responsible for keeping your account credentials confidential.</p>
+          </section>
+
+          <section>
+            <h2 className="font-bold text-espresso text-base mb-2">10. International Data Transfers</h2>
+            <p>Vision is based in the United States, and your information may be processed, stored, and transferred to servers located in the United States or other countries. By using the Service, you consent to the transfer of your information to countries that may have different data protection laws than your own.</p>
+          </section>
+
+          <section>
+            <h2 className="font-bold text-espresso text-base mb-2">11. Children's Privacy</h2>
             <p>Vision requires all users to be at least 18 years old, and the Service is not directed to or intended for use by anyone under 18. We do not knowingly collect personal information from anyone under 18. If we learn that we have collected information from a user under 18, we will delete that information and terminate the associated account.</p>
           </section>
 
           <section>
-            <h2 className="font-bold text-espresso text-base mb-2">10. Changes to This Policy</h2>
+            <h2 className="font-bold text-espresso text-base mb-2">12. Disputes</h2>
+            <p>Any dispute arising from this Privacy Policy is subject to the Dispute Resolution & Arbitration provisions in our <Link to="/terms" className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">Terms of Service</Link>, including the binding arbitration and class action waiver provisions described there.</p>
+          </section>
+
+          <section>
+            <h2 className="font-bold text-espresso text-base mb-2">13. Changes to This Policy</h2>
             <p>We may update this Privacy Policy from time to time. We'll notify you of significant changes by posting the new policy and updating the effective date above.</p>
           </section>
 
           <section>
-            <h2 className="font-bold text-espresso text-base mb-2">11. Contact</h2>
+            <h2 className="font-bold text-espresso text-base mb-2">14. Contact</h2>
             <p>Questions about this policy? Email us at <a href={`mailto:${CONTACT}`} className="text-espresso font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity">{CONTACT}</a>.</p>
           </section>
 
