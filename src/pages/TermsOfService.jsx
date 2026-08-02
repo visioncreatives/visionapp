@@ -109,7 +109,7 @@ export default function TermsOfService() {
             <p className="mb-4">Featured placements are one-time purchases processed through Vision&apos;s authorized payment provider. Featured placement purchases are separate from Vision&apos;s marketplace transaction fees and do not affect platform booking fees or payouts.</p>
 
             <h3 className="font-semibold text-espresso mb-2">9.4 Refund Policy</h3>
-            <p className="mb-4">Once a Featured placement has been activated, the purchase is generally non-refundable, except where required by applicable law or when Vision determines that a refund is appropriate due to a verified technical or billing error.</p>
+            <p className="mb-4">All payments for Featured placements and other paid promotional services are final and non-refundable. If a user no longer wants continued promotion, the user may stop the visibility of the applicable listing or profile, but stopping visibility does not entitle the user to a refund or credit for any unused portion of the purchased promotion, except where required by applicable law or when Vision determines that a refund is appropriate due to a verified technical or billing error.</p>
 
             <h3 className="font-semibold text-espresso mb-2">9.5 Eligibility & Removal</h3>
             <p className="mb-4">Vision reserves the right to refuse, suspend, or remove a Featured placement if the associated account, listing, or content violates these Terms, Community Guidelines, or becomes ineligible for promotion.</p>
