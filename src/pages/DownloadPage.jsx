@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { LogoLockup } from '../Logo'
 
-const APP_URL = 'https://live.joinvision.app'
+const APP_URL = 'https://apps.apple.com/us/app/vision-creator-marketplace/id6788151682'
 const E = '#3A3A3A'
 const C = '#FFFFFF'
 
@@ -604,14 +604,7 @@ export default function DownloadPage() {
   }, [])
 
   const handleInstall = async () => {
-    if (installPrompt) {
-      installPrompt.prompt()
-      const { outcome } = await installPrompt.userChoice
-      if (outcome === 'accepted') setInstalled(true)
-      setInstallPrompt(null)
-    } else {
-      window.open(APP_URL, '_blank')
-    }
+    window.open(APP_URL, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -633,7 +626,7 @@ export default function DownloadPage() {
           Vision on your home screen.
         </h1>
         <p style={{ fontSize: 15, color: 'rgba(58,58,58,0.5)', textAlign: 'center', maxWidth: 340, lineHeight: 1.6, marginBottom: 28 }}>
-          Available on iPhone and Android. No App Store needed — install directly from your browser.
+          Download Vision from the App Store and open it on your iPhone.
         </p>
 
         {/* Download button */}
@@ -644,10 +637,10 @@ export default function DownloadPage() {
           onMouseOut={e => e.currentTarget.style.opacity = '1'}
         >
           <Ico.Download style={{ width: 17, height: 17 }} />
-          {installed ? 'Installed ✓' : 'Download Vision'}
+          Download on the App Store
         </button>
         <p style={{ fontSize: 12, color: 'rgba(58,58,58,0.4)', textAlign: 'center', marginBottom: 56 }}>
-          🍎 iPhone · 🤖 Android · 💻 Desktop &nbsp;—&nbsp; no app store required
+          Opens the official Vision App Store listing
         </p>
 
         {/* ── Side-by-side: phone + install guide ── */}
@@ -791,14 +784,14 @@ export default function DownloadPage() {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 24, background: E, color: C, padding: '13px 0', borderRadius: 8, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(58,58,58,0.18)' }}
             >
               <Ico.Download style={{ width: 16, height: 16 }} />
-              Open Vision App
+              Open in the App Store
             </a>
 
             {/* Tip */}
             <div style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(58,58,58,0.04)', borderRadius: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ fontSize: 18 }}>💡</span>
               <p style={{ margin: 0, fontSize: 12, color: 'rgba(58,58,58,0.6)', lineHeight: 1.5 }}>
-                <strong style={{ color: E }}>Already installed?</strong> Open from your home screen — it runs full-screen like a native app.
+                <strong style={{ color: E }}>Already installed?</strong> Open Vision directly from your home screen.
               </p>
             </div>
           </div>

@@ -6,9 +6,8 @@ import { LogoLockup } from './Logo'
 // Landing page CTAs
 // APP_URL     → App Store listing (primary CTA)
 // WEB_APP_URL → the live web app, for people who'd rather not download
-// TODO: replace APP_URL with the real App Store URL once the listing is live
 // ============================================================
-const APP_URL = "https://apps.apple.com/app/id0000000000"
+const APP_URL = "https://apps.apple.com/us/app/vision-creator-marketplace/id6788151682"
 const WEB_APP_URL = "https://live.joinvision.app"
 
 // ─── Icons ────────────────────────────────────────────────────
